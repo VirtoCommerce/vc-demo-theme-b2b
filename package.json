@@ -1,6 +1,6 @@
 {
-    "version": "3.0.7",
-    "name": "vc-b2b-theme",
+    "version": "1.0.0",
+    "name": "vc-demo-theme-b2b",
     "author": "VirtoCommerce",
     "description": "B2B theme for Storefront",
     "private": true,
