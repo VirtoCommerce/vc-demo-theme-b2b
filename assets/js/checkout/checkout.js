@@ -29,7 +29,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber);
                 });
             }
-            
+
             $scope.sendToEmail = function () {
                 dialogService.showDialog({}, 'sendCartToEmailDialogController', 'storefront.send-cart-to-email.tpl');
             }
@@ -68,7 +68,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changeShippingAddress = function () {
                 var dialogData =
-                    {                     
+                    {
                         checkout: $scope.checkout,
                         addresses: $scope.checkout.cart.customer.addresses
                     };
@@ -285,6 +285,23 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 }
             };
 
+            $scope.getCustomerDefaults = function() {
+                if ($scope.customer.id) {
+                    var customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id));
+                    if (customerDefaults) {
+                        if (customerDefaults.deliveryMethod) {
+                            $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
+                        }
+                        if (customerDefaults.paymentMethod) {
+                            $scope.selectPaymentMethod(customerDefaults.paymentMethod);
+                        }
+                        if (customerDefaults.shippingMethod) {
+                            $scope.selectShippingMethod(customerDefaults.shippingMethod);
+                        }
+                    }
+                }
+            };
+
             function updatePayment(payment) {
                 if ($scope.checkout.billingAddressEqualsShipping) {
                     payment.billingAddress = undefined;
@@ -339,6 +356,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                 $scope.reloadCart().then(function (cart) {
                     $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
+                    $scope.getCustomerDefaults();
                 });
             };
 
