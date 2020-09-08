@@ -29,3 +29,28 @@
   color: $text-color;
   font-weight: bold;
 }
+
+.nav-pills-transparent li:first-child {
+    margin-left: 18px;
+}
+
+.nav-pills-transparent > li+li {
+    margin-left: 20px;
+}
+
+.nav-pills-transparent > li > a {
+    color: $brand-alt;
+    border-left: none;
+    padding-left: 0;
+    padding-right: 0;
+    &:focus, &:hover {
+      background-color: $body-bg;
+      color: $text-color;
+    }
+}
+
+.nav-pills-transparent > li.active > a, .nav-pills-transparent > li.active > a:focus, .nav-pills-transparent > li.active > a:hover {
+  border-bottom: 2px $brand-primary solid;
+  background-color: $body-bg;
+  color: $text-color;
+}
