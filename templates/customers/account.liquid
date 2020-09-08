@@ -20,6 +20,9 @@
                     </div>
                     <div class="row">
                         <ul class="nav nav-pills nav-stacked">
+                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountDashboard'}">
+                                <a ng-link="['Dashboard']">{{ 'customer.account.menu_label.dashboard' | t }}</a>
+                            </li>
                             <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountProfileUpdate'}">
                                 <a ng-link="['Profile']">{{ 'customer.account.menu_label.profile' | t }}</a>
                             </li>
