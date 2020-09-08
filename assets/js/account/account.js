@@ -76,13 +76,3 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
             return $q.when(window.confirm(message || 'Is it OK?'));
         };
     }])
-
-    .service('checkoutDefaultService', ['$localStorage', function ($localStorage) {
-        return {
-            paymentMethod: undefined,
-            shippingMethod: undefined,
-            deliveryMethod: undefined,
-            address: undefined
-        };
-    }])
-
