@@ -36,6 +36,9 @@ h3, .h3 {
   border-top: 1px solid $gray-lighter;
 }
 
+.border-bottom-light {
+    border-bottom: 1px solid $gray-lighter;
+}
 
 @include text-emphasis-variant('.text-contrast', $text-contrast);
 
