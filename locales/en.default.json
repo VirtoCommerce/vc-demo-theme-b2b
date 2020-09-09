@@ -77,7 +77,7 @@
         "purchase_order_number": {
             "title": "Purchase Order",
             "placeholder": "Enter purchase order number"
-        }, 
+        },
         "mobile": {
             "show_order_summary": "Show order summary",
             "hide_order_summary": "Hide order summary"
@@ -406,8 +406,13 @@
                 "change_password": "Change password",
                 "company_info": "Company info",
                 "company_members": "Company members",
-                "wishlist": "Your List"
+                "wishlist": "Your List",
+                "dashboard": "Dashboard"
             }
+        },
+        "dashboard": {
+            "last_orders": "Last orders",
+            "all_orders_link_text": "All Orders"
         },
         "activate_account": {
             "title": "Activate Account",

@@ -1,3 +1,8 @@
+{% if customer and customer.is_registered_user %}
+    <script>
+            window.location.replace("{{ '/account' | absolute_url }}");
+    </script>
+{% endif %}
 <main class="container" role="main">
     <div class="row">
         <div class="col-md-4">
@@ -7,7 +12,7 @@
                 <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img class="img-responsive" src="{{ 'carousel-1-resize.jpg' | asset_url }}" alt="...">                            
+                            <img class="img-responsive" src="{{ 'carousel-1-resize.jpg' | asset_url }}" alt="...">
                         </div>
                     </div>
                 </div>

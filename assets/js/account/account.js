@@ -42,9 +42,11 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
         },
         $routeConfig: [
             { path: '/orders/...', name: 'Orders', component: 'vcAccountOrders' },
+            { path: '/orders/:number', name: 'OrderDetail', component: 'vcAccountOrders' },
             { path: '/subscriptions/...', name: 'Subscriptions', component: 'vcAccountSubscriptions' },
             { path: '/quotes', name: 'Quotes', component: 'vcAccountQuotes' },
-            { path: '/profile', name: 'Profile', component: 'vcAccountProfileUpdate', useAsDefault: true },
+            { path: '/dashboard', name: 'Dashboard', component: 'vcAccountDashboard', useAsDefault: true },
+            { path: '/profile', name: 'Profile', component: 'vcAccountProfileUpdate' },
             { path: '/addresses', name: 'Addresses', component: 'vcAccountAddresses' },
             { path: '/changePassword', name: 'PasswordChange', component: 'vcAccountPasswordChange' },
             { path: '/companyInfo', name: 'CompanyInfo', component: 'vcAccountCompanyInfo' },
@@ -75,13 +77,3 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
             return $q.when(window.confirm(message || 'Is it OK?'));
         };
     }])
-
-    .service('checkoutDefaultService', ['$localStorage', function ($localStorage) {
-        return {
-            paymentMethod: undefined,
-            shippingMethod: undefined,
-            deliveryMethod: undefined,
-            address: undefined
-        };       
-    }])
-
