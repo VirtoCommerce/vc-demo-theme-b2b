@@ -6,11 +6,6 @@ angular.module('storefront.account')
             $ctrl.loader = loader;
             $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 5 };
 
-            $ctrl.getInvoicePdf = function (orderNumber) {
-                var url = $window.BASE_URL + 'storefrontapi/orders/' + orderNumber + '/invoice';
-                $window.open(url, '_blank');
-            }
-
             $ctrl.sortInfos = {
                 sortBy: 'createdDate',
                 sortDirection: sortDescending

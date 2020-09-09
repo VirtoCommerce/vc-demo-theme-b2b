@@ -30,9 +30,7 @@
                                 <a ng-bind="order.number" ng-link="['OrderDetail', {number: order.number}]"></a>
                             </td>
                             <td ng-bind="order.purchaseOrderNumber"></td>
-                            <td>
-                                <a ng-bind="order.number" ng-click="$ctrl.getInvoicePdf(order.number)" class="cursor-pointer"></a>
-                            </td>
+                            <td ng-bind="order.number"></td>
                             <td ng-bind="order.createdDate | date"></td>
                             <td ng-bind="order | orderToSummarizedStatusLabel"></td>
                             <td ng-bind="order.total.formattedAmount"></td>
