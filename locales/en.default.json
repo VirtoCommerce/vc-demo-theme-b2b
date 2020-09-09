@@ -410,6 +410,10 @@
                 "dashboard": "Dashboard"
             }
         },
+        "dashboard": {
+            "last_orders": "Last orders",
+            "all_orders_link_text": "All Orders"
+        },
         "activate_account": {
             "title": "Activate Account",
             "subtext": "Create your password to activate your account.",
