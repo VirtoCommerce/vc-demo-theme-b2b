@@ -42,6 +42,7 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
         },
         $routeConfig: [
             { path: '/orders/...', name: 'Orders', component: 'vcAccountOrders' },
+            { path: '/orders/:number', name: 'OrderDetail', component: 'vcAccountOrders' },
             { path: '/subscriptions/...', name: 'Subscriptions', component: 'vcAccountSubscriptions' },
             { path: '/quotes', name: 'Quotes', component: 'vcAccountQuotes' },
             { path: '/dashboard', name: 'Dashboard', component: 'vcAccountDashboard', useAsDefault: true },
