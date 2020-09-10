@@ -30,7 +30,6 @@ angular.module('storefront.account')
 
                 return $q.all(requests)
                 .then(function (results) {
-                    //$ctrl.pageSettings.totalItems = response.data.totalCount;
                     results.forEach(function (response, index) {
                         var status = statuses[index];
                         $ctrl.statusStats[status] = response.data.totalCount;
