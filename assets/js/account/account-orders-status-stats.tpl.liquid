@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h4">{{ 'customer.dashboard.last_orders' | t }}</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div>New</div>
+                <div>{{$ctrl.statusStats.New}}</div>
+            </div>
+            <div class="col-md-4">
+                <div>Processing</div>
+                <div>{{$ctrl.statusStats.Processing}}</div>
+            </div>
+            <div class="col-md-4">
+                <div>Completed</div>
+                <div>{{$ctrl.statusStats.Completed}}</div>
+            </div>
+        </div>
+    </div>
+</div>
