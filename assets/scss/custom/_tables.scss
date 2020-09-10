@@ -8,8 +8,6 @@
     }
   }
 
-
-
   > thead > tr,
   > tbody > tr,
   > tfoot > tr {
@@ -39,7 +37,6 @@
 .table > tfoot > tr > th,
 .table > thead > tr > td,
 .table > thead > tr > th {
-  //border: none;
   vertical-align: middle;
 }
 
@@ -50,6 +47,7 @@
 
 .table > tbody > tr > td{
   border-right: 1px solid $gray-lighter;
+  border-top: 0;
 }
 
 
@@ -59,9 +57,27 @@
 }
 
 .sortable th:hover {
-    background-color: $gray-striped-table;
-    cursor: pointer;
+  background-color: $gray-striped-table;
+  cursor: pointer;
 }
+
+.table > tbody > tr > td > .ng-binding{
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 14px;
+}
+
+.orders-list-table tr td{
+  width: 16.6%;
+}
+
+.table>thead>tr>th {
+  padding: 14px 8px 14px 10px;
+}
+
+.table>tbody>tr>td {
+  padding: 8px 8px 8px 10px;
+}
+
 
 th {
 
@@ -91,7 +107,3 @@ th {
 
 }
 
-.table > tbody > tr > td > .ng-binding{
-  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-  font-size: 14px;
-}
