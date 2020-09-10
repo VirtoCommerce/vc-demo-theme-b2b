@@ -11,10 +11,11 @@ angular.module('storefront.account')
 
         $ctrl.statusStats = {
             'New': null,
-            // 'Processing': null,
-            // 'Completed': null
+            'Processing': null,
+            'Completed': null
         }
 
+        $ctrl.statuses = Object.keys($ctrl.statusStats);
 
         $ctrl.$onInit = function() {
             loadData();
@@ -22,7 +23,7 @@ angular.module('storefront.account')
 
         function loadData() {
             return loader.wrapLoading(function () {
-                var statuses = Object.keys($ctrl.statusStats);
+                var statuses = $ctrl.statuses;
                 var requests = statuses.map(function(value) {
                     return getRequestPromise(value);
                 });
