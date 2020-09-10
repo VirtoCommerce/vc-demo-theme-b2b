@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped border-top-light sortable">
+            <table class="table table-striped border-top-light sortable orders-list-table">
                 <thead>
                     <tr>
                         <th ng-click="$ctrl.sortChanged('number')" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }">{{ 'customer.orders.order_number' | t }}</th>
