@@ -26,7 +26,7 @@
                             {{ 'customer.orders.status' | t }}
                             </toggle-dropdown>
                         </th>
-                        <th ng-click="$ctrl.sortChanged('total.amount')" ng-class="{'desc': $ctrl.getSortDirection('total.amount') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('total.amount') == $ctrl.sortAscending }">{{ 'customer.orders.total' | t }}</th>
+                        <th ng-click="$ctrl.sortChanged('total')" ng-class="{'desc': $ctrl.getSortDirection('total') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('total') == $ctrl.sortAscending }">{{ 'customer.orders.total' | t }}</th>
                     </tr>
                 </thead>
                 <tbody ng-if="$ctrl.entries.length">
