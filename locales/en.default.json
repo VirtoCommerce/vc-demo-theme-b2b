@@ -411,6 +411,7 @@
             }
         },
         "dashboard": {
+            "orders_status": "Orders status",
             "last_orders": "Last orders",
             "all_orders_link_text": "All Orders",
             "users": "Users",

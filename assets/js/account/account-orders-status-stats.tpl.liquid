@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h4">{{ 'customer.dashboard.orders_status' | t }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="spend-report-body">
+            <div class="spend-report-card text-center">
+                <span class="h4 text-transform-none text-normal">New</span>
+                <span class="h2 text-transform-none margin-0 text-green" ng-bind="$ctrl.statusStats['New']"></span>
+            </div>
+            <div class="spend-report-card text-center">
+                <span class="h4 text-transform-none text-normal">Processing</span>
+                <span class="h2 text-transform-none margin-0" ng-bind="$ctrl.statusStats['Processing']"></span>
+            </div>
+            <div class="spend-report-card text-center">
+                <span class="h4 text-transform-none text-normal">Completed</span>
+                <span class="h2 text-transform-none margin-0 text-danger" ng-bind="$ctrl.statusStats['Completed']"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
