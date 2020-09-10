@@ -1,0 +1,43 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-10">
+                <span class="h4">{{ 'customer.dashboard.users' | t }}</span>
+            </div>
+            <div class="col-md-2">
+                <a ng-link="['CompanyMembers']" class="text-transform-none">
+                    {{ 'customer.dashboard.all_users_link_text' | t }} <span class="fa fa-arrow-right arrow-padding-left"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped margin-0" ng-if="$ctrl.entries.length">
+        <thead>
+            <tr>
+                <th>{{ 'customer.edit_company_members.name' | t }}</th>
+                <th>{{ 'customer.edit_company_members.email' | t }}</th>
+                <th>{{ 'customer.edit_company_members.role' | t }}</th>
+                <th>{{ 'customer.edit_company_members.status' | t }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="member in $ctrl.entries">
+                <td ng-bind="member.userName"></td>
+                <td ng-bind="member.email"></td>
+                <td ng-bind="member.role.name"></td>
+                <td ng-bind="member.isLockedOut ? 'Not active' : 'Active'" ng-class="{ 'text-green': !member.isLockedOut }"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            <p ng-if="!$ctrl.entries.length && !$ctrl.loader.isLoading" class="text-center">{{ 'customer.edit_company_members.none' | t }}</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

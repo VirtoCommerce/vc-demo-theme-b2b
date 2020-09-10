@@ -412,7 +412,9 @@
         },
         "dashboard": {
             "last_orders": "Last orders",
-            "all_orders_link_text": "All Orders"
+            "all_orders_link_text": "All Orders",
+            "users": "Users",
+            "all_users_link_text": "All Users"
         },
         "activate_account": {
             "title": "Activate Account",
