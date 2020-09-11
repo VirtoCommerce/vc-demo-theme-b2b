@@ -10,6 +10,11 @@ angular.module('storefront.account')
                 sortDirection: sortDescending
             }
 
+            $ctrl.userTableHided = function () {
+                const element = document.getElementById('user-list-table');
+                return window.getComputedStyle(element, null).display == 'none';
+            }
+
             function refresh() {
                 $ctrl.errors = undefined;
                 loader.wrapLoading(function () {
