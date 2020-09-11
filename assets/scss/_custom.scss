@@ -100,3 +100,34 @@ main {
 .arrow-padding-left {
   padding-left: 10px;
 }
+
+.spend-report-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.spend-report-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-roles-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.user-roles-card-body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-family: $font-family-sans-serif;
+  .title {
+    line-height: $line-height-base;
+  }
+  .description {
+    color: $gray-roles-description;
+    font-size: $font-size-small;
+  }
+}

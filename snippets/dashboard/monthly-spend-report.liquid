@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h4">{{ 'customer.dashboard.monthly_spend_report' | t }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="spend-report-body">
+            <img src="{{ 'spend-chart.svg' | asset_url }}" />
+            <div class="spend-report-card">
+                <span class="h4 text-transform-none text-normal">{{ 'customer.dashboard.budget' | t }}</span>
+                <span class="h2 text-transform-none margin-0">$58,152</span>
+            </div>
+            <div class="spend-report-card">
+                <span class="h4 text-transform-none text-normal">{{ 'customer.dashboard.total_spend' | t }}</span>
+                <span class="h2 text-transform-none margin-0">$30,152</span>
+            </div>
+        </div>
+    </div>
+</div>
