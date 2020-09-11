@@ -3,6 +3,8 @@
   font-family: $btn-font-family;
   text-transform: uppercase;
   height: $input-height-base;
+  font-size: 15px;
+  letter-spacing: 0.015em;
 }
 
 .btn-lg {
@@ -90,4 +92,23 @@
       text-decoration: none;
     }
   }
+}
+
+.btn-lined-yellow{
+  display: block;
+  background-color: #fff;
+  border: 2px #F0AD4E solid !important;
+  color: #F0AD4E;
+  cursor: default;
+  text-transform: uppercase;
+  height: 36px;
+  font-size: 15px;
+  font-weight: 700 !important;
+  line-height: 34px;
+  border-radius: 4px;
+}
+
+.btn-lined-yellow:hover{
+  border: 2px #4c5c6a solid !important;
+  color: #4c5c6a;
 }
