@@ -96,9 +96,9 @@
 
 .btn-lined-yellow{
   display: block;
-  background-color: #fff;
-  border: 2px #F0AD4E solid !important;
-  color: #F0AD4E;
+  background-color: $body-bg;
+  border: 2px $brand-primary solid !important;
+  color: $brand-primary;
   cursor: default;
   text-transform: uppercase;
   height: 36px;
@@ -109,6 +109,6 @@
 }
 
 .btn-lined-yellow:hover{
-  border: 2px #4c5c6a solid !important;
-  color: #4c5c6a;
+  border: 2px $gray-dark solid !important;
+  color: $gray-dark;
 }
