@@ -4,9 +4,13 @@
         {% include 'customers/badge' %}
     </div>
 </aside>
-<aside class="panel panel-default" ng-if="customer && !customer.isRegisteredUser">
+<aside class="panel panel-default login-form" ng-if="customer && !customer.isRegisteredUser">
+        <div class="panel-heading">
+            <span class="h4">{{ 'customer.sign_in.title' | t }}</span>
+        </div>
+
     <div class="panel-body">
-        <h4>{{ 'customer.sign_in.title' | t }}</h4>
+
         {% capture loginUrl %} {{ '~/account/login' | absolute_url }} {% endcapture %}
         {% include 'customers/login-form' %}
     </div>
@@ -31,7 +35,11 @@
     {% if found %}{% break %}{% endif %}
 {% endfor %}
 {% if settings.footer_newsletter_enable %}
-    <aside class="panel panel-default">
+
+    <aside class="panel panel-default subscribe-form">
+         <div class="panel-heading">
+            <span class="h4">Subscribe now!</span>
+        </div>
         <div class="panel-body">
             {% include 'shared/newsletter-form' %}
         </div>
