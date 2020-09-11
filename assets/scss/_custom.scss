@@ -131,3 +131,21 @@ main {
     font-size: $font-size-small;
   }
 }
+
+.no-permission {
+  background: url('../../images/dashboard-placeholder-bg.png') right no-repeat;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+    .message {
+      width: 179px;
+      margin-left: 35px;
+      font-family: $font-family-sans-serif;
+      color: $gray-no-permission;
+      font-weight: bold;
+    }
+}
+
+.user-inactive {
+  color: $gray-user-inactive;
+}

@@ -419,7 +419,8 @@
             "monthly_spend_report": "Monthly spend report",
             "budget": "Budget",
             "total_spend": "Total spend",
-            "current_user_roles": "Current user roles"
+            "current_user_roles": "Current user roles",
+            "no_permission_message": "Administrator rights are required to view user list"
         },
         "activate_account": {
             "title": "Activate Account",
