@@ -17,7 +17,7 @@
             <table class="table table-striped border-top-light sortable orders-list-table">
                 <thead>
                     <tr>
-                        <th ng-click="$ctrl.sortChanged('number')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }" class="">{{ 'customer.orders.order_number' | t }}</th>
+                        <th ng-click="$ctrl.sortChanged('number')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }">{{ 'customer.orders.order_number' | t }}</th>
                         <th>{{ 'customer.orders.purchase_order' | t }}</th>
                         <th>{{ 'customer.orders.invoice' | t }}</th>
                         <th ng-click="$ctrl.sortChanged('createdDate')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('createdDate') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('createdDate') == $ctrl.sortAscending }">{{ 'customer.orders.date' | t }}</th>
