@@ -11,9 +11,11 @@ storefrontApp.component('vcCheckoutLineItem', {
         onRemove: '&',
         readOnly: '<'
     },
-    controller: ['$scope', 'availablePaymentPlans', function ($scope, availablePaymentPlans) {
+    controller: ['$scope', 'availablePaymentPlans', 'baseUrl', function ($scope, availablePaymentPlans, baseUrl) {
         var ctrl = this;
         ctrl.availablePaymentPlans = availablePaymentPlans;
+        $scope.baseUrl = baseUrl;
+        $scope.regex = new RegExp(/^\/+/);
         this.$onInit = function () {
             ctrl.checkoutStep.addComponent(this);
         };
@@ -35,8 +37,8 @@ storefrontApp.component('vcCheckoutLineItem', {
             return true;
         };
 
-        $scope.$watch('$ctrl.lineItem', function (value) {           
+        $scope.$watch('$ctrl.lineItem', function (value) {
         }, true);
-   
+
     }]
 });
