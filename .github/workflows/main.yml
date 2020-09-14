@@ -31,8 +31,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    with:
-        fetch-depth: 0
+      with:
+          fetch-depth: 0
 
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v1
