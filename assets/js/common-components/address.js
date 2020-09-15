@@ -1,4 +1,4 @@
-﻿var storefrontApp = angular.module('storefrontApp');
+var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('vcAddress', {
     templateUrl: "themes/assets/address.tpl.html",
     bindings: {
@@ -102,6 +102,7 @@ storefrontApp.component('vcAddress', {
             if (ctrl.address) {
                 populateRegionalDataForAddress(ctrl.address);
                 ctrl.address.name = stringifyAddress(ctrl.address);
+                ctrl.address.type = ctrl.address.type || 'BillingAndShipping';
             }
             ctrl.onUpdate({ address: ctrl.address });
         }, true);

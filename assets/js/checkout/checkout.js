@@ -164,11 +164,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             }
                         });
                     }
-                    else {
-                        //Set default shipping address
-                        if ($scope.checkout.cart.customer.addresses) {
-                            $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.defaultShippingAddress;
-                        }
+                    if (!cart.shipments.length || !$scope.checkout.shipment.deliveryAddress) {
+                        $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.defaultShippingAddress;
                     }
                     $scope.checkout.deliveryAddress = $scope.checkout.shipment.deliveryAddress;
                     $scope.checkout.billingAddressEqualsShipping = cart.hasPhysicalProducts && !angular.isObject($scope.checkout.payment.billingAddress);
