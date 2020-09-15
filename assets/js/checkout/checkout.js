@@ -30,8 +30,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     firstAddress.city == secondAddress.city &&
                     firstAddress.regionId == secondAddress.regionId &&
                     firstAddress.countryCode == secondAddress.countryCode &&
-                    firstAddress.postalCode == secondAddress.postalCode &&
-                    firstAddress.type == secondAddress.type;
+                    firstAddress.postalCode == secondAddress.postalCode;
             };
 
             $scope.setPurchaseOrderNumber = function () {
@@ -232,7 +231,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             $scope.updateShipment = function (shipment) {
                 if (shipment.deliveryAddress) {
                     var deliveryAddress = $scope.checkout.shipment.deliveryAddress;
-                    deliveryAddress.type = 'Shipping';
                     //WORKAROUND: For pickup address FirstName and LastName can't set and need use some to avoid required violation
                     deliveryAddress.firstName = deliveryAddress.firstName ? deliveryAddress.firstName : 'Fulfillment';
                     deliveryAddress.lastName = deliveryAddress.lastName ? deliveryAddress.lastName : 'center';
