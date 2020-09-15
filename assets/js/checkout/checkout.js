@@ -30,8 +30,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     firstAddress.city == secondAddress.city &&
                     firstAddress.regionId == secondAddress.regionId &&
                     firstAddress.countryCode == secondAddress.countryCode &&
-                    firstAddress.postalCode == secondAddress.postalCode &&
-                    firstAddress.type.includes('Shipping') && secondAddress.type.includes('Shipping');
+                    firstAddress.postalCode == secondAddress.postalCode;
             };
 
             $scope.setPurchaseOrderNumber = function () {
