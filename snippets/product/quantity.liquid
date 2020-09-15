@@ -4,6 +4,10 @@
 <div class="input-group">
     <input type="text" class="form-control" ng-init="product['{{product.id}}'].quantity = 1" ng-model="product['{{product.id}}'].quantity">
     <span class="input-group-btn">
-        <button class="btn btn-alt btn-primary" title="{{ 'products.general.add_to_cart' | t }}" ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)" ng-controller="productController">{{ 'products.general.add_to_cart' | t }}</button>
+        <button class="btn btn-alt btn-primary"
+                {% if unavailable or sold_out %} disabled {% endif %}
+                title="{{ 'products.general.add_to_cart' | t }}"
+                ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
+                ng-controller="productController">{{ 'products.general.add_to_cart' | t }}</button>
     </span>
 </div>

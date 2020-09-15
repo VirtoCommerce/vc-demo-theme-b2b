@@ -4,6 +4,17 @@
 
 <!-- TODO: Badges -->
 
+{% assign unavailable = false %}
+{% assign sold_out = false %}
+
+{% if product.buyable and product.in_stock != true %}
+    {% assign sold_out = true %}
+{% endif %}
+
+{% if product.buyable != true  %}
+    {% assign unavailable = true %}
+{% endif %}
+
 <div class="col-md-3 flexible product-card" ng-init="products.push('{{ product.id }}')">
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
