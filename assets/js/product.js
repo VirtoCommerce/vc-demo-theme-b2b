@@ -236,8 +236,10 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.$watch('filters', initialize);
     }]);
 
-storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', function ($scope, $window, $uibModalInstance, mailingService, dialogData) {
+storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', function ($scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl) {
     $scope.dialogData = dialogData;
+    $scope.baseUrl = baseUrl;
+    $scope.regex = new RegExp(/^\/+/);
 
     $scope.close = function() {
         $uibModalInstance.dismiss('cancel');
