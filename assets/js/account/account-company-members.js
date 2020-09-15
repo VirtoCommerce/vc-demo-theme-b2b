@@ -18,16 +18,15 @@ angular.module('storefront.account')
             $ctrl.currentMemberId = mainContext.customer.id;
             $ctrl.newMemberComponent = null;
             $ctrl.loader = loader;
-            $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 5, numPages: 10 };
+            $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 10, numPages: 10 };
             $ctrl.pageSettings.pageChanged = function () { refresh(); };
 
             function refresh() {
                 $ctrl.errors = undefined;
                 loader.wrapLoading(function () {
                     return accountApi.searchOrganizationUsers({
-                        skip: ($ctrl.pageSettings.currentPage - 1) * $ctrl.pageSettings.itemsPerPageCount,
-                        take: $ctrl.pageSettings.itemsPerPageCount,
-                        sortInfos: $ctrl.sortInfos
+                        pageNumber: $ctrl.pageSettings.currentPage,
+                        pageSize: $ctrl.pageSettings.itemsPerPageCount
                     }).then(function (response) {
                         $ctrl.entries = response.data.results;
                         $ctrl.pageSettings.totalItems = response.data.totalCount;

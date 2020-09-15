@@ -5,8 +5,8 @@ if (storefrontAppDependencies != undefined) {
     storefrontAppDependencies.push(moduleName);
 }
 angular.module(moduleName, ['credit-cards', 'angular.filter'])
-    .controller('checkoutController', ['$rootScope', '$scope', '$window', 'cartService', 'commonService', 'dialogService', 'orderService',
-        function ($rootScope, $scope, $window, cartService, commonService, dialogService, orderService) {
+    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService',
+        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService) {
             $scope.checkout = {
                 wizard: {},
                 cart: {},
@@ -22,6 +22,16 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 loading: false,
                 isValid: false,
                 newAddress: {}
+            };
+
+            $scope.isEqualAddress = function (firstAddress, secondAddress) {
+                return firstAddress.line1 == secondAddress.line1 &&
+                    firstAddress.line2 == secondAddress.line2 &&
+                    firstAddress.city == secondAddress.city &&
+                    firstAddress.regionId == secondAddress.regionId &&
+                    firstAddress.countryCode == secondAddress.countryCode &&
+                    firstAddress.postalCode == secondAddress.postalCode &&
+                    firstAddress.type == secondAddress.type;
             };
 
             $scope.setPurchaseOrderNumber = function () {
@@ -68,11 +78,12 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changeShippingAddress = function () {
                 var dialogData =
-                    {
-                        customer: $scope.customer,
-                        checkout: $scope.checkout,
-                        addresses: $scope.checkout.cart.customer.addresses
-                    };
+                {
+                    customer: $scope.customer,
+                    checkout: $scope.checkout,
+                    addresses: $scope.checkout.cart.customer.addresses,
+                    isEqualAddress: $scope.isEqualAddress
+                };
 
                 var dialogInstance = dialogService.showDialog(dialogData, 'universalDialogController', 'storefront.select-address-dialog.tpl', 'lg');
                 dialogInstance.result.then(function () {
@@ -153,11 +164,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             }
                         });
                     }
-                    else {
-                        //Set default shipping address
-                        if ($scope.checkout.cart.customer.addresses) {
-                            $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.defaultShippingAddress;
-                        }
+                    if (!cart.shipments.length || !$scope.checkout.shipment.deliveryAddress) {
+                        $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.defaultShippingAddress;
                     }
                     $scope.checkout.deliveryAddress = $scope.checkout.shipment.deliveryAddress;
                     $scope.checkout.billingAddressEqualsShipping = cart.hasPhysicalProducts && !angular.isObject($scope.checkout.payment.billingAddress);

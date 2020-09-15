@@ -15,7 +15,7 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible" ng-init="products.push('{{ product.id }}')">
+<div class="col-md-3 flexible product-card" ng-init="products.push('{{ product.id }}')">
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}

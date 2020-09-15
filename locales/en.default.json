@@ -218,7 +218,7 @@
             "categories": "Categories"
         },
         "newsletter": {
-            "message": "Your connection to what's new at {0}. <br><strong>Sign Up Now!</strong>",
+            "message": "Your connection to what's new at {0}.",
             "sign_up": "Sign Up",
             "email_placeholder": "Email Address"
         }

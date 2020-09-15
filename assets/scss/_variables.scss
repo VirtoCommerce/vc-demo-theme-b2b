@@ -13,8 +13,7 @@
    $gray-dark:     #4c5c6a; // lighten($gray-base, 20%)   // #333
    $gray:          #abb0b6; // lighten($gray-base, 33.5%) // #555
    $gray-light:    #d8d8d8; // lighten($gray-base, 46.7%) // #777
-   $gray-lighter:  #eee;    // lighten($gray-base, 93.5%) // #eee
-
+   $gray-lighter:  #E3E3E3;    // lighten($gray-base, 93.5%) // #eee
 
    $brand-primary: #f0ad4e; // darken(#428bca, 6.5%) // #337ab7
    $brand-alt:     #00739E; // not predefined
@@ -91,7 +90,7 @@
 // $headings-line-height:    1.1
 // $headings-color:          inherit
    $link-font-family:        $font-family-condensed; // not predefined
-   $link-font-weight:        700; // not predefined
+   $link-font-weight:        500; // not predefined
 
 
 //== Iconography

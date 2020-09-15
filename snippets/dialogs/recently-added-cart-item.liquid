@@ -11,7 +11,7 @@
                     <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}">
                 </div>
                 <div class="col-md-5">
-                    <a href="item.url" ng-bind="item.name"></a>
+                    <a ng-href="{% raw %}{{ item.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="item.name"></a>
                 </div>
                 <div class="col-md-5">
                     <div class="row">

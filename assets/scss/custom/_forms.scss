@@ -58,3 +58,22 @@ form label.required:after
     color: $brand-primary;
     content: "*";
 }
+
+// Login form on the Home page
+
+#customer_login .form-group {
+    margin-bottom: 7px;
+}
+
+#customer_login .list-inline{
+  margin-top: -10px;
+}
+
+#customer_login .btn-primary{
+  width: 140px;
+}
+
+#customer_login .btn-lined-yellow{
+  margin: 0px 0px 0px -10px;
+  padding: 0px;
+}

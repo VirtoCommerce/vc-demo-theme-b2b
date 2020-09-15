@@ -173,7 +173,7 @@
                                                 <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
                                             </a>
                                             <div class="pull-left" ng-if="checkout.shipment.deliveryAddress.city">
-                                                <span class="label label-default" ng-if="checkout.shipment.deliveryAddress.key === customer.defaultShippingAddress.key">Default</span>
+                                                <span class="label label-default" ng-if="isEqualAddress(checkout.shipment.deliveryAddress, customer.defaultShippingAddress)">Default</span>
                                                 <vc-address address="checkout.shipment.deliveryAddress" edit-mode="false"></vc-address>
                                             </div>
                                             <div class="pull-left" ng-if="!checkout.shipment.deliveryAddress.city">
@@ -411,10 +411,10 @@
                         <span ng-bind="address.email"></span>
                     </td>
                     <td>
-                        <label ng-if="checkout.deliveryAddress.key === address.key">
+                        <label ng-if="isEqualAddress(checkout.deliveryAddress, address)">
                             <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Current address
                         </label>
-                        <label ng-if="checkout.deliveryAddress.key !== address.key">
+                        <label ng-if="!isEqualAddress(checkout.deliveryAddress, address)">
                             <a role="button" href="" ng-click="checkout.deliveryAddress = address">Select address</a>
                         </label>
                     </td>

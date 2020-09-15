@@ -4,41 +4,41 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group">                
-                    <input class="form-control" ng-model="username" name="customer[user_name]" required vc-flying-placeholder="{{ 'customer.sign_in.user_name' | t }}"/>                    
+                <div class="form-group">
+                    <input class="form-control" ng-model="username" name="customer[user_name]" required vc-flying-placeholder="{{ 'customer.sign_in.user_name' | t }}"/>
                     <span class="text-danger" ng-show="!customer_login['customer[user_name]'].$pristine && customer_login['customer[user_name]'].$error.required">{{ 'common.required' | t }}</span>
-                
+
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="form-group">               
+                <div class="form-group">
                     <input class="form-control" ng-model="password" type="password" name="customer[password]" required vc-flying-placeholder="{{ 'customer.sign_in.password' | t }}" />
                     <span class="text-danger" ng-show="!customer_login['customer[password]'].$pristine && customer_login['customer[password]'].$error.required">{{ 'common.required' | t }}</span>
-                    
-                </div>                    
+
+                </div>
             </div>
         </div>
     </div>
-   
+
     {% if template != 'customers/login' %}
     <div class="form-group">
         {% include 'customers/forgot-links' %}
     </div>
     {% endif %}
-   
+
     {% if template != 'customers/login' %}
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-5">
     {% else %}
             <div class="form-group">
-    {% endif %}  
+    {% endif %}
                  <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.sign_in.sign_in' | t }}">
         {% if template != 'customers/login' %}
             </div>
         {% endif %}
         {% if template != 'customers/login' %}
-            <div class="col-md-4">
-                {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-link" href' }}
+            <div class="col-md-5">
+                {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-lined-yellow" href' }}
             </div>
         {% endif %}
         </div>
@@ -46,7 +46,7 @@
         <div class="form-group">
             {% include 'customers/forgot-links' %}
         </div>
-        {% endif %}  
-</fieldset> 
+        {% endif %}
+</fieldset>
 {{ antiforgery }}
 </form>
