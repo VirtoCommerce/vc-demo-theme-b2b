@@ -68,6 +68,18 @@
 }
 
 
+.nogap > [class*="col-"] {
+  padding-left: 7.5px;
+  padding-right: 7.5px
+}
+.nogap > [class*="col-"]:first-child {
+  padding-left: 15px;
+}
+.nogap > [class*="col-"]:last-child {
+  padding-right: 15px;
+}
+
+
 // Products grid
 
 .product-card{
