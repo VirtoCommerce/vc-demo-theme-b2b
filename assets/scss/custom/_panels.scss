@@ -1,6 +1,6 @@
 ﻿.panel {
     margin-bottom: 20px;
-    border: 1px solid $gray-lighter;
+    border: 1px solid $gray-light;
 }
 
 .panel h4{
@@ -8,7 +8,7 @@
 }
 
 .panel-body {
-    padding: 18px;
+    padding: 15px;
 }
 
 
@@ -32,6 +32,25 @@
     margin-top: 0;
   }
 }
+
+
+.sidebar .panel-group {
+
+.panel-static {
+    border-radius: 4px;
+}
+
+  .panel-static + .panel-static {
+    border-top-width: 1px;
+  }
+}
+
+
+
+
+
+
+
 
 .panel-heading {
   font-family: $panel-heading-font-family;
@@ -69,3 +88,24 @@
 }
 
 
+.panel-group .panel-default{
+  margin-bottom: 22px;
+}
+
+
+.sidebar .panel h4 {
+    font-size: 16px;
+}
+
+.sidebar .panel .fa-chevron-down{
+  font-size: 16px;
+}
+
+.sidebar .panel .fa-chevron-down, .sidebar .panel h4 {
+    font-size: 16px;
+  font-weight: bold;
+}
+
+.accordion-toggle .ng-binding{
+ font-weight: bold;
+}

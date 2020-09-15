@@ -112,3 +112,9 @@
   border: 2px $gray-dark solid !important;
   color: $gray-dark;
 }
+
+.btn-alt .fa{
+    color: $brand-primary;
+    font-weight: bold;
+    padding-left: 5px;
+}

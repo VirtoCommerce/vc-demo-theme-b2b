@@ -14,7 +14,7 @@
   > li > a {
     color: $text-color;
     font-weight: normal;
-    border-left: 3px $body-bg solid;
+    border-radius: $panel-border-radius !important;
   }
 }
 
@@ -53,4 +53,8 @@
   border-bottom: 2px $brand-primary solid;
   background-color: $body-bg;
   color: $text-color;
+}
+
+.pagination {
+    margin-left: -12px;
 }
