@@ -45,8 +45,8 @@ jobs:
       id: changelog
       uses: VirtoCommerce/vc-github-actions/changelog-generator@master
 
-    - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+#    - name: SonarCloud Scan
+#      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
 
     - name: Build
       uses: VirtoCommerce/vc-github-actions/build-theme@master
