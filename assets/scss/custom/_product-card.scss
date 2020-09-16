@@ -1,0 +1,154 @@
+/***  Product Page  ***/
+
+.panel-heading {
+    padding: 13px 15px 10px 15px;
+}
+
+.price-panel .panel-body {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.panel-table-inside .panel-body {
+    padding: 0px;
+}
+
+.panel-table-inside .table {
+    border: 0;
+}
+
+.panel-table-inside .panel .table > tbody > tr > td {
+    border: 0;
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.price-block {
+    padding: 5px 15px 15px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid $gray-light;
+}
+
+.delivery-cart {
+    padding: 5px 15px 0px 15px;
+}
+
+.delivery-cart p {
+    margin: 5px 0px 5px 0px;
+}
+
+/** Panel Action Buttons **/
+
+.action-buttons {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-left: 15px;
+    border-top: 1px solid $gray-light;
+}
+
+.action-buttons ul {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.action-buttons ul li a {
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.005em;
+}
+
+.action-buttons .fa {
+    display: none;
+}
+
+.add-to-list .fa,
+.print .fa,
+.envelope .fa {
+    display: none;
+}
+
+a.add-to-list {
+    padding-left: 20px;
+    background: url(../../images/action-add.svg) no-repeat left;
+}
+
+.action-buttons .envelope {
+    margin: 0px 3px 0px 3px;
+}
+
+a.envelope {
+    padding-left: 18px;
+    background: url(../../images/action-mail.svg) no-repeat left;
+}
+
+.action-buttons .envelope {
+    padding-left: 24px;
+}
+
+.action-buttons .print {
+    padding-right: 0px;
+}
+
+a.print {
+    padding: 0px 0px 0px 15px;
+    background: url(../../images/action-print.svg) no-repeat left;
+}
+
+/*** Cart panel styles ***/
+
+.price-block .dl-horizontal dt {
+    font-weight: bold;
+}
+
+.price-block .dl-horizontal dd {
+    font-weight: bold;
+    color: #3c763d;
+}
+
+.product-card .dl-horizontal dt {
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
+    margin: 0px;
+}
+
+.product-card .dl-horizontal dd {
+    margin: 0px;
+    width: 100%;
+}
+
+/*** Price ***/
+
+.product-pull-right {
+    float: right;
+}
+
+.product-pull-left {
+    float: left;
+}
+
+.product-card .dl-horizontal dt .product-pull-left {
+    width: 100%;
+    font-weight: bold;
+}
+
+.product-card .dl-horizontal dd .product-pull-right {
+    margin: 0;
+    width: 100%;
+    text-align: left;
+}
+
+/*** Product Page ***/
+
+.template-product .container-drain > .row:not(:first-child) {
+    padding-top: 0px;
+}
+
+.template-product .col-md-3,
+.template-product .col-md-4 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
