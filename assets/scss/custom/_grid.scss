@@ -112,3 +112,14 @@
 .product-grid .row .col-xs-12{
   padding-left: 3px;
 }
+
+/*** Product Page ***/
+
+.template-product .container-drain>.row:not(:first-child) {
+    padding-top: 0px;
+}
+
+.template-product .col-md-3, .template-product .col-md-4{
+  padding-left: 10px;
+  padding-right: 10px;
+}

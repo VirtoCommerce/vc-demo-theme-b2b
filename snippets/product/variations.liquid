@@ -3,7 +3,7 @@
         {% include 'shared/breadcrumb' %}
         <ul class="list-inline pull-right">
             <li>
-                <a href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')"><i class="fa fa-envelope"></i>&ensp;Email</a>
+                <a class="envelope" href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')"><i class="fa fa-envelope"></i>&ensp;Email</a>
             </li>
             <li>
                 {% include 'shared/print' %}
