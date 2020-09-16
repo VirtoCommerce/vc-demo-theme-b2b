@@ -8,6 +8,14 @@
                 {% if unavailable or sold_out %} disabled {% endif %}
                 title="{{ 'products.general.add_to_cart' | t }}"
                 ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
-                ng-controller="productController">{{ 'products.general.add_to_cart' | t }}</button>
+                ng-controller="productController">
+                {% if unavailable %}
+                {{ 'products.product.unavailable' | t }}
+                {% elsif sold_out %}
+                {{ 'products.product.sold_out' | t }}
+                {% else %}
+                {{ 'products.general.add_to_cart' | t }}
+                {% endif %}
+            </button>
     </span>
 </div>
