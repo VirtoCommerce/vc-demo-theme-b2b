@@ -44,8 +44,10 @@
                     {% include 'collection/nav' %}
                     {% include product_items %}
                     {% assign position = 'bottom' %}
-                    {% include 'collection/nav' %}
-                    {% include 'shared/pagination' %}
+                   <div class="navigation-bottom">
+                        {% include 'shared/pagination' %}
+                        {% include 'collection/nav' %}
+                    </div>
                     <script>
                         window.products = [];
                         {% for product in collection.products %}
