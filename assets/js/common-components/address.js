@@ -36,18 +36,19 @@ storefrontApp.component('vcAddress', {
 
         function populateRegionalDataForAddress(address) {
             if (address) {
+                const countryChanged = !address.country || address.country.code3 !== address.countryCode;
                 //Set country object for address
                 address.country = _.findWhere(ctrl.countries, { code3: address.countryCode });
                 if (address.country != null) {
-                    ctrl.address.countryName = ctrl.address.country.name;
-                    ctrl.address.countryCode = ctrl.address.country.code3;
+                    address.countryName = address.country.name;
+                    address.countryCode = address.country.code3;
                 }
 
                 if (address.country) {
                     if (address.country.regions) {
                         setAddressRegion(address, address.country.regions);
                     }
-                    else {
+                    else if (countryChanged) {
                         ctrl.getCountryRegions({ country: address.country }).then(function (regions) {
                             address.country.regions = regions;
                             setAddressRegion(address, regions);
