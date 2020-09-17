@@ -1,0 +1,47 @@
+{% if variants_size != 1 %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="h4">{{ 'products.variation.product_variations' | t }}</span>
+                        </div>
+                    </div>
+                </div>
+                    {% for variant in product.variants %}
+                        <div class="panel-body row" style="display: flex;">
+                            <div class="col-md-2">
+                            {% if variant.primary_image %}
+                                <img class="img-responsive" ng-src="{{ variant.primary_image.url | img_url: "46x46" }}" alt="{{ variant.primary_image.alt | escape }}" />
+                            {% else %}
+                                <img class="img-responsive" src="{{ 'no-image.svg' | asset_url }}" />
+                            {% endif %}
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-uppercase">Item #{{ variant.sku }}</p>
+                                <div ng-repeat="property in allVariationsMap['{{ variant.id }}'].variationProperties">
+                                    <span>{% raw %}{{ property.name }}{% endraw %}</span>
+                                    <span style="padding-left: 20px;">{% raw %}{{ property.value }}{% endraw %}</span>
+                                </div>
+                                    {% if settings.show_prices_with_taxes %}
+                                        {% assign price = variant.price_with_tax %}
+                                        {% include 'product/price' %}
+                                    {% else %}
+                                        {% assign price = variant.price %}
+                                        {% include 'product/price' %}
+                                    {% endif %}
+                            </div>
+                            <div class="col-md-4" style="align-self: center;">
+                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                    <label for="qty">Quantity</label>
+                                    <input id="qty" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border-bottom-light"></div>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

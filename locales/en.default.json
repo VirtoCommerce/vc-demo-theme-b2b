@@ -830,6 +830,9 @@
             "details_tab": "Product details",
             "sign_in_to_see_price": "Sign in to see the price"
         },
+        "variation": {
+            "product_variations": "Product variations"
+        },
         "price": {
             "public": "Web price",
             "private": "Your price"
