@@ -95,19 +95,22 @@
                                             {{ 'checkout.purchase_order_number.title' | t }}
                                         </div>
                                         <div class="panel-body">
-                                            <form accept-charset="UTF-8" action="" name="$ctrl.form" novalidate="novalidate">
+                                            <form class="form-inline" accept-charset="UTF-8" action="" name="$ctrl.form" novalidate="novalidate">
                                                 <div class="form-group">
                                                     <input id="PurchaseOrderNumber"
                                                            class="form-control"
                                                            ng-model="checkout.cart.purchaseOrderNumber"
-                                                           ng-change="setPurchaseOrderNumber()"
-                                                           ng-model-options="{ updateOn: 'keyup', debounce: 300 }"
-                                                           name="PurchaseOrderNumber"
+                                                           name="purchaseOrderNumber"
                                                            placeholder="{{ 'checkout.purchase_order_number.placeholder' | t }}"
                                                            required="required"
-                                                           size="30"
                                                            type="text">
                                                 </div>
+                                                <button class="btn pull-right"
+                                                        ng-class="$ctrl.form.purchaseOrderNumber.$dirty ? 'btn-primary' : 'btn-success'"
+                                                        ng-disabled="!checkout.cart.purchaseOrderNumber"
+                                                        ng-click="setPurchaseOrderNumber()">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
                                             </form>
 
                                         </div>
