@@ -94,8 +94,8 @@
                                                 ng-click="$ctrl.accountLists.addToCart(lineItem)" ng-disabled="!$ctrl.canBeAddedToCart(lineItem)">
                                             <span class="icon icon-cart"></span>
                                             <span id="addToCartText" ng-if="!lineItem.product.isBuyable">{{ 'products.product.unavailable' | t }}</span>
-                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable & !lineItem.product.isInStock">{{ 'products.product.sold_out' | t }}</span>
-                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable & lineItem.product.isInStock">{{ 'products.general.add_to_cart' | t }}</span>
+                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable && !lineItem.product.isInStock">{{ 'products.product.sold_out' | t }}</span>
+                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable && lineItem.product.isInStock">{{ 'products.general.add_to_cart' | t }}</span>
                                         </button>
                                     </td>
                                 </tr>
@@ -104,6 +104,7 @@
                         </table>
                         <div ng-if="$ctrl.accountLists.selectedList.items.length" class="lists-productsList-addAllToCart">
                             <button type="button" name="add" id="addToCart" class="btn pull-right"
+                                    ng-disabled = "!$ctrl.addToCartAllProductsEnabled()"
                                     ng-click="$ctrl.addToCartAllProducts($ctrl.accountLists.selectedList.name)">
                                 <span class="icon icon-cart"></span>
                                 <span id="addToCartText">{{ 'wishlist.general.add_all_products' | t }}</span>
