@@ -129,7 +129,7 @@
                          return lineItem.product.isBuyable && lineItem.product.isInStock;
                     }
 
-                    $ctrl.addToCartAllProductsEnabled() {
+                    $ctrl.addToCartAllProductsEnabled = function () {
                         var result = $ctrl.accountLists.selectedList.items.some(function (item) {
                             return  $ctrl.canBeAddedToCart(item);
                         });
