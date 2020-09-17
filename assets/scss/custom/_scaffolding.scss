@@ -6,18 +6,17 @@ a {
   &.btn.btn-link {
     font-family: $link-font-family;
     font-weight: $link-font-weight;
-    border-bottom: 1px solid transparent;
-
+    //border-bottom: 1px solid transparent;
     &:hover,
     &:focus {
-      border-bottom: 1px $link-hover-border-style $link-hover-color;
+      //border-bottom: 1px $link-hover-border-style $link-hover-color;
     }
 
     &[href^="#"],
     &[href=""] {
       &:hover,
       &:focus{
-          border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
+          //border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
       }
     }
   }

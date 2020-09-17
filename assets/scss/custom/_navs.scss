@@ -1,40 +1,49 @@
 ﻿.nav-sm {
-  > li > a {
-    padding: $nav-small-link-padding;
-  }
+    > li > a {
+        padding: $nav-small-link-padding;
+    }
 }
 
 .nav-lg {
-  > li > a {
-    padding: $nav-large-link-padding;
-  }
+    > li > a {
+        padding: $nav-large-link-padding;
+    }
 }
 
 .nav-pills {
-  > li > a {
+    > li > a {
+        color: $text-color;
+        font-weight: normal;
+    }
+}
+
+.nav-stacked > li > a:focus,
+.nav-stacked > li > a:hover {
+    background-color: $body-bg;
+    color: $brand-primary;
+    //border-left: 3px $brand-primary solid;
+}
+
+
+.left-nav > li > a:hover,
+.left-nav > li > a:focus {
+    background: $gray-lighter;
+    border: 0 !important;
     color: $text-color;
-    font-weight: normal;
-    border-radius: $panel-border-radius !important;
-  }
 }
 
-.nav-stacked > li > a:focus, .nav-stacked > li > a:hover {
-  background-color: $body-bg;
-  border-left: 3px $brand-primary solid;
-}
-
-.nav-stacked > li.active >a, .nav-stacked > li.active > a:focus, .nav-stacked > li.active > a:hover {
-  background-color: $gray-lighter;
-  border-left: 3px $brand-primary solid;
-  color: $text-color;
-  font-weight: bold;
+.left-nav > li.active > a, .left-nav > li.active:hover > a, .left-nav > li.active:focus > a   {
+    background-color: $gray-lighter !important;
+    border-left: 3px $brand-primary solid !important;
+    color: $text-color !important;
+    font-weight: bold;
 }
 
 .nav-pills-transparent li:first-child {
     margin-left: 18px;
 }
 
-.nav-pills-transparent > li+li {
+.nav-pills-transparent > li + li {
     margin-left: 20px;
 }
 
@@ -43,18 +52,25 @@
     border-left: none;
     padding-left: 0;
     padding-right: 0;
-    &:focus, &:hover {
-      background-color: $body-bg;
-      color: $text-color;
+    &:focus,
+    &:hover {
+        background-color: $body-bg;
+        color: $text-color;
     }
 }
 
-.nav-pills-transparent > li.active > a, .nav-pills-transparent > li.active > a:focus, .nav-pills-transparent > li.active > a:hover {
-  border-bottom: 2px $brand-primary solid;
-  background-color: $body-bg;
-  color: $text-color;
+.nav-pills-transparent > li.active > a,
+.nav-pills-transparent > li.active > a:focus,
+.nav-pills-transparent > li.active > a:hover {
+    border-bottom: 2px $brand-primary solid;
+    background-color: $body-bg;
+    color: $text-color;
 }
 
 .pagination {
-    margin-left: -12px;
+    margin: 0;
+}
+
+.coll-top-nav {
+    width: 102.6%;
 }
