@@ -2,6 +2,12 @@
     padding-left: 3px;
 }
 
+.product-grid .nav-pills {
+  > li > a {
+    border-radius: $panel-border-radius !important;
+  }
+}
+
 /***Bottom nav ***/
 .navigation-bottom {
     width: 100%;

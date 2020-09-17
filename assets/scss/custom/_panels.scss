@@ -99,3 +99,13 @@
     font-weight: bold;
 }
 
+.sidebar .panel .fa-chevron-down{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.panel-default table{
+    border-left: 0px solid  $gray-lighter;
+    border-bottom: 0px solid  $gray-lighter;
+    border-right: 1px solid #ffffff;
+}
