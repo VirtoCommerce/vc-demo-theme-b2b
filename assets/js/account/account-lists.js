@@ -125,6 +125,10 @@
                         });
                     };
 
+                    $ctrl.canBeAddedToCart = function (lineItem) {
+                         return lineItem.product.isBuyable && lineItem.product.isInStock;
+                    }
+
                     $ctrl.addToCartAllProducts = function (listName) {
                         loader.wrapLoading(function () {
                             return listsApi.mergeWithCurrentCart(listName, $ctrl.type).then(function (response) {

@@ -8,7 +8,7 @@
     </div>
 
     <p ng-if="$ctrl.lists.length == 0">{{'wishlist.general.emptyData' | t}}</p>
-    
+
     <div ng-if="$ctrl.accountLists.lists.length != 0" class="grid-border">
         <div class ="row">
             <div class="col-md-12">
@@ -45,14 +45,14 @@
                                         <button class="btn"><i class="fa fa-plus"></i> {{'wishlist.general.create' | t}}</button>
                                     </li>
                                 </ul>
-                            </div>   
+                            </div>
                         </div>
 
                         <span ng-if="$ctrl.accountLists.selectedList.items.length == 0">
                             <h2>{{ 'wishlist.general.empty' | t }}</h2>
                             <p>{{ 'wishlist.general.continue_browsing_html' | t }}</p>
                         </span>
-                    
+
                         <table class="table table-hover" ng-if="$ctrl.accountLists.selectedList.items.length > 0">
                             <thead>
                                 <tr>
@@ -91,14 +91,16 @@
                                     </td>
                                     <td>
                                         <button type="button" name="add" id="addToCart" class="btn btn-primary"
-                                                ng-click="$ctrl.accountLists.addToCart(lineItem)">
+                                                ng-click="$ctrl.accountLists.addToCart(lineItem)" ng-disabled="!$ctrl.canBeAddedToCart(lineItem)">
                                             <span class="icon icon-cart"></span>
-                                            <span id="addToCartText">{{ 'products.general.add_to_cart' | t }}</span>
+                                            <span id="addToCartText" ng-if="!lineItem.product.isBuyable">{{ 'products.product.unavailable' | t }}</span>
+                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable & !lineItem.product.isInStock">{{ 'products.product.sold_out' | t }}</span>
+                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable & lineItem.product.isInStock">{{ 'products.general.add_to_cart' | t }}</span>
                                         </button>
                                     </td>
                                 </tr>
                             </tbody>
-                            
+
                         </table>
                         <div ng-if="$ctrl.accountLists.selectedList.items.length" class="lists-productsList-addAllToCart">
                             <button type="button" name="add" id="addToCart" class="btn pull-right"
