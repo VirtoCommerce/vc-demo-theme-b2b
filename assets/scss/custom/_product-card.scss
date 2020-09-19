@@ -23,7 +23,7 @@
 }
 
 .price-block {
-    padding: 5px 15px 15px 15px;
+    padding: 0px 15px 15px 15px;
     margin-bottom: 10px;
     border-bottom: 1px solid $gray-light;
 }
@@ -151,4 +151,9 @@ a.print {
 .template-product .col-md-4 {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+
+.template-product .dl-horizontal{
+    margin-top: 7px;
 }

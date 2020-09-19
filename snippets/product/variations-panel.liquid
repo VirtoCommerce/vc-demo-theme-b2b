@@ -15,14 +15,24 @@
                             {% if variant.primary_image %}
                                 <img class="img-responsive" ng-src="{{ variant.primary_image.url | img_url: "46x46" }}" alt="{{ variant.primary_image.alt | escape }}" />
                             {% else %}
-                                <img class="img-responsive" src="{{ 'no-image.svg' | asset_url }}" />
+                                <img class="img-responsive" style="margin-top: 10px;" src="{{ 'no-image.svg' | asset_url }}" />
                             {% endif %}
                             </div>
-                            <div class="col-md-6">
-                                <p class="text-uppercase">Item #{{ variant.sku }}</p>
+
+                            <div class="col-md-7">
+                                <p class="text-uppercase" style="margin-top: 10px;"><strong>Item #{{ variant.sku }}</strong></p>
+
                                 <div ng-repeat="property in allVariationsMap['{{ variant.id }}'].variationProperties">
-                                    <span>{% raw %}{{ property.name }}{% endraw %}</span>
-                                    <span style="padding-left: 20px;">{% raw %}{{ property.value }}{% endraw %}</span>
+
+                             <table class="product-properties ">
+                                <tr>
+                                    <td class="property-label">
+                                        <span >{% raw %}{{ property.name }}{% endraw %}</span></td>
+                                    <td class="property">
+                                        <span style="padding-left: 5px;"><strong>{% raw %}{{ property.value }}{% endraw %}</strong></span>
+                                    </td>
+                                </tr>
+                             </table>
                                 </div>
                                     {% if settings.show_prices_with_taxes %}
                                         {% assign price = variant.price_with_tax %}
@@ -32,10 +42,11 @@
                                         {% include 'product/price' %}
                                     {% endif %}
                             </div>
-                            <div class="col-md-4" style="align-self: center;">
-                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                    <label for="qty">Quantity</label>
-                                    <input id="qty" class="form-control" />
+
+                            <div class="col-md-3" style="align-self: center;">
+                                <div style="display:flex; flex-direction: row; justify-content: right; align-items: center">
+                                    <label for="qty" style="padding-top: 4px;">Quantity</label>
+                                    <input id="qty" class="form-control margin-right" />
                                 </div>
                             </div>
                         </div>
