@@ -8,7 +8,8 @@
     'storefrontApp.consts',
     'mgo-angular-wizard',
     'angularjs-dropdown-multiselect',
-    'storefrontApp.customerInfo'
+    'storefrontApp.customerInfo',
+    'ui.router'
 ];
 var storefrontApp = angular.module('storefrontApp', storefrontAppDependencies);
 

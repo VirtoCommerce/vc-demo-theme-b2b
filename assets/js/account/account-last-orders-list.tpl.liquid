@@ -5,7 +5,7 @@
                 <span class="h4">{{ 'customer.dashboard.last_orders' | t }}</span>
             </div>
             <div class="col-md-2">
-                <a ng-link="['Orders']" class="text-transform-none">
+                <a ui-sref="orders" class="text-transform-none">
                     {{ 'customer.dashboard.all_orders_link_text' | t }} <span class="fa fa-arrow-right arrow-padding-left"></span>
                 </a>
             </div>
@@ -27,7 +27,7 @@
                     <tbody ng-if="$ctrl.entries.length">
                         <tr ng-repeat="order in $ctrl.entries">
                             <td>
-                                <a ng-bind="order.number" ng-link="['OrderDetail', {number: order.number}]"></a>
+                                <a ng-bind="order.number" ui-sref="orders.detail({number: order.number})"></a>
                             </td>
                             <td ng-bind="order.purchaseOrderNumber"></td>
                             <td ng-bind="order.number"></td>

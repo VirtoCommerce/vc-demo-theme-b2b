@@ -23,7 +23,8 @@
             "bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js",
             "bower_components/bootstrap-toc/dist/bootstrap-toc.js",
             "bower_components/prism/prism.js",
-            "bower_components/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js"
+            "bower_components/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js",
+            "bower_components/angular-ui-router/release//angular-ui-router.js"
         ]
     },
     {

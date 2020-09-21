@@ -6,10 +6,146 @@ if (storefrontAppDependencies !== undefined) {
 }
 angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards', */'pascalprecht.translate', 'ngSanitize', 'storefrontApp', 'storefrontApp.consts'])
 
-    .config(['$translateProvider', 'baseUrl', function ($translateProvider, baseUrl) {
+    .config(['$translateProvider', 'baseUrl', '$stateProvider', '$urlRouterProvider', function ($translateProvider, baseUrl, $stateProvider, $urlRouterProvider) {
         $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
         $translateProvider.useUrlLoader(baseUrl + 'themes/localization.json');
         $translateProvider.preferredLanguage('en');
+
+        $urlRouterProvider.otherwise("/");
+
+        var dashboardSate = {
+            name: 'dashboard',
+            url: '/',
+            component: 'vcAccountDashboard'
+        }
+
+        var ordersSate = {
+            abstract: true,
+            name: 'orders',
+            url: '/orders/',
+            component: 'vcAccountOrders'
+        }
+
+        var ordersListSate = {
+            name: 'orders.list',
+            url: '',
+            component: 'vcAccountOrdersList',
+        }
+
+        var ordersDetailSate = {
+            name: 'orders.detail',
+            url: '/{number}',
+            component: 'vcAccountOrdersDetail'
+        }
+
+        var subscriptionsSate = {
+            abstract: true,
+            name: 'subscriptions',
+            url: '/subscriptions/',
+            component: 'vcAccountSubscriptions'
+        }
+
+
+        var subscriptionsListSate = {
+            name: 'subscriptions.list',
+            url: '',
+            component: 'vcAccountSubscriptionsList',
+        }
+
+        var subscriptionsDetailSate = {
+            name: 'subscriptions.detail',
+            url: '/{number}',
+            component: 'vcAccountSubscriptionsDetail'
+        }
+
+        var companyInfoSate = {
+            name: 'companyInfo',
+            url: '/companyInfo',
+            component: 'vcAccountCompanyInfo'
+        }
+
+        var membersSate = {
+            abstract: true,
+            name: 'members',
+            url: '/companyMembers/',
+            component: 'vcAccountCompanyMembers'
+        }
+
+        var membersListSate = {
+            name: 'members.list',
+            url: '',
+            component: 'vcAccountCompanyMembersList',
+        }
+
+        var membersDetailSate = {
+            name: 'members.detail',
+            url: '/{member}',
+            component: 'vcAccountCompanyMemberDetail'
+        }
+
+        var profileSate = {
+            name: 'profile',
+            url: '/profile',
+            component: 'vcAccountProfileUpdate'
+        }
+
+        var addressesSate = {
+            name: 'addresses',
+            url: '/addresses',
+            component: 'vcAccountAddresses'
+        }
+
+        var changePasswordSate = {
+            name: 'passwordChange',
+            url: '/changePassword',
+            component: 'vcAccountPasswordChange'
+        }
+
+        var checkoutDefaultsSate = {
+            name: 'checkoutDefaults',
+            url: '/checkoutDefaults',
+            component: 'vcAccountCheckoutDefaults'
+        }
+
+
+        var listsSate = {
+            abstract: true,
+            name: 'lists',
+            url: '/lists/',
+            component: 'vcAccountLists'
+        }
+
+        var listsMyListsSate = {
+            name: 'lists.myLists',
+            url: '',
+            component: 'vcAccountMyLists',
+        }
+
+        var quotesSate = {
+            name: 'quotes',
+            url: '/quotes',
+            component: 'vcAccountQuotes'
+        }
+
+        $stateProvider.state(dashboardSate);
+        $stateProvider.state(ordersSate);
+        $stateProvider.state(ordersDetailSate);
+        $stateProvider.state(ordersListSate);
+        $stateProvider.state(subscriptionsSate);
+        $stateProvider.state(subscriptionsDetailSate);
+        $stateProvider.state(subscriptionsListSate);
+        $stateProvider.state(companyInfoSate);
+        $stateProvider.state(membersSate);
+        $stateProvider.state(membersListSate);
+        $stateProvider.state(membersDetailSate);
+        $stateProvider.state(profileSate);
+        $stateProvider.state(addressesSate);
+        $stateProvider.state(changePasswordSate);
+        $stateProvider.state(checkoutDefaultsSate);
+        $stateProvider.state(listsSate);
+        $stateProvider.state(listsMyListsSate);
+        $stateProvider.state(quotesSate);
+
     }])
 
     .run(['$templateCache', function ($templateCache) {
@@ -17,7 +153,6 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
         $templateCache.put('pagerTemplate.html', '<ul uib-pagination boundary-links="true" max-size="$ctrl.pageSettings.numPages" items-per-page="$ctrl.pageSettings.itemsPerPageCount" total-items="$ctrl.pageSettings.totalItems" ng-model="$ctrl.pageSettings.currentPage" ng-change="$ctrl.pageSettings.pageChanged()" class="pagination-sm" style="padding-bottom: 20px;" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul uib-pagination>');
     }])
 
-    .value('$routerRootComponent', 'vcAccountManager')
     .service('accountDialogService', ['$uibModal', function ($uibModal) {
         return {
             showDialog: function (dialogData, controller, templateUrl) {
@@ -40,32 +175,18 @@ angular.module(moduleName, ['ngResource', 'ngComponentRouter', /*'credit-cards',
             baseUrl: '<',
             customer: '<'
         },
-        $routeConfig: [
-            { path: '/orders/...', name: 'Orders', component: 'vcAccountOrders' },
-            { path: '/orders/:number', name: 'OrderDetail', component: 'vcAccountOrders' },
-            { path: '/subscriptions/...', name: 'Subscriptions', component: 'vcAccountSubscriptions' },
-            { path: '/quotes', name: 'Quotes', component: 'vcAccountQuotes' },
-            { path: '/dashboard', name: 'Dashboard', component: 'vcAccountDashboard', useAsDefault: true },
-            { path: '/profile', name: 'Profile', component: 'vcAccountProfileUpdate' },
-            { path: '/addresses', name: 'Addresses', component: 'vcAccountAddresses' },
-            { path: '/changePassword', name: 'PasswordChange', component: 'vcAccountPasswordChange' },
-            { path: '/companyInfo', name: 'CompanyInfo', component: 'vcAccountCompanyInfo' },
-            { path: '/companyMembers/...', name: 'CompanyMembers', component: 'vcAccountCompanyMembers' },
-            { path: '/lists/...', name: 'Lists', component: 'vcAccountLists' },
-            { path: '/checkoutDefaults', name: 'CheckoutDefaults', component: 'vcAccountCheckoutDefaults' },
-        ],
         controller: ['$scope', '$timeout', 'storefrontApp.mainContext', 'loadingIndicatorService', 'commonService', function ($scope, $timeout, mainContext, loader, commonService) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.availCountries = [];
-            loader.wrapLoading(function() {
+            loader.wrapLoading(function () {
                 return commonService.getCountries().then(function (response) {
                     $ctrl.availCountries = response.data;
                 });
             });
 
             $ctrl.getCountryRegions = function (country) {
-                return loader.wrapLoading(function() {
+                return loader.wrapLoading(function () {
                     return commonService.getCountryRegions(country.code3).then(function (response) { return response.data; });
                 });
             };
