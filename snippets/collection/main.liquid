@@ -7,7 +7,7 @@
 {% comment %}
 {% paginate collection.products by settings.product_list_capacity %}
 {% endcomment %}
-    <main class="container" role="main">
+    <main class="container category-page" role="main">
         <div class="row" ng-controller="collectionController as $collection">
             <div class="col-xs-12">
                 {% include 'shared/breadcrumb' %}
