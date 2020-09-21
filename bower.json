@@ -17,7 +17,6 @@
     "angularjs": "~1.5.11",
     "angular-animate": "~1.5.11",
     "angular-bootstrap": "^2.5.0",
-    "angular-component-router": "",
     "angular-credit-cards": "^3.0.1",
     "angular-filter": "^0.5.8",
     "angular-recaptcha": "^4.1.2",
