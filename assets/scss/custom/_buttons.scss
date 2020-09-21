@@ -117,7 +117,7 @@
 
 .btn-primary.btn-alt {
     @include button-variant-alt(
-        $btn-primary-color,
+        $body-bg $btn-primary-color,
         $btn-primary-bg,
         $btn-primary-border,
         'darken',
@@ -170,10 +170,10 @@
     padding-left: 5px;
 }
 
-.vc-product-address .btn-white {
+.address-list .btn-white {
     width: 28px;
     height: 28px;
-    background: #ffffff;
+    background: $body-bg;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     border: 0;
@@ -181,14 +181,14 @@
     margin-right: 8px;
 }
 
-.vc-product-address .btn-white:hover {
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+.address-list .btn-white:hover {
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
 }
 
 .btn-white {
     width: 28px;
     height: 28px;
-    background: #ffffff;
+    background: $body-bg;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     border: 0;
@@ -196,22 +196,15 @@
     margin-right: 8px;
 }
 
-
 .btn-white:hover {
-  box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
 }
-
 
 .text-danger {
     color: $brand-danger;
 }
 
-// .vc-product-address table a{
-//     font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-//     font-size: 14px;
-// }
-
-.vc-product-address a:not(.btn) {
+.address-list a:not(.btn) {
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     font-weight: 500;
     margin-left: 16px;
@@ -219,6 +212,6 @@
 }
 
 .link-button {
-  padding-top: 3px !important;
-  margin-top: 10px !important;
+    padding-top: 3px !important;
+    margin-top: 10px !important;
 }
