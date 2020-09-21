@@ -35,7 +35,12 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.setPurchaseOrderNumber = function () {
                 return wrapLoading(function () {
-                    return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber);
+                    return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
+                        $rootScope.$broadcast('successOperation', {
+                            type: 'success',
+                            title: ['Purchase order number has successfully changed']
+                        });
+                    });
                 });
             }
 
