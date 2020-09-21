@@ -153,7 +153,23 @@ a.print {
     padding-right: 10px;
 }
 
-
-.template-product .dl-horizontal{
+.template-product .dl-horizontal {
     margin-top: 7px;
+}
+
+/*****/
+
+.quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+.quantity label.qty{
+    margin-top: 3px;
+}
+
+.variation-img{
+    padding: 0px 0px 0px 15px;
 }
