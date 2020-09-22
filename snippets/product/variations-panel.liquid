@@ -10,7 +10,7 @@
                     </div>
                 </div>
                     {% for variant in product.variants %}
-                        <div class="panel-body row" style="display: flex;">
+                        <div class="panel-body row flex">
                             <div class="variation-img">
                             {% if variant.primary_image %}
                                 <img class="img-responsive" ng-src="{{ variant.primary_image.url | img_url: "46x46" }}" alt="{{ variant.primary_image.alt | escape }}" />
@@ -44,7 +44,7 @@
                                     {% endif %}
                             </div>
 
-                            <div class="col-md-3" style="align-self: center;">
+                            <div class="col-md-3 qty-col">
                                 <div class="quantity">
                                     <label for="qty">Quantity</label>
                                     <input id="qty" class="form-control" />
