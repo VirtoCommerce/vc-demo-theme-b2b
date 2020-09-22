@@ -147,11 +147,7 @@ th {
 .address-list a:not(.btn) {
     font-weight: 500;
     margin-left: 18px;
-    border-bottom: 1px dashed #00739e;
-}
-
-.template-product .table>tbody>tr {
-  background-color: #f8f8f8;
+    border-bottom: 1px dashed $brand-alt;
 }
 
 .product-properties {

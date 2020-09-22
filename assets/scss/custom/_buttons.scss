@@ -93,6 +93,15 @@
         'lighten',
         0
     );
+
+    width: 28px;
+    height: 28px;
+    background: $body-bg;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    border: 0;
+    padding: 0px;
+    margin-right: 8px;
 }
 
 .btn-white.btn-alt {
@@ -199,17 +208,6 @@
 
 .address-list .btn-white:hover {
     box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
-}
-
-.btn-white {
-    width: 28px;
-    height: 28px;
-    background: $body-bg;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    border: 0;
-    padding: 0px;
-    margin-right: 8px;
 }
 
 .btn-white:hover {
