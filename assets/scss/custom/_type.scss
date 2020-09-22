@@ -1,5 +1,8 @@
 .page-header {
     margin: 0 0 $line-height-computed;
+    padding-bottom: 0px;
+    margin-bottom: 25px;
+    border: 0;
 }
 
 .border-none {
@@ -221,6 +224,19 @@ dl {
     color: $text-color;
 }
 
+// Checkout
+
+.checkout-settings h2 {
+    border-top: 1px solid $gray-light;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 25px;
+}
+
+.checkout-settings h5 {
+    margin-top: 0px;
+}
+
 .template-product .panel label,
 .product-pull-left,
 .property-label {
@@ -233,3 +249,8 @@ dl {
     margin-right: 10px;
 }
 
+.checkout-settings .img-responsive {
+    min-width: 40px;
+    height: auto;
+    margin-left: -20px;
+}

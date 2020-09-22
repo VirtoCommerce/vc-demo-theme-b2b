@@ -27,13 +27,13 @@
                 </ol>
                 <ul class="list-inline pull-right">
                     <li>
-                        <a href="" class="btn btn-link" ng-click=""><i class="fa fa-bullhorn"></i>&ensp;Feedback</a>
+                        <a href="" class="btn btn-link bullhorn" ng-click=""><i class="fa fa-bullhorn"></i>&ensp;Feedback</a>
                     </li>
                     <li>
-                        <a class="envelope" href="" class="btn btn-link" ng-click="sendToEmail()"><i class="fa fa-envelope"></i>&ensp;Email</a>
+                        <a href="" class="btn btn-link envelope" ng-click="sendToEmail()"><i class="fa fa-envelope"></i>&ensp;Email</a>
                     </li>
                     <li>
-                        <a href="" class="btn btn-link" ng-click="print()"><i class="fa fa-print"></i>&ensp;Print</a>
+                        <a href="" class="btn btn-link print" ng-click="print()"><i class="fa fa-print"></i>&ensp;Print</a>
                     </li>
                 </ul>
             </div>
@@ -133,13 +133,9 @@
                     <div class="col-xs-12">
                         <div class="row">
                             <div class="col-xs-12 col-md-9">
-                                <div class="container-drain container-bordered-horizontal">
+                                <div class="container-drain checkout-settings">
                                     <div class="row hidden-xs hidden-sm">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                Delivery method
-                                            </div>
-                                        </div>
+                                               <h2>DELIVERY METHOD</h2>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -164,17 +160,13 @@
                                         </div>
                                     </div>
                                     <div class="row hidden-xs hidden-sm" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                Shipping address
-                                            </div>
-                                        </div>
+                                            <h2>SHIPPING ADDRESS</h2>
                                     </div>
                                     <div class="row" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                         <div class="col-xs-12">
                                             &emsp;
-                                            <a class="btn btn-white" href="" ng-click="changeShippingAddress()">
-                                                <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <a class="btn btn-white link-button" href="" ng-click="changeShippingAddress()">
+                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                             </a>
                                             <div class="pull-left" ng-if="checkout.shipment.deliveryAddress.city">
                                                 <span class="label label-default" ng-if="isEqualAddress(checkout.shipment.deliveryAddress, customer.defaultShippingAddress)">Default</span>
@@ -187,24 +179,20 @@
                                     </div>
 
                                     <div class="row" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                SHIPPING METHOD
-                                            </div>
-                                        </div>
+                                                <h2>SHIPPING METHOD</h2>
                                     </div>
                                     <div class="row"  ng-if="checkout.deliveryMethod.type == 'shipping'">
                                         <div class="col-xs-12">
                                             &emsp;
-                                            <a class="btn btn-white" href="" ng-click="changeShippingMethod()">
-                                                <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <a class="btn btn-white link-button" href="" ng-click="changeShippingMethod()">
+                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                             </a>
                                             <div class="pull-left" ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode">
                                                 <address>
-                                                    <div class="col-xs-2 col-md-1">
+                                                    <div class="col-xs-2 col-md-3">
                                                         <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
                                                     </div>
-                                                    <div class="h5">
+                                                    <div class="h5 col-md-9">
                                                         <span class="name" ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
                                                         <span>
                                                             <strong ng-bind="'(' + checkout.shipment.price.formattedAmount + ')'"></strong>
@@ -219,17 +207,13 @@
                                     </div>
 
                                     <div class="row" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                PICKUP ADDRESS
-                                            </div>
-                                        </div>
+                                                <h2>PICKUP ADDRESS</h2>
                                     </div>
                                     <div class="row" ng-if="checkout.deliveryMethod.type == 'pickup'">
                                         <div class="col-xs-12">
                                             &emsp;
-                                            <a class="btn btn-white" href="" ng-click="changePickupAddress()">
-                                                <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <a class="btn btn-white link-button" href="" ng-click="changePickupAddress()">
+                                                   <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                             </a>
                                             <div class="pull-left" ng-if="checkout.deliveryMethod.fulfillmentCenter.address.city">
                                                 <vc-address address="checkout.deliveryMethod.fulfillmentCenter.address" edit-mode="false"></vc-address>
@@ -241,24 +225,20 @@
                                     </div>
 
                                     <div class="row hidden-xs hidden-sm">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                PAYMENT METHOD
-                                            </div>
-                                        </div>
+                                            <h2>PAYMENT METHOD</h2>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             &emsp;
-                                            <a class="btn btn-white" href="" ng-click="changePaymentMethod()">
-                                                <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                                            <a class="btn btn-white link-button" href="" ng-click="changePaymentMethod()">
+                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                             </a>
                                             <div class="pull-left" ng-if="checkout.payment.name">
                                                 <address>
-                                                    <div class="col-xs-2 col-md-1">
+                                                    <div class="col-xs-2 col-md-3">
                                                         <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
                                                     </div>
-                                                    <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                                    <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                         <span ng-bind="checkout.payment.name"></span>
                                                         <span><small ng-bind="checkout.payment.description"></small></span>
                                                     </div>
@@ -275,11 +255,7 @@
                                     </div>
 
                                     <div class="row hidden-xs hidden-sm">
-                                        <div class="col-xs-12">
-                                            <div class="h2">
-                                                MY PRODUCTS
-                                            </div>
-                                        </div>
+                                               <h2> MY PRODUCTS</h2>
                                     </div>
                                     <div class="row flexible text-condensed" ng-repeat="lineItem in checkout.cart.items">
                                         <vc-checkout-line-item line-item="lineItem"></vc-checkout-line-item>
@@ -386,7 +362,7 @@
         <h4 class="modal-title">SELECT ADDRESS</h4>
     </div>
     <div class="modal-body">
-        <table class="table table-striped">
+        <table class="table table-striped address-list">
             <thead>
                 <tr>
                     <th>Recipient's name</th>

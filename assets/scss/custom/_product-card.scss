@@ -70,8 +70,19 @@
 
 .add-to-list .fa,
 .print .fa,
-.envelope .fa {
+.envelope .fa,
+.bullhorn .fa {
     display: none;
+}
+
+.add-to-list,
+.print,
+.envelope,
+.bullhorn {
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 a.add-to-list {
@@ -88,6 +99,11 @@ a.envelope {
     background: url(../../images/action-mail.svg) no-repeat left;
 }
 
+a.bullhorn {
+    padding-left: 18px;
+    background: url(../../images/action-feedback.svg) no-repeat left;
+}
+
 .action-buttons .envelope {
     padding-left: 24px;
 }
@@ -101,6 +117,11 @@ a.print {
     background: url(../../images/action-print.svg) no-repeat left;
 }
 
+a.feedback {
+    padding-left: 18px;
+    background: url(../../images/action-feedback.svg) no-repeat left;
+}
+
 /*** Cart panel styles ***/
 
 .price-block .dl-horizontal dt {
@@ -109,7 +130,7 @@ a.print {
 
 .price-block .dl-horizontal dd {
     font-weight: bold;
-    color: #3c763d;
+    color: $dark-green;
 }
 
 .product-card .dl-horizontal dt {
