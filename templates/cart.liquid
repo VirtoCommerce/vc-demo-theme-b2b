@@ -106,7 +106,8 @@
                                                            type="text">
                                                 </div>
                                                 <button class="btn pull-right"
-                                                        ng-class="$ctrl.form.purchaseOrderNumber.$dirty ? 'btn-primary' : 'btn-success'"
+                                                        type="button"
+                                                        ng-class="$ctrl.form.purchaseOrderNumber.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
                                                         ng-disabled="!checkout.cart.purchaseOrderNumber"
                                                         ng-click="setPurchaseOrderNumber()">
                                                     <i class="fa fa-check"></i>

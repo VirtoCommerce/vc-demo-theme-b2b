@@ -125,6 +125,22 @@
     );
 }
 
+.btn-success.btn-alt {
+    @include button-variant-alt($btn-success-color, $btn-success-bg, $btn-success-border, 'darken', 0);
+}
+
+.btn-info.btn-alt {
+    @include button-variant-alt($btn-info-color, $btn-info-bg, $btn-info-border, 'darken', 0);
+}
+
+.btn-warning.btn-alt {
+    @include button-variant-alt($btn-warning-color, $btn-warning-bg, $btn-warning-border, 'darken', 0);
+}
+
+.btn-danger.btn-alt {
+    @include button-variant-alt($btn-danger-color, $btn-danger-bg, $btn-danger-border, 'darken', 0);
+}
+
 .btn-primary,
 .btn-success,
 .btn-info,
@@ -214,4 +230,13 @@
 .link-button {
     padding-top: 3px !important;
     margin-top: 10px !important;
+}
+
+// Temporary workaround
+.category-page {
+    .btn-alt .fa {
+        color: $brand-primary;
+        font-weight: bold;
+        padding-left: 5px;
+    }
 }
