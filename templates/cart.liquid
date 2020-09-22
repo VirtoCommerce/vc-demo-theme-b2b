@@ -95,25 +95,23 @@
                                             {{ 'checkout.purchase_order_number.title' | t }}
                                         </div>
                                         <div class="panel-body">
-                                            <form class="form-inline" accept-charset="UTF-8" action="" name="$ctrl.form" novalidate="novalidate">
+                                            <form class="form-inline" accept-charset="UTF-8" name="purchaseOrderNumberForm" novalidate="novalidate">
                                                 <div class="form-group">
-                                                    <input id="PurchaseOrderNumber"
+                                                    <input id="purchaseOrderNumber"
                                                            class="form-control"
                                                            ng-model="checkout.cart.purchaseOrderNumber"
                                                            name="purchaseOrderNumber"
                                                            placeholder="{{ 'checkout.purchase_order_number.placeholder' | t }}"
-                                                           required="required"
                                                            type="text">
                                                 </div>
-                                                <button class="btn pull-right"
-                                                        type="button"
-                                                        ng-class="$ctrl.form.purchaseOrderNumber.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
-                                                        ng-disabled="!checkout.cart.purchaseOrderNumber"
+                                                <button id="purchaseOrderNumberSubmit"
+                                                        class="btn pull-right"
+                                                        ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
+                                                        ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
                                                         ng-click="setPurchaseOrderNumber()">
                                                     <i class="fa fa-check"></i>
                                                 </button>
                                             </form>
-
                                         </div>
                                     </div>
                                     <div class="panel panel-default panel-static">
