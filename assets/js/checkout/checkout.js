@@ -34,6 +34,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             };
 
             $scope.setPurchaseOrderNumber = function () {
+                this.purchaseOrderNumberForm.$setPristine();
+                angular.element('#purchaseOrderNumberSubmit').blur();
                 return wrapLoading(function () {
                     return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
                         $rootScope.$broadcast('successOperation', {
