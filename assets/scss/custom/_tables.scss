@@ -129,3 +129,21 @@ th {
 .template-product .table>tbody>tr{
   background-color: #f8f8f8;
 }
+
+.product-properties {
+  width: 310px;
+  margin-bottom: 4px;
+}
+
+.product-properties tr td {
+    text-align: left !important;
+    padding: 5px 0px 0px 0px;
+}
+
+.product-properties tr td.property-label{
+  width: 160px;
+}
+
+.product-properties tr td.property{
+  width: 100px;
+}

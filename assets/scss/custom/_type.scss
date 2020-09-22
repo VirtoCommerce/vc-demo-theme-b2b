@@ -221,6 +221,15 @@ dl {
     color: $text-color;
 }
 
-
-
+.template-product .panel label,
+.product-pull-left,
+.property-label {
+    font-family: 'Helvetica Neue', sans-serif
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    color: $text-muted;
+    margin-right: 10px;
+}
 

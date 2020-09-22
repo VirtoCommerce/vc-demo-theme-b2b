@@ -1,3 +1,7 @@
+.flex{
+    display: flex;
+}
+
 /***  Product Page  ***/
 
 .panel-heading {
@@ -23,7 +27,7 @@
 }
 
 .price-block {
-    padding: 5px 15px 15px 15px;
+    padding: 0px 15px 15px 15px;
     margin-bottom: 10px;
     border-bottom: 1px solid $gray-light;
 }
@@ -151,4 +155,29 @@ a.print {
 .template-product .col-md-4 {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.template-product .dl-horizontal {
+    margin-top: 7px;
+}
+
+/*****/
+
+.quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+}
+
+.quantity label.qty{
+    margin-top: 3px;
+}
+
+.variation-img{
+    padding: 0px 0px 0px 15px;
+}
+
+.qty-col{
+    align-self: center;
 }
