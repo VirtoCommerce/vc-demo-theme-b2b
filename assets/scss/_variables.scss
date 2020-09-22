@@ -256,7 +256,7 @@
 //** Small `.form-control` & `button` height
 // $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2)
 //** Extra small `button` height
-   $input-height-xs:                (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 2);
+   $input-height-xs:                (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 6);
 
 //** `.form-group` margin
 // $form-group-margin-bottom:       15px
