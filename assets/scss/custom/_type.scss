@@ -237,6 +237,18 @@ dl {
     margin-top: 0px;
 }
 
+.template-product .panel label,
+.product-pull-left,
+.property-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    color: $text-muted;
+    margin-right: 10px;
+}
+
 .checkout-settings .img-responsive {
     min-width: 40px;
     height: auto;

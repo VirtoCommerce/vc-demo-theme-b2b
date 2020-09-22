@@ -39,6 +39,7 @@
                 {% include 'collection/sidebar' %}
             </div>
             <div class="col-md-9 product-grid">
+                {% include 'product/product-compare-list-bar' %}
                 <div class="container-drain" ng-controller="priceController">
                     {% assign position = 'top' %}
                     {% include 'collection/nav' %}

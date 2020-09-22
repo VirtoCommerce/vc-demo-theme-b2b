@@ -36,6 +36,16 @@ angular.module('storefrontApp')
                     }
                 })
             };
+
+            $scope.$on('productRemovedFromCompareList', function(event, data) {
+                if ($ctrl.productId == data) {
+                    $ctrl.containProduct = false;
+                }
+            });
+
+            $scope.$on('productCompareListCleared', function(event, data) {
+                $ctrl.containProduct = false;
+            });
         }]
     })
 

@@ -14,11 +14,8 @@
     {% assign unavailable = true %}
 {% endif %}
 
-    {% if variants_size == 1 %}
-        {% include 'product/main' %}
-    {% else %}
-        {% include 'product/variations' %}
-    {% endif %}
+{% include 'product/main' %}
+
 </ng-controller>
 
 
