@@ -126,7 +126,7 @@
 
 .btn-primary.btn-alt {
     @include button-variant-alt(
-        $body-bg $btn-primary-color,
+        $btn-primary-color,
         $btn-primary-bg,
         $btn-primary-border,
         'darken',
