@@ -1,10 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountCompanyMembers', {
         templateUrl: "themes/assets/account-company-members.tpl.liquid",
-        $routeConfig: [
-            { path: '/', name: 'MemberList', component: 'vcAccountCompanyMembersList', useAsDefault: true },
-            { path: '/:member', name: 'MemberDetail', component: 'vcAccountCompanyMemberDetail' }
-        ],
         controller: ['storefrontApp.mainContext', function (mainContext) {
             var $ctrl = this;
         }]
@@ -12,7 +8,6 @@ angular.module('storefront.account')
 
     .component('vcAccountCompanyMembersList', {
         templateUrl: "account-company-members-list.tpl",
-        bindings: { $router: '<' },
         controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'confirmService', '$location', '$translate', function (mainContext, $scope, accountApi, loader, confirmService, $location, $translate) {
             var $ctrl = this;
             $ctrl.currentMemberId = mainContext.customer.id;
@@ -138,10 +133,6 @@ angular.module('storefront.account')
                     });
                 });
             };
-
-            $ctrl.edit = function (memberId) {
-                this.$router.navigate(['MemberDetail', { member: memberId, pageNumber: $ctrl.pageSettings.currentPage }]);
-            }
 
             $ctrl.delete = function (member) {
                 var showDialog = function (text) {

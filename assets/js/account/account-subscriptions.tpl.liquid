@@ -1,5 +1,5 @@
 <div class="col-md-8">
-    <ng-outlet></ng-outlet>
+    <ui-view></ui-view>
 </div>
 
     <script id="account-subscriptions-list.tpl" type="text/ng-template">
@@ -20,7 +20,7 @@
             <tbody>
                 <tr ng-repeat="data in $ctrl.entries">
                     <td>
-                        <a ng-bind="data.number" ng-link="['SubscriptionDetail', {number: data.number, pageNumber: $ctrl.pageSettings.currentPage}]"></a>
+                        <a ng-bind="data.number" ui-sref="subscriptions.detail({number: data.number, pageNumber: $ctrl.pageSettings.currentPage})"></a>
                     </td>
                     <td ng-bind="data.status"></td>
                     <td ng-bind="(data.intervalCount===1?'': data.intervalCount) + (data | toIntervalKey:data.intervalCount | translate)"></td>
@@ -38,7 +38,7 @@
 
     <script id="account-subscription-detail.tpl" type="text/ng-template">
         <p>
-            <a ng-link="['SubscriptionList', {pageNumber: $ctrl.pageNumber}]">
+            <a ui-sref="subscriptions.list({pageNumber: $ctrl.pageNumber})">
                 <span class="fa fa-arrow-left"></span> {{ 'customer.subscriptions.return' | t }}
             </a>
         </p>
@@ -93,7 +93,7 @@
                 <div class="vc-section-header">
                     <div class="vc-t">{{ 'customer.subscription.orders' | t }}</div>
                     <div class="vc-descr" ng-repeat="order in $ctrl.subscription.customerOrders">
-                        <a ng-link="['/Orders/OrderDetail', {number: order.number}]">
+                        <a ui-sref="orders.detail({number: order.number})">
                             {% raw %}{{ 'customer.subscription.order_sentence' | translate: {order:order} }}{% endraw %}
                         </a>
                     </div>

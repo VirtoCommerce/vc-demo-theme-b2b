@@ -1,4 +1,4 @@
-<ng-outlet ng-init="$ctrl.orderHelper.statusLabels=[
+<ui-view ng-init="$ctrl.orderHelper.statusLabels=[
            { status: 'unpaid', label: '{{ 'customer.order.status.unpaid' | t }}'},
            { status: 'pending', label: '{{ 'customer.order.status.pending' | t }}'},
            { status: 'processing', label: '{{ 'customer.order.status.processing' | t }}'},
@@ -6,7 +6,7 @@
            { status: 'sent', label: '{{ 'customer.order.status.sent' | t }}'},
            { status: 'partiallysent', label: '{{ 'customer.order.status.partially_sent' | t }}'},
            { status: 'cancelled', label: '{{ 'customer.order.status.cancelled' | t }}'}
-           ]"></ng-outlet>
+           ]"></ui-view>
 
 <script id="account-orders-list.tpl" type="text/ng-template">
     <div class="page-header border-none">
@@ -32,7 +32,7 @@
                 <tbody ng-if="$ctrl.entries.length">
                     <tr ng-repeat="order in $ctrl.entries">
                         <td>
-                            <a ng-bind="order.number" ng-link="['OrderDetail', {number: order.number, pageNumber: $ctrl.pageSettings.currentPage}]"></a>
+                            <a ng-bind="order.number" ui-sref="orders.detail({number: order.number, pageNumber: $ctrl.pageSettings.currentPage})"></a>
                         </td>
                         <td ng-bind="order.purchaseOrderNumber"></td>
                         <td>
@@ -62,7 +62,7 @@
 <script id="account-order-detail.tpl" type="text/ng-template">
     <div class="page-header">
         <h3>
-            <a ng-link="['OrderList', {pageNumber: $ctrl.pageNumber}]">
+            <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})">
                 <span class="fa fa-arrow-left"></span> {{ 'customer.orders.return' | t }}
             </a>
         </h3>
@@ -179,7 +179,7 @@
                             <div class="vc-t">{{ 'customer.order.subscription' | t }}</div>
                             <div class="vc-descr">
                                 {{ 'customer.order.subscription_comment' | t }}
-                                <a ng-bind="$ctrl.order.subscriptionNumber" ng-link="['/Subscriptions/SubscriptionDetail', {number: $ctrl.order.subscriptionNumber}]"></a>
+                                <a ng-bind="$ctrl.order.subscriptionNumber" ui-sref="subscriptions.detail({number: $ctrl.order.subscriptionNumber})"></a>
                             </div>
                         </div>
                     </div>

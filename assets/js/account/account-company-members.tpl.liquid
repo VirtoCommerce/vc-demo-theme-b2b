@@ -1,5 +1,5 @@
 <div class="col-md-8">
-    <ng-outlet ng-init=""></ng-outlet>
+    <ui-view></ui-view>
 </div>
 <script id="account-company-members-list.tpl" type="text/ng-template">
 
@@ -27,7 +27,7 @@
                         <td ng-bind="member.isLockedOut ?'Not active':'Active'"></td>
                         <td>
                             <span ng-show="$ctrl.showActions(member)">
-                                <a ng-if="member.firstName" ng-click="$ctrl.edit(member.id)" href="">Edit | </a>
+                                <a ng-if="member.firstName" ui-sref="members.detail({ member: member.id, pageNumber: $ctrl.pageSettings.currentPage })">Edit | </a>
                                 <a ng-click="$ctrl.delete(member)" href="">Delete</a>
                                 <a ng-click="$ctrl.changeStatus(member)" href="" ng-bind="member.isLockedOut ? '| Activate' : '| Deactivate'"></a>
                             </span>
