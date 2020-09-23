@@ -3,6 +3,6 @@
 </div>
 <p>
     <a class="text-truncate" href="{{ product_url | append: '?resp_group=' | append: response_group }}">{{ product.title }}</a><br>
-    {{ 'products.product.sku' | t }}&nbsp;<a href="{{ product_url| append: '?resp_group=' | append: response_group }}">{{ product.sku }}</a><br>
-    {{ 'products.product.mmn' | t }}&nbsp;{{ product.properties['MMN'].value }}
+    <strong>{{ 'products.product.sku' | t }}</strong>&nbsp;<a href="{{ product_url| append: '?resp_group=' | append: response_group }}">{{ product.sku }}</a><br>
+    <strong>{{ 'products.product.mmn' | t }}</strong>&nbsp;{{ product.properties['MMN'].value }}
 </p>

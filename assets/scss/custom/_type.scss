@@ -5,6 +5,10 @@
     border: 0;
 }
 
+.page-header h3 a{
+    font-family: $font-family-condensed;
+}
+
 .border-none {
     border: none;
     padding: 0;
@@ -49,6 +53,7 @@ h3,
 
 p.product-count {
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .border-top-light {
@@ -141,6 +146,11 @@ p.product-count {
             }
         }
     }
+}
+
+
+footer .navbar-static-bottom .list-unstyled li a{
+    font-size: 13px;
 }
 
 dl:only-child {
@@ -253,4 +263,13 @@ dl {
     min-width: 40px;
     height: auto;
     margin-left: -20px;
+}
+
+
+.user-roles-card-body .title{
+    font-weight: $btn-font-weight;
+}
+
+.action-buttons .list-inline a{
+    font-family: $font-family-condensed !important;
 }

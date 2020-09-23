@@ -83,28 +83,24 @@
 
 .sidebar .panel h4 {
     font-size: 16px;
+    font-weight: 700;
 }
 
 .sidebar .panel .fa-chevron-down {
-    font-size: 16px;
-}
-
-.sidebar .panel h4 {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 .accordion-toggle .ng-binding {
     font-weight: bold;
 }
 
-.sidebar .panel .fa-chevron-down{
-    font-size: 15px;
-    font-weight: 400;
-}
-
 .panel-default table{
     border-left: 0px solid  $gray-lighter;
     border-bottom: 0px solid  $gray-lighter;
     border-right: 1px solid #ffffff;
+}
+
+h4.panel-title a{
+     font-family: $font-family-condensed !important;
 }

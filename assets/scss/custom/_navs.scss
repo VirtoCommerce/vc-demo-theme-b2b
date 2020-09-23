@@ -13,8 +13,13 @@
 .nav-pills {
     > li > a {
         color: $text-color;
-        font-weight: normal;
+        font-weight: $btn-font-weight;
+        font-family: $font-family-condensed;
     }
+}
+
+.left-nav li a {
+        font-weight: $link-font-weight;
 }
 
 .nav-stacked > li > a:focus,
@@ -37,6 +42,7 @@
     border-left: 3px $brand-primary solid !important;
     color: $text-color !important;
     font-weight: bold;
+    padding-left: 12px;
 }
 
 .nav-pills-transparent li:first-child {
@@ -71,6 +77,15 @@
     margin: 0;
 }
 
+.pagination li a, .pagination li {
+  font-weight: $btn-font-weight;
+  font-family: $font-family-condensed;
+}
+
 .coll-top-nav {
     width: 102.6%;
+}
+
+.view-switcher{
+    margin-right: 15px;
 }
