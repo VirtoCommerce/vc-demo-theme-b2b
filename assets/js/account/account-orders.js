@@ -1,10 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountOrders', {
         templateUrl: "themes/assets/js/account/account-orders.tpl.liquid",
-        $routeConfig: [
-            { path: '/', name: 'OrderList', component: 'vcAccountOrdersList', useAsDefault: true },
-            { path: '/:number', name: 'OrderDetail', component: 'vcAccountOrderDetail' }
-        ],
         controller: [function () {
             var $ctrl = this;
         }]

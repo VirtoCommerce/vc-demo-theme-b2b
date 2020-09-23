@@ -5,7 +5,7 @@
         <vc-member-detail member="$ctrl.member" member-component="$ctrl.memberComponent" fields-config="$ctrl.fieldsConfig"></vc-member-detail>
     </div>
 
-    <a ng-link="['MemberList', {pageNumber: $ctrl.pageNumber}]" class="btn btn-default btn-marging-right">
+    <a ui-sref="members.list({pageNumber: $ctrl.pageNumber})" class="btn btn-default btn-marging-right">
         <span class="btn-text">{{ 'customer.edit_company_member.return_text' | t }}</span>
     </a>
     <button ng-click="$ctrl.submitMember()" ng-disabled="$ctrl.loader.isLoading" class="btn btn-primary" ng-class="{ 'loading': $ctrl.loader.isLoading }">

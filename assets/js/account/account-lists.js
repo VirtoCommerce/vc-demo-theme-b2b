@@ -2,10 +2,6 @@
     .component('vcAccountLists',
         {
             templateUrl: "lists-manager.tpl",
-            $routeConfig: [
-                { path: '/', name: 'Lists', component: 'vcAccountLists' },
-                { path: '/myLists', name: 'MyLists', component: 'vcAccountMyLists', useAsDefault: true }
-            ],
             controller: [
                 'listsApi', '$rootScope', 'cartService', '$translate', 'loadingIndicatorService', '$timeout',
                 function (listsApi, $rootScope, cartService, $translate, loader, $timeout) {

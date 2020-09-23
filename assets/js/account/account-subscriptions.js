@@ -1,10 +1,6 @@
 angular.module('storefront.account')
 .component('vcAccountSubscriptions', {
-    templateUrl: "themes/assets/js/account/account-subscriptions.tpl.liquid",
-    $routeConfig: [
-     { path: '/', name: 'SubscriptionList', component: 'vcAccountSubscriptionsList', useAsDefault: true },
-     { path: '/:number', name: 'SubscriptionDetail', component: 'vcAccountSubscriptionDetail' }
-    ]
+    templateUrl: "themes/assets/js/account/account-subscriptions.tpl.liquid"
 })
 
 .component('vcAccountSubscriptionsList', {
@@ -55,14 +51,14 @@ angular.module('storefront.account')
         };
 
         $ctrl.cancel = function () {
-           
+
             loader.wrapLoading(function () {
                 return accountApi.cancelUserSubscription({ number: $ctrl.entryNumber, cancelReason: $ctrl.cancelReason }).then(function (result) {
                     $ctrl.subscription = angular.copy(result.data);
                     $ctrl.isCancelFormVisible = false;
                     refresh();
                 });
-            });               
+            });
         };
     }]
 })

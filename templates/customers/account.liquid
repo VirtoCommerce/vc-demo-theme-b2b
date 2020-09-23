@@ -20,36 +20,36 @@
                     </div>
                     <div class="row">
                         <ul class="nav nav-pills nav-stacked left-nav">
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountDashboard'}">
-                                <a ng-link="['Dashboard']">{{ 'customer.account.menu_label.dashboard' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="dashboard">{{ 'customer.account.menu_label.dashboard' | t }}</a>
                             </li>
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountProfileUpdate'}">
-                                <a ng-link="['Profile']">{{ 'customer.account.menu_label.profile' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="orders.list">{{ 'customer.account.menu_label.orders' | t }}</a>
                             </li>
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountAddresses'}">
-                                <a ng-link="['Addresses']">{{ 'customer.account.menu_label.addresses' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="profile">{{ 'customer.account.menu_label.profile' | t }}</a>
                             </li>
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountPasswordChange'}">
-                                <a ng-link="['PasswordChange']">{{ 'customer.account.menu_label.change_password' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="addresses">{{ 'customer.account.menu_label.addresses' | t }}</a>
                             </li>
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountOrders'}">
-                                <a ng-link="['Orders']">{{ 'customer.account.menu_label.orders' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="passwordChange">{{ 'customer.account.menu_label.change_password' | t }}</a>
                             </li>
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountLists'}">
-                                <a ng-link="['Lists']">{{ 'customer.account.menu_label.wishlist' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                             </li>
                             {% if shop.subscription_enabled %}
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountSubscriptions'}">
-                                <a ng-link="['Subscriptions']">{{ 'customer.account.menu_label.subscriptions' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="subscriptions">{{ 'customer.account.menu_label.subscriptions' | t }}</a>
                             </li>
                             {% endif %}
                             {% if shop.quotes_enabled %}
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountQuotes'}">
-                                <a ng-link="['Quotes']">{{ 'customer.account.menu_label.quotes' | t }}</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="quotes">{{ 'customer.account.menu_label.quotes' | t }}</a>
                             </li>
                             {% endif %}
-                            <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountCheckoutDefaults'}">
-                                <a ng-link="['CheckoutDefaults']">Checkout Details</a>
+                            <li ui-sref-active="active">
+                                <a ui-sref="checkoutDefaults">Checkout Details</a>
                             </li>
                         </ul>
                     </div>
@@ -59,19 +59,19 @@
                             <h3>{{ 'customer.account.corporate' | t }}</h3>
                         </div>
                         <div class="row">
-                            <ul class="nav nav-pills nav-stacked left-nav">
-                                <li ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountCompanyInfo'}">
-                                    <a ng-link="['CompanyInfo']">{{ 'customer.account.menu_label.company_info' | t }}</a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li ui-sref-active="active">
+                                    <a ui-sref="companyInfo">{{ 'customer.account.menu_label.company_info' | t }}</a>
                                 </li>
-                                <li va-permission="storefront:user:view" ng-class="{active: $$ngOutlet.$$componentName === 'vcAccountCompanyMembers'}">
-                                    <a ng-link="['CompanyMembers']">{{ 'customer.account.menu_label.company_members' | t }}</a>
+                                <li va-permission="storefront:user:view" ui-sref-active="active">
+                                    <a ui-sref="members.list">{{ 'customer.account.menu_label.company_members' | t }}</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-8 col-sm-10">
-                    <ng-outlet></ng-outlet>
+                    <ui-view></ui-view>
                 </div>
             </div>
         </div>
