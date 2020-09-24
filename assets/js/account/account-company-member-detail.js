@@ -4,9 +4,15 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['$q', '$rootScope', '$scope', '$window', 'accountApi', 'loadingIndicatorService', function ($q, $rootScope, $scope, $window, accountApi, loader) {
+        controller: ['$q', '$rootScope', '$scope', '$window', 'accountApi', 'loadingIndicatorService', '$stateParams', function ($q, $rootScope, $scope, $window, accountApi, loader, $stateParams) {
             var $ctrl = this;
             $ctrl.loader = loader;
+
+            $ctrl.pageNumber = $stateParams.pageNumber || 1;
+            $ctrl.memberNumber =$stateParams.member;
+
+            refresh();
+
             $ctrl.fieldsConfig = [
                 {
                     field: 'CompanyName',
@@ -50,12 +56,6 @@ angular.module('storefront.account')
                     });
                 });
             }
-
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageNumber = next.params.pageNumber || 1;
-                $ctrl.memberNumber = next.params.member;
-                refresh();
-            };
 
             $ctrl.submitMember = function () {
                 if ($ctrl.memberComponent.validate()) {

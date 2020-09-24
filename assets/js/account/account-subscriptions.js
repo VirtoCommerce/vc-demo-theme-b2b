@@ -5,11 +5,18 @@ angular.module('storefront.account')
 
 .component('vcAccountSubscriptionsList', {
     templateUrl: "account-subscriptions-list.tpl",
-    controller: ['accountApi', 'confirmService', 'loadingIndicatorService', '$translate', function (accountApi, confirmService, loader, $translate) {
+    controller: ['accountApi', 'confirmService', 'loadingIndicatorService', '$translate', '$stateParams', function (accountApi, confirmService, loader, $translate, $stateParams) {
         var $ctrl = this;
         $ctrl.loader = loader;
-        $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 5, numPages: 10 };
+        $ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 5, numPages: 10 };
+
+        loadData();
+
         $ctrl.pageSettings.pageChanged = function () {
+            loadData();
+        };
+
+        function loadData() {
             loader.wrapLoading(function () {
                 return accountApi.searchUserSubscriptions({
                     pageNumber: $ctrl.pageSettings.currentPage,
@@ -20,20 +27,20 @@ angular.module('storefront.account')
                     $ctrl.pageSettings.totalItems = response.data.totalCount;
                 });
             });
-        };
-
-        this.$routerOnActivate = function (next) {
-            $ctrl.pageSettings.currentPage = next.params.pageNumber || $ctrl.pageSettings.currentPage;
-            $ctrl.pageSettings.pageChanged();
-        };
+        }
     }]
 })
 
 .component('vcAccountSubscriptionDetail', {
     templateUrl: "account-subscription-detail.tpl",
-    controller: ['accountApi', 'confirmService', 'loadingIndicatorService', '$translate', function (accountApi, confirmService, loader, $translate) {
+    controller: ['accountApi', 'confirmService', 'loadingIndicatorService', '$translate', '$stateParams', function (accountApi, confirmService, loader, $translate, $stateParams) {
         var $ctrl = this;
         $ctrl.loader = loader;
+
+        $ctrl.pageNumber = $stateParams.pageNumber || 1;
+        $ctrl.entryNumber = $stateParams.number;
+
+        refresh();
 
         function refresh() {
             loader.wrapLoading(function () {
@@ -42,13 +49,6 @@ angular.module('storefront.account')
                 });
             });
         }
-
-        this.$routerOnActivate = function (next) {
-            $ctrl.pageNumber = next.params.pageNumber || 1;
-            $ctrl.entryNumber = next.params.number;
-
-            refresh();
-        };
 
         $ctrl.cancel = function () {
 

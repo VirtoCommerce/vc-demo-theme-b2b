@@ -22,40 +22,52 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
         var ordersSate = {
             abstract: true,
             name: 'orders',
-            url: '/orders/',
+            url: '/orders',
             component: 'vcAccountOrders'
         }
 
         var ordersListSate = {
             name: 'orders.list',
-            url: '',
+            url: '/{pageNumber: int}',
             component: 'vcAccountOrdersList',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var ordersDetailSate = {
             name: 'orders.detail',
-            url: '/{number}',
-            component: 'vcAccountOrdersDetail'
+            url: '/{number}?pageNumber',
+            component: 'vcAccountOrderDetail',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var subscriptionsSate = {
             abstract: true,
             name: 'subscriptions',
-            url: '/subscriptions/',
+            url: '/subscriptions',
             component: 'vcAccountSubscriptions'
         }
 
 
         var subscriptionsListSate = {
             name: 'subscriptions.list',
-            url: '',
+            url: '/{pageNumber: int}',
             component: 'vcAccountSubscriptionsList',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var subscriptionsDetailSate = {
             name: 'subscriptions.detail',
-            url: '/{number}',
-            component: 'vcAccountSubscriptionsDetail'
+            url: '/{number}?pageNumber',
+            component: 'vcAccountSubscriptionsDetail',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var companyInfoSate = {
@@ -67,20 +79,26 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
         var membersSate = {
             abstract: true,
             name: 'members',
-            url: '/companyMembers/',
+            url: '/companyMembers',
             component: 'vcAccountCompanyMembers'
         }
 
         var membersListSate = {
             name: 'members.list',
-            url: '',
+            url: '/{pageNumber: int}',
             component: 'vcAccountCompanyMembersList',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var membersDetailSate = {
             name: 'members.detail',
-            url: '/{member}',
-            component: 'vcAccountCompanyMemberDetail'
+            url: '/{member}?pageNumber',
+            component: 'vcAccountCompanyMemberDetail',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         var profileSate = {
@@ -111,20 +129,23 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
         var listsSate = {
             abstract: true,
             name: 'lists',
-            url: '/lists/',
+            url: '/lists',
             component: 'vcAccountLists'
         }
 
         var listsMyListsSate = {
             name: 'lists.myLists',
-            url: '',
+            url: '/',
             component: 'vcAccountMyLists',
         }
 
         var quotesSate = {
             name: 'quotes',
-            url: '/quotes',
-            component: 'vcAccountQuotes'
+            url: '/quotes/{pageNumber: int}',
+            component: 'vcAccountQuotes',
+            params: {
+                pageNumber: {value: null}
+            }
         }
 
         $stateProvider.state(dashboardSate);

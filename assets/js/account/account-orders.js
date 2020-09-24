@@ -7,7 +7,7 @@ angular.module('storefront.account')
     })
     .component('vcAccountOrdersList', {
         templateUrl: "account-orders-list.tpl",
-        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses ) {
+        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', '$stateParams', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses, $stateParams ) {
             var $ctrl = this;
             $ctrl.sortDescending = sortDescending;
             $ctrl.sortAscending = sortAscending;
@@ -16,7 +16,8 @@ angular.module('storefront.account')
             $ctrl.loader = loader;
             $ctrl.filterDropdownSettings = { template: '{{option}}', smartButtonTextConverter(skip, option) { return option; }, };
             $ctrl.dropdownEvents = { onSelectionChanged: filtersChanged };
-            $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 10, numPages: 10 };
+            $ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 10, numPages: 10 };
+
             $ctrl.pageSettings.pageChanged = function () {
                 loadData();
             };
@@ -66,10 +67,7 @@ angular.module('storefront.account')
                 return sortDirection == sortAscending ? sortDescending : sortAscending;
             }
 
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageSettings.currentPage = next.params.pageNumber || $ctrl.pageSettings.currentPage;
-                $ctrl.pageSettings.pageChanged();
-            };
+            loadData();
         }]
     })
     .component('vcAccountOrderDetail', {
@@ -77,11 +75,15 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService ) {
+        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', '$stateParams', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService, $stateParams ) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.hasPhysicalProducts = true;
-            var loadPromise;
+
+            $ctrl.pageNumber = $stateParams.pageNumber || 1;
+            $ctrl.orderNumber = $stateParams.number;
+
+            refresh();
 
             function refresh() {
                 loader.wrapLoading(function () {
@@ -117,13 +119,6 @@ angular.module('storefront.account')
                     });
                 });
             }
-
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageNumber = next.params.pageNumber || 1;
-                $ctrl.orderNumber = next.params.number;
-
-                refresh();
-            };
 
             $ctrl.getInvoicePdf = function () {
                 var url = $window.BASE_URL + 'storefrontapi/orders/' + $ctrl.orderNumber + '/invoice';

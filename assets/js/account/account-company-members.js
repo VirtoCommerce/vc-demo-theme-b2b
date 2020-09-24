@@ -8,13 +8,15 @@ angular.module('storefront.account')
 
     .component('vcAccountCompanyMembersList', {
         templateUrl: "account-company-members-list.tpl",
-        controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'confirmService', '$location', '$translate', function (mainContext, $scope, accountApi, loader, confirmService, $location, $translate) {
+        controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'confirmService', '$location', '$translate', '$stateParams', function (mainContext, $scope, accountApi, loader, confirmService, $location, $translate, $stateParams) {
             var $ctrl = this;
             $ctrl.currentMemberId = mainContext.customer.id;
             $ctrl.newMemberComponent = null;
             $ctrl.loader = loader;
-            $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 10, numPages: 10 };
+            $ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 10, numPages: 10 };
             $ctrl.pageSettings.pageChanged = function () { refresh(); };
+
+            refresh();
 
             function refresh() {
                 $ctrl.errors = undefined;
@@ -66,11 +68,6 @@ angular.module('storefront.account')
                 $ctrl.storeId = storeId;
                 $ctrl.cultureName = cultureName;
                 $ctrl.registrationUrl = registrationUrl;
-            };
-
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageSettings.currentPage = next.params.pageNumber || $ctrl.pageSettings.currentPage;
-                refresh();
             };
 
             $ctrl.inviteEmailsValidationPattern = new RegExp(/((^|((?!^)([,;]|\r|\r\n|\n)))([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*))+$/);
