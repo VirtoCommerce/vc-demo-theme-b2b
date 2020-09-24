@@ -5,13 +5,13 @@ angular.module('storefront.account')
         var $ctrl = this;
         $ctrl.loader = loader;
 
-        $ctrl.newCount = null;
-        $ctrl.processingCount = null;
+        $ctrl.unpaidCount = null;
+        $ctrl.paidCount = null;
         $ctrl.completedCount = null;
 
         $ctrl.statusStats = {
-            'New': null,
-            'Processing': null,
+            'Unpaid': null,
+            'Paid': null,
             'Completed': null
         }
 
