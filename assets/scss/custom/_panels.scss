@@ -104,3 +104,18 @@
 h4.panel-title a{
      font-family: $font-family-condensed !important;
 }
+
+
+// Panels with tables inside
+
+.panel-table{
+    padding: 0px;
+}
+
+.panel-table table{
+    margin-bottom: 0px;
+}
+
+.panel-table table tr td{
+    padding: 15px;
+}

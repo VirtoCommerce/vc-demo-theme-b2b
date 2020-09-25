@@ -1,7 +1,7 @@
 {% if variants_size != 1 %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-default">
+            <div class="panel panel-default variations-panel">
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-12">
@@ -22,17 +22,35 @@
                             <div class="col-md-7">
                                 <p class="text-uppercase"><strong>Item #{{ variant.sku }}</strong></p>
                                 <div ng-repeat="property in allVariationsMap['{{ variant.id }}'].variationProperties">
-
+<!--
                              <table class="product-properties ">
                                 <tr>
                                     <td class="property-label">
                                         <span>{% raw %}{{ property.name }}{% endraw %}</span></td>
                                     <td class="property">
                                         <span><strong>{% raw %}{{ property.value }}{% endraw %}</strong></span>
-                                    </span>
+
                                     </td>
                                 </tr>
-                             </table>
+                             </table> -->
+
+<dl class="dl-horizontal">
+    <dt class="text-normal">
+        <span class="product-pull-left">
+
+             <span>{% raw %}{{ property.name }}{% endraw %}</span>
+
+        </span>
+    </dt>
+
+    <dd>
+        <span class="product-pull-right">
+        <span><strong>{% raw %}{{ property.value }}{% endraw %}</strong></span>
+        </span>
+    </dd>
+        </dl>
+
+
 
                                 </div>
                                     {% if settings.show_prices_with_taxes %}

@@ -46,7 +46,6 @@
             </table>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div ng-if='$ctrl.pageSettings.totalItems > $ctrl.pageSettings.itemsPerPageCount' ng-include="'pagerTemplate.html'"></div>
@@ -99,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body panel-table">
                             <div class="row">
                                 <div class="col-md-12">
                                     <vc-line-items items="$ctrl.order.items"></vc-line-items>

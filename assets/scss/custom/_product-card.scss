@@ -54,6 +54,10 @@
     margin-bottom: 0px;
 }
 
+.action-buttons ul li {
+    margin-right: 20px;
+}
+
 .action-buttons ul li a {
     font-style: normal;
     font-weight: bold !important;
@@ -201,4 +205,12 @@ a.feedback {
 
 .qty-col{
     align-self: center;
+}
+
+.variations-panel .dl-horizontal .text-normal .product-pull-left{
+    text-transform: uppercase;
+}
+
+.template-product .img-responsive{
+    border: 1px $gray-lighter solid;
 }
