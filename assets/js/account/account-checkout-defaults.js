@@ -9,8 +9,13 @@ angular.module('storefront.account')
             $ctrl.loader = loader;
             $ctrl.defaults = {};
             $ctrl.deliveryMethods = [{ type: 'shipping' }, { type: 'pickup' }];
+            $ctrl.customer = mainContext.customer;
 
-            $ctrl.getAvailPaymentMethods = function () {
+            $ctrl.$onInit = function () {
+                loadData();
+            }
+
+            function getAvailPaymentMethods() {
                 loader.wrapLoading(function() {
                     return cartService.getAvailablePaymentMethods().then(function (response) {
                         $ctrl.paymentMethods = response.data;
@@ -19,7 +24,7 @@ angular.module('storefront.account')
                 });
             };
 
-            $ctrl.getAvailShippingMethods = function () {
+            function getAvailShippingMethods() {
                 loader.wrapLoading(function() {
                     return cartService.getAvailableShippingMethods().then(function (response) {
                         $ctrl.shippingMethods = response.data;
@@ -27,6 +32,12 @@ angular.module('storefront.account')
                     });
                 });
             }
+
+            function loadData() {
+                getCustomerDefaults();
+                getAvailShippingMethods();
+                getAvailPaymentMethods();
+            };
 
             $ctrl.changeShippingMethod = function (method) {
                 $ctrl.defaults.shippingMethod = method;
@@ -42,19 +53,12 @@ angular.module('storefront.account')
                 });
             }
 
-            $ctrl.getCustomerDefaults = function() {
+             function getCustomerDefaults() {
                 var customerDefaults = JSON.parse(localStorage.getItem($ctrl.customer.id));
                 if (customerDefaults) {
                     $ctrl.defaults = customerDefaults;
                 }
             }
-
-            this.$routerOnActivate = function () {
-                $ctrl.customer = mainContext.customer;
-                $ctrl.getCustomerDefaults();
-                $ctrl.getAvailShippingMethods();
-                $ctrl.getAvailPaymentMethods();
-            };
 
             function setActiveShippingMethod() {
                 if ($ctrl.defaults.shippingMethod) {

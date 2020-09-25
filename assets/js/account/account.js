@@ -28,7 +28,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
         var ordersListSate = {
             name: 'orders.list',
-            url: '/{pageNumber: int}',
+            url: '/?{pageNumber: int}',
             component: 'vcAccountOrdersList',
             params: {
                 pageNumber: {value: null}
@@ -54,7 +54,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
         var subscriptionsListSate = {
             name: 'subscriptions.list',
-            url: '/{pageNumber: int}',
+            url: '/?{pageNumber: int}',
             component: 'vcAccountSubscriptionsList',
             params: {
                 pageNumber: {value: null}
@@ -85,7 +85,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
         var membersListSate = {
             name: 'members.list',
-            url: '/{pageNumber: int}',
+            url: '/?{pageNumber: int}',
             component: 'vcAccountCompanyMembersList',
             params: {
                 pageNumber: {value: null}
@@ -141,7 +141,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
         var quotesSate = {
             name: 'quotes',
-            url: '/quotes/{pageNumber: int}',
+            url: '/quotes/?{pageNumber: int}',
             component: 'vcAccountQuotes',
             params: {
                 pageNumber: {value: null}
@@ -150,8 +150,8 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
         $stateProvider.state(dashboardSate);
         $stateProvider.state(ordersSate);
-        $stateProvider.state(ordersDetailSate);
         $stateProvider.state(ordersListSate);
+        $stateProvider.state(ordersDetailSate);
         $stateProvider.state(subscriptionsSate);
         $stateProvider.state(subscriptionsDetailSate);
         $stateProvider.state(subscriptionsListSate);
