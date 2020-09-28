@@ -8,26 +8,19 @@
     font-size: 20px;
 }
 
-.panel-body {
-    padding: 15px;
-}
-
 .panel-group {
     .panel-static {
         border-radius: 0;
-
         &:first-child {
             border-top-left-radius: $panel-border-radius;
             border-top-right-radius: $panel-border-radius;
         }
-
         &:last-child {
             border-bottom-left-radius: $panel-border-radius;
             border-bottom-right-radius: $panel-border-radius;
         }
     }
-
-    .panel-static + .panel-static {
+    .panel-static+.panel-static {
         border-top-width: 0;
         margin-top: 0;
     }
@@ -37,8 +30,7 @@
     .panel-static {
         border-radius: 4px;
     }
-
-    .panel-static + .panel-static {
+    .panel-static+.panel-static {
         border-top-width: 1px;
     }
 }
@@ -53,13 +45,12 @@
 }
 
 .panel-title {
-    > a,
-    > small > a,
-    > .small > a {
+    >a,
+    >small>a,
+    >.small>a {
         &:hover {
             border-bottom-color: inherit;
         }
-
         &:focus:not(:hover) {
             border-bottom-color: transparent;
         }
@@ -67,12 +58,12 @@
 }
 
 .panel-body {
-    > uib-accordion-heading + *,
-    > *:first-child {
+    padding: 15px;
+    >uib-accordion-heading+*,
+    >*:first-child {
         margin-top: 0;
     }
-
-    > *:last-child {
+    >*:last-child {
         margin-bottom: 0;
     }
 }
@@ -95,14 +86,27 @@
     font-weight: bold;
 }
 
-.panel-default table{
-    border-left: 0px solid  $gray-lighter;
-    border-bottom: 0px solid  $gray-lighter;
+.panel-default table {
+    border-left: 0px solid $gray-lighter;
+    border-bottom: 0px solid $gray-lighter;
     border-right: 1px solid #ffffff;
 }
 
-h4.panel-title a{
-     font-family: $font-family-condensed !important;
+h4.panel-title a {
+    font-family: $font-family-condensed !important;
+}
+
+// Panels with tables inside
+.panel-table {
+    padding: 0px;
+}
+
+.panel-table table {
+    margin-bottom: 0px;
+}
+
+.panel-table table tr td {
+    padding: 15px;
 }
 
 .panel-striped:nth-of-type(odd) {
