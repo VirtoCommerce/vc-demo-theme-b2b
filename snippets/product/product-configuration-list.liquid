@@ -41,8 +41,8 @@
                 </div>
             </div>
             <div class="col-xs-2">
-                <img ng-if="item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" />
-                <img ng-if="!item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive" ng-src="{{ 'no-image.svg' | asset_url }}" />
+                <img ng-if="item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive border-none" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" />
+                <img ng-if="!item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive border-none" ng-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
             <div class="col-xs-9 configuration-group">
                 <span ng-class="{ 'group-name': dialogData.selectedItemId == item.id }" ng-bind="item.name"></span>
