@@ -1,4 +1,4 @@
-<div class="col-md-8">
+ <div class="col-md-8">
     <ui-view></ui-view>
 </div>
 <script id="account-company-members-list.tpl" type="text/ng-template">
@@ -11,6 +11,7 @@
                 <thead>
                     <tr>
                         <th>{{ 'customer.edit_company_members.name' | t }}</th>
+                        <th>{{ 'customer.edit_company_members.job_title' | t }}</th>
                         <th>{{ 'customer.edit_company_members.email' | t }}</th>
                         <th>{{ 'customer.edit_company_members.role' | t }}</th>
                         <th>Budget</th>
@@ -21,6 +22,7 @@
                 <tbody>
                     <tr ng-repeat="member in $ctrl.entries">
                         <td ng-bind="member.userName"></td>
+                        <td ng-bind="member.title"></td>
                         <td ng-bind="member.email"></td>
                         <td ng-bind="member.role.name"></td>
                         <td ng-bind="member.salutation ? '$' + member.salutation : 'n/a'"></td>
