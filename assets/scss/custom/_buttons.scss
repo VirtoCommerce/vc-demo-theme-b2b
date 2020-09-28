@@ -36,6 +36,8 @@
     }
     &:disabled {
         border-bottom: 1px solid transparent;
+        color: $btn-link-disabled-color;
+        text-decoration: none;
     }
     &.btn-lg {
         @include button-link-size-fix( $padding-large-horizontal, $font-size-large, $line-height-large, $input-height-large);
@@ -98,18 +100,6 @@
 .btn-warning,
 .btn-danger {
     @include button-variant-disabled();
-}
-
-.btn-link {
-    &[disabled],
-    fieldset[disabled] & {
-        &,
-        &:hover,
-        &:focus {
-            color: $btn-link-disabled-color;
-            text-decoration: none;
-        }
-    }
 }
 
 .address-list .btn-white {
