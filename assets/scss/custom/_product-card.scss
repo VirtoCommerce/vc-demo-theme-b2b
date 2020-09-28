@@ -202,3 +202,34 @@ a.feedback {
 .qty-col{
     align-self: center;
 }
+
+/*** Product configuration ***/
+
+.configuration-group {
+    font-family: $font-family-sans-serif;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    .group-name {
+        font-weight: bold;
+    }
+}
+
+.configuration-item-info {
+    display: flex;
+    .price-title {
+        color: $text-muted;
+        font-size: 13px;
+        line-height: 20px;
+    }
+    .price-value {
+        padding-left: 5px;
+        font-weight: bold;
+    }
+}
+
+.configuration-group-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

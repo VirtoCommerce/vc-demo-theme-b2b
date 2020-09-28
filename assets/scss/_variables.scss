@@ -254,7 +254,7 @@
 //** Large `.form-control` & `button` height
 // $input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2)
 //** Small `.form-control` & `button` height
-// $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2)
+   $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
 //** Extra small `button` height
    $input-height-xs:                (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 6);
 
@@ -713,9 +713,9 @@ $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
 //** Modal backdrop opacity
 // $modal-backdrop-opacity:      .5
 //** Modal header border color
-// $modal-header-border-color:   #e5e5e5
+$modal-header-border-color:   #e5e5e5;
 //** Modal footer border color
-// $modal-footer-border-color:   $modal-header-border-color
+$modal-footer-border-color:   $modal-header-border-color;
 
 // $modal-lg:                    900px
 // $modal-md:                    600px

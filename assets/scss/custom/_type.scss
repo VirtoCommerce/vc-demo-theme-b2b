@@ -78,6 +78,14 @@ p.product-count {
     font-weight: normal;
 }
 
+.text-bold {
+    font-weight: bold;
+}
+
+.text-default-color {
+    color: $text-color;
+}
+
 .text-primary {
     color: $brand-primary;
 }

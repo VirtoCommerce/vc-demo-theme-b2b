@@ -1,0 +1,64 @@
+{% if product.product_type == "Configurable" %}
+    <div class="row" ng-controller="productConfigurationController">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default" ng-if="productParts">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class="h4">Customize your configuration</span>
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="part in productParts" class="flex border-bottom-light panel-body align-items-center">
+                    <div>
+                        <img ng-if="part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" class="img-responsive" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
+                        <img ng-if="!part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" class="img-responsive" ng-src="{{ 'no-image.svg' | asset_url }}" />
+                    </div>
+
+                    <div class="col-md-8 configuration-group">
+                        <span class="group-name" ng-bind="part.name"></span>
+                        <span ng-bind="getSelectedItem(part)"></span>
+                    </div>
+
+                    <div class="col-md-2 configuration-group-btn p-0">
+                        <button class="btn btn-sm btn-alt btn-primary" ng-click="changeGroupItem(part)">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+<script id="storefront.select-configuration-item-dialog.tpl" type="text/ng-template">
+    <div class="modal-header configuration">
+        <span class="modal-title h4" ng-bind="getModalTitel()"></span>
+        <button class="close" type="button" ng-click="close()" title="close" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
+    </div>
+        <div class="flex align-items-center panel-body panel-striped" ng-repeat="item in dialogData.items">
+            <div class="col-xs-1">
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" ng-change="handleRadioClick(item.id)" ng-model="selectedId" ng-value="item.id" name="partName">
+                        <span class="switch"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <img ng-if="item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" />
+                <img ng-if="!item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive" ng-src="{{ 'no-image.svg' | asset_url }}" />
+            </div>
+            <div class="col-xs-9 configuration-group">
+                <span ng-class="{ 'group-name': dialogData.selectedItemId == item.id }" ng-bind="item.name"></span>
+                <div class="configuration-item-info">
+                    <span class="price-title">Your price:</span> <span ng-bind="item.price.actualPrice.formattedAmount" class="price-value"></span>
+                </div>
+            </div>
+        </div>
+    <div class="modal-flex-footer">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="save(selectedId)">Save</button>
+    </div>
+</script>

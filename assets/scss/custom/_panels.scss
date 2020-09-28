@@ -104,3 +104,7 @@
 h4.panel-title a{
      font-family: $font-family-condensed !important;
 }
+
+.panel-striped:nth-of-type(odd) {
+    background-color: $gray-striped-table;
+}

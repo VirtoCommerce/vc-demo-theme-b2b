@@ -151,3 +151,33 @@ main {
 .user-inactive {
   color: $gray-user-inactive;
 }
+
+
+.modal-flex-footer {
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+    border-top: 1px solid $modal-footer-border-color;
+}
+
+.modal-header.configuration {
+    background-color: $gray-striped-table;
+    border-top-left-radius: $panel-border-radius;
+    border-top-right-radius: $panel-border-radius;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.modal-header {
+    button.close {
+        font-size: 35px;
+    }
+
+    &:before, &:after {
+        display: none;
+    }
+}
+

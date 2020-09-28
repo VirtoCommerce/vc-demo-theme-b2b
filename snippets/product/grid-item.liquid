@@ -20,7 +20,10 @@
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}
-    {% include 'product/price' %}
+    <div class="configurable-wrapper">
+        {% include 'product/price' %}
+        {% include 'product/configurable' %}
+    </div>
     {% include 'product/quantity' %}
 </div>
 

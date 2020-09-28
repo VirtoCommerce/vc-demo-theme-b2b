@@ -87,8 +87,50 @@
                         </div>
                         <div class="panel-body">
                           <div class="price-block">
-                            {% assign product = product %}
-                            {% include 'product/price' %}
+                            {% if product.product_type == "Configurable" %}
+                                <dl class="dl-horizontal">
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color">Default price</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right text-normal text-default-color">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color">Custom changes</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right text-normal text-default-color">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+
+                                    <br>
+
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color text-bold">Total</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+                                </dl>
+                            {% else %}
+                                {% assign product = product %}
+                                {% include 'product/price' %}
+                            {% endif %}
                           </div>
 
                           <div class="delivery-cart">
@@ -126,6 +168,7 @@
                 </div>
 
             {% include 'product/variations-panel' %}
+            {% include 'product/product-configuration-list' %}
 
             </div>
 
