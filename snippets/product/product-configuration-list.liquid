@@ -9,8 +9,8 @@
         </div>
         <div ng-repeat="part in productParts" class="flex border-bottom-light panel-body align-items-center">
             <div>
-                <img ng-if="part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" class="img-responsive" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
-                <img ng-if="!part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" class="img-responsive" ng-src="{{ 'no-image.svg' | asset_url }}" />
+                <img ng-if="part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
+                <img ng-if="!part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
 
             <div class="col-md-8 configuration-group">
