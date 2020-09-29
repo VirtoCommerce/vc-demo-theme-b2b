@@ -288,7 +288,6 @@ storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scop
     }
 
     $scope.save = function(id) {
-        console.log($scope.selectedId);
         $uibModalInstance.close(id);
     }
 }]);
