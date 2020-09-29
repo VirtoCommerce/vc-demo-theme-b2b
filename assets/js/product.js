@@ -114,13 +114,13 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.changeGroupItem = function (productPart) {
             var dialogInstance = dialogService.showDialog(productPart, 'changeConfigurationGroupItemDialogController', 'storefront.select-configuration-item-dialog.tpl');
             dialogInstance.result.then(function (id) {
-                const foundIndex = $scope.productParts.findIndex(x => x.name == productPart.name);
+                const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
                 $scope.productParts[foundIndex].selectedItemId = id;
             });
         };
 
         $scope.getSelectedItem = function(configPart) {
-            const item = configPart.items.find(x => x.id == configPart.selectedItemId);
+            const item = configPart.items.find(x => x.id === configPart.selectedItemId);
             return item.name;
         }
 
