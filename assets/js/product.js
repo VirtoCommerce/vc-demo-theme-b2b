@@ -111,6 +111,19 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             });
         }
 
+        $scope.changeGroupItem = function (productPart) {
+            var dialogInstance = dialogService.showDialog(productPart, 'changeConfigurationGroupItemDialogController', 'storefront.select-configuration-item-dialog.tpl');
+            dialogInstance.result.then(function (id) {
+                const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
+                $scope.productParts[foundIndex].selectedItemId = id;
+            });
+        };
+
+        $scope.getSelectedItem = function(configPart) {
+            const item = configPart.items.find(x => x.id === configPart.selectedItemId);
+            return item.name;
+        }
+
         function toDialogDataModel(product, quantity) {
             return { items: [angular.extend({ }, product, { quantity: quantity })] };
             //     return {
@@ -170,6 +183,10 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 return availabilityService.getProductsAvailability([product.id]).then(function(response) {
                     $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
                 });
+            });
+
+            catalogService.getProductConfiguration(product.id).then(function(response) {
+                $scope.productParts = response.data;
             });
         };
 
@@ -251,5 +268,26 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$w
     $scope.send = function(email) {
         mailingService.sendProduct(dialogData.productId, { email: email, storeId: dialogData.storeId, productUrl: dialogData.productUrl, language: dialogData.language });
         $uibModalInstance.close();
+    }
+}]);
+
+storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scope', '$window', '$uibModalInstance', 'dialogData', function ($scope, $window, $uibModalInstance, dialogData) {
+    $scope.dialogData = dialogData;
+    $scope.selectedId = dialogData.selectedItemId;
+
+    $scope.close = function() {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    $scope.getModalTitel = function() {
+        return `Choose ${$scope.dialogData.name}`
+    }
+
+    $scope.handleRadioClick = function(id) {
+        $scope.selectedId = id;
+    }
+
+    $scope.save = function(id) {
+        $uibModalInstance.close(id);
     }
 }]);

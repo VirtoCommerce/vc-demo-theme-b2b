@@ -43,6 +43,20 @@
     width: 23%;
     padding-top: 15px;
     padding-bottom: 15px;
+    .configurable-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .configurable {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-self: flex-end;
+            margin-bottom: 10px;
+        }
+        .configure-icon {
+            margin-right: 4px;
+        }
+    }
 }
 
 .template-collection .container-drain > .row:not(:last-child) {

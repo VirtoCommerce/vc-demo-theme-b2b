@@ -63,6 +63,9 @@ storefrontApp.service('catalogService', ['$http', function ($http) {
         },
         searchCategories: function (criteria) {
             return $http.post('storefrontapi/categories/search', criteria);
+        },
+        getProductConfiguration: function (productId) {
+            return $http.get('storefrontapi/demo/catalog/' + productId + '/configuration?t=' + new Date().getTime());
         }
     }
 }]);

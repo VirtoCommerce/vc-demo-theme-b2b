@@ -34,46 +34,44 @@
                     {% include 'product/product-compare-list-bar' %}
                 </div>
 
-
-            {% if product.properties.size > 0 %}
-                   <div class="col-md-6">
-                    <div class="panel panel-default panel-table-inside">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span class="h4">Technical Specs</span>
+                <div class="col-md-6">
+                    {% if product.properties.size > 0 %}
+                        <div class="panel panel-default panel-table-inside">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="h4">Technical Specs</span>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    {% for property in product.properties %}
+                                        {% assign column_count = 1 %}
+                                        {% include 'shared/grid/rows' %}
+                                        {% if should_start_row %}
+                                            <tr>
+                                        {% endif %}
+                                            <td class="no-border"><span class="text-muted">{{ property.name }}</span></td>
+                                            <td class="no-border"><strong>{{ property.value }}</strong></td>
+                                        {% if should_end_row %}
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                </table>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                        <table class="table table-striped">
-                            {% for property in product.properties %}
-                                {% assign column_count = 1 %}
-                                {% include 'shared/grid/rows' %}
-                                {% if should_start_row %}
-                                    <tr>
-                                {% endif %}
-                                    <td class="no-border"><span class="text-muted">{{ property.name }}</span></td>
-                                    <td class="no-border"><strong>{{ property.value }}</strong></td>
-                                {% if should_end_row %}
-                                    </tr>
+                        <div class="product-description">
+                            {% for description in product.descriptions %}
+                                {% if description.type == "FullReview" %}
+                                    {{ description.content }}
                                 {% endif %}
                             {% endfor %}
-                        </table>
                         </div>
-
-                    </div>
-
-                <div class="product-description">
-                    {% for description in product.descriptions %}
-                        {% if description.type == "FullReview" %}
-                            {{ description.content }}
-                        {% endif %}
-                    {% endfor %}
+                    {% endif %}
+                {% include 'product/variations-panel' %}
+                {% include 'product/product-configuration-list' %}
                 </div>
-
-                </div>
-            {% endif %}
 
                 <div class="col-md-3" ng-controller="priceController">
 
@@ -87,8 +85,50 @@
                         </div>
                         <div class="panel-body">
                           <div class="price-block">
-                            {% assign product = product %}
-                            {% include 'product/price' %}
+                            {% if product.product_type == "Configurable" %}
+                                <dl class="dl-horizontal">
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color">Default price</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right text-normal text-default-color">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color">Custom changes</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right text-normal text-default-color">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+
+                                    <br>
+
+                                    <dt class="text-normal">
+                                        <span class="product-pull-left">
+                                            <span class="text-default-color text-bold">Total</span>
+                                        </span>
+                                    </dt>
+
+                                    <dd>
+                                        <span class="product-pull-right">
+                                            <span>placeholder for price</span>
+                                        </span>
+                                    </dd>
+                                </dl>
+                            {% else %}
+                                {% assign product = product %}
+                                {% include 'product/price' %}
+                            {% endif %}
                           </div>
 
                           <div class="delivery-cart">
@@ -119,13 +159,10 @@
                             </div>
                             </div>
 
-
                         </div>
                     </div>
 
                 </div>
-
-            {% include 'product/variations-panel' %}
 
             </div>
 

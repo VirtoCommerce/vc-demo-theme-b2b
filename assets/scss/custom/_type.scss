@@ -10,7 +10,7 @@
 }
 
 .border-none {
-    border: none;
+    border: none !important;
     padding: 0;
 }
 
@@ -76,6 +76,14 @@ p.product-count {
 
 .text-normal {
     font-weight: normal;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-default-color {
+    color: $text-color;
 }
 
 .text-primary {
@@ -151,10 +159,6 @@ p.product-count {
 
 footer .navbar-static-bottom .list-unstyled li a{
     font-size: 13px;
-}
-
-dl:only-child {
-    margin: 0;
 }
 
 .dl-horizontal {

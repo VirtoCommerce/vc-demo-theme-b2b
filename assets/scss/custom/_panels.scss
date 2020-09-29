@@ -108,3 +108,7 @@ h4.panel-title a {
 .panel-table table tr td {
     padding: 15px;
 }
+
+.panel-striped:nth-of-type(odd) {
+    background-color: $gray-striped-table;
+}
