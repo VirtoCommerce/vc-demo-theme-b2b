@@ -1,11 +1,10 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
-
         $scope.allVariations = [];
         $scope.allVariationsMap = {}
         $scope.allVariationPropsMap = {};
@@ -14,6 +13,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.selectedVariation = {};
         $scope.productPrice = null;
         $scope.productPriceLoaded = false;
+        $scope.configurationQty = 1;
 
         $scope.addProductToCart = function (product, quantity) {
             var dialogData = toDialogDataModel(product, quantity);
@@ -116,6 +116,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             dialogInstance.result.then(function (id) {
                 const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
                 $scope.productParts[foundIndex].selectedItemId = id;
+                recalculateTotals();
             });
         };
 
@@ -123,6 +124,56 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             const item = configPart.items.find(x => x.id === configPart.selectedItemId);
             return item.name;
         }
+
+        $scope.getCurrentTotal = function() {
+            if ($scope.updatedTotal) {
+                var total = bankersRound($scope.updatedTotal * $scope.configurationQty);
+            } else {
+                var total = bankersRound($scope.defaultPrice * $scope.configurationQty);
+            }
+
+            return $filter('currency')(total ,'$');
+        }
+
+        $scope.getDefaultPrice = function() {
+            return $filter('currency')($scope.defaultPrice, '$');
+        }
+
+        $scope.getCustomChangesTotal = function() {
+            return $scope.differenceSign + $filter('currency')($scope.totalDifference, '$') || $filter('currency')(0, '$');
+        }
+
+        $scope.quantityChanged = function(qty) {
+            const intValue = parseInt(qty, 10)
+            if (isNaN(intValue) || intValue == 0) {
+                $scope.configurationQty = 1
+            } else {
+                $scope.configurationQty = intValue;
+            }
+        }
+
+        $scope.validateQtyInput = function($event) {
+            const e = $event;
+
+            if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode === 65 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+C
+                (e.keyCode === 67 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+V
+                (e.keyCode === 86 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+X
+                (e.keyCode === 88 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+              // let it happen, don't do anything
+              return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+              e.preventDefault();
+            }
+          }
 
         function toDialogDataModel(product, quantity) {
             return { items: [angular.extend({ }, product, { quantity: quantity })] };
@@ -187,6 +238,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
 
             catalogService.getProductConfiguration(product.id).then(function(response) {
                 $scope.productParts = response.data;
+                $scope.defaultProductParts = [];
+                _.each($scope.productParts, function (part) {
+                    $scope.defaultProductParts.push(part.items.find(x => x.id == part.selectedItemId));
+                });
+                $scope.defaultPrice = bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
         };
 
@@ -228,6 +284,24 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 return retVal;
             });
         };
+
+        function bankersRound(n, d=2) {
+            var x = n * Math.pow(10, d);
+            var r = Math.round(x);
+            var br = Math.abs(x) % 1 === 0.5 ? (r % 2 === 0 ? r : r-1) : r;
+            return br / Math.pow(10, d);
+        }
+
+        function recalculateTotals() {
+            $scope.selectedProductParts = [];
+            _.each($scope.productParts, function (part) {
+                $scope.selectedProductParts.push(part.items.find(x => x.id == part.selectedItemId));
+            });
+            $scope.updatedTotal = bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            $scope.totalDifference = bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
+            $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
+                                    ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
+        }
 
         //function findVariationBySelectedProps(variations, selectedPropMap) {
         //    return _.find(variations, function (x) {

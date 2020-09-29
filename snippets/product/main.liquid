@@ -87,7 +87,7 @@
                           <div class="price-block">
                             {% if product.product_type == "Configurable" %}
                                 <dl class="dl-horizontal">
-                                    <dt class="text-normal">
+                                    <dt class="text-normal overflow-visible">
                                         <span class="product-pull-left">
                                             <span class="text-default-color">Default price</span>
                                         </span>
@@ -95,11 +95,11 @@
 
                                     <dd>
                                         <span class="product-pull-right text-normal text-default-color">
-                                            <span>placeholder for price</span>
+                                            <span ng-bind="getDefaultPrice()"></span>
                                         </span>
                                     </dd>
 
-                                    <dt class="text-normal">
+                                    <dt class="text-normal overflow-visible">
                                         <span class="product-pull-left">
                                             <span class="text-default-color">Custom changes</span>
                                         </span>
@@ -107,13 +107,13 @@
 
                                     <dd>
                                         <span class="product-pull-right text-normal text-default-color">
-                                            <span>placeholder for price</span>
+                                            <span ng-bind="getCustomChangesTotal()"></span>
                                         </span>
                                     </dd>
 
                                     <br>
 
-                                    <dt class="text-normal">
+                                    <dt class="text-normal overflow-visible">
                                         <span class="product-pull-left">
                                             <span class="text-default-color text-bold">Total</span>
                                         </span>
@@ -121,7 +121,7 @@
 
                                     <dd>
                                         <span class="product-pull-right">
-                                            <span>placeholder for price</span>
+                                            <span ng-bind="getCurrentTotal()"></span>
                                         </span>
                                     </dd>
                                 </dl>
