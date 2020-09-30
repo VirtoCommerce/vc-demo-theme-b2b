@@ -16,14 +16,6 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.configurationQty = 1;
         $scope.validateQtyInput = validationHelper.positiveInt;
 
-        $scope.addProductToCart = function (product, quantity) {
-            var dialogData = toDialogDataModel(product, quantity);
-            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
-            cartService.addLineItem(product.id, quantity).then(function (response) {
-                $rootScope.$broadcast('cartItemsChanged');
-            });
-        }
-
         // TODO: Replace mock with real function
         $scope.addProductsToCartMock = function () {
             var rejection = {
@@ -94,6 +86,33 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
         }
 
+        $scope.addSelectedProductsToCart = function() {
+            var items = $scope.productParts.map(function(value){
+                return { id: value.selectedItemId, quantity: $scope.configurationQty };
+            });
+            cartService.addLineItems(items).then(function (response) {
+                var result = response.data;
+                if(result.isSuccess) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                    var products  = $scope.productParts.map(function(part){
+                        return part.items.find(function(item){
+                            return item.id === part.selectedItemId;
+                        });
+                    });
+
+                    var dialogData = toDialogDataModel(products, $scope.configurationQty);
+                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+                }
+            });
+        }
+        $scope.addProductToCart = function (product, quantity) {
+            var dialogData = toDialogDataModel([product], quantity);
+            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+            cartService.addLineItem(product.id, quantity).then(function (response) {
+                $rootScope.$broadcast('cartItemsChanged');
+            });
+        }
+
         $scope.addProductToCartById = function (productId, quantity, event) {
             event.preventDefault();
             catalogService.getProduct([productId]).then(function (response) {
@@ -105,7 +124,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.addProductToActualQuoteRequest = function (product, quantity) {
-            var dialogData = toDialogDataModel(product, quantity);
+            var dialogData = toDialogDataModel([product], quantity);
             dialogService.showDialog(dialogData, 'recentlyAddedActualQuoteRequestItemDialogController', 'storefront.recently-added-actual-quote-request-item-dialog.tpl');
             quoteRequestService.addProductToQuoteRequest(product.id, quantity).then(function (response) {
                 $rootScope.$broadcast('actualQuoteRequestItemsChanged');
@@ -156,8 +175,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             }
         }
 
-        function toDialogDataModel(product, quantity) {
-            return { items: [angular.extend({ }, product, { quantity: quantity })] };
+        function toDialogDataModel(products, quantity) {
+            var dialogItems = products.map(function(product) {
+                                return angular.extend({ }, product, { quantity: quantity })
+                            });
+            return { items: dialogItems };
             //     return {
             //         id: product.id,
             //         name: product.name,

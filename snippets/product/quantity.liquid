@@ -17,7 +17,7 @@
                     {% if unavailable or sold_out %} disabled {% endif %}
                     title="{{ 'products.general.add_to_cart' | t }}"
                     {% if product.product_type == "Configurable" %}
-                    ng-click="addProductsToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
+                    ng-click="addSelectedProductsToCart()"
                     {% else %}
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
                     {% endif %}
