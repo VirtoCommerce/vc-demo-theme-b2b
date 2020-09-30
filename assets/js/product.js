@@ -93,6 +93,19 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
         }
 
+        $scope.addSelectedProductsToCart = function() {
+            var items = $scope.productParts.map(function(value){
+                return { id: value.selectedItemId, quantity: $scope.configurationQty };
+            });
+            cartService.addLineItems(items).then(function (response) {
+                var result = response.data;
+                if(result.isSuccess) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                }
+            });
+        }
+
+
         $scope.addProductToCartById = function (productId, quantity, event) {
             event.preventDefault();
             catalogService.getProduct([productId]).then(function (response) {
