@@ -221,7 +221,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 $scope.productParts = response.data;
                 $scope.defaultProductParts = [];
                 _.each($scope.productParts, function (part) {
-                    $scope.defaultProductParts.push(part.items.find(x => x.id == part.selectedItemId));
+                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
                 });
                 $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
