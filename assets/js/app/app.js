@@ -56,15 +56,20 @@ storefrontApp.factory('themeInterceptor', ['$q', 'baseUrl', function ($q, baseUr
 }
 ]);
 
-storefrontApp.factory('helpers', function () {
+storefrontApp.factory('roundHelper', function () {
     return {
         bankersRound: function (n, d=2) {
             var x = n * Math.pow(10, d);
             var r = Math.round(x);
             var br = Math.abs(x) % 1 === 0.5 ? (r % 2 === 0 ? r : r-1) : r;
             return br / Math.pow(10, d);
-        },
-        validateQtyInput: function($event) {
+        }
+    }
+});
+
+storefrontApp.factory('validationHelper', function () {
+    return {
+        positiveInt: function($event) {
             const e = $event;
 
             if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||

@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'helpers',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, helpers) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -14,7 +14,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.productPrice = null;
         $scope.productPriceLoaded = false;
         $scope.configurationQty = 1;
-        $scope.validateQtyInput = helpers.validateQtyInput;
+        $scope.validateQtyInput = validationHelper.positiveInt;
 
         $scope.addProductToCart = function (product, quantity) {
             var dialogData = toDialogDataModel(product, quantity);
@@ -130,9 +130,9 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             var total;
 
             if ($scope.updatedTotal) {
-                total = helpers.bankersRound($scope.updatedTotal * $scope.configurationQty);
+                total = roundHelper.bankersRound($scope.updatedTotal * $scope.configurationQty);
             } else {
-                total = helpers.bankersRound($scope.defaultPrice * $scope.configurationQty);
+                total = roundHelper.bankersRound($scope.defaultPrice * $scope.configurationQty);
             }
 
             return $filter('currency')(total ,'$');
@@ -223,7 +223,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 _.each($scope.productParts, function (part) {
                     $scope.defaultProductParts.push(part.items.find(x => x.id == part.selectedItemId));
                 });
-                $scope.defaultPrice = helpers.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
         };
 
@@ -271,8 +271,8 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             _.each($scope.productParts, function (part) {
                 $scope.selectedProductParts.push(part.items.find(x => x.id === part.selectedItemId));
             });
-            $scope.updatedTotal = helpers.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
-            $scope.totalDifference = helpers.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
+            $scope.updatedTotal = roundHelper.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            $scope.totalDifference = roundHelper.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
             $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
                                     ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
         }
