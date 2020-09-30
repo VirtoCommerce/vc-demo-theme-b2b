@@ -20,8 +20,7 @@
                     ng-click="addSelectedProductsToCart()"
                     {% else %}
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
-                    {% endif %}
-                    ng-controller="productController">
+                    {% endif %}>
                     {% if unavailable %}
                     {{ 'products.product.unavailable' | t }}
                     {% elsif sold_out %}
