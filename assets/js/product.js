@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'helpers',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, helpers) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -14,6 +14,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.productPrice = null;
         $scope.productPriceLoaded = false;
         $scope.configurationQty = 1;
+        $scope.validateQtyInput = helpers.validateQtyInput;
 
         $scope.addProductToCart = function (product, quantity) {
             var dialogData = toDialogDataModel(product, quantity);
@@ -126,10 +127,12 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.getCurrentTotal = function() {
+            var total;
+
             if ($scope.updatedTotal) {
-                var total = bankersRound($scope.updatedTotal * $scope.configurationQty);
+                total = helpers.bankersRound($scope.updatedTotal * $scope.configurationQty);
             } else {
-                var total = bankersRound($scope.defaultPrice * $scope.configurationQty);
+                total = helpers.bankersRound($scope.defaultPrice * $scope.configurationQty);
             }
 
             return $filter('currency')(total ,'$');
@@ -144,36 +147,14 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.quantityChanged = function(qty) {
-            const intValue = parseInt(qty, 10)
-            if (isNaN(intValue) || intValue == 0) {
+            const intValue = parseInt(qty, 10);
+
+            if (isNaN(intValue) || intValue === 0) {
                 $scope.configurationQty = 1
             } else {
                 $scope.configurationQty = intValue;
             }
         }
-
-        $scope.validateQtyInput = function($event) {
-            const e = $event;
-
-            if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
-                // Allow: Ctrl+A
-                (e.keyCode === 65 && (e.ctrlKey || e.metaKey)) ||
-                // Allow: Ctrl+C
-                (e.keyCode === 67 && (e.ctrlKey || e.metaKey)) ||
-                // Allow: Ctrl+V
-                (e.keyCode === 86 && (e.ctrlKey || e.metaKey)) ||
-                // Allow: Ctrl+X
-                (e.keyCode === 88 && (e.ctrlKey || e.metaKey)) ||
-                // Allow: home, end, left, right
-                (e.keyCode >= 35 && e.keyCode <= 39)) {
-              // let it happen, don't do anything
-              return;
-            }
-            // Ensure that it is a number and stop the keypress
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-              e.preventDefault();
-            }
-          }
 
         function toDialogDataModel(product, quantity) {
             return { items: [angular.extend({ }, product, { quantity: quantity })] };
@@ -242,7 +223,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 _.each($scope.productParts, function (part) {
                     $scope.defaultProductParts.push(part.items.find(x => x.id == part.selectedItemId));
                 });
-                $scope.defaultPrice = bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+                $scope.defaultPrice = helpers.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
         };
 
@@ -285,20 +266,13 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             });
         };
 
-        function bankersRound(n, d=2) {
-            var x = n * Math.pow(10, d);
-            var r = Math.round(x);
-            var br = Math.abs(x) % 1 === 0.5 ? (r % 2 === 0 ? r : r-1) : r;
-            return br / Math.pow(10, d);
-        }
-
         function recalculateTotals() {
             $scope.selectedProductParts = [];
             _.each($scope.productParts, function (part) {
-                $scope.selectedProductParts.push(part.items.find(x => x.id == part.selectedItemId));
+                $scope.selectedProductParts.push(part.items.find(x => x.id === part.selectedItemId));
             });
-            $scope.updatedTotal = bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
-            $scope.totalDifference = bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
+            $scope.updatedTotal = helpers.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            $scope.totalDifference = helpers.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
             $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
                                     ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
         }

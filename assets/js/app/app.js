@@ -56,6 +56,39 @@ storefrontApp.factory('themeInterceptor', ['$q', 'baseUrl', function ($q, baseUr
 }
 ]);
 
+storefrontApp.factory('helpers', function () {
+    return {
+        bankersRound: function (n, d=2) {
+            var x = n * Math.pow(10, d);
+            var r = Math.round(x);
+            var br = Math.abs(x) % 1 === 0.5 ? (r % 2 === 0 ? r : r-1) : r;
+            return br / Math.pow(10, d);
+        },
+        validateQtyInput: function($event) {
+            const e = $event;
+
+            if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
+                // Allow: Ctrl+A
+                (e.keyCode === 65 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+C
+                (e.keyCode === 67 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+V
+                (e.keyCode === 86 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: Ctrl+X
+                (e.keyCode === 88 && (e.ctrlKey || e.metaKey)) ||
+                // Allow: home, end, left, right
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+              // let it happen, don't do anything
+              return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+              e.preventDefault();
+            }
+        }
+    }
+});
+
 storefrontApp.config(['$locationProvider', '$httpProvider', 'baseUrl', '$translateProvider', 'vcRecaptchaServiceProvider', 'reCaptchaKey', function ($locationProvider, $httpProvider, baseUrl, $translateProvider, vcRecaptchaServiceProvider, reCaptchaKey) {
     //$locationProvider.html5Mode({ enabled: true, requireBase: false, rewriteLinks: false });
     $httpProvider.interceptors.push('httpErrorInterceptor');
