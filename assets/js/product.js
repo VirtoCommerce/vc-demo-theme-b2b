@@ -1,11 +1,10 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
-
         $scope.allVariations = [];
         $scope.allVariationsMap = {}
         $scope.allVariationPropsMap = {};
@@ -14,6 +13,8 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.selectedVariation = {};
         $scope.productPrice = null;
         $scope.productPriceLoaded = false;
+        $scope.configurationQty = 1;
+        $scope.validateQtyInput = validationHelper.positiveInt;
 
         $scope.addProductToCart = function (product, quantity) {
             var dialogData = toDialogDataModel(product, quantity);
@@ -116,12 +117,43 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             dialogInstance.result.then(function (id) {
                 const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
                 $scope.productParts[foundIndex].selectedItemId = id;
+                recalculateTotals();
             });
         };
 
         $scope.getSelectedItem = function(configPart) {
             const item = configPart.items.find(x => x.id === configPart.selectedItemId);
             return item.name;
+        }
+
+        $scope.getCurrentTotal = function() {
+            var total;
+
+            if ($scope.updatedTotal) {
+                total = roundHelper.bankersRound($scope.updatedTotal * $scope.configurationQty);
+            } else {
+                total = roundHelper.bankersRound($scope.defaultPrice * $scope.configurationQty);
+            }
+
+            return $filter('currency')(total ,'$');
+        }
+
+        $scope.getDefaultPrice = function() {
+            return $filter('currency')($scope.defaultPrice, '$');
+        }
+
+        $scope.getCustomChangesTotal = function() {
+            return $scope.differenceSign + $filter('currency')($scope.totalDifference, '$') || $filter('currency')(0, '$');
+        }
+
+        $scope.quantityChanged = function(qty) {
+            const intValue = parseInt(qty, 10);
+
+            if (isNaN(intValue) || intValue === 0) {
+                $scope.configurationQty = 1
+            } else {
+                $scope.configurationQty = intValue;
+            }
         }
 
         function toDialogDataModel(product, quantity) {
@@ -187,6 +219,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
 
             catalogService.getProductConfiguration(product.id).then(function(response) {
                 $scope.productParts = response.data;
+                $scope.defaultProductParts = [];
+                _.each($scope.productParts, function (part) {
+                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+                });
+                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
         };
 
@@ -228,6 +265,17 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 return retVal;
             });
         };
+
+        function recalculateTotals() {
+            $scope.selectedProductParts = [];
+            _.each($scope.productParts, function (part) {
+                $scope.selectedProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+            });
+            $scope.updatedTotal = roundHelper.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            $scope.totalDifference = roundHelper.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
+            $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
+                                    ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
+        }
 
         //function findVariationBySelectedProps(variations, selectedPropMap) {
         //    return _.find(variations, function (x) {
