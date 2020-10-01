@@ -181,3 +181,19 @@ main {
     }
 }
 
+// Index page
+
+.credentials-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: $font-family-sans-serif;
+    .credentials-block-text {
+       font-size: $font-size-small;
+       margin-left: 14px;
+    }
+    .credentials-block-link {
+        font-weight: bold;
+        color: $brand-alt;
+    }
+}
