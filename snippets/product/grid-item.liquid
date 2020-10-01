@@ -20,11 +20,14 @@
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}
+    {% comment %}
     <div class="configurable-wrapper">
         {% include 'product/price' %}
         {% include 'product/configurable' %}
     </div>
-    {% include 'product/quantity' %}
+    {% endcomment %}
+    {% include 'product/price' %}
+    {% include 'product/quantity-grid' %}
 </div>
 
 <script>
