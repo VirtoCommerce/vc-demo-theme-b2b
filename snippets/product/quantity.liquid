@@ -7,7 +7,7 @@
         {% if product.product_type == "Configurable" %}
         ng-model="configurationQty"
         ng-change="quantityChanged(configurationQty)"
-        ng-model-options="{ debounce: 1000 }"
+        ng-model-options="{ debounce: 300 }"
         {% else %}
         ng-init="product['{{product.id}}'].quantity = 1"
         ng-model="product['{{product.id}}'].quantity"
