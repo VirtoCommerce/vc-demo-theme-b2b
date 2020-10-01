@@ -15,16 +15,19 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible product-card" ng-init="products.push('{{ product.id }}')">
+<div class="col-md-3 flexible product-card" ng-controller="productController" ng-init="products.push('{{ product.id }}')">
     {% include 'shared/item-response-group' %}
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}
+    {% comment %}
     <div class="configurable-wrapper">
         {% include 'product/price' %}
         {% include 'product/configurable' %}
     </div>
-    {% include 'product/quantity' %}
+    {% endcomment %}
+    {% include 'product/price' %}
+    {% include 'product/quantity-grid' %}
 </div>
 
 <script>
