@@ -1,13 +1,13 @@
 <script id="storefront.lists-create-new-list-dialog.tpl" type="text/ng-template">
   <div class="modal-header">
+    <h4 class="modal-title">{{ 'wishlist.general.create' | t }}</h4>
       <button type="button" class="close" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">{{ 'wishlist.general.create' | t }}</h4>
   </div>
   <div class="modal-body">
     <div class="input-group">
           <input placeholder="Enter list name" class="form-control" ng-model="dialogData.listName" type="text"/>
     </div>
-    
+
     <div class="product-list-modal-borders product-list-modal-borders">
       <div class="grid-item text-right">
         <button ng-disabled="inProgress || !dialogData.listName" class="btn " ng-click="createList()">
@@ -19,5 +19,5 @@
       </div>
     </div>
   </div>
-   
+
 </script>
