@@ -159,3 +159,15 @@
 .variations-panel .product-pull-right {
     width: 110px;
 }
+
+.configure-btn {
+    width: 100%;
+    border: 1px solid $brand-primary;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .configure-icon {
+        margin-right: 4px;
+    }
+}
