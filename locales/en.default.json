@@ -704,10 +704,10 @@
             "btn_update": "Update",
             "invite": {
                 "title": "Invite members",
-                "emails_placeholder": "Enter email addresses",
-                "emails_title": "Enter email addresses of the persons you wish to invite. Use commas, semicolons or carriage returns to separate multiple entries",
-                "message_placeholder": "Person invitation message",
-                "message_title": "Each person you wish to invite will receive an email with instructions. Customize the email with optional message",
+                "emails_placeholder": "Use commas, semicolons or carriage returns to separate multiple entries",
+                "emails_title": "Enter email addresses of the persons you wish to invite",
+                "message_placeholder": "Each person you wish to invite will receive an email with instructions. Customize the email with optional message",
+                "message_title": "Message",
                 "submit": "Invite"
             },
             "add_new": "Add new member",

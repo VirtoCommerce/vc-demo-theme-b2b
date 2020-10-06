@@ -8,13 +8,14 @@ angular.module('storefront.account')
 
     .component('vcAccountCompanyMembersList', {
         templateUrl: "account-company-members-list.tpl",
-        controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'confirmService', '$location', '$translate', '$stateParams', function (mainContext, $scope, accountApi, loader, confirmService, $location, $translate, $stateParams) {
+        controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'confirmService', '$location', '$translate', '$stateParams', 'b2bRoles', '$rootScope', function (mainContext, $scope, accountApi, loader, confirmService, $location, $translate, $stateParams, b2bRoles, $rootScope) {
             var $ctrl = this;
             $ctrl.currentMemberId = mainContext.customer.id;
             $ctrl.newMemberComponent = null;
             $ctrl.loader = loader;
             $ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 10, numPages: 10 };
             $ctrl.pageSettings.pageChanged = function () { refresh(); };
+            $ctrl.availableRoles = b2bRoles;
 
             refresh();
 
@@ -76,11 +77,16 @@ angular.module('storefront.account')
                 loader.wrapLoading(function () {
                     return accountApi.createInvitation({
                         emails: $ctrl.inviteInfo.emails,
-                        message: $ctrl.inviteInfo.message
+                        message: $ctrl.inviteInfo.message,
+                        roles: [$ctrl.inviteInfo.role.name]
                     }).then(function(response) {
                         if (response.data.succeeded) {
                             $ctrl.cancel();
                             refresh();
+                            $rootScope.$broadcast('successOperation', {
+                                type: 'success',
+                                message: 'The invintation was successfully sent out to users',
+                            });
                         }
                         else {
                             $ctrl.errors = _.pluck(response.data.errors, 'description');
