@@ -12,7 +12,10 @@
 
     <dd>
         <span class="product-pull-right">
-            {% if settings.show_prices_with_taxes %}
+        {% if product.product_type == "Configurable" %}
+            <strong ng-bind="getDefaultPrice()"></strong>
+        {% else %}
+        {% if settings.show_prices_with_taxes %}
             {% assign price = product.price_with_tax %}
             {% include 'product/price/static' %}
             {% assign price_name = 'actualPriceWithTax' %}
@@ -22,6 +25,7 @@
             {% include 'product/price/static' %}
             {% assign price_name = 'actualPrice' %}
             {% include 'product/price/dynamic' %}
+        {% endif %}
         {% endif %}
         <!-- TODO: Replace with product unit -->
         <span class="price-unit">/ each</span>
