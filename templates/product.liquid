@@ -1,4 +1,4 @@
-<ng-controller ng-controller="productController">
+<ng-controller ng-controller="productController" ng-init="productContext = { id: '{{ product.id }}', productType: '{{product.product_type}}', isGrid: false }">
 
 {% assign variants_size = product.variants | size %}
 
