@@ -15,6 +15,12 @@
         {% include 'customers/login-form' %}
     </div>
 </aside>
+<aside class="panel">
+    <div class="panel-body credentials-block">
+        <img src="{{ 'book.svg' | asset_url }}" />
+        <p class="margin-0 credentials-block-text">Please <a class="credentials-block-link" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
+    </div>
+</aside>
 {% assign found = false %}
 {% for blog in blogs %}
     {% for article in blog.articles %}

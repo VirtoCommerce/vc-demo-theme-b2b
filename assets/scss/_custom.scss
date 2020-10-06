@@ -164,14 +164,15 @@ main {
     background-color: $gray-striped-table;
     border-top-left-radius: $panel-border-radius;
     border-top-right-radius: $panel-border-radius;
+}
+
+.modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
-}
 
-.modal-header {
     button.close {
         font-size: 35px;
     }
@@ -181,3 +182,19 @@ main {
     }
 }
 
+// Index page
+
+.credentials-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: $font-family-sans-serif;
+    .credentials-block-text {
+       font-size: $font-size-small;
+       margin-left: 14px;
+    }
+    .credentials-block-link {
+        font-weight: bold;
+        color: $brand-alt;
+    }
+}
