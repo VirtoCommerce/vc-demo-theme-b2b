@@ -7,7 +7,7 @@ angular.module('storefront.account')
     })
     .component('vcAccountOrdersList', {
         templateUrl: "account-orders-list.tpl",
-        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', '$stateParams', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses, $stateParams ) {
+        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', '$stateParams', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses, $stateParams) {
             var $ctrl = this;
             $ctrl.sortDescending = sortDescending;
             $ctrl.sortAscending = sortAscending;
@@ -75,7 +75,7 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', '$stateParams', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService, $stateParams ) {
+        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', '$stateParams', '$scope', 'catalogService', 'dialogService', 'cartService', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService, $stateParams, $scope, catalogService, dialogService, cartService ) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.hasPhysicalProducts = true;
@@ -160,6 +160,11 @@ angular.module('storefront.account')
                 }
             }
 
+            $scope.$on('lineItemAdded', function (event, data) {
+                const {productId, quantity} = data;
+                addProductToCartById(productId, quantity);
+            });
+
             var components = [];
             $ctrl.addComponent = function (component) {
                 components.push(component);
@@ -181,6 +186,27 @@ angular.module('storefront.account')
                 });
                 return;
             };
+
+            function addProductToCartById(productId, quantity) {
+                catalogService.getProduct([productId]).then(function (response) {
+                    if (response.data && response.data.length) {
+                        var product = response.data[0];
+                        addProductToCart(product, quantity);
+                    }
+                });
+            }
+
+            function addProductToCart(product, quantity) {
+                var dialogData = toDialogDataModel(product, quantity);
+                dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+                cartService.addLineItem(product.id, quantity).then(function (response) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                });
+            }
+
+            function toDialogDataModel(product, quantity) {
+                return { items: [angular.extend({ }, product, { quantity: quantity })] };
+            }
         }]
     })
     .filter('orderToSummarizedStatusLabel', [function () {

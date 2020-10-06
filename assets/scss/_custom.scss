@@ -164,14 +164,15 @@ main {
     background-color: $gray-striped-table;
     border-top-left-radius: $panel-border-radius;
     border-top-right-radius: $panel-border-radius;
+}
+
+.modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 10px;
-}
 
-.modal-header {
     button.close {
         font-size: 35px;
     }

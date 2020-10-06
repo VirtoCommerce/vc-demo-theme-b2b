@@ -106,6 +106,10 @@ p.product-count {
     color: $gray-totals;
 }
 
+.text-nowrap {
+    white-space: nowrap;
+}
+
 .text-truncate {
     display: inline-block;
     max-width: 100%;
