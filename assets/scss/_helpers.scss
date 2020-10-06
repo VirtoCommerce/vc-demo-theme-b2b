@@ -1,91 +1,91 @@
-@include bg-variant('.bg-gray-base',     $gray-base);
-@include bg-variant('.bg-gray-darker',   $gray-darker);
-@include bg-variant('.bg-gray-dark',     $gray-dark);
-@include bg-variant('.bg-gray',          $gray);
-@include bg-variant('.bg-gray-light',    $gray-light);
-@include bg-variant('.bg-gray-lighter',  $gray-lighter);
+@include bg-variant('.bg-gray-base', $gray-base);
+@include bg-variant('.bg-gray-darker', $gray-darker);
+@include bg-variant('.bg-gray-dark', $gray-dark);
+@include bg-variant('.bg-gray', $gray);
+@include bg-variant('.bg-gray-light', $gray-light);
+@include bg-variant('.bg-gray-lighter', $gray-lighter);
 
-@include bg-variant('.bg-alt',           $brand-alt);
+@include bg-variant('.bg-alt', $brand-alt);
 
 @include bg-variant('.bg-brand-success', $brand-success);
-@include bg-variant('.bg-brand-info',    $brand-info);
+@include bg-variant('.bg-brand-info', $brand-info);
 @include bg-variant('.bg-brand-warning', $brand-warning);
-@include bg-variant('.bg-brand-danger',  $brand-danger);
+@include bg-variant('.bg-brand-danger', $brand-danger);
 
 .vertical-align-center {
-  display: inline-block;
-  vertical-align: middle;
-  float: none;
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
 // Helpers from Bootstrap 4
 
 .rounded {
-  @include border-top-radius($border-radius-base);
-  @include border-bottom-radius($border-radius-base);
+    @include border-top-radius($border-radius-base);
+    @include border-bottom-radius($border-radius-base);
 
-  &.rounded-lg {
-    @include border-top-radius($border-radius-large);
-    @include border-bottom-radius($border-radius-large);
-  }
+    &.rounded-lg {
+        @include border-top-radius($border-radius-large);
+        @include border-bottom-radius($border-radius-large);
+    }
 
-  &.rounded-sm {
-    @include border-top-radius($border-radius-small);
-    @include border-bottom-radius($border-radius-small);
-  }
+    &.rounded-sm {
+        @include border-top-radius($border-radius-small);
+        @include border-bottom-radius($border-radius-small);
+    }
 }
 
 .rounded-top {
-  @include border-top-radius($border-radius-base);
+    @include border-top-radius($border-radius-base);
 
-  &.rounded-lg {
-    @include border-top-radius($border-radius-large);
-  }
+    &.rounded-lg {
+        @include border-top-radius($border-radius-large);
+    }
 
-  &.rounded-sm {
-    @include border-top-radius($border-radius-small);
-  }
+    &.rounded-sm {
+        @include border-top-radius($border-radius-small);
+    }
 }
 
 .rounded-right {
-  @include border-right-radius($border-radius-base);
+    @include border-right-radius($border-radius-base);
 
-  &.rounded-lg {
-    @include border-right-radius($border-radius-large);
-  }
+    &.rounded-lg {
+        @include border-right-radius($border-radius-large);
+    }
 
-  &.rounded-sm {
-    @include border-right-radius($border-radius-small);
-  }
+    &.rounded-sm {
+        @include border-right-radius($border-radius-small);
+    }
 }
 
 .rounded-bottom {
-  @include border-bottom-radius($border-radius-base);
+    @include border-bottom-radius($border-radius-base);
 
-  &.rounded-lg {
-    @include border-bottom-radius($border-radius-large);
-  }
+    &.rounded-lg {
+        @include border-bottom-radius($border-radius-large);
+    }
 
-  &.rounded-sm {
-    @include border-bottom-radius($border-radius-small);
-  }
+    &.rounded-sm {
+        @include border-bottom-radius($border-radius-small);
+    }
 }
 
 .rounded-left {
-  @include border-left-radius($border-radius-base);
+    @include border-left-radius($border-radius-base);
 
-  &.rounded-lg {
-    @include border-left-radius($border-radius-large);
-  }
+    &.rounded-lg {
+        @include border-left-radius($border-radius-large);
+    }
 
-  &.rounded-sm {
-    @include border-left-radius($border-radius-small);
-  }
+    &.rounded-sm {
+        @include border-left-radius($border-radius-small);
+    }
 }
 
 .rounded-0 {
-  @include border-top-radius(0);
-  @include border-bottom-radius(0);
+    @include border-top-radius(0);
+    @include border-bottom-radius(0);
 }
 
 .p-0 {
@@ -114,4 +114,8 @@
 
 .mb-0 {
   margin-bottom: 0 !important;
+}
+
+.border {
+    border: 1px solid $gray-light;
 }
