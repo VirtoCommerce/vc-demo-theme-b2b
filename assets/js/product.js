@@ -204,11 +204,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         function initialize(filters) {
-            var product = $window.product;
-            if (!product || !product.id) {
+            var productContext = $scope.productContext;
+            if ( !productContext || (productContext.isGrid && productContext.productType != 'Configurable')) {
                 return;
             }
-            catalogService.getProduct([product.id]).then(function (response) {
+            catalogService.getProduct([productContext.id]).then(function (response) {
 				var product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
@@ -239,7 +239,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 });
             });
 
-            catalogService.getProductConfiguration(product.id).then(function(response) {
+            catalogService.getProductConfiguration(productContext.id).then(function(response) {
                 $scope.productParts = response.data;
                 $scope.defaultProductParts = [];
                 _.each($scope.productParts, function (part) {
