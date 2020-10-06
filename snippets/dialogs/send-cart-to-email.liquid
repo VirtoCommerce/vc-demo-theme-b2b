@@ -1,9 +1,9 @@
 <script id="storefront.send-cart-to-email.tpl" type="text/ng-template">
     <div class="modal-header bg-gray-light rounded-top rounded-lg">
-        <button type="button" class="close" ng-click="close()" title="{{ 'cart.send_to_email.close' | t }}" aria-label="{{ 'cart.send_to_email.close' | t }}">
-            <i class="fa fa-times vertical-align-center"></i>
-        </button>
         <h4 class="modal-title">{{ 'cart.send_to_email.title' | t }}</h4>
+        <button type="button" class="close" ng-click="close()" title="{{ 'cart.send_to_email.close' | t }}" aria-label="{{ 'cart.send_to_email.close' | t }}">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body pt-0">
         <div ng-if="isLoading" class="loader">

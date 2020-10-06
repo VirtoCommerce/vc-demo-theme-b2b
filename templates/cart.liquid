@@ -240,7 +240,7 @@
                                                         <span ng-bind="checkout.payment.name"></span>
                                                         <span><small ng-bind="checkout.payment.description"></small></span>
                                                     </div>
-                                                    <div class="h5" ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                                    <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'pickup'">
                                                         <span ng-bind="checkout.payment.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : checkout.payment.name"></span>
                                                         <span><small ng-bind="checkout.payment.description"></small></span>
                                                     </div>
@@ -356,8 +356,8 @@
 
 <script id="storefront.select-address-dialog.tpl" type="text/ng-template">
     <div class="modal-header">
-        <button class="close" type="button" ng-click="close()" title="Select address" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">SELECT ADDRESS</h4>
+        <button class="close" type="button" ng-click="close()" title="Select address" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
         <table class="table table-striped address-list">
@@ -389,10 +389,10 @@
                         <span ng-bind="address.email"></span>
                     </td>
                     <td>
-                        <label ng-if="isEqualAddress(checkout.deliveryAddress, address)">
+                        <label ng-if="isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
                             <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Current address
                         </label>
-                        <label ng-if="!isEqualAddress(checkout.deliveryAddress, address)">
+                        <label ng-if="!isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
                             <a role="button" href="" ng-click="checkout.deliveryAddress = address">Select address</a>
                         </label>
                     </td>
@@ -409,8 +409,8 @@
 
 <script id="storefront.select-shipment-method-dialog.tpl" type="text/ng-template">
     <div class="modal-header">
-        <button class="close" type="button" ng-click="close()" title="SHIPPING METHOD" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">AVAILABLE SHIPPING METHODS / ESTIMATED ARRIVAL</h4>
+        <button class="close" type="button" ng-click="close()" title="SHIPPING METHOD" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
         <div class="container-bordered container-drain">
@@ -436,8 +436,8 @@
 
 <script id="storefront.select-payment-method-dialog.tpl" type="text/ng-template">
     <div class="modal-header">
-        <button class="close" type="button" ng-click="close()" title="Select payment method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Select payment method</h4>
+        <button class="close" type="button" ng-click="close()" title="Select payment method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
         <div class="container-bordered container-drain">
