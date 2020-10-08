@@ -77,7 +77,7 @@
         "purchase_order_number": {
             "title": "Purchase Order",
             "placeholder": "Enter purchase order number"
-        }, 
+        },
         "mobile": {
             "show_order_summary": "Show order summary",
             "hide_order_summary": "Hide order summary"
@@ -218,7 +218,7 @@
             "categories": "Categories"
         },
         "newsletter": {
-            "message": "Your connection to what's new at {0}. <br><strong>Sign Up Now!</strong>",
+            "message": "Your connection to what's new at {0}.",
             "sign_up": "Sign Up",
             "email_placeholder": "Email Address"
         }
@@ -406,8 +406,21 @@
                 "change_password": "Change password",
                 "company_info": "Company info",
                 "company_members": "Company members",
-                "wishlist": "Your List"
+                "wishlist": "Your List",
+                "dashboard": "Dashboard"
             }
+        },
+        "dashboard": {
+            "orders_status": "Orders status",
+            "last_orders": "Last orders",
+            "all_orders_link_text": "All Orders",
+            "users": "Users",
+            "all_users_link_text": "All Users",
+            "monthly_spend_report": "Monthly spend report",
+            "budget": "Budget",
+            "total_spend": "Total spend",
+            "current_user_roles": "Current user roles",
+            "no_permission_message": "Administrator rights are required to view user list"
         },
         "activate_account": {
             "title": "Activate Account",
@@ -691,10 +704,10 @@
             "btn_update": "Update",
             "invite": {
                 "title": "Invite members",
-                "emails_placeholder": "Enter email addresses",
-                "emails_title": "Enter email addresses of the persons you wish to invite. Use commas, semicolons or carriage returns to separate multiple entries",
-                "message_placeholder": "Person invitation message",
-                "message_title": "Each person you wish to invite will receive an email with instructions. Customize the email with optional message",
+                "emails_placeholder": "Use commas, semicolons or carriage returns to separate multiple entries",
+                "emails_title": "Enter email addresses of the persons you wish to invite",
+                "message_placeholder": "Each person you wish to invite will receive an email with instructions. Customize the email with optional message",
+                "message_title": "Message",
                 "submit": "Invite"
             },
             "add_new": "Add new member",
@@ -816,6 +829,9 @@
             "quantity": "Quantity",
             "details_tab": "Product details",
             "sign_in_to_see_price": "Sign in to see the price"
+        },
+        "variation": {
+            "product_variations": "Product variations"
         },
         "price": {
             "public": "Web price",

@@ -1,4 +1,4 @@
-﻿var storefrontApp = angular.module('storefrontApp');
+var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.controller('accountRegisterController', ['$q', '$scope', 'storefrontApp.mainContext', 'loadingIndicatorService', 'vcRecaptchaService', 'commonService', 'WizardHandler', 'accountApi', 
     function ($q, $scope, mainContext, loader, vcRecaptchaService, commonService, WizardHandler, accountApi) {
@@ -49,7 +49,7 @@ storefrontApp.controller('accountRegisterController', ['$q', '$scope', 'storefro
         }, true);
 
         $scope.init = function (storeId) {
-            $scope.registration = { storeId: storeId, type: 'Business', address: {}, email: null };
+            $scope.registration = { storeId: storeId, type: 'Business', address: { type: 'BillingAndShipping' }, email: null };
             $scope.switchTemplate($scope.registration.type);
         };
    

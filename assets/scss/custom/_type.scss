@@ -1,54 +1,89 @@
 .page-header {
-  margin: 0 0 $line-height-computed;
+    margin: 0 0 $line-height-computed;
+    padding-bottom: 0px;
+    margin-bottom: 25px;
+    border: 0;
+}
+
+.page-header h3 a{
+    font-family: $font-family-condensed;
 }
 
 .border-none {
-  border: none;
-  padding: 0;
+    border: none !important;
+    padding: 0;
 }
 
-h1, .h1 {
-  :not(strong) {
-    font-weight: normal;
-  }
+.margin-0 {
+    margin: 0;
 }
 
-h2, .h2,
-h3, .h3,
-h4, .h4 {
-  text-transform: uppercase;
+h1,
+.h1 {
+    :not(strong) {
+        font-weight: normal;
+    }
 }
 
-h4, .h4 {
-  small,
-  .small {
-    font-size: 65%;
-  }
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+    text-transform: uppercase;
 }
 
-h1, .h1,
-h2, .h2,
-h3, .h3 {
-  margin-bottom: 15px;
+h4,
+.h4 {
+    small,
+    .small {
+        font-size: 65%;
+    }
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3 {
+    margin-bottom: 15px;
+}
+
+p.product-count {
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .border-top-light {
-  border-top: 1px solid $gray-lighter;
+    border-top: 1px solid $gray-lighter;
 }
 
+.border-bottom-light {
+    border-bottom: 1px solid $gray-lighter;
+}
 
 @include text-emphasis-variant('.text-contrast', $text-contrast);
 
 .text-serif {
-  font-family: $font-family-serif !important;
+    font-family: $font-family-serif !important;
 }
 
 .text-condensed {
-  font-family: $font-family-condensed !important;
+    font-family: $font-family-condensed !important;
 }
 
 .text-normal {
-  font-weight: normal;
+    font-weight: normal;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-default-color {
+    color: $text-color;
 }
 
 .text-primary {
@@ -56,111 +91,116 @@ h3, .h3 {
 }
 
 .text-normalize {
-  text-transform: none;
+    text-transform: none;
 }
 
 .text-middle {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .text-green {
-  color: $dark-green;
+    color: $dark-green;
 }
 
 .text-gray-totals {
-  color: $gray-totals;
+    color: $gray-totals;
+}
+
+.text-nowrap {
+    white-space: nowrap;
 }
 
 .text-truncate {
-  display: inline-block;
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .list-inline > li {
-  vertical-align: inherit;
+    vertical-align: inherit;
 }
 
 .list-inline-divider > li {
-  &:not(:first-child)::before {
-    content: '\FF5C'; // 1px width full height vertical line
-    position: absolute;
-    left: calc(-0.5em - 1px); // horizontal align
-    opacity: (1/3);
-  }
+    &:not(:first-child)::before {
+        content: '\FF5C'; // 1px width full height vertical line
+        position: absolute;
+        left: calc(-0.5em - 1px); // horizontal align
+        opacity: (1/3);
+    }
 }
 
 .list-horizontal {
-  @include list-unstyled;
-  margin-left: -5px;
+    @include list-unstyled;
+    margin-left: -5px;
 
-  > li {
-    display: inline-block;
-    position: relative;
-    padding-left: .5em;
-    padding-right: .5em;
-
-    &:not(:first-child)::before {
-      content: '\FF5C'; // 1px width full height vertical line
-      position: absolute;
-      left: calc(-0.5em - 1px); // horizontal align
-      opacity: (1/3);
-    }
-  }
-
-  &.list-lg {
     > li {
-      padding-left: 1em;
-      padding-right: 1em;
-      &:not(:first-child)::before{
-        font-size: 2em;
-      }
+        display: inline-block;
+        position: relative;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+
+        &:not(:first-child)::before {
+            content: '\FF5C'; // 1px width full height vertical line
+            position: absolute;
+            left: calc(-0.5em - 1px); // horizontal align
+            opacity: (1/3);
+        }
     }
-  }
+
+    &.list-lg {
+        > li {
+            padding-left: 1em;
+            padding-right: 1em;
+            &:not(:first-child)::before {
+                font-size: 2em;
+            }
+        }
+    }
 }
 
-dl:only-child {
-  margin: 0;
+
+footer .navbar-static-bottom .list-unstyled li a{
+    font-size: 13px;
 }
 
 .dl-horizontal {
-  @media (min-width: $dl-horizontal-breakpoint) {
-    dt {
-      float: left;
-      width: $dl-horizontal-offset * 0.90;
-      clear: left;
-      text-align: right;
-    }
+    @media (min-width: $dl-horizontal-breakpoint) {
+        dt {
+            float: left;
+            width: $dl-horizontal-offset * 0.9;
+            clear: left;
+            text-align: right;
+        }
 
-    dd {
-      margin-left: $dl-horizontal-offset;
-      text-align: left;
+        dd {
+            margin-left: $dl-horizontal-offset;
+            text-align: left;
+        }
     }
-  }
 }
 
 .dl-horizontal-inverse {
-  @media (min-width: $dl-horizontal-breakpoint) {
-    dt {
-      font-weight: normal;
-      float: left;
-      width: 100% - $dl-horizontal-offset;
-      clear: left;
-      text-align: left;
-    }
+    @media (min-width: $dl-horizontal-breakpoint) {
+        dt {
+            font-weight: normal;
+            float: left;
+            width: 100% - $dl-horizontal-offset;
+            clear: left;
+            text-align: left;
+        }
 
-    dd {
-      font-weight: bold;
-      margin-left: 100% - $dl-horizontal-offset * 0.75;
-      text-align: right;
+        dd {
+            font-weight: bold;
+            margin-left: 100% - $dl-horizontal-offset * 0.75;
+            text-align: right;
+        }
     }
-  }
 }
 
 address:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .cursor-pointer:hover {
@@ -174,4 +214,70 @@ hr {
 
 dl {
     margin-bottom: 10px;
+}
+
+// 4 blocks on the home page
+
+#four-blocks-on-main {
+    margin-top: 25px;
+}
+
+#four-blocks-on-main .col-md-12 h3.text-center {
+    font-family: 'Helvetica Neue', sans-serif !important;
+    font-style: normal;
+    font-weight: bold !important;
+    font-size: 20px;
+    line-height: 37px !important;
+    text-align: center;
+    text-transform: uppercase;
+    color: $text-color;
+}
+
+#four-blocks-on-main .row .block-wraper p.decription {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: $text-color;
+}
+
+// Checkout
+
+.checkout-settings h2 {
+    border-top: 1px solid $gray-light;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 25px;
+}
+
+.checkout-settings h5 {
+    margin-top: 0px;
+}
+
+.template-product .panel label,
+.product-pull-left,
+.property-label {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    color: $text-muted;
+    margin-right: 10px;
+}
+
+.checkout-settings .img-responsive {
+    min-width: 40px;
+    height: auto;
+    margin-left: -20px;
+}
+
+
+.user-roles-card-body .title{
+    font-weight: $btn-font-weight;
+}
+
+.action-buttons .list-inline a{
+    font-family: $font-family-condensed !important;
 }

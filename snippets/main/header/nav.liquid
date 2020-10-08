@@ -3,6 +3,7 @@
         {% include 'main/header/nav/top-level-collections' %}
         <ul class="nav navbar-nav navbar-right">
             {% if template != 'bulk-order' %}
+                {% assign dropdown = true %}
                 {% include 'main/header/nav/bulk-order-form' %}
             {% endif %}
             {% include 'main/header/shared/cart' %}

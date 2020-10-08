@@ -4,38 +4,82 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['storefrontApp.mainContext', '$scope', 'cartService', 'loadingIndicatorService', 'checkoutDefaultService', 'customerService', function (mainContext, $scope, cartService, loader, checkoutDefaultService, customerService) {
+        controller: ['storefrontApp.mainContext', '$scope', 'cartService', 'loadingIndicatorService', 'customerService', '$rootScope', function (mainContext, $scope, cartService, loader, customerService, $rootScope) {
             var $ctrl = this;
             $ctrl.loader = loader;
-            $ctrl.defaults = checkoutDefaultService;
+            $ctrl.defaults = {};
             $ctrl.deliveryMethods = [{ type: 'shipping' }, { type: 'pickup' }];
-            $ctrl.customer = {};
+            $ctrl.customer = mainContext.customer;
 
-            $ctrl.getAvailPaymentMethods = function () {
-                return cartService.getAvailablePaymentMethods().then(function (response) {
-                    return response.data;
+            $ctrl.$onInit = function () {
+                loadData();
+            }
+
+            function getAvailPaymentMethods() {
+                loader.wrapLoading(function() {
+                    return cartService.getAvailablePaymentMethods().then(function (response) {
+                        $ctrl.paymentMethods = response.data;
+                        setActivePaymentMethod();
+                    });
                 });
             };
 
-            $ctrl.getAvailShippingMethods = function () {
-                return cartService.getAvailableShippingMethods().then(function (response) {
-                    return response.data;
+            function getAvailShippingMethods() {
+                loader.wrapLoading(function() {
+                    return cartService.getAvailableShippingMethods().then(function (response) {
+                        $ctrl.shippingMethods = response.data;
+                        setActiveShippingMethod();
+                    });
                 });
             }
 
-            $ctrl.getAvailPaymentMethods().then(function (paymentMethods) {
-                $ctrl.paymentMethods = paymentMethods;             
-            });
+            function loadData() {
+                getCustomerDefaults();
+                getAvailShippingMethods();
+                getAvailPaymentMethods();
+            };
 
-            $ctrl.getAvailShippingMethods().then(function (shippingMethods) {
-                $ctrl.shippingMethods = shippingMethods;          
-            });
+            $ctrl.changeShippingMethod = function (method) {
+                $ctrl.defaults.shippingMethod = method;
+            }
 
-    
-            customerService.getCurrentCustomer().then(function (response) {
-                $ctrl.customer = response.data;             
-            });
+            $ctrl.updateCustomerDefaults = function() {
+                $ctrl.defaults.shippingMethod = $ctrl.activeShippingMethod;
+                $ctrl.defaults.paymentMethod = $ctrl.activePaymentMethod;
+                localStorage.setItem($ctrl.customer.id, JSON.stringify($ctrl.defaults));
+                $rootScope.$broadcast('successOperation', {
+                    type: 'success',
+                    message: 'User preferences were updated!',
+                });
+            }
 
-        
+             function getCustomerDefaults() {
+                var customerDefaults = JSON.parse(localStorage.getItem($ctrl.customer.id));
+                if (customerDefaults) {
+                    $ctrl.defaults = customerDefaults;
+                }
+            }
+
+            function setActiveShippingMethod() {
+                if ($ctrl.defaults.shippingMethod) {
+                    $ctrl.activeShippingMethod = $ctrl.shippingMethods.find(x => x.shipmentMethodCode == $ctrl.defaults.shippingMethod.shipmentMethodCode);
+                }
+            }
+
+            function setActivePaymentMethod() {
+                if ($ctrl.defaults.paymentMethod) {
+                    $ctrl.activePaymentMethod = $ctrl.paymentMethods.find(x => x.code == $ctrl.defaults.paymentMethod.code);
+                }
+            }
+
         }]
-    });
+    }).filter('toShippingMethodLabel', [function () {
+        return function (method) {
+            if (!method)
+                return false;
+
+            var retVal = method.name + method.optionName;
+
+            return retVal;
+        };
+    }]);

@@ -10,6 +10,7 @@
            ng-disabled="$ctrl.disabled"
            ng-pattern="$ctrl.pattern"
            ng-class="$ctrl.inputClass"
+           maxlength="{% raw %} {{$ctrl.maxlength}} {% endraw %}"
            class="form-control" />
     <label for="{% raw %}{{ $ctrl.name }}{% endraw %}" class="control-label" ng-bind="$ctrl.placeholder"></label>
     <span class="help-block text-danger" ng-if="($ctrl.form[$ctrl.name].$dirty || $ctrl.form.$submitted) && $ctrl.form[$ctrl.name].$error.required" ng-bind="$ctrl.requiredError || '{{ 'common.required' | t }}'"></span>

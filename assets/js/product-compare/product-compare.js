@@ -1,11 +1,13 @@
 ﻿var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productCompareListController', ['$rootScope', '$scope', '$localStorage', '$window', 'catalogService', 'dialogService', 'compareProductService',
-function ($rootScope, $scope, $localStorage, $window, catalogService, dialogService, compareProductService) {
+storefrontApp.controller('productCompareListController', ['$rootScope', '$scope', '$localStorage', '$window', 'catalogService', 'dialogService', 'compareProductService', 'baseUrl',
+function ($rootScope, $scope, $localStorage, $window, catalogService, dialogService, compareProductService, baseUrl) {
     var $ctrl = this;
     $ctrl.containProduct = false;
     $scope.properties = [];
     $scope.products = [];
+    $scope.baseUrl = baseUrl;
+    $scope.regex = new RegExp(/^\/+/);
 
     function initialize() {
         $scope.loaded = false;
@@ -87,6 +89,7 @@ function ($rootScope, $scope, $localStorage, $window, catalogService, dialogServ
         compareProductService.clearCompareList();
         $scope.products = [];
         $rootScope.$broadcast('productCompareListChanged');
+        $rootScope.$broadcast('productCompareListCleared');
         $scope.properties = [];
     }
 
@@ -94,6 +97,7 @@ function ($rootScope, $scope, $localStorage, $window, catalogService, dialogServ
         compareProductService.removeProduct(product.id)
         $scope.products = _.without($scope.products, product);
         $rootScope.$broadcast('productCompareListChanged');
+        $rootScope.$broadcast('productRemovedFromCompareList', product.id);
         $scope.getProductProperties();
     }
 
@@ -114,5 +118,5 @@ function ($scope, $window, dialogData, $uibModalInstance) {
 
     $scope.redirect = function (url) {
         $window.location = url;
-    }    
+    }
 }]);

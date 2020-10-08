@@ -2,8 +2,32 @@
     <label>{{ 'products.product.quantity' | t }}</label>
 {% endif %}
 <div class="input-group">
-    <input type="text" class="form-control" ng-init="product['{{product.id}}'].quantity = 1" ng-model="product['{{product.id}}'].quantity">
-    <span class="input-group-btn">
-        <button class="btn btn-alt btn-primary" title="{{ 'products.general.add_to_cart' | t }}" ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)" ng-controller="productController">{{ 'products.general.add_to_cart' | t }}</button>
-    </span>
+        <input type="text" class="form-control"
+        ng-keydown="validateQtyInput($event)"
+        {% if product.product_type == "Configurable" %}
+        ng-model="configurationQty"
+        ng-change="quantityChanged(configurationQty)"
+        ng-model-options="{ debounce: 300 }"
+        {% else %}
+        ng-init="product['{{product.id}}'].quantity = 1"
+        ng-model="product['{{product.id}}'].quantity"
+        {% endif %}>
+        <span class="input-group-btn">
+            <button class="btn btn-alt btn-primary"
+                    {% if unavailable or sold_out %} disabled {% endif %}
+                    title="{{ 'products.general.add_to_cart' | t }}"
+                    {% if product.product_type == "Configurable" %}
+                    ng-click="addSelectedProductsToCart()"
+                    {% else %}
+                    ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
+                    {% endif %}>
+                    {% if unavailable %}
+                    {{ 'products.product.unavailable' | t }}
+                    {% elsif sold_out %}
+                    {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                    {{ 'products.general.add_to_cart' | t }}
+                    {% endif %}
+                </button>
+        </span>
 </div>

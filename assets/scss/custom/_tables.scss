@@ -1,34 +1,35 @@
 .table {
-  > caption {
-    border-top: solid 1px $gray-light;
-    border-bottom: solid 1px $gray-light;
+    > caption {
+        border-top: solid 1px $gray-light;
+        border-bottom: solid 1px $gray-light;
 
-    ul, ol {
-      margin-bottom: 0;
+        ul,
+        ol {
+            margin-bottom: 0;
+        }
     }
-  }
 
-  > thead > tr,
-  > tbody > tr,
-  > tfoot > tr {
-    > td.active,
-    > th.active,
-    &.active > td,
-    &.active > th {
-      color: $text-contrast;
+    > thead > tr,
+    > tbody > tr,
+    > tfoot > tr {
+        > td.active,
+        > th.active,
+        &.active > td,
+        &.active > th {
+            color: $text-contrast;
+        }
     }
-  }
 }
 
 .table > tbody > tr,
 .table > tfoot > tr {
-  line-height: 54px;
-  min-height: 54px;
-  height: 54px;
+    line-height: 54px;
+    min-height: 54px;
+    height: 54px;
 }
 
 .table > thead > tr {
-  height: 37px;
+    height: 37px;
 }
 
 .table > tbody > tr > td,
@@ -37,12 +38,33 @@
 .table > tfoot > tr > th,
 .table > thead > tr > td,
 .table > thead > tr > th {
-  border: none;
-  vertical-align: middle;
+    vertical-align: middle;
+    padding: 8px 15px;
+}
+
+.table {
+    border-left: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+}
+
+.table > tbody > tr > td {
+    border-right: 1px solid $gray-lighter;
+    border-top: 0;
+}
+
+.table > tbody > tr > td.no-border {
+    border: 0;
 }
 
 .table > thead > tr > th {
-  border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
+    border-top: 1px solid $gray-lighter;
+    font-family: $font-family-condensed;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 .sortable th:hover {
@@ -50,30 +72,99 @@
     cursor: pointer;
 }
 
-th {
-
-  &.desc,
-  &.asc,
-  &.filtered,
-  &.filter:hover {
-    background-repeat: no-repeat;
-    background-position: calc(100% - 10px);
-  }
-
-  &.desc {
-    background-image: url(../../images/arrow-active-down.svg);
-  }
-
-  &.asc {
-    background-image: url(../../images/arrow-active-up.svg);
-  }
-
-  &.filtered {
-    background-image: url(../../images/filter-active.svg);
-  }
-
-  &.filter:hover {
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9IiNCQUJBQkEiIGQ9Ik0xMS41MyAySDIuNDdjLS40MTcgMC0uNjI3LjUwNS0uMzMyLjhMNS43NSA2LjQxM3Y0LjAyNGMwIC4xNTMuMDc1LjI5Ny4yLjM4NWwxLjU2MiAxLjA5M2MuMzA5LjIxNi43MzgtLjAwMy43MzgtLjM4NFY2LjQxM0wxMS44NjIgMi44Yy4yOTUtLjI5NC4wODYtLjgtLjMzMS0uOHoiLz4KPC9zdmc+Cg==");
-  }
-
+.table > tbody > tr > td > .ng-binding {
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
 }
+
+.orders-list-table tr td {
+    width: 16.6%;
+}
+
+.table > thead > tr > th {
+    padding: 14px 8px 14px 10px;
+}
+
+.table > tbody > tr > td {
+    padding: 8px 8px 8px 12px;
+}
+
+th {
+    &.col-sortable {
+        background-image: url(../../images/arrow-inactive-down.svg);
+        background-repeat: no-repeat;
+        background-position: calc(100% - 10px);
+    }
+
+    &.filter {
+        background-repeat: no-repeat;
+        background-position: calc(100% - 10px);
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9IiNCQUJBQkEiIGQ9Ik0xMS41MyAySDIuNDdjLS40MTcgMC0uNjI3LjUwNS0uMzMyLjhMNS43NSA2LjQxM3Y0LjAyNGMwIC4xNTMuMDc1LjI5Ny4yLjM4NWwxLjU2MiAxLjA5M2MuMzA5LjIxNi43MzgtLjAwMy43MzgtLjM4NFY2LjQxM0wxMS44NjIgMi44Yy4yOTUtLjI5NC4wODYtLjgtLjMzMS0uOHoiLz4KPC9zdmc+Cg==');
+    }
+
+    &.desc,
+    &.asc,
+    &.filtered,
+    &.filter:hover {
+        background-repeat: no-repeat;
+        background-position: calc(100% - 10px);
+    }
+
+    &.desc {
+        background-image: url(../../images/arrow-active-down.svg);
+    }
+
+    &.asc {
+        background-image: url(../../images/arrow-active-up.svg);
+    }
+
+    &.filtered {
+        background-image: url(../../images/filter-active.svg);
+    }
+
+    &.filter:hover {
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDE0IDE0Ij4KICAgIDxwYXRoIGZpbGw9IiNCQUJBQkEiIGQ9Ik0xMS41MyAySDIuNDdjLS40MTcgMC0uNjI3LjUwNS0uMzMyLjhMNS43NSA2LjQxM3Y0LjAyNGMwIC4xNTMuMDc1LjI5Ny4yLjM4NWwxLjU2MiAxLjA5M2MuMzA5LjIxNi43MzgtLjAwMy43MzgtLjM4NFY2LjQxM0wxMS44NjIgMi44Yy4yOTUtLjI5NC4wODYtLjgtLjMzMS0uOHoiLz4KPC9zdmc+Cg==');
+    }
+}
+
+.template-product .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: $body-bg;
+}
+
+.template-product .table > tbody > tr {
+    background-color: $gray-striped-table;
+}
+
+.table td label a.btn.btn-link,
+.table td label a:not(.btn) {
+    font-family: $font-family-sans-serif;
+}
+
+.address-list {
+    border-top: 1px solid $gray-lighter;
+}
+
+.address-list a:not(.btn) {
+    font-weight: 500;
+    margin-left: 18px;
+    border-bottom: 1px dashed $brand-alt;
+}
+
+.product-properties {
+  width: 310px;
+  margin-bottom: 4px;
+}
+
+.product-properties tr td {
+    text-align: left !important;
+    padding: 5px 0px 0px 0px;
+}
+
+.product-properties tr td.property-label {
+  width: 160px;
+}
+
+.product-properties tr td.property {
+  width: 100px;
+}
+

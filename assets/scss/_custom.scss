@@ -8,6 +8,7 @@
 @import "custom/_type.scss";
 @import "custom/_scaffolding.scss";
 @import "custom/_breadcrumb.scss";
+@import "custom/_labels.scss";
 @import "custom/_tables.scss";
 @import "custom/_dropdowns.scss";
 @import "custom/_buttons.scss";
@@ -23,6 +24,8 @@
 @import "custom/_responsive-utilities.scss";
 @import "custom/_toc.scss";
 @import "custom/_icon.scss";
+@import "custom/_category-page.scss";
+@import "custom/_product-card.scss";
 
 html {
   height: 100%;
@@ -91,4 +94,107 @@ main {
 
 .btn-marging-right {
   margin-right: 13px;
+}
+
+
+//Dashboard
+
+.arrow-padding-left {
+  padding-left: 10px;
+}
+
+.spend-report-body {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.spend-report-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-roles-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.user-roles-card-body {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-family: $font-family-sans-serif;
+  .title {
+    line-height: $line-height-base;
+  }
+  .description {
+    color: $gray-roles-description;
+    font-size: $font-size-small;
+  }
+}
+
+.no-permission {
+  background: url('../../images/dashboard-placeholder-bg.png') right no-repeat;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+    .message {
+      width: 179px;
+      margin-left: 35px;
+      font-family: $font-family-sans-serif;
+      color: $gray-no-permission;
+      font-weight: bold;
+    }
+}
+
+.user-inactive {
+  color: $gray-user-inactive;
+}
+
+
+.modal-flex-footer {
+    display: flex;
+    padding: 15px;
+    justify-content: space-between;
+    border-top: 1px solid $modal-footer-border-color;
+}
+
+.modal-header.configuration {
+    background-color: $gray-striped-table;
+    border-top-left-radius: $panel-border-radius;
+    border-top-right-radius: $panel-border-radius;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    button.close {
+        font-size: 35px;
+    }
+
+    &:before, &:after {
+        display: none;
+    }
+}
+
+// Index page
+
+.credentials-block {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: $font-family-sans-serif;
+    .credentials-block-text {
+       font-size: $font-size-small;
+       margin-left: 14px;
+    }
+    .credentials-block-link {
+        font-weight: bold;
+        color: $brand-alt;
+    }
 }

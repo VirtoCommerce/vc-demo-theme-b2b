@@ -1,75 +1,98 @@
 .btn {
-  border-width: 2px;
-  font-family: $btn-font-family;
-  text-transform: uppercase;
-  height: $input-height-base;
+    border-width: 2px;
+    font-family: $btn-font-family;
+    text-transform: uppercase;
+    height: $input-height-base;
+    font-size: 15px;
+    letter-spacing: 0.015em;
 }
 
 .btn-lg {
-  height: $input-height-large;
+    height: $input-height-large;
 }
 
 .btn-sm {
-  height: $input-height-small;
+    height: $input-height-small;
+    font-size: $font-size-small;
 }
 
 .btn-xs {
-  height: $input-height-xs;
+    height: $input-height-xs;
 }
 
 .btn-link {
-  border-bottom: 1px solid transparent;
-  font-weight: $link-font-weight;
-  text-transform: none;
-  @include button-link-size-fix($padding-base-horizontal, $font-size-base, $line-height-base, $input-height-base);
-
-  &:hover,
-  &:focus {
-    border-bottom: 1px $link-hover-border-style $link-hover-color;
-  }
-
-  &.btn-link-internal {
+    border-bottom: 1px solid transparent;
+    font-weight: $link-font-weight;
+    text-transform: none;
+    @include button-link-size-fix( $padding-base-horizontal, $font-size-base, $line-height-base, $input-height-base);
     &:hover,
     &:focus {
-      border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
+        border-bottom: 1px $link-hover-border-style $link-hover-color;
     }
-  }
-
-  &:disabled {
-    border-bottom: 1px solid transparent;
-  }
-
-  &.btn-lg {
-    @include button-link-size-fix($padding-large-horizontal, $font-size-large, $line-height-large, $input-height-large);
-  }
-
-  &.btn-sm {
-    @include button-link-size-fix($padding-small-horizontal, $font-size-small, $line-height-small, $input-height-small);
-  }
-
-  &.btn-xs {
-    @include button-link-size-fix($padding-xs-horizontal, $font-size-small, $line-height-small, $input-height-xs);
-  }
+    &.btn-link-internal {
+        &:hover,
+        &:focus {
+            border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
+        }
+    }
+    &:disabled {
+        border-bottom: 1px solid transparent;
+        color: $btn-link-disabled-color;
+        text-decoration: none;
+    }
+    &.btn-lg {
+        @include button-link-size-fix( $padding-large-horizontal, $font-size-large, $line-height-large, $input-height-large);
+    }
+    &.btn-sm {
+        @include button-link-size-fix( $padding-small-horizontal, $font-size-small, $line-height-small, $input-height-small);
+    }
+    &.btn-xs {
+        @include button-link-size-fix( $padding-xs-horizontal, $font-size-small, $line-height-small, $input-height-xs);
+    }
 }
 
 .btn-default {
-  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border, 'lighten', 2);
+    @include button-variant( $btn-default-color, $btn-default-bg, $btn-default-border, 'lighten', 2);
 }
 
 .btn-white {
-  @include button-variant($btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
+    @include button-variant( $btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
+    width: 28px;
+    height: 28px;
+    background: $body-bg;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    border: 0;
+    padding: 0px;
+    margin-right: 8px;
 }
 
 .btn-white.btn-alt {
-  @include button-variant-alt($btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
+    @include button-variant-alt( $btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
 }
 
 .btn-alt {
-  @include button-variant-alt($btn-default-color, $btn-default-bg, $btn-default-border, 'lighten', 0);
+    @include button-variant-alt( $btn-default-color, $btn-default-bg, $btn-default-border, 'lighten', 0);
 }
 
 .btn-primary.btn-alt {
-  @include button-variant-alt($btn-primary-color, $btn-primary-bg, $btn-primary-border, 'darken', 0);
+    @include button-variant-alt( $btn-primary-color, $btn-primary-bg, $btn-primary-border, 'darken', 0);
+}
+
+.btn-success.btn-alt {
+    @include button-variant-alt($btn-success-color, $btn-success-bg, $btn-success-border, 'darken', 0);
+}
+
+.btn-info.btn-alt {
+    @include button-variant-alt($btn-info-color, $btn-info-bg, $btn-info-border, 'darken', 0);
+}
+
+.btn-warning.btn-alt {
+    @include button-variant-alt($btn-warning-color, $btn-warning-bg, $btn-warning-border, 'darken', 0);
+}
+
+.btn-danger.btn-alt {
+    @include button-variant-alt($btn-danger-color, $btn-danger-bg, $btn-danger-border, 'darken', 0);
 }
 
 .btn-primary,
@@ -77,17 +100,74 @@
 .btn-info,
 .btn-warning,
 .btn-danger {
-  @include button-variant-disabled();
+    @include button-variant-disabled();
 }
 
-.btn-link {
-  &[disabled],
-  fieldset[disabled] & {
-    &,
-    &:hover,
-    &:focus {
-      color: $btn-link-disabled-color;
-      text-decoration: none;
+.address-list .btn-white {
+    width: 28px;
+    height: 28px;
+    background: $body-bg;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    border: 0;
+    padding: 0px;
+    margin-right: 8px;
+}
+
+.address-list .btn-white:hover {
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+}
+
+.btn-white:hover {
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+}
+
+.text-danger {
+    color: $brand-danger;
+}
+
+.address-list a:not(.btn) {
+    font-family: $font-family-sans-serif;
+    font-weight: 500;
+    margin-left: 16px;
+    border-bottom: 1px $brand-alt dashed;
+}
+
+.link-button {
+    padding-top: 3px !important;
+    margin-top: 10px !important;
+}
+
+// Temporary workaround
+.dropdown-toggle .fa {
+    color: $brand-primary;
+    font-weight: bold;
+}
+
+.btn-toolbar .btn-alt {
+    font-size: 14px;
+}
+
+#customer_login .btn-alt {
+    margin-left: -15px;
+}
+
+.variations-panel .col-md-7 {
+    width: 63.3333333333%;
+}
+
+.variations-panel .product-pull-right {
+    width: 110px;
+}
+
+.configure-btn {
+    width: 100%;
+    border: 1px solid $brand-primary;
+    border-radius: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .configure-icon {
+        margin-right: 4px;
     }
-  }
 }

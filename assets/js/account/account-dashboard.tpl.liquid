@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <vc-account-last-orders-list></vc-account-last-orders-list>
+            </div>
+        </div>
+        <div class="row nogap">
+            <div class="col-md-6">
+                {% include 'dashboard/monthly-spend-report' %}
+            </div>
+            <div class="col-md-6">
+                <vc-account-orders-status-stats></vc-account-orders-status-stats>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <vc-dashboard-user-list></vc-dashboard-user-list>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            {% include 'dashboard/bulk-order-content' %}
+        </div>
+        <div class="row">
+            <vc-dashboard-user-roles-list></vc-dashboard-user-roles-list>
+        </div>
+    </div>
+</div>

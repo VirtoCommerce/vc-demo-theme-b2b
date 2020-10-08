@@ -13,11 +13,12 @@
         requiredError: '@?',
         autofocus: '<',
         pattern: '@',
-        disabled: '<'
+        disabled: '<',
+        maxlength: '<'
     },
     controller: [function () {
         var $ctrl = this;
-        
+
         $ctrl.validate = function () {
             $ctrl.form.$setSubmitted();
             return $ctrl.form.$valid;

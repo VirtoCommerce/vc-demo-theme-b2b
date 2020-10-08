@@ -2,10 +2,11 @@ var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.service('dialogService', ['$uibModal', function ($uibModal) {
     return {
-        showDialog: function (dialogData, controller, templateUrl) {
+        showDialog: function (dialogData, controller, templateUrl, size) {
             var modalInstance = $uibModal.open({
                 controller: controller,
                 templateUrl: templateUrl,
+                size: size,
                 resolve: {
                     dialogData: function () {
                         return dialogData;
@@ -62,6 +63,9 @@ storefrontApp.service('catalogService', ['$http', function ($http) {
         },
         searchCategories: function (criteria) {
             return $http.post('storefrontapi/categories/search', criteria);
+        },
+        getProductConfiguration: function (productId) {
+            return $http.get('storefrontapi/demo/catalog/' + productId + '/configuration?t=' + new Date().getTime());
         }
     }
 }]);
@@ -76,6 +80,9 @@ storefrontApp.service('cartService', ['$http', function ($http) {
         },
         addLineItem: function (productId, quantity) {
             return $http.post('storefrontapi/cart/items', { id: productId, quantity: quantity });
+        },
+        addLineItems: function (items) {
+            return $http.post('storefrontapi/cartdemo/items/bulk', items);
         },
         changeLineItemQuantity: function (lineItemId, quantity) {
             return $http.put('storefrontapi/cart/items', { lineItemId: lineItemId, quantity: quantity });
@@ -191,7 +198,7 @@ storefrontApp.service('compareProductService', ['$http', '$localStorage', functi
     return {
         isInProductCompareList: function(productId) {
             var containProduct;
-            if (!_.some($localStorage['productCompareListIds'], function(id) { return id === productId })) {
+            if (!_.some($localStorage['b2bproductCompareListIds'], function(id) { return id === productId })) {
                 containProduct = false;
             }
             else
@@ -199,32 +206,32 @@ storefrontApp.service('compareProductService', ['$http', '$localStorage', functi
             return containProduct;
         },
         addProduct: function(productId) {
-            if (!$localStorage['productCompareListIds']) {
-                $localStorage['productCompareListIds'] = [];
+            if (!$localStorage['b2bproductCompareListIds']) {
+                $localStorage['b2bproductCompareListIds'] = [];
             }
-            $localStorage['productCompareListIds'].push(productId);
-            _.uniq($localStorage['productCompareListIds']);
+            $localStorage['b2bproductCompareListIds'].push(productId);
+            _.uniq($localStorage['b2bproductCompareListIds']);
         },
         getProductsIds: function() {
-            if (!$localStorage['productCompareListIds']) {
-                $localStorage['productCompareListIds'] = [];
+            if (!$localStorage['b2bproductCompareListIds']) {
+                $localStorage['b2bproductCompareListIds'] = [];
                 return;
             }
             var ids = [];
-            for (i = 0; i < $localStorage['productCompareListIds'].length; i++) {
-                ids.push('productIds=' + $localStorage['productCompareListIds'][i]);
+            for (i = 0; i < $localStorage['b2bproductCompareListIds'].length; i++) {
+                ids.push('productIds=' + $localStorage['b2bproductCompareListIds'][i]);
             }
             return ids.join("&");
         },
         getProductsCount: function() {
-            var count = $localStorage['productCompareListIds'] ? $localStorage['productCompareListIds'].length : 0;
+            var count = $localStorage['b2bproductCompareListIds'] ? $localStorage['b2bproductCompareListIds'].length : 0;
             return count;
         },
         clearCompareList: function() {
-            $localStorage['productCompareListIds'] = [];
+            $localStorage['b2bproductCompareListIds'] = [];
         },
         removeProduct: function(productId) {
-            $localStorage['productCompareListIds'] = _.without($localStorage['productCompareListIds'], productId);
+            $localStorage['b2bproductCompareListIds'] = _.without($localStorage['b2bproductCompareListIds'], productId);
         }
     }
 }]);

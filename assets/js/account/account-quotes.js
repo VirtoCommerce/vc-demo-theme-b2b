@@ -4,19 +4,22 @@
     require: {
         accountManager: '^vcAccountManager'
     },
-    controller: [function () {
+    controller: ['$stateParams', function ( $stateParams ) {
         var ctrl = this;
-        ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 5, numPages: 10 };
+        ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 5, numPages: 10 };
+
+        refresh();
+
         ctrl.pageSettings.pageChanged = function () {
+            refresh();
+        };
+
+        function refresh() {
             ctrl.accountManager.getQuotes(ctrl.pageSettings.currentPage, ctrl.pageSettings.itemsPerPageCount, ctrl.sortInfos, function (data) {
                 ctrl.entries = data.results;
                 ctrl.pageSettings.totalItems = data.totalCount;
             });
-        };
-        
-        this.$routerOnActivate = function (next) {
-            ctrl.pageSettings.currentPage = next.params.pageNumber || ctrl.pageSettings.currentPage;
-            ctrl.pageSettings.pageChanged();
-        };
+        }
+
     }]
 });

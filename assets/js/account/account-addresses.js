@@ -16,10 +16,10 @@ angular.module('storefront.account')
             });
 
         $ctrl.addNewAddress = function () {
-            if (_.last(components).validate()) {
+            if (components.length > 0 && components[0].validate()) {
                 $ctrl.currentMember.addresses.push($ctrl.newAddress);
                 $ctrl.newAddress = null;
-                $ctrl.updateAddresses($ctrl.currentMember);              
+                $ctrl.updateAddresses($ctrl.currentMember);
             }
         };
 
@@ -29,7 +29,7 @@ angular.module('storefront.account')
         }
 
         $ctrl.submit = function () {
-            if (components[$ctrl.editIndex].validate()) {
+            if (components.length > 0 && components[0].validate()) {
                 angular.copy($ctrl.editAddress, $ctrl.currentMember.addresses[$ctrl.editIndex]);
                 $ctrl.updateAddresses($ctrl.currentMember, $ctrl.cancel);
             }

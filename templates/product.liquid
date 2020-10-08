@@ -1,17 +1,26 @@
-<ng-controller ng-controller="productController">
+<ng-controller ng-controller="productController" ng-init="productContext = { id: '{{ product.id }}', productType: '{{product.product_type}}', isGrid: false }">
 
 {% assign variants_size = product.variants | size %}
 
-    {% if variants_size == 1 %}    
-        {% include 'product/main' %}
-    {% else %}    
-        {% include 'product/variations' %}
-    {% endif %}
+
+{% assign unavailable = false %}
+{% assign sold_out = false %}
+
+{% if product.buyable and product.in_stock != true %}
+    {% assign sold_out = true %}
+{% endif %}
+
+{% if product.buyable != true  %}
+    {% assign unavailable = true %}
+{% endif %}
+
+{% include 'product/main' %}
+
 </ng-controller>
 
 
 
-<script>  
+<script>
     window.product = {
         id: "{{ product.id }}",
         catalogId: "{{ product.catalog_id }}",

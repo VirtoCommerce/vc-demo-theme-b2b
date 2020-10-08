@@ -65,4 +65,40 @@
     display: flex;
     flex-direction: column;
   }
+
+  &:before, &:after {
+    display: none;
+  }
 }
+
+
+.nogap > [class*="col-"] {
+  @media (min-width: $screen-md-min) {
+    padding-left: 7.5px;
+    padding-right: 7.5px
+  }
+}
+.nogap > [class*="col-"]:first-child {
+  padding-left: 15px;
+}
+.nogap > [class*="col-"]:last-child {
+  padding-right: 15px;
+}
+
+#accordiongroup-27-4585-panel .panel-body {
+    padding-right: 15px !important;
+}
+
+.sidebar{
+  padding-right: 20px;
+  width: 23%;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.overflow-visible {
+    overflow: visible !important;
+}
+

@@ -5,8 +5,8 @@ if (storefrontAppDependencies != undefined) {
     storefrontAppDependencies.push(moduleName);
 }
 angular.module(moduleName, ['credit-cards', 'angular.filter'])
-    .controller('checkoutController', ['$rootScope', '$scope', '$window', 'cartService', 'commonService', 'dialogService', 'orderService',
-        function ($rootScope, $scope, $window, cartService, commonService, dialogService, orderService) {
+    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService',
+        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService) {
             $scope.checkout = {
                 wizard: {},
                 cart: {},
@@ -24,12 +24,28 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 newAddress: {}
             };
 
+            $scope.isEqualAddress = function (firstAddress, secondAddress) {
+                return firstAddress.line1 == secondAddress.line1 &&
+                    firstAddress.line2 == secondAddress.line2 &&
+                    firstAddress.city == secondAddress.city &&
+                    firstAddress.regionId == secondAddress.regionId &&
+                    firstAddress.countryCode == secondAddress.countryCode &&
+                    firstAddress.postalCode == secondAddress.postalCode;
+            };
+
             $scope.setPurchaseOrderNumber = function () {
+                this.purchaseOrderNumberForm.$setPristine();
+                angular.element('#purchaseOrderNumberSubmit').blur();
                 return wrapLoading(function () {
-                    return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber);
+                    return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
+                        $rootScope.$broadcast('successOperation', {
+                            type: 'success',
+                            title: ['Purchase order number has successfully changed']
+                        });
+                    });
                 });
             }
-            
+
             $scope.sendToEmail = function () {
                 dialogService.showDialog({}, 'sendCartToEmailDialogController', 'storefront.send-cart-to-email.tpl');
             }
@@ -68,26 +84,16 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changeShippingAddress = function () {
                 var dialogData =
-                    {                     
-                        checkout: $scope.checkout,
-                        addresses: $scope.checkout.cart.customer.addresses
-                    };
+                {
+                    customer: $scope.customer,
+                    checkout: $scope.checkout,
+                    addresses: $scope.checkout.cart.customer.addresses,
+                    isEqualAddress: $scope.isEqualAddress
+                };
 
-                var dialogInstance = dialogService.showDialog(dialogData, 'universalDialogController', 'storefront.select-address-dialog.tpl');
-                dialogInstance.result.then(function (address) {
-                    if (address == $scope.checkout.newAddress) {
-                        dialogInstance = dialogService.showDialog(dialogData, 'universalDialogController', 'storefront.new-address-dialog.tpl');
-                        dialogInstance.result.then(function (address) {
-                            if (!$scope.checkout.cart.customer.addresses) {
-                                $scope.checkout.cart.customer.addresses = [];
-                            }
-                            $scope.checkout.cart.customer.addresses.push(address);
-                            $scope.checkout.shipment.deliveryAddress = address;
-                        });
-                    }
-                    else {
-                        $scope.checkout.shipment.deliveryAddress = address;
-                    }
+                var dialogInstance = dialogService.showDialog(dialogData, 'universalDialogController', 'storefront.select-address-dialog.tpl', 'lg');
+                dialogInstance.result.then(function () {
+                    $scope.checkout.shipment.deliveryAddress = $scope.checkout.deliveryAddress;
                     $scope.updateShipment($scope.checkout.shipment);
                 });
             };
@@ -164,12 +170,10 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             }
                         });
                     }
-                    else {
-                        //Set default shipping address
-                        if ($scope.checkout.cart.customer.addresses) {
-                            $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.addresses[0];
-                        }
+                    if (!cart.shipments.length || !$scope.checkout.shipment.deliveryAddress) {
+                        $scope.checkout.shipment.deliveryAddress = $scope.checkout.cart.customer.defaultShippingAddress;
                     }
+                    $scope.checkout.deliveryAddress = $scope.checkout.shipment.deliveryAddress;
                     $scope.checkout.billingAddressEqualsShipping = cart.hasPhysicalProducts && !angular.isObject($scope.checkout.payment.billingAddress);
 
                     $scope.checkout.canCartBeRecurring = $scope.customer.isRegisteredUser && _.all(cart.items, function (x) { return !x.isReccuring });
@@ -234,7 +238,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             $scope.updateShipment = function (shipment) {
                 if (shipment.deliveryAddress) {
                     var deliveryAddress = $scope.checkout.shipment.deliveryAddress;
-                    deliveryAddress.type = 'Shipping';
                     //WORKAROUND: For pickup address FirstName and LastName can't set and need use some to avoid required violation
                     deliveryAddress.firstName = deliveryAddress.firstName ? deliveryAddress.firstName : 'Fulfillment';
                     deliveryAddress.lastName = deliveryAddress.lastName ? deliveryAddress.lastName : 'center';
@@ -281,6 +284,23 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                                 $scope.checkout.cart.paymentPlan = undefined;
                             });
                         });
+                    }
+                }
+            };
+
+            $scope.getCustomerDefaults = function() {
+                if ($scope.customer.id) {
+                    var customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id));
+                    if (customerDefaults) {
+                        if (customerDefaults.deliveryMethod) {
+                            $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
+                        }
+                        if (customerDefaults.paymentMethod) {
+                            $scope.selectPaymentMethod(customerDefaults.paymentMethod);
+                        }
+                        if (customerDefaults.shippingMethod) {
+                            $scope.selectShippingMethod(customerDefaults.shippingMethod);
+                        }
                     }
                 }
             };
@@ -339,6 +359,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                 $scope.reloadCart().then(function (cart) {
                     $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
+                    $scope.getCustomerDefaults();
                 });
             };
 
