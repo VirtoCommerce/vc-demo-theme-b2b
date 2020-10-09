@@ -55,7 +55,7 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
             _.each(item.parts, function (part) {
                 part.items = [ctrl.cartItems.find(x => x.id === part.selectedItemId)];
             });
-        };
+        }
 
         getConfiguredLineItems(ctrl.item);
 
