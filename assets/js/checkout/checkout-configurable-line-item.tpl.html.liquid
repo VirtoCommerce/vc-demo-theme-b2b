@@ -1,0 +1,100 @@
+<div class="d-flex flex-column">
+    <div class="d-flex align-items-center">
+        <div class="col-xs-2 col-md-1 align-self-start">
+            <img class="img-responsive" alt="{% raw %}{{ $ctrl.item.configuredLineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.item.configuredLineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <p><a ng-href="{% raw %}{{ $ctrl.item.configuredLineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.item.configuredLineItem.name" class="text-bold"></a></p>
+            <p><span class="text-bold">Item</span> <span ng-bind="$ctrl.item.configuredLineItem.sku"></span></p>
+            <p>
+                <span class="text-bold">Price</span>
+                {% if settings.show_prices_with_taxes %}
+                    <span ng-bind="$ctrl.item.configuredLineItem.placedPriceWithTax.formattedAmount" class="text-bold text-green"></span>
+                {% else %}
+                    <span ng-bind="$ctrl.item.configuredLineItem.placedPrice.formattedAmount" class="text-bold text-green"></span>
+                {% endif %}
+                <span>/ each</span>
+            </p>
+            <p class="d-flex">
+                <img class="img-responsive" style="margin-right: 4px;" src="{{ 'customize.svg' | asset_url }}" />
+                <a ng-bind="$ctrl.getToggleTitle()" ng-click="$ctrl.toggleConfiguration()" class="cursor-pointer"></a>
+            </p>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.item.configuredLineItem.productId)'>
+            <vc-item-availability availability="$ctrl.item.configuredLineItem.availability"></vc-item-availability>
+            <vc-payment-plan available-payment-plans="$ctrl.availablePaymentPlans" payment-plan="$ctrl.item.configuredLineItem.paymentPlan"></vc-payment-plan>
+        </div>
+        <div class="col-xs-3 col-md-2">
+            <div class="row nogap">
+                <div class="col-md-6 form-group">
+                    <input class="form-control" type="text" ng-model="$ctrl.item.configuredLineItem.quantity" />
+                </div>
+                <div class="col-md-6">
+                    <a href="" ng-click="$ctrl.changeQty()">Update</a>
+                    <a href="" ng-click="$ctrl.remove()">Remove</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-3 col-md-2">
+            <p>
+                <span class="text-bold text-condensed">Total</span><br>
+                {% if settings.show_prices_with_taxes %}
+                    <span ng-bind="$ctrl.item.configuredLineItem.extendedPriceWithTax.formattedAmount" class="text-green text-bold"></span>
+                {% else %}
+                    <span ng-bind="$ctrl.item.configuredLineItem.extendedPrice.formattedAmount" class="text-green text-bold"></span>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    <div ng-if="showConfiguration" class="col-md-offset-1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="h4">Configuration parts</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table no-vertical-borders small-table-head table-row-padding margin-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="part in $ctrl.item.parts" class="border-bottom-light">
+                                <td>
+                                    <img class="img-responsive" alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                                </td>
+                                <td class="d-flex flex-column">
+                                    <span class="text-bold" ng-bind="part.name"></span>
+                                    <a ng-href="{% raw %}{{ part.items[0].product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.items[0].name" class="text-bold"></a>
+                                    <p class="margin-0">
+                                        <span class="text-bold">Price</span>
+                                        {% if settings.show_prices_with_taxes %}
+                                            <span ng-bind="part.items[0].placedPriceWithTax.formattedAmount" class="text-bold text-green"></span>
+                                        {% else %}
+                                            <span ng-bind="part.items[0].placedPrice.formattedAmount" class="text-bold text-green"></span>
+                                        {% endif %}
+                                        <span>/ each</span>
+                                    </p>
+                                </td>
+                                <td ng-bind="part.items[0].quantity" class="text-center"></td>
+                                {% if settings.show_prices_with_taxes %}
+                                    <td ng-bind="part.items[0].extendedPriceWithTax.formattedAmount" class="text-bold text-green" style="text-align: right;"></td>
+                                {% else %}
+                                    <td ng-bind="part.items[0].extendedPrice.formattedAmount" class="text-bold text-green" style="text-align: right;"></td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -40,7 +40,7 @@
 .container-bordered-horizontal,
 .container-bordered {
   > .row:not(:last-child)::after {
-    border-bottom: 1px solid $grid-border;
+    border-bottom: 1px solid $gray-lighter;
     position: relative;
     width: calc(100% - #{$grid-gutter-width});
     left: $grid-gutter-width / 2;
@@ -71,6 +71,25 @@
   }
 }
 
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-self-start {
+    align-self: flex-start;
+}
 
 .nogap > [class*="col-"] {
   @media (min-width: $screen-md-min) {

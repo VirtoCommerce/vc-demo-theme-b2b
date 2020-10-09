@@ -147,6 +147,22 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     var cart = response.data;
 
                     $scope.checkout.cart = cart;
+
+                    if (cart.configuredItems.length) {
+                        $scope.configuredItemsIds = []
+                        _.each($scope.checkout.cart.configuredItems, function (item) {
+                            _.each(item.parts, function (part) {
+                                $scope.configuredItemsIds.push(part.selectedItemId);
+                            });
+                        });
+                        $scope.configuredItemsIds = _.uniq($scope.configuredItemsIds);
+                        $scope.regularLineItems = _.filter($scope.checkout.cart.items, function(item) {
+                            return $scope.configuredItemsIds.indexOf(item.id) === -1;
+                        });
+                    } else {
+                        $scope.regularLineItems = $scope.checkout.cart.items;
+                    }
+
                     if (cart.payments.length) {
                         $scope.checkout.payment = cart.payments[0];
                         $scope.checkout.paymentMethod.code = $scope.checkout.payment.paymentGatewayCode;

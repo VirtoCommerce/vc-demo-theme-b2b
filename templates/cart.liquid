@@ -63,7 +63,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row flexible text-condensed" ng-repeat="lineItem in checkout.cart.items">
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredItems">
+                                        <vc-checkout-configurable-line-item item="item" cart-items="checkout.cart.items" on-change-qty="changeItemQty(item)" on-remove="removeItem(item)"></vc-checkout-configurable-line-item>
+                                    </div>
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in regularLineItems">
                                         <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
                                     </div>
                                     <div class="row">
@@ -188,7 +191,7 @@
                                             <div class="pull-left" ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode">
                                                 <address>
                                                     <div class="col-xs-2 col-md-3">
-                                                        <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
+                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
                                                     </div>
                                                     <div class="h5 col-md-9">
                                                         <span class="name" ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
@@ -234,7 +237,7 @@
                                             <div class="pull-left" ng-if="checkout.payment.name">
                                                 <address>
                                                     <div class="col-xs-2 col-md-3">
-                                                        <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
+                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
                                                     </div>
                                                     <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                         <span ng-bind="checkout.payment.name"></span>
@@ -255,8 +258,11 @@
                                     <div class="row hidden-xs hidden-sm">
                                                <h2> MY PRODUCTS</h2>
                                     </div>
-                                    <div class="row flexible text-condensed" ng-repeat="lineItem in checkout.cart.items">
-                                        <vc-checkout-line-item line-item="lineItem"></vc-checkout-line-item>
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredItems">
+                                        <vc-checkout-configurable-line-item item="item" cart-items="checkout.cart.items" ></vc-checkout-configurable-line-item>
+                                    </div>
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in regularLineItems">
+                                        <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
                                     </div>
                                 </div>
                             </div>
