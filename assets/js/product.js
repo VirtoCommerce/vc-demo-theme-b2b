@@ -87,8 +87,14 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.addSelectedProductsToCart = function() {
+            if($scope.productContext.productType != 'Configurable'){
+                throw new Error("addSelectedProductsToCart method is allowed only in scope of configurable product");
+            }
+
+            var configuredProductId = $scope.productContext.id;
+
             var items = $scope.productParts.map(function(value){
-                return { id: value.selectedItemId, quantity: $scope.configurationQty };
+                return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
             });
             cartService.addLineItems(items).then(function (response) {
                 var result = response.data;
