@@ -68,8 +68,8 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="part in $ctrl.item.parts" class="border-bottom-light">
-                                <td>
-                                    <img class="img-responsive" alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                                <td class="text-center">
+                                    <img alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
                                 </td>
                                 <td class="d-flex flex-column">
                                     <span class="text-bold" ng-bind="part.name"></span>
