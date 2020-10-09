@@ -148,8 +148,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                     $scope.checkout.cart = cart;
 
-                    if (cart.configuredItems.length) {
-                        $scope.configuredItemsIds = []
+                    if (cart.configuredItems && cart.configuredItems.length) {
+                        $scope.configuredItemsIds = [];
                         _.each($scope.checkout.cart.configuredItems, function (item) {
                             _.each(item.parts, function (part) {
                                 $scope.configuredItemsIds.push(part.selectedItemId);
