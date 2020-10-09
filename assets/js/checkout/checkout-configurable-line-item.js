@@ -28,12 +28,12 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
 
         this.changeQty = function () {
             if (ctrl.onChangeQty) {
-                ctrl.onChangeQty({ item: ctrl.item });
+                ctrl.onChangeQty({ item: ctrl.item.configuredLineItem });
             }
         };
 
         this.remove = function () {
-            ctrl.onRemove({ item: ctrl.item });
+            ctrl.onRemove({ item: ctrl.item.configuredLineItem });
         }
 
         this.validate = function () {

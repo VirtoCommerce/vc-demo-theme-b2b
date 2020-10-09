@@ -120,14 +120,26 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             };
 
             $scope.changeItemQty = function (lineItem) {
+                var id;
+                if (lineItem.id) {
+                    id = lineItem.id;
+                } else {
+                    id = lineItem.productId;
+                }
                 return wrapLoading(function () {
-                    return cartService.changeLineItemsQuantity({ lineItemId: lineItem.id, quantity: lineItem.quantity }).then($scope.reloadCart);
+                    return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity }).then($scope.reloadCart);
                 });
             };
 
             $scope.removeItem = function (lineItem) {
+                var id;
+                if (lineItem.id) {
+                    id = lineItem.id;
+                } else {
+                    id = lineItem.productId;
+                }
                 return wrapLoading(function () {
-                    return cartService.removeLineItem(lineItem.id).then($scope.reloadCart);
+                    return cartService.removeLineItem(id).then($scope.reloadCart);
                 });
             };
             $scope.validateCheckout = function (checkout) {
