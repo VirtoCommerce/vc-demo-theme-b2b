@@ -91,6 +91,10 @@
     align-self: flex-start;
 }
 
+.justify-content-center {
+    justify-content: center;
+}
+
 .nogap > [class*="col-"] {
   @media (min-width: $screen-md-min) {
     padding-left: 7.5px;

@@ -41,7 +41,7 @@
         "apply": "Apply",
         "cart": "Cart",
         "remove": "Remove",
-        "coupon_code": "Coupon code",
+        "coupon_code": "Enter your code",
         "coupon_applied_sucessfuly": "Coupon is valid",
         "invalid_coupon_code": "This code did not match any active coupon. Was it entered correctly?",
         "make_recurring_order": "I want this to be a recurring order",

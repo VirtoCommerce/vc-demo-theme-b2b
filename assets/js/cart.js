@@ -142,23 +142,6 @@ storefrontApp.controller('cartController', ['$rootScope', '$scope', '$timeout', 
             $rootScope.$broadcast('cartItemsChanged');
         });
     }
-    
-    $scope.applyCoupon = function (coupon) {
-        coupon.loader.wrapLoading(function() {
-            return cartService.addCoupon(coupon.code).then(function() {
-                reloadCart();
-            });
-        });
-    }
-
-    $scope.removeCoupon = function (coupon) {
-        coupon.loader.wrapLoading(function() {
-            return cartService.removeCoupon().then(function() {
-                $scope.coupon = { loader: $scope.coupon.loader };
-                reloadCart();
-            });
-        });
-    }
 
     function initialize() {
         reloadCart();
