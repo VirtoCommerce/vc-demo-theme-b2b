@@ -120,14 +120,34 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             };
 
             $scope.changeItemQty = function (lineItem) {
+                var id;
+                if (lineItem.id) {
+                    id = lineItem.id;
+                } else {
+                    id = lineItem.productId;
+                }
                 return wrapLoading(function () {
-                    return cartService.changeLineItemsQuantity({ lineItemId: lineItem.id, quantity: lineItem.quantity }).then($scope.reloadCart);
+                    return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity })
+                    .then(() => {
+                        $scope.reloadCart();
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
                 });
             };
 
             $scope.removeItem = function (lineItem) {
+                var id;
+                if (lineItem.id) {
+                    id = lineItem.id;
+                } else {
+                    id = lineItem.productId;
+                }
                 return wrapLoading(function () {
-                    return cartService.removeLineItem(lineItem.id).then($scope.reloadCart);
+                    return cartService.removeLineItem(id)
+                    .then(() => {
+                        $scope.reloadCart();
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
                 });
             };
             $scope.validateCheckout = function (checkout) {
@@ -147,6 +167,22 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     var cart = response.data;
 
                     $scope.checkout.cart = cart;
+
+                    if (cart.configuredItems && cart.configuredItems.length) {
+                        $scope.configuredItemsIds = [];
+                        _.each($scope.checkout.cart.configuredItems, function (item) {
+                            _.each(item.parts, function (part) {
+                                $scope.configuredItemsIds.push(part.selectedItemId);
+                            });
+                        });
+                        $scope.configuredItemsIds = _.uniq($scope.configuredItemsIds);
+                        $scope.regularLineItems = _.filter($scope.checkout.cart.items, function(item) {
+                            return $scope.configuredItemsIds.indexOf(item.id) === -1;
+                        });
+                    } else {
+                        $scope.regularLineItems = $scope.checkout.cart.items;
+                    }
+
                     if (cart.payments.length) {
                         $scope.checkout.payment = cart.payments[0];
                         $scope.checkout.paymentMethod.code = $scope.checkout.payment.paymentGatewayCode;

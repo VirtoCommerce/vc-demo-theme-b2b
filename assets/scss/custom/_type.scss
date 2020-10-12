@@ -79,7 +79,7 @@ p.product-count {
 }
 
 .text-bold {
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .text-default-color {
@@ -267,7 +267,7 @@ dl {
     margin-right: 10px;
 }
 
-.checkout-settings .img-responsive {
+.checkout-settings.img-responsive {
     min-width: 40px;
     height: auto;
     margin-left: -20px;
