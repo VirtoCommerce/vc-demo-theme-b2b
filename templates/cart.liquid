@@ -90,7 +90,7 @@
                                             Order summary
                                         </div>
                                         <div class="panel-body">
-                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: {% if settings.show_prices_with_taxes %}cart.discountWithTaxes{% else %}cart.discount{% endif %}.amount > 0 } }"></vc-totals>
+                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true } }"></vc-totals>
                                         </div>
                                     </div>
                                     <div class="panel panel-default panel-static">
@@ -108,7 +108,7 @@
                                                            type="text">
                                                 </div>
                                                 <button id="purchaseOrderNumberSubmit"
-                                                        class="btn pull-right"
+                                                        class="btn pull-right d-flex align-items-center justify-content-center"
                                                         ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
                                                         ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
                                                         ng-click="setPurchaseOrderNumber()">
@@ -122,7 +122,32 @@
                                             Promotion code
                                         </div>
                                         <div class="panel-body">
-                                            <vc-checkout-coupon coupon="checkout.coupon" on-apply-coupon="applyCoupon(coupon)" on-remove-coupon="removeCoupon(coupon)"></vc-checkout-coupon>
+                                            <form class="form-inline" accept-charset="UTF-8" name="applyCouponForm" novalidate="novalidate">
+                                                <div class="form-group">
+                                                    <input id="applyCoupon"
+                                                           class="form-control"
+                                                           ng-model="checkout.coupon.code"
+                                                           name="applyCoupon"
+                                                           placeholder="{{ 'checkout.coupon_code' | t }}"
+                                                           ng-disabled="couponApplied"
+                                                           type="text">
+                                                </div>
+                                                <button ng-if="!couponApplied"
+                                                        id="applyCouponSubmit"
+                                                        class="btn pull-right d-flex align-items-center justify-content-center"
+                                                        ng-class="applyCouponForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
+                                                        ng-disabled="!checkout.coupon.code"
+                                                        ng-click="applyCoupon(checkout.coupon)">
+                                                    <i class="fa fa-check"></i>
+                                                </button>
+                                                <button ng-if="couponApplied"
+                                                        id="removeCouponSubmit"
+                                                        class="btn pull-right btn-alt btn-danger d-flex align-items-center justify-content-center"
+                                                        ng-click="removeCoupon(checkout.coupon)">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </form>
+                                            <span class="text-danger" ng-if="!checkout.coupon.appliedSuccessfully">{{ 'checkout.invalid_coupon_code' | t }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -278,7 +303,7 @@
                                             Order summary
                                         </div>
                                         <div class="panel-body">
-                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: {% if settings.show_prices_with_taxes %}cart.discountWithTaxes{% else %}cart.discount{% endif %}.amount > 0 } }"></vc-totals>
+                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true } }"></vc-totals>
                                         </div>
                                     </div>
                                 </div>
