@@ -127,7 +127,11 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     id = lineItem.productId;
                 }
                 return wrapLoading(function () {
-                    return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity }).then($scope.reloadCart);
+                    return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity })
+                    .then(() => {
+                        $scope.reloadCart();
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
                 });
             };
 
@@ -139,7 +143,11 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     id = lineItem.productId;
                 }
                 return wrapLoading(function () {
-                    return cartService.removeLineItem(id).then($scope.reloadCart);
+                    return cartService.removeLineItem(id)
+                    .then(() => {
+                        $scope.reloadCart();
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
                 });
             };
             $scope.validateCheckout = function (checkout) {
