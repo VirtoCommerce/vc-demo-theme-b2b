@@ -341,6 +341,47 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 }
             };
 
+            $scope.applyCoupon = function (coupon) {
+                wrapLoading(function() {
+                    return validateCoupon(coupon).then(function (result) {
+                        if (result.appliedSuccessfully) {
+                            $scope.couponApplied = true;
+                            return cartService.addCoupon(coupon.code).then(function() {
+                                $scope.reloadCart().then(function() {
+                                    $rootScope.$broadcast('successOperation', {
+                                        type: 'success',
+                                        message: 'Your promocode was successfully applied',
+                                    });
+                                });
+                            });
+                        }
+                    });
+                });
+            };
+
+            $scope.removeCoupon = function (coupon) {
+                wrapLoading(function() {
+                    return cartService.removeCoupon(coupon.code).then(function() {
+                        $scope.reloadCart().then(function() {
+                            $scope.couponApplied = false;
+                            $scope.checkout.coupon.code = null;
+                        });
+                    });
+                });
+            };
+
+            $scope.$watch("checkout.coupon", function () {
+                if (!$scope.checkout.coupon.code) {
+                    $scope.checkout.coupon.appliedSuccessfully = true;
+                }
+            }, true);
+
+            function validateCoupon(coupon) {
+                return cartService.validateCoupon(coupon).then(function (result) {
+                    return angular.extend(coupon, result.data);
+                });
+            }
+
             function updatePayment(payment) {
                 if ($scope.checkout.billingAddressEqualsShipping) {
                     payment.billingAddress = undefined;

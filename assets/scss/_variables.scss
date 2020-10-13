@@ -130,7 +130,7 @@
    $line-height-small:          1.5; // 1.5
    $line-height-small-computed: floor(($font-size-small * $line-height-small)); // not predefined
 
-// $border-radius-base:         4px
+   $border-radius-base:         4px;
 // $border-radius-large:        6px
 // $border-radius-small:        3px
 
@@ -812,7 +812,7 @@ $alert-success-border:        $state-success-border;
 // $panel-body-padding:          15px
 // $panel-heading-padding:       10px 15px
 // $panel-footer-padding:        $panel-heading-padding
-// $panel-border-radius:         $border-radius-base
+   $panel-border-radius:         $border-radius-base;
 
    $panel-heading-font-family:   $font-family-condensed; // not predefined
    $panel-heading-font-weight:   700; // not predefined
