@@ -66,7 +66,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changePaymentMethod = function () {
                 $scope.getAvailPaymentMethods().then(function (response) {
-                    var dialogInstance = dialogService.showDialog({ availPaymentMethods: response, checkout: $scope.checkout }, 'universalDialogController', 'storefront.select-payment-method-dialog.tpl');
+                    var dialogInstance = dialogService.showDialog({ availPaymentMethods: response, checkout: $scope.checkout }, 'universalDialogController', 'storefront.select-payment-method-dialog.tpl', 'lg');
                     dialogInstance.result.then(function (paymentMethod) {
                         $scope.selectPaymentMethod(paymentMethod);
                     });

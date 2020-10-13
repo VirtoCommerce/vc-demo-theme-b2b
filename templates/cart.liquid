@@ -447,8 +447,36 @@
     </div>
     <div class="modal-body">
         <div class="container-bordered container-drain">
+            <div class="row">
+                <div class="col-md-9">
+                    <span class="bold">Method name</span>
+                </div>
+                <div class="col-md-2 text-center">
+                    <span class="bold">Active method</span>
+                </div>
+            </div>
             <div class="row" ng-repeat="paymentMethod in availPaymentMethods">
-                <div class="form-group">
+                <div class="col-md-1">
+                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ paymentMethod.logoUrl }}{% endraw %}" />
+                </div>
+                <div class="col-md-8">
+                    <span class="name" ng-class="{'text-primary': checkout.paymentMethod == paymentMethod}" ng-bind="paymentMethod.name"></span>
+                </div>
+                <div class="col-md-2 text-center" >
+                    <label ng-if="checkout.paymentMethod != paymentMethod" class="text-nowrap">
+                        <a role="button" href="" ng-click="checkout.paymentMethod = paymentMethod">Choose</a>
+                    </label>
+                    <label ng-if="checkout.paymentMethod == paymentMethod" class="text-nowrap">
+                        <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Active
+                    </label>
+                </div>
+                <div class="col-md-1">
+                    <a class="btn btn-white link-button" href="" ng-click="close()">
+                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                    </a>
+                </div>
+
+                <!-- <div class="form-group">
                     <div class="col-xs-1">
                         <div class="radio-inline">
                             <label>
@@ -473,12 +501,12 @@
                     <div class="col-xs-12" ng-if="checkout.paymentMethod == paymentMethod && paymentMethod.paymentMethodType === 'Standard'">
                         <vc-credit-card card="paymentMethod.card" validation-container="validationContainer"></vc-credit-card>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="close(checkout.paymentMethod)">Update</button>
+        <button type="button" class="btn btn-default pull-left" ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="close(checkout.paymentMethod)">Ok</button>
     </div>
 </script>
