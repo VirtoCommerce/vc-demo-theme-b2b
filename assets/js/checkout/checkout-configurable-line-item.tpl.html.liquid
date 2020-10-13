@@ -4,7 +4,7 @@
             <img class="img-responsive" alt="{% raw %}{{ $ctrl.item.configuredLineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.item.configuredLineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
         </div>
         <div class="col-xs-4 col-md-4">
-            <p><a ng-href="{% raw %}{{ $ctrl.item.configuredLineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.item.configuredLineItem.name" class="text-bold"></a></p>
+            <p><span ng-bind="$ctrl.item.configuredLineItem.name" class="text-bold"></span></p>
             <p><span class="text-bold">Item</span> <span ng-bind="$ctrl.item.configuredLineItem.sku"></span></p>
             <p>
                 <span class="text-bold">Price</span>
