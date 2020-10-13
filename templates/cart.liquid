@@ -523,10 +523,13 @@
                             <span ng-bind="paymentMethod.description"></span>
                         </address>
                     </div>
-                    <div class="col-xs-12" ng-if="checkout.paymentMethod == paymentMethod && paymentMethod.paymentMethodType === 'Standard'">
-                        <vc-credit-card card="paymentMethod.card" validation-container="validationContainer"></vc-credit-card>
+                    <div class="col-xs-12">
+                        <demo-credit-card></demo-credit-card>
                     </div>
-                </div> -->
+                    <!-- <div class="col-xs-12" ng-if="checkout.paymentMethod == paymentMethod && paymentMethod.paymentMethodType === 'Standard'">
+                        <vc-credit-card card="paymentMethod.card" validation-container="validationContainer"></vc-credit-card>
+                    </div> -->
+                </div>
             </div>
         </div>
     </div>
