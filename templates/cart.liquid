@@ -502,6 +502,9 @@
                     </a>
                 </div>
                 <div ng-if="!isAvailable(paymentMethod)" class="col-md-6">You have no permissions to use the credit card payment method. For more details please contact the Organization maintainer</div>
+                    <div class="col-xs-12">
+                        <demo-credit-card></demo-credit-card>
+                    </div>
             </div>
             <div ng-show="creditCardEditorVisibility">
                 !Credit card editor!
