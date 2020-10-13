@@ -39,6 +39,10 @@ angular.module('storefrontApp')
         return result;
     }
 
+    $scope.hideCreditCardEditor = function() {
+        $scope.creditCardEditorVisibility = false;
+    }
+
     $scope.close = function (result) {
         if (result) {
             $uibModalInstance.close(result);
