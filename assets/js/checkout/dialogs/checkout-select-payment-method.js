@@ -6,7 +6,7 @@ angular.module('storefrontApp')
     $scope.creditCardEditorVisibility = null;
 
     $scope.isActive = function(paymentMethod) {
-        return $scope.checkout.paymentMethod.code == paymentMethod.code
+        return $scope.checkout.paymentMethod.code === paymentMethod.code
     }
 
     $scope.activate = function(paymentMethod) {
@@ -51,10 +51,6 @@ angular.module('storefrontApp')
     }
 
     $scope.getPaymentIconUrl = function(paymentMethod) {
-        if(paymentMethod.logoUrl) {
-            return paymentMethod.logoUrl;
-        }
-
         iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
         return iconUrl;
     };

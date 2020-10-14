@@ -74,10 +74,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             };
 
             $scope.getPaymentIconUrl = function(paymentMethod) {
-                if(paymentMethod.logoUrl) {
-                    return paymentMethod.logoUrl;
-                }
-
                 iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
                 return iconUrl;
             };

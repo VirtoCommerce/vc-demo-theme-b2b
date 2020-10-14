@@ -2,7 +2,7 @@ storefrontApp.service('authService', ['storefrontApp.mainContext', function (mai
     return {
         canByRole: function (roleId) {
             var customer = mainContext.customer;
-            var role = customer.roles.find(x=>x.id === roleId)
+            var role = customer.roles.find(x=>x.id === roleId);
             return role != null;
         }
     }
