@@ -416,7 +416,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 }
 
                 if(paymentMethod.code === creditCardPaymentMethodCode) {
-                orderService.processOrderPayment(order.number, order.inPayments[0].number, null).then(function(response) {
+                    orderService.processOrderPayment(order.number, order.inPayments[0].number, null).then(function(response) {
                         orderProcessingResult = response.data.orderProcessingResult;
                         order.inPayments[0].status = "Paid";
                         orderService.addOrUpdatePayment(order.number, order.inPayments[0]).then(function(response) {

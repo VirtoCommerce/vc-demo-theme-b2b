@@ -501,7 +501,10 @@
                         <img class="align-self-center" alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                     </a>
                 </div>
-                <div ng-if="!isAvailable(paymentMethod)" class="col-md-6">You have no permissions to use the credit card payment method. For more details please contact the Organization maintainer</div>
+                <div ng-if="!isAvailable(paymentMethod)" class="col-md-6 d-flex align-items-center">
+                    <img style="margin-right:1em;" class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" src="{{ 'attention.svg' | asset_url }}" />
+                    <span>You have no permissions to use the credit card payment method. For more details please <a href="">contact the Organization maintainer</a></span>
+                </div>
 
             </div>
             <div class="row" ng-show="creditCardEditorVisibility">
