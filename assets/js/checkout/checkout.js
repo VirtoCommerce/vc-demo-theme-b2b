@@ -5,8 +5,8 @@ if (storefrontAppDependencies != undefined) {
     storefrontAppDependencies.push(moduleName);
 }
 angular.module(moduleName, ['credit-cards', 'angular.filter'])
-    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService', 'iconUrlService',
-        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService, iconUrlService) {
+    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService', 'iconUrlService', 'creditCardPaymentMethodCode',
+        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService, iconUrlService, creditCardPaymentMethodCode) {
             $scope.checkout = {
                 wizard: {},
                 cart: {},
@@ -415,7 +415,19 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     return;
                 }
 
-                if (paymentMethod.paymentMethodType && paymentMethod.paymentMethodType.toLowerCase() == 'preparedform' && orderProcessingResult.htmlForm) {
+                if(paymentMethod.code === creditCardPaymentMethodCode) {
+                orderService.processOrderPayment(order.number, order.inPayments[0].number, null).then(function(response) {
+                        orderProcessingResult = response.data.orderProcessingResult;
+                        order.inPayments[0].status = "Paid";
+                        orderService.addOrUpdatePayment(order.number, order.inPayments[0]).then(function(response) {
+                            $rootScope.$broadcast('successOperation', {
+                                type: 'success',
+                                message: 'Credit card payment for order ' + order.number + ' has been successfully done',
+                            });
+                            $scope.checkout.wizard.nextStep();
+                        });
+                    });
+                } else if (paymentMethod.paymentMethodType && paymentMethod.paymentMethodType.toLowerCase() == 'preparedform' && orderProcessingResult.htmlForm) {
                     $scope.outerRedirect($scope.baseUrl + 'cart/checkout/paymentform?orderNumber=' + order.number);
                 } else if (paymentMethod.paymentMethodType && paymentMethod.paymentMethodType.toLowerCase() == 'redirection' && orderProcessingResult.redirectUrl) {
                     $window.location.href = orderProcessingResult.redirectUrl;
