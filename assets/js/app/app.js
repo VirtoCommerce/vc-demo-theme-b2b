@@ -1,4 +1,4 @@
-﻿var storefrontAppDependencies = [
+var storefrontAppDependencies = [
     'ngStorage',
     'pascalprecht.translate',
     'ngSanitize',
@@ -94,13 +94,13 @@ storefrontApp.factory('validationHelper', function () {
     }
 });
 
-storefrontApp.config(['$locationProvider', '$httpProvider', 'baseUrl', '$translateProvider', 'vcRecaptchaServiceProvider', 'reCaptchaKey', function ($locationProvider, $httpProvider, baseUrl, $translateProvider, vcRecaptchaServiceProvider, reCaptchaKey) {
+storefrontApp.config(['$httpProvider', 'locale', 'localization', '$translateProvider', 'vcRecaptchaServiceProvider', 'reCaptchaKey', function ($httpProvider, locale, localization, $translateProvider, vcRecaptchaServiceProvider, reCaptchaKey) {
     //$locationProvider.html5Mode({ enabled: true, requireBase: false, rewriteLinks: false });
     $httpProvider.interceptors.push('httpErrorInterceptor');
     $httpProvider.interceptors.push('themeInterceptor');
 
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-    $translateProvider.useUrlLoader(baseUrl + 'themes/localization.json');
+    $translateProvider.translations(locale, localization);
     $translateProvider.preferredLanguage('en');
 
     // wizardConfigProvider.prevString = 'Back';
@@ -110,7 +110,8 @@ storefrontApp.config(['$locationProvider', '$httpProvider', 'baseUrl', '$transla
     vcRecaptchaServiceProvider.setSiteKey(reCaptchaKey);
 }]);
 
-storefrontApp.run(['$rootScope', '$window', function ($rootScope, $window) {
+storefrontApp.run(['$rootScope', '$window', 'locale', '$translate', function ($rootScope, $window, locale, $translate) {
+    $translate.use(locale);
     $rootScope.print = function () {
         $window.print();
     };
