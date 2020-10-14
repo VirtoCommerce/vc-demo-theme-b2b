@@ -471,8 +471,8 @@
         <button class="close" type="button" ng-click="close()" title="Select payment method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
-        <div class="container-bordered container-drain">
-            <div class="row">
+        <div class="container-drain">
+            <div class="row border-bottom-light">
                 <div class="col-md-9">
                     <span class="text-bold">Method name</span>
                 </div>
@@ -480,7 +480,7 @@
                     <span class="text-bold">Active method</span>
                 </div>
             </div>
-            <div class="row" ng-repeat="paymentMethod in availPaymentMethods">
+            <div class="row d-flex align-items-center raw-striped" ng-repeat="paymentMethod in availPaymentMethods">
                 <div class="col-md-1">
                     <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(paymentMethod) }} {% endraw %}" />
                 </div>
@@ -497,8 +497,8 @@
                     </label>
                 </div>
                 <div ng-if="isAvailable(paymentMethod)" class="col-md-1">
-                    <a class="btn btn-white link-button" href="" ng-click="edit(paymentMethod)" ng-disabled="!isActive(paymentMethod)">
-                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                    <a class="btn btn-white d-flex flex-column justify-content-center" href="" ng-click="edit(paymentMethod)" ng-disabled="!isActive(paymentMethod)">
+                        <img class="align-self-center" alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                     </a>
                 </div>
                 <div ng-if="!isAvailable(paymentMethod)" class="col-md-6">You have no permissions to use the credit card payment method. For more details please contact the Organization maintainer</div>

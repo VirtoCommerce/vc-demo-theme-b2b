@@ -103,6 +103,10 @@
     justify-content: center;
 }
 
+.align-self-center {
+    align-self: center;
+}
+
 .nogap > [class*="col-"] {
   @media (min-width: $screen-md-min) {
     padding-left: 7.5px;
