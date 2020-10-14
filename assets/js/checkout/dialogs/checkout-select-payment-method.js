@@ -1,8 +1,7 @@
 angular.module('storefrontApp')
-.controller('selectPaymentMethodDialogController', ['$scope', 'authService', '$uibModalInstance', 'dialogData', function ($scope, authService, $uibModalInstance, dialogData) {
+.controller('selectPaymentMethodDialogController', ['$scope', 'authService', '$uibModalInstance', 'dialogData', 'iconUrlService', 'creditCardPaymentMethodCode', 'purchasingAgentRole',
+            function ($scope, authService, $uibModalInstance, dialogData, iconUrlService, creditCardPaymentMethodCode, purchasingAgentRole) {
     angular.extend($scope, dialogData);
-    const CREDIT_CARD_METHOD_CODE = "DemoCreditCardPaymentMethod";
-    const PURCHASING_AGENT_ROLE = "purchasing-agent";
 
     $scope.creditCardEditorVisibility = null;
 
@@ -12,7 +11,7 @@ angular.module('storefrontApp')
 
     $scope.activate = function(paymentMethod) {
         $scope.checkout.paymentMethod = paymentMethod;
-        if(paymentMethod.code === CREDIT_CARD_METHOD_CODE && $scope.creditCardEditorVisibility === null) {
+        if(paymentMethod.code === creditCardPaymentMethodCode && $scope.creditCardEditorVisibility === null) {
             $scope.creditCardEditorVisibility = true;
         } else {
             $scope.creditCardEditorVisibility = false;
@@ -20,11 +19,11 @@ angular.module('storefrontApp')
     }
 
     $scope.editEnabled = function(paymentMethod) {
-        return paymentMethod.code === CREDIT_CARD_METHOD_CODE;
+        return paymentMethod.code === creditCardPaymentMethodCode;
     }
 
     $scope.edit = function(paymentMethod) {
-        if(paymentMethod.code === CREDIT_CARD_METHOD_CODE) {
+        if(paymentMethod.code === creditCardPaymentMethodCode) {
             $scope.creditCardEditorVisibility = !$scope.creditCardEditorVisibility;
         }
     }
@@ -32,8 +31,8 @@ angular.module('storefrontApp')
     $scope.isAvailable = function(paymentMethod) {
         var result = true;
 
-        if(paymentMethod.code === CREDIT_CARD_METHOD_CODE) {
-            result = authService.canByRole(PURCHASING_AGENT_ROLE);
+        if(paymentMethod.code === creditCardPaymentMethodCode) {
+            result = authService.canByRole(purchasingAgentRole);
         }
 
         return result;
@@ -50,5 +49,15 @@ angular.module('storefrontApp')
             $uibModalInstance.dismiss('cancel');
         }
     }
+
+    $scope.getPaymentIconUrl = function(paymentMethod) {
+        if(paymentMethod.logoUrl) {
+            return paymentMethod.logoUrl;
+        }
+
+        iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
+        return iconUrl;
+    };
+
 
 }]);

@@ -5,8 +5,8 @@ if (storefrontAppDependencies != undefined) {
     storefrontAppDependencies.push(moduleName);
 }
 angular.module(moduleName, ['credit-cards', 'angular.filter'])
-    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService',
-        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService) {
+    .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService', 'iconUrlService',
+        function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService, iconUrlService) {
             $scope.checkout = {
                 wizard: {},
                 cart: {},
@@ -71,6 +71,15 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                         $scope.selectPaymentMethod(paymentMethod);
                     });
                 });
+            };
+
+            $scope.getPaymentIconUrl = function(paymentMethod) {
+                if(paymentMethod.logoUrl) {
+                    return paymentMethod.logoUrl;
+                }
+
+                iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
+                return iconUrl;
             };
 
             $scope.changePickupAddress = function () {

@@ -262,7 +262,7 @@
                                             <div class="pull-left" ng-if="checkout.payment.name">
                                                 <address>
                                                     <div class="col-xs-2 col-md-3">
-                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
+                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                     </div>
                                                     <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                         <span ng-bind="checkout.payment.name"></span>
@@ -343,7 +343,7 @@
                                             <div class="center-block text-center">{{ 'checkout.payment_method.title' | t }}</div>
                                             <address>
                                                 <div class="col-xs-2 col-md-1">
-                                                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
+                                                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                 </div>
                                                 <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                     <span ng-bind="checkout.payment.name"></span>
@@ -482,7 +482,7 @@
             </div>
             <div class="row" ng-repeat="paymentMethod in availPaymentMethods">
                 <div class="col-md-1">
-                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ paymentMethod.logoUrl }}{% endraw %}" />
+                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(paymentMethod) }} {% endraw %}" />
                 </div>
                 <div class="col-md-5">
                     <span class="name" ng-class="{'text-bold': isActive(paymentMethod)}" ng-bind="paymentMethod.name"></span>
