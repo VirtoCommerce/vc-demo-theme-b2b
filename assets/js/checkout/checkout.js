@@ -168,6 +168,14 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                     $scope.checkout.cart = cart;
 
+                    if (cart.coupon) {
+                        $scope.couponApplied = true;
+                        $scope.checkout.coupon = cart.coupon;
+                    } else {
+                        $scope.couponApplied = false;
+                        $scope.checkout.coupon.code = null;
+                    }
+
                     if (cart.configuredItems && cart.configuredItems.length) {
                         $scope.configuredItemsIds = [];
                         _.each($scope.checkout.cart.configuredItems, function (item) {
@@ -345,7 +353,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 wrapLoading(function() {
                     return validateCoupon(coupon).then(function (result) {
                         if (result.appliedSuccessfully) {
-                            $scope.couponApplied = true;
                             return cartService.addCoupon(coupon.code).then(function() {
                                 $scope.reloadCart().then(function() {
                                     $rootScope.$broadcast('successOperation', {
@@ -362,10 +369,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             $scope.removeCoupon = function (coupon) {
                 wrapLoading(function() {
                     return cartService.removeCoupon(coupon.code).then(function() {
-                        $scope.reloadCart().then(function() {
-                            $scope.couponApplied = false;
-                            $scope.checkout.coupon.code = null;
-                        });
+                        $scope.reloadCart();
                     });
                 });
             };
