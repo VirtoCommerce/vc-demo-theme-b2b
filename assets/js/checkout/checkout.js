@@ -457,6 +457,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                 $scope.reloadCart()
                 .then(function() {
+                    // Workaround: we need to update cart and then reload it again to run cart recalculations
                     cartService.updateCartComment('')
                     .then(function() {
                         $scope.reloadCart()
