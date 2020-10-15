@@ -74,7 +74,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             };
 
             $scope.getPaymentIconUrl = function(paymentMethod) {
-                iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
+                var iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
                 return iconUrl;
             };
 
@@ -419,7 +419,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     orderService.processOrderPayment(order.number, order.inPayments[0].number, null).then(function(response) {
                         orderProcessingResult = response.data.orderProcessingResult;
                         order.inPayments[0].status = "Paid";
-                        orderService.addOrUpdatePayment(order.number, order.inPayments[0]).then(function(response) {
+                        orderService.addOrUpdatePayment(order.number, order.inPayments[0]).then(function() {
                             $rootScope.$broadcast('successOperation', {
                                 type: 'success',
                                 message: 'Credit card payment for order ' + order.number + ' has been successfully done',

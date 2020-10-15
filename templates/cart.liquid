@@ -432,7 +432,7 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="close(false)">Cancel</button>
+        <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close(false)">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="close(true)">Save</button>
     </div>
 </script>
@@ -497,7 +497,7 @@
                     </label>
                 </div>
                 <div ng-if="isAvailable(paymentMethod)" class="col-md-1">
-                    <a class="btn btn-white d-flex flex-column justify-content-center" href="" ng-click="edit(paymentMethod)" ng-disabled="!isActive(paymentMethod)">
+                    <a class="btn btn-white d-flex flex-column justify-content-center" href="" ng-click="edit(paymentMethod)" ng-disabled="!isActive(paymentMethod) || !editEnabled(paymentMethod)">
                         <img class="align-self-center" alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                     </a>
                 </div>
@@ -515,7 +515,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="close(checkout.paymentMethod)">Save</button>
     </div>
 </script>

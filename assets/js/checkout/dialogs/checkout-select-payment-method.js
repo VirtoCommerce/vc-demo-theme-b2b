@@ -51,7 +51,7 @@ angular.module('storefrontApp')
     }
 
     $scope.getPaymentIconUrl = function(paymentMethod) {
-        iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
+        var iconUrl = iconUrlService.getPaymentMethodIconUrl(paymentMethod.code);
         return iconUrl;
     };
 
