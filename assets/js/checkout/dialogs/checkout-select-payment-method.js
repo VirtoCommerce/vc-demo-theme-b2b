@@ -23,6 +23,9 @@ angular.module('storefrontApp')
     }
 
     $scope.edit = function(paymentMethod) {
+        if(!isActive(paymentMethod) || !editEnabled(paymentMethod)){
+            return;
+        }
         if(paymentMethod.code === creditCardPaymentMethodCode) {
             $scope.creditCardEditorVisibility = !$scope.creditCardEditorVisibility;
         }
