@@ -455,9 +455,16 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.initialize = function () {
 
-                $scope.reloadCart().then(function (cart) {
-                    $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
-                    $scope.getCustomerDefaults();
+                $scope.reloadCart()
+                .then(function() {
+                    cartService.updateCartComment('')
+                    .then(function() {
+                        $scope.reloadCart()
+                        .then(function (cart) {
+                            $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
+                            $scope.getCustomerDefaults();
+                        });
+                    });
                 });
             };
 
