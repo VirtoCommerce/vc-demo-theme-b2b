@@ -84,3 +84,39 @@ textarea.resize-vertical {
 .margin-right {
     width: 45px;
 }
+
+// Credit card payment method form
+
+.credit-card-form {
+    margin-top: 15px;
+
+    .btn-toolbar {
+        margin-top: 15px;
+    }
+}
+
+.payment-systems {
+    & > img:not(:first-child) {
+        padding-left: 12px;
+    }
+}
+
+.credit-card-side {
+    border: 1px solid $gray-lighter;
+    border-radius: $panel-border-radius;
+    width: 400px;
+    height: 200px;
+
+    &:first-child() {
+        @media (max-width: $screen-md-max) {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.card-back-strip {
+    background: $gray-lighter;
+    border-radius: 0;
+    padding: 20px;
+    margin-bottom: 10px;
+}

@@ -80,11 +80,19 @@
 }
 
 .flex-wrap {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
 }
 
 .align-items-center {
     align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
 }
 
 .align-self-start {
@@ -93,6 +101,10 @@
 
 .justify-content-center {
     justify-content: center;
+}
+
+.align-self-center {
+    align-self: center;
 }
 
 .nogap > [class*="col-"] {
@@ -120,4 +132,3 @@
 .overflow-visible {
     overflow: visible !important;
 }
-

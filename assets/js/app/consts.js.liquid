@@ -31,4 +31,7 @@ angular.module('storefrontApp.consts', [])
     ItemMedium: this.ItemSmall | this.ItemProperties | this.ItemEditorialReviews,
     ItemLarge: this.ItemMedium | this.ItemAssociations | this.Variations | this.Inventory | this.ItemWithPrices | this.ItemWithDiscounts | this.ItemWithVendor | this.ItemWithPaymentPlan
 })
-.constant('defaultLists', {{ settings.lists | json }});
+.constant('defaultLists', {{ settings.lists | json }})
+.constant('purchasingAgentRole', 'purchasing-agent')
+.constant('creditCardPaymentMethodCode', 'DemoCreditCardPaymentMethod')
+.constant('invoicePaymentMethodCode', 'InvoicePaymentMethod');

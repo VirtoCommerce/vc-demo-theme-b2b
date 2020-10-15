@@ -198,3 +198,8 @@ main {
         color: $brand-alt;
     }
 }
+
+// For grid raw stripped view. Ex. on the 'select payment method' dialog
+.raw-striped:nth-of-type(odd) {
+    background-color: $gray-striped-table;
+}

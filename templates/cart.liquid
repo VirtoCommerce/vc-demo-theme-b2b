@@ -262,7 +262,7 @@
                                             <div class="pull-left" ng-if="checkout.payment.name">
                                                 <address>
                                                     <div class="col-xs-2 col-md-3">
-                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
+                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                     </div>
                                                     <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                         <span ng-bind="checkout.payment.name"></span>
@@ -343,7 +343,7 @@
                                             <div class="center-block text-center">{{ 'checkout.payment_method.title' | t }}</div>
                                             <address>
                                                 <div class="col-xs-2 col-md-1">
-                                                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.payment.logoUrl }}{% endraw %}" />
+                                                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                 </div>
                                                 <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                     <span ng-bind="checkout.payment.name"></span>
@@ -432,7 +432,7 @@
         </table>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="close(false)">Cancel</button>
+        <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close(false)">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="close(true)">Save</button>
     </div>
 </script>
@@ -471,39 +471,51 @@
         <button class="close" type="button" ng-click="close()" title="Select payment method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body">
-        <div class="container-bordered container-drain">
-            <div class="row" ng-repeat="paymentMethod in availPaymentMethods">
-                <div class="form-group">
-                    <div class="col-xs-1">
-                        <div class="radio-inline">
-                            <label>
-                                <input type="radio" ng-model="checkout.paymentMethod" ng-value="paymentMethod">
-                                <span class="switch"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-xs-1">
-                        <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ paymentMethod.logoUrl }}{% endraw %}" />
-                    </div>
-                    <div class="col-xs-10">
-                        <address ng-if="checkout.deliveryMethod.type == 'shipping'">
-                            <span><strong ng-bind="paymentMethod.name"></strong></span><br>
-                            <span ng-bind="paymentMethod.description"></span>
-                        </address>
-                        <address ng-if="checkout.deliveryMethod.type == 'pickup'">
-                            <span><strong ng-bind="paymentMethod.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : paymentMethod.name"></strong></span><br>
-                            <span ng-bind="paymentMethod.description"></span>
-                        </address>
-                    </div>
-                    <div class="col-xs-12" ng-if="checkout.paymentMethod == paymentMethod && paymentMethod.paymentMethodType === 'Standard'">
-                        <vc-credit-card card="paymentMethod.card" validation-container="validationContainer"></vc-credit-card>
-                    </div>
+        <div class="container-drain">
+            <div class="row border-bottom-light">
+                <div class="col-md-9">
+                    <span class="text-bold">Method name</span>
+                </div>
+                <div class="col-md-2 text-center">
+                    <span class="text-bold">Active method</span>
+                </div>
+            </div>
+            <div class="row d-flex align-items-center raw-striped" ng-repeat="paymentMethod in availPaymentMethods">
+                <div class="col-md-1">
+                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(paymentMethod) }} {% endraw %}" />
+                </div>
+                <div class="col-md-5">
+                    <span class="name" ng-class="{'text-bold': isActive(paymentMethod)}" ng-bind="paymentMethod.name"></span>
+                </div>
+                <div ng-if="isAvailable(paymentMethod)" class="col-md-3"></div>
+                <div ng-if="isAvailable(paymentMethod)" class="col-md-2 text-center" >
+                    <label ng-if="!isActive(paymentMethod)" class="text-nowrap">
+                        <a role="button" href="" ng-click="activate(paymentMethod)">Choose</a>
+                    </label>
+                    <label ng-if="isActive(paymentMethod)" class="text-nowrap">
+                        <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Active
+                    </label>
+                </div>
+                <div ng-if="isAvailable(paymentMethod)" class="col-md-1">
+                    <a class="btn btn-white d-flex flex-column justify-content-center" href="" ng-click="edit(paymentMethod)" ng-disabled="!isActive(paymentMethod) || !editEnabled(paymentMethod)">
+                        <img class="align-self-center" alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                    </a>
+                </div>
+                <div ng-if="!isAvailable(paymentMethod)" class="col-md-6 d-flex align-items-center">
+                    <img style="margin-right:1em;" class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" src="{{ 'attention.svg' | asset_url }}" />
+                    <span>You have no permissions to use the credit card payment method. For more details please <a href="">contact the Organization maintainer</a></span>
+                </div>
+
+            </div>
+            <div class="row" ng-show="creditCardEditorVisibility">
+                <div class="col-xs-12">
+                    <demo-credit-card on-cancel="hideCreditCardEditor()"></demo-credit-card>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
-        <button type="button" class="btn btn-primary" ng-click="close(checkout.paymentMethod)">Update</button>
+        <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="close(checkout.paymentMethod)">Save</button>
     </div>
 </script>
