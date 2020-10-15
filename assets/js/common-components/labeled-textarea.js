@@ -7,6 +7,7 @@
         form: '=',
         name: '@',
         label: '@',
+        placeholder: '@',
         required: '<',
         requiredError: '@?',
         pattern: '<?',

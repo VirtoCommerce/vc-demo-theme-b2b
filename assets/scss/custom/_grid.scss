@@ -40,7 +40,7 @@
 .container-bordered-horizontal,
 .container-bordered {
   > .row:not(:last-child)::after {
-    border-bottom: 1px solid $grid-border;
+    border-bottom: 1px solid $gray-lighter;
     position: relative;
     width: calc(100% - #{$grid-gutter-width});
     left: $grid-gutter-width / 2;
@@ -65,4 +65,70 @@
     display: flex;
     flex-direction: column;
   }
+
+  &:before, &:after {
+    display: none;
+  }
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.align-self-start {
+    align-self: flex-start;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.nogap > [class*="col-"] {
+  @media (min-width: $screen-md-min) {
+    padding-left: 7.5px;
+    padding-right: 7.5px
+  }
+}
+.nogap > [class*="col-"]:first-child {
+  padding-left: 15px;
+}
+.nogap > [class*="col-"]:last-child {
+  padding-right: 15px;
+}
+
+#accordiongroup-27-4585-panel .panel-body {
+    padding-right: 15px !important;
+}
+
+.sidebar{
+  padding-right: 20px;
+  width: 23%;
+}
+
+.overflow-visible {
+    overflow: visible !important;
 }

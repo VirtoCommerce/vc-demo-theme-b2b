@@ -4,12 +4,30 @@
 
 <!-- TODO: Badges -->
 
-<div class="col-md-3 flexible" ng-init="products.push('{{ product.id }}')">
+{% assign unavailable = false %}
+{% assign sold_out = false %}
+
+{% if product.buyable and product.in_stock != true %}
+    {% assign sold_out = true %}
+{% endif %}
+
+{% if product.buyable != true  %}
+    {% assign unavailable = true %}
+{% endif %}
+
+<div class="col-md-3 flexible product-card" ng-controller="productController" ng-init="productContext = { id: '{{ product.id }}', productType: '{{product.product_type}}', isGrid: true }; products.push('{{ product.id }}')">
+    {% include 'shared/item-response-group' %}
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}
+    {% comment %}
+    <div class="configurable-wrapper">
+        {% include 'product/price' %}
+        {% include 'product/configurable' %}
+    </div>
+    {% endcomment %}
     {% include 'product/price' %}
-    {% include 'product/quantity' %}
+    {% include 'product/quantity-grid' %}
 </div>
 
 <script>

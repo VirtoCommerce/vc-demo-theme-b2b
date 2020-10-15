@@ -1,0 +1,49 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-10">
+                <span class="h4">{{ 'customer.dashboard.users' | t }}</span>
+            </div>
+            <div class="col-md-2" va-permission="storefront:organization:edit">
+               <a ui-sref="members.list" class="text-transform-none">
+                    {{ 'customer.dashboard.all_users_link_text' | t }} <span class="fa fa-arrow-right arrow-padding-left"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div va-permission="storefront:organization:edit" id="user-list-table">
+        <table class="table table-striped margin-0" ng-if="$ctrl.entries.length">
+            <thead>
+                <tr>
+                    <th>{{ 'customer.edit_company_members.name' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.email' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.role' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.status' | t }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="member in $ctrl.entries" ng-class="{ 'user-inactive': member.isLockedOut }">
+                    <td ng-bind="member.fullName"></td>
+                    <td ng-bind="member.email"></td>
+                    <td ng-bind="member.role.name"></td>
+                    <td ng-bind="member.isLockedOut ? 'Inactive' : 'Active'" ng-class="{ 'text-green': !member.isLockedOut }"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <p ng-if="!$ctrl.entries.length && !$ctrl.loader.isLoading" class="text-center">{{ 'customer.edit_company_members.none' | t }}</p>
+            </div>
+        </div>
+    </div>
+    <div ng-if="$ctrl.userTableHided()" class="panel-body no-permission">
+        <img src="{{ 'cabinet.svg' | asset_url }}" />
+        <p class="message">{{ 'customer.dashboard.no_permission_message' | t }}</p>
+    </div>
+</div>
+
+
+
+
+
+

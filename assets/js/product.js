@@ -1,11 +1,10 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
-
         $scope.allVariations = [];
         $scope.allVariationsMap = {}
         $scope.allVariationPropsMap = {};
@@ -14,14 +13,8 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.selectedVariation = {};
         $scope.productPrice = null;
         $scope.productPriceLoaded = false;
-
-        $scope.addProductToCart = function (product, quantity) {
-            var dialogData = toDialogDataModel(product, quantity);
-            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
-            cartService.addLineItem(product.id, quantity).then(function (response) {
-                $rootScope.$broadcast('cartItemsChanged');
-            });
-        }
+        $scope.configurationQty = 1;
+        $scope.validateQtyInput = validationHelper.positiveInt;
 
         // TODO: Replace mock with real function
         $scope.addProductsToCartMock = function () {
@@ -93,6 +86,39 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
         }
 
+        $scope.addSelectedProductsToCart = function() {
+            if($scope.productContext.productType != 'Configurable'){
+                throw new Error("addSelectedProductsToCart method is allowed only in scope of configurable product");
+            }
+
+            var configuredProductId = $scope.productContext.id;
+
+            var items = $scope.productParts.map(function(value){
+                return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
+            });
+            cartService.addLineItems(items).then(function (response) {
+                var result = response.data;
+                if(result.isSuccess) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                    var products  = $scope.productParts.map(function(part){
+                        return part.items.find(function(item){
+                            return item.id === part.selectedItemId;
+                        });
+                    });
+
+                    var dialogData = toDialogDataModel(products, $scope.configurationQty);
+                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+                }
+            });
+        }
+        $scope.addProductToCart = function (product, quantity) {
+            var dialogData = toDialogDataModel([product], quantity);
+            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+            cartService.addLineItem(product.id, quantity).then(function (response) {
+                $rootScope.$broadcast('cartItemsChanged');
+            });
+        }
+
         $scope.addProductToCartById = function (productId, quantity, event) {
             event.preventDefault();
             catalogService.getProduct([productId]).then(function (response) {
@@ -104,15 +130,62 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.addProductToActualQuoteRequest = function (product, quantity) {
-            var dialogData = toDialogDataModel(product, quantity);
+            var dialogData = toDialogDataModel([product], quantity);
             dialogService.showDialog(dialogData, 'recentlyAddedActualQuoteRequestItemDialogController', 'storefront.recently-added-actual-quote-request-item-dialog.tpl');
             quoteRequestService.addProductToQuoteRequest(product.id, quantity).then(function (response) {
                 $rootScope.$broadcast('actualQuoteRequestItemsChanged');
             });
         }
 
-        function toDialogDataModel(product, quantity) {
-            return { items: [angular.extend({ }, product, { quantity: quantity })] };
+        $scope.changeGroupItem = function (productPart) {
+            var dialogInstance = dialogService.showDialog(productPart, 'changeConfigurationGroupItemDialogController', 'storefront.select-configuration-item-dialog.tpl');
+            dialogInstance.result.then(function (id) {
+                const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
+                $scope.productParts[foundIndex].selectedItemId = id;
+                recalculateTotals();
+            });
+        };
+
+        $scope.getSelectedItem = function(configPart) {
+            const item = configPart.items.find(x => x.id === configPart.selectedItemId);
+            return item.name;
+        }
+
+        $scope.getCurrentTotal = function() {
+            var total;
+
+            if ($scope.updatedTotal) {
+                total = roundHelper.bankersRound($scope.updatedTotal * $scope.configurationQty);
+            } else {
+                total = roundHelper.bankersRound($scope.defaultPrice * $scope.configurationQty);
+            }
+
+            return $filter('currency')(total ,'$');
+        }
+
+        $scope.getDefaultPrice = function() {
+            return $filter('currency')($scope.defaultPrice, '$');
+        }
+
+        $scope.getCustomChangesTotal = function() {
+            return $scope.differenceSign + $filter('currency')($scope.totalDifference, '$') || $filter('currency')(0, '$');
+        }
+
+        $scope.quantityChanged = function(qty) {
+            const intValue = parseInt(qty, 10);
+
+            if (isNaN(intValue) || intValue === 0) {
+                $scope.configurationQty = 1
+            } else {
+                $scope.configurationQty = intValue;
+            }
+        }
+
+        function toDialogDataModel(products, quantity) {
+            var dialogItems = products.map(function(product) {
+                                return angular.extend({ }, product, { quantity: quantity })
+                            });
+            return { items: dialogItems };
             //     return {
             //         id: product.id,
             //         name: product.name,
@@ -137,11 +210,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         function initialize(filters) {
-            var product = $window.product;
-            if (!product || !product.id) {
+            var productContext = $scope.productContext;
+            if ( !productContext || (productContext.isGrid && productContext.productType != 'Configurable')) {
                 return;
             }
-            catalogService.getProduct([product.id]).then(function (response) {
+            catalogService.getProduct([productContext.id]).then(function (response) {
 				var product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
@@ -170,6 +243,15 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 return availabilityService.getProductsAvailability([product.id]).then(function(response) {
                     $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
                 });
+            });
+
+            catalogService.getProductConfiguration(productContext.id).then(function(response) {
+                $scope.productParts = response.data;
+                $scope.defaultProductParts = [];
+                _.each($scope.productParts, function (part) {
+                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+                });
+                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
             });
         };
 
@@ -212,6 +294,17 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             });
         };
 
+        function recalculateTotals() {
+            $scope.selectedProductParts = [];
+            _.each($scope.productParts, function (part) {
+                $scope.selectedProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+            });
+            $scope.updatedTotal = roundHelper.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            $scope.totalDifference = roundHelper.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
+            $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
+                                    ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
+        }
+
         //function findVariationBySelectedProps(variations, selectedPropMap) {
         //    return _.find(variations, function (x) {
         //        return comparePropertyMaps(getVariationPropertyMap(x), selectedPropMap);
@@ -236,8 +329,10 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.$watch('filters', initialize);
     }]);
 
-storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', function ($scope, $window, $uibModalInstance, mailingService, dialogData) {
+storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', function ($scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl) {
     $scope.dialogData = dialogData;
+    $scope.baseUrl = baseUrl;
+    $scope.regex = new RegExp(/^\/+/);
 
     $scope.close = function() {
         $uibModalInstance.dismiss('cancel');
@@ -249,5 +344,26 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$w
     $scope.send = function(email) {
         mailingService.sendProduct(dialogData.productId, { email: email, storeId: dialogData.storeId, productUrl: dialogData.productUrl, language: dialogData.language });
         $uibModalInstance.close();
+    }
+}]);
+
+storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scope', '$window', '$uibModalInstance', 'dialogData', function ($scope, $window, $uibModalInstance, dialogData) {
+    $scope.dialogData = dialogData;
+    $scope.selectedId = dialogData.selectedItemId;
+
+    $scope.close = function() {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    $scope.getModalTitel = function() {
+        return `Choose ${$scope.dialogData.name}`
+    }
+
+    $scope.handleRadioClick = function(id) {
+        $scope.selectedId = id;
+    }
+
+    $scope.save = function(id) {
+        $uibModalInstance.close(id);
     }
 }]);

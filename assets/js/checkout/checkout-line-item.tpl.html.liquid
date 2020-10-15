@@ -1,71 +1,67 @@
-<div ng-if="!$ctrl.readOnly">
-    <div class="col-xs-2 col-md-1">
-        <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" "  />
+<div ng-if="!$ctrl.readOnly" class="d-flex align-items-center">
+    <div class="col-xs-2 col-md-1 align-self-start">
+        <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
     </div>
-    <div class="col-xs-4 col-md-3">
-        <p><a ng-href="{% raw %}{{ $ctrl.lineItem.product.url.replace('~/', '') }}{% endraw %}" ng-bind="$ctrl.lineItem.name"></a></p>
-        <p>Item <strong ng-bind="$ctrl.lineItem.sku"></strong></p>
+    <div class="col-xs-4 col-md-4">
+        <p><a ng-href="{% raw %}{{ $ctrl.lineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.lineItem.name" class="text-bold"></a></p>
+        <p><span class="text-bold">Item</span> <span ng-bind="$ctrl.lineItem.sku"></span></p>
         <p>
-            <span>Price</span>
+            <span class="text-bold">Price</span>
             {% if settings.show_prices_with_taxes %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount" class="text-green"></strong>
             {% else %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.placedPrice.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.placedPrice.formattedAmount" class="text-green"></strong>
             {% endif %}
             <span>/ each</span>
         </p>
     </div>
-    <div class="hidden-xs hidden-sm col-md-4" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
+    <div class="hidden-xs hidden-sm col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
         <vc-item-availability availability="$ctrl.lineItem.availability"></vc-item-availability>
         <vc-payment-plan available-payment-plans="$ctrl.availablePaymentPlans" payment-plan="$ctrl.lineItem.paymentPlan"></vc-payment-plan>
     </div>
     <div class="col-xs-3 col-md-2">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input class="form-control" type="text" ng-model="$ctrl.lineItem.quantity" />
-                </div>
+        <div class="row nogap">
+            <div class="col-md-6 form-group">
+                <input class="form-control" type="text" ng-model="$ctrl.lineItem.quantity" />
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div><a href="" ng-click="$ctrl.changeQty()">Update</a></div>
-                <div><a href="" ng-click="$ctrl.remove()">Remove</a></div>
+            <div class="col-md-6">
+                <a href="" ng-click="$ctrl.changeQty()">Update</a>
+                <a href="" ng-click="$ctrl.remove()">Remove</a>
             </div>
         </div>
     </div>
     <div class="col-xs-3 col-md-2">
         <p>
-            <span class="text-uppercase">Total</span><br>
+            <span class="text-bold text-condensed">Total</span><br>
             {% if settings.show_prices_with_taxes %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount" class="text-green"></strong>
             {% else %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount" class="text-green"></strong>
             {% endif %}
         </p>
     </div>
 </div>
-<div ng-if="$ctrl.readOnly">
-    <div class="col-xs-2 col-md-1">
+<div ng-if="$ctrl.readOnly" class="d-flex align-items-center">
+    <div class="col-xs-2 col-md-1 align-self-start">
         <img class="img-responsive" alt="{% raw %}{{ $ctrl.lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
     </div>
-    <div class="col-xs-4 col-md-3">
-        <p><a href="{% raw %}{{ $ctrl.lineItem.product.url.replace('~/', '') }}{% endraw %}" ng-bind="$ctrl.lineItem.name"></a></p>
-        <p>Item <strong ng-bind="$ctrl.lineItem.sku"></strong></p>
+    <div class="col-xs-4 col-md-4">
+        <p><a href="{% raw %}{{ $ctrl.lineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.lineItem.name" class="text-bold"></a></p>
+        <p class="text-bold">Item <strong ng-bind="$ctrl.lineItem.sku"></strong></p>
         <p>
-            <span>Price</span>
+            <span class="text-bold">Price</span>
             {% if settings.show_prices_with_taxes %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount" class="text-green"></strong>
             {% else %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.placedPrice.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.placedPrice.formattedAmount" class="text-green"></strong>
             {% endif %}
             <span>/ each</span>
         </p>
     </div>
-    <div class="hidden-xs hidden-sm col-md-4" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
+    <div class="hidden-xs hidden-sm col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
         <vc-item-availability availability="$ctrl.lineItem.availability"></vc-item-availability>
     </div>
-    <div class="col-xs-2 col-md-1">
+    <div class="col-xs-2 col-md-2">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -76,11 +72,11 @@
     </div>
     <div class="col-xs-3 col-md-2">
         <p>
-            <span class="text-uppercase">Total</span><br>
+            <span class="text-bold text-condensed">Total</span><br>
             {% if settings.show_prices_with_taxes %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount" class="text-green"></strong>
             {% else %}
-            <strong class="text-success" ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount"></strong>
+            <strong ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount" class="text-green"></strong>
             {% endif %}
         </p>
     </div>

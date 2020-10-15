@@ -7,7 +7,7 @@
 {% comment %}
 {% paginate collection.products by settings.product_list_capacity %}
 {% endcomment %}
-    <main class="container" role="main">
+    <main class="container category-page" role="main">
         <div class="row" ng-controller="collectionController as $collection">
             <div class="col-xs-12">
                 {% include 'shared/breadcrumb' %}
@@ -31,21 +31,24 @@
                 {% endfor %}
                 {% assign all_results_count = collection.all_products_count %}
                 {% assign displayed_results_count = collection.products | size %}
-                <p>{{ 'collections.general.products_count' | t: all_results_count, displayed_results_count, variants_count }}</p>
+                <p class="product-count">{{ 'collections.general.products_count' | t: all_results_count, displayed_results_count, variants_count }}</p>
                 <p class="collapse" uib-collapse="isAboutCollapsed">{{ collection.description }}</p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 sidebar">
                 {% assign collection = collection %}
                 {% include 'collection/sidebar' %}
             </div>
-            <div class="col-md-9">
-                <div class="container-drain container-bordered" ng-controller="priceController">
+            <div class="col-md-9 product-grid">
+                {% include 'product/product-compare-list-bar' %}
+                <div class="container-drain" ng-controller="priceController">
                     {% assign position = 'top' %}
-                    {% include 'collection/nav' %}                    
+                    {% include 'collection/nav' %}
                     {% include product_items %}
                     {% assign position = 'bottom' %}
-                    {% include 'collection/nav' %}
-                    {% include 'shared/pagination' %}
+                   <div class="navigation-bottom">
+                        {% include 'shared/pagination' %}
+                        {% include 'collection/nav' %}
+                    </div>
                     <script>
                         window.products = [];
                         {% for product in collection.products %}
@@ -71,7 +74,7 @@
                         taxType: "{{ product.tax_type }}"
                     });
                 {% endfor %}
-            </script>           
+            </script>
         </div>
     </main>
 

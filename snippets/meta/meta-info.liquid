@@ -7,7 +7,7 @@
     {% include 'tags-joined' %}
      - {{ 'general.meta.tags' | t: current_tags_joined }}
     {% endif %}
-    {% if current_page != 1 %}
+    {% if page_number != 1 %}
       - {{ 'general.meta.page' | t: current_page }}
     {% endif %}
     {% unless page_title contains shop.name %}

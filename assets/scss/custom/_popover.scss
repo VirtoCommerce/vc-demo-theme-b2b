@@ -29,3 +29,7 @@
     }
   }
 }
+
+.nav-pills-transparent>li.active>a, .nav-pills-transparent>li.active>a:focus, .nav-pills-transparent>li.active>a:hover {
+    border-bottom: 3px solid #f0ad4e;
+}

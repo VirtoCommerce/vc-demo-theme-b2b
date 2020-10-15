@@ -26,7 +26,7 @@
                         <table class="table compare-table">
                             <tr>
                                 <td>
-                                    
+
                                 </td>
                                 <td ng-repeat="product in products">
                                     <div class="product-actions">
@@ -35,7 +35,7 @@
                                             Remove
                                         </a>
                                     </div>
-                                    <a ng-href="{% raw %}{{ product.url.replace('~/', '') }}{% endraw %}">
+                                    <a ng-href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}">
                                         <img style="max-width: 150px;" ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" ng-if="product.primaryImage.url" />
                                         <div class="no-product-image" ng-if="!product.primaryImage.url">
                                             <img src="{{ 'images/no-image.svg' | asset_url }}" />

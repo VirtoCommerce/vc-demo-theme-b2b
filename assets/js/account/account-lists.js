@@ -2,10 +2,6 @@
     .component('vcAccountLists',
         {
             templateUrl: "lists-manager.tpl",
-            $routeConfig: [
-                { path: '/', name: 'Lists', component: 'vcAccountLists' },
-                { path: '/myLists', name: 'MyLists', component: 'vcAccountMyLists', useAsDefault: true }
-            ],
             controller: [
                 'listsApi', '$rootScope', 'cartService', '$translate', 'loadingIndicatorService', '$timeout',
                 function (listsApi, $rootScope, cartService, $translate, loader, $timeout) {
@@ -124,6 +120,19 @@
                             }
                         });
                     };
+
+                    $ctrl.canBeAddedToCart = function (lineItem) {
+                         return lineItem.product.isBuyable && lineItem.product.isInStock;
+                    }
+
+                    $ctrl.addToCartAllProductsEnabled = function () {
+                        var result = $ctrl.accountLists.selectedList.items.some(function (item) {
+                            return  $ctrl.canBeAddedToCart(item);
+                        });
+
+                        return result;
+                    }
+
 
                     $ctrl.addToCartAllProducts = function (listName) {
                         loader.wrapLoading(function () {

@@ -1,57 +1,102 @@
-﻿.panel-group {
-  .panel-static {
-    border-radius: 0;
+﻿.panel {
+    margin-bottom: 15px;
+    border: 1px solid $gray-light;
+    box-shadow: none;
+}
 
-    &:first-child {
-      border-top-left-radius: $panel-border-radius;
-      border-top-right-radius: $panel-border-radius;
+.panel h4 {
+    font-size: 20px;
+}
+
+.panel-group {
+    .panel-static + .panel-static {
+        margin-top: 0;
     }
+}
 
-    &:last-child {
-      border-bottom-left-radius: $panel-border-radius;
-      border-bottom-right-radius: $panel-border-radius;
+.sidebar .panel-group {
+    .panel-static {
+        border-radius: 4px;
     }
-  }
-
-  .panel-static + .panel-static {
-    border-top-width: 0;
-    margin-top: 0;
-  }
+    .panel-static + .panel-static {
+        border-top-width: 1px;
+    }
 }
 
 .panel-heading {
-  font-family: $panel-heading-font-family;
-  font-weight: $panel-heading-font-weight;
-  text-transform: uppercase;
-  .info {
-      font-weight: normal;
-  }
-
+    font-family: $panel-heading-font-family;
+    font-weight: $panel-heading-font-weight;
+    text-transform: uppercase;
+    .info {
+        font-weight: normal;
+    }
 }
 
 .panel-title {
-  > a,
-  > small > a,
-  > .small > a {
-    &:hover {
-      border-bottom-color: inherit;
+    > a,
+    > small > a,
+    > .small > a {
+        &:hover {
+            border-bottom-color: inherit;
+        }
+        &:focus:not(:hover) {
+            border-bottom-color: transparent;
+        }
     }
-
-    &:focus:not(:hover) {
-      border-bottom-color: transparent;
-    }
-  }
 }
 
 .panel-body {
-  > uib-accordion-heading + *,
-  > *:first-child {
-    margin-top: 0;
-  }
-
-  > *:last-child {
-    margin-bottom: 0;
-  }
+    padding: 15px;
+    > uib-accordion-heading + *,
+    > *:first-child {
+        margin-top: 0;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
 }
 
+.panel-group .panel-default {
+    margin-bottom: 13px;
+}
 
+.sidebar .panel h4 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.sidebar .panel .fa-chevron-down {
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.accordion-toggle .ng-binding {
+    font-weight: bold;
+}
+
+.panel-default table {
+    border-left: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+h4.panel-title a {
+    font-family: $font-family-condensed !important;
+}
+
+// Panels with tables inside
+.panel-table {
+    padding: 0px;
+}
+
+.panel-table table {
+    margin-bottom: 0px;
+}
+
+.panel-table table tr td {
+    padding: 15px;
+}
+
+.panel-striped:nth-of-type(odd) {
+    background-color: $gray-striped-table;
+}

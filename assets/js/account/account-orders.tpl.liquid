@@ -1,4 +1,4 @@
-<ng-outlet ng-init="$ctrl.orderHelper.statusLabels=[
+<ui-view ng-init="$ctrl.orderHelper.statusLabels=[
            { status: 'unpaid', label: '{{ 'customer.order.status.unpaid' | t }}'},
            { status: 'pending', label: '{{ 'customer.order.status.pending' | t }}'},
            { status: 'processing', label: '{{ 'customer.order.status.processing' | t }}'},
@@ -6,7 +6,7 @@
            { status: 'sent', label: '{{ 'customer.order.status.sent' | t }}'},
            { status: 'partiallysent', label: '{{ 'customer.order.status.partially_sent' | t }}'},
            { status: 'cancelled', label: '{{ 'customer.order.status.cancelled' | t }}'}
-           ]"></ng-outlet>
+           ]"></ui-view>
 
 <script id="account-orders-list.tpl" type="text/ng-template">
     <div class="page-header border-none">
@@ -14,25 +14,25 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped border-top-light sortable">
+            <table class="table table-striped border-top-light sortable orders-list-table">
                 <thead>
                     <tr>
-                        <th ng-click="$ctrl.sortChanged('number')" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }">{{ 'customer.orders.order_number' | t }}</th>
+                        <th ng-click="$ctrl.sortChanged('number')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }">{{ 'customer.orders.order_number' | t }}</th>
                         <th>{{ 'customer.orders.purchase_order' | t }}</th>
                         <th>{{ 'customer.orders.invoice' | t }}</th>
-                        <th ng-click="$ctrl.sortChanged('createdDate')" ng-class="{'desc': $ctrl.getSortDirection('createdDate') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('createdDate') == $ctrl.sortAscending }">{{ 'customer.orders.date' | t }}</th>
+                        <th ng-click="$ctrl.sortChanged('createdDate')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('createdDate') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('createdDate') == $ctrl.sortAscending }">{{ 'customer.orders.date' | t }}</th>
                         <th ng-dropdown-multiselect="" options="$ctrl.orderStatuses" selected-model="$ctrl.selectedStatuses" events="$ctrl.dropdownEvents" extra-settings="$ctrl.filterDropdownSettings" class="filter" ng-class="{'filtered': $ctrl.selectedStatuses.length > 0 }">
                             <toggle-dropdown>
                             {{ 'customer.orders.status' | t }}
                             </toggle-dropdown>
                         </th>
-                        <th ng-click="$ctrl.sortChanged('total.amount')" ng-class="{'desc': $ctrl.getSortDirection('total.amount') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('total.amount') == $ctrl.sortAscending }">{{ 'customer.orders.total' | t }}</th>
+                        <th ng-click="$ctrl.sortChanged('total')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('total') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('total') == $ctrl.sortAscending }">{{ 'customer.orders.total' | t }}</th>
                     </tr>
                 </thead>
                 <tbody ng-if="$ctrl.entries.length">
                     <tr ng-repeat="order in $ctrl.entries">
                         <td>
-                            <a ng-bind="order.number" ng-link="['OrderDetail', {number: order.number, pageNumber: $ctrl.pageSettings.currentPage}]"></a>
+                            <a ng-bind="order.number" ui-sref="orders.detail({number: order.number, pageNumber: $ctrl.pageSettings.currentPage})"></a>
                         </td>
                         <td ng-bind="order.purchaseOrderNumber"></td>
                         <td>
@@ -46,7 +46,6 @@
             </table>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div ng-if='$ctrl.pageSettings.totalItems > $ctrl.pageSettings.itemsPerPageCount' ng-include="'pagerTemplate.html'"></div>
@@ -62,7 +61,7 @@
 <script id="account-order-detail.tpl" type="text/ng-template">
     <div class="page-header">
         <h3>
-            <a ng-link="['OrderList', {pageNumber: $ctrl.pageNumber}]">
+            <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})">
                 <span class="fa fa-arrow-left"></span> {{ 'customer.orders.return' | t }}
             </a>
         </h3>
@@ -79,7 +78,7 @@
                                     <h3>{{ 'customer.order.title' | t: order_number }}</h3>
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <p>{{ 'customer.orders.status' | t }}: <span ng-bind="$ctrl.order.inPayments[0].status" class="info"></span></p>
+                                            <p>{{ 'customer.orders.status' | t }}: <span ng-bind="$ctrl.order.status" class="info"></span></p>
 
                                         </div>
                                         <div class="col-md-8">
@@ -99,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body panel-table">
                             <div class="row">
                                 <div class="col-md-12">
                                     <vc-line-items items="$ctrl.order.items"></vc-line-items>
@@ -179,7 +178,7 @@
                             <div class="vc-t">{{ 'customer.order.subscription' | t }}</div>
                             <div class="vc-descr">
                                 {{ 'customer.order.subscription_comment' | t }}
-                                <a ng-bind="$ctrl.order.subscriptionNumber" ng-link="['/Subscriptions/SubscriptionDetail', {number: $ctrl.order.subscriptionNumber}]"></a>
+                                <a ng-bind="$ctrl.order.subscriptionNumber" ui-sref="subscriptions.detail({number: $ctrl.order.subscriptionNumber})"></a>
                             </div>
                         </div>
                     </div>

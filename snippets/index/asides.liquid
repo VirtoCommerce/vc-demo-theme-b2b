@@ -4,11 +4,21 @@
         {% include 'customers/badge' %}
     </div>
 </aside>
-<aside class="panel panel-default" ng-if="customer && !customer.isRegisteredUser">
+<aside class="panel panel-default login-form" ng-if="customer && !customer.isRegisteredUser">
+        <div class="panel-heading">
+            <span class="h4">{{ 'customer.sign_in.title' | t }}</span>
+        </div>
+
     <div class="panel-body">
-        <h4>{{ 'customer.sign_in.title' | t }}</h4>
+
         {% capture loginUrl %} {{ '~/account/login' | absolute_url }} {% endcapture %}
         {% include 'customers/login-form' %}
+    </div>
+</aside>
+<aside class="panel">
+    <div class="panel-body credentials-block">
+        <img src="{{ 'book.svg' | asset_url }}" />
+        <p class="margin-0 credentials-block-text">Please <a class="credentials-block-link" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
     </div>
 </aside>
 {% assign found = false %}
@@ -31,7 +41,11 @@
     {% if found %}{% break %}{% endif %}
 {% endfor %}
 {% if settings.footer_newsletter_enable %}
-    <aside class="panel panel-default">
+
+    <aside class="panel panel-default subscribe-form">
+         <div class="panel-heading">
+            <span class="h4">Subscribe now!</span>
+        </div>
         <div class="panel-body">
             {% include 'shared/newsletter-form' %}
         </div>

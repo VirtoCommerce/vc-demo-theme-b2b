@@ -1,17 +1,13 @@
 angular.module('storefront.account')
     .component('vcAccountOrders', {
         templateUrl: "themes/assets/js/account/account-orders.tpl.liquid",
-        $routeConfig: [
-            { path: '/', name: 'OrderList', component: 'vcAccountOrdersList', useAsDefault: true },
-            { path: '/:number', name: 'OrderDetail', component: 'vcAccountOrderDetail' }
-        ],
         controller: [function () {
             var $ctrl = this;
         }]
     })
     .component('vcAccountOrdersList', {
         templateUrl: "account-orders-list.tpl",
-        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses ) {
+        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', '$stateParams', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses, $stateParams) {
             var $ctrl = this;
             $ctrl.sortDescending = sortDescending;
             $ctrl.sortAscending = sortAscending;
@@ -20,7 +16,8 @@ angular.module('storefront.account')
             $ctrl.loader = loader;
             $ctrl.filterDropdownSettings = { template: '{{option}}', smartButtonTextConverter(skip, option) { return option; }, };
             $ctrl.dropdownEvents = { onSelectionChanged: filtersChanged };
-            $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 10, numPages: 10 };
+            $ctrl.pageSettings = { currentPage: $stateParams.pageNumber || 1, itemsPerPageCount: 10, numPages: 10 };
+
             $ctrl.pageSettings.pageChanged = function () {
                 loadData();
             };
@@ -70,10 +67,7 @@ angular.module('storefront.account')
                 return sortDirection == sortAscending ? sortDescending : sortAscending;
             }
 
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageSettings.currentPage = next.params.pageNumber || $ctrl.pageSettings.currentPage;
-                $ctrl.pageSettings.pageChanged();
-            };
+            loadData();
         }]
     })
     .component('vcAccountOrderDetail', {
@@ -81,11 +75,15 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService ) {
+        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', '$stateParams', '$scope', 'catalogService', 'dialogService', 'cartService', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService, $stateParams, $scope, catalogService, dialogService, cartService ) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.hasPhysicalProducts = true;
-            var loadPromise;
+
+            $ctrl.pageNumber = $stateParams.pageNumber || 1;
+            $ctrl.orderNumber = $stateParams.number;
+
+            refresh();
 
             function refresh() {
                 loader.wrapLoading(function () {
@@ -121,13 +119,6 @@ angular.module('storefront.account')
                     });
                 });
             }
-
-            this.$routerOnActivate = function (next) {
-                $ctrl.pageNumber = next.params.pageNumber || 1;
-                $ctrl.orderNumber = next.params.number;
-
-                refresh();
-            };
 
             $ctrl.getInvoicePdf = function () {
                 var url = $window.BASE_URL + 'storefrontapi/orders/' + $ctrl.orderNumber + '/invoice';
@@ -169,6 +160,11 @@ angular.module('storefront.account')
                 }
             }
 
+            $scope.$on('lineItemAdded', function (event, data) {
+                const {productId, quantity} = data;
+                addProductToCartById(productId, quantity);
+            });
+
             var components = [];
             $ctrl.addComponent = function (component) {
                 components.push(component);
@@ -190,6 +186,27 @@ angular.module('storefront.account')
                 });
                 return;
             };
+
+            function addProductToCartById(productId, quantity) {
+                catalogService.getProduct([productId]).then(function (response) {
+                    if (response.data && response.data.length) {
+                        var product = response.data[0];
+                        addProductToCart(product, quantity);
+                    }
+                });
+            }
+
+            function addProductToCart(product, quantity) {
+                var dialogData = toDialogDataModel(product, quantity);
+                dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+                cartService.addLineItem(product.id, quantity).then(function (response) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                });
+            }
+
+            function toDialogDataModel(product, quantity) {
+                return { items: [angular.extend({ }, product, { quantity: quantity })] };
+            }
         }]
     })
     .filter('orderToSummarizedStatusLabel', [function () {

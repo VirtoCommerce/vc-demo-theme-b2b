@@ -13,21 +13,23 @@
    $gray-dark:     #4c5c6a; // lighten($gray-base, 20%)   // #333
    $gray:          #abb0b6; // lighten($gray-base, 33.5%) // #555
    $gray-light:    #d8d8d8; // lighten($gray-base, 46.7%) // #777
-   $gray-lighter:  #eee;    // lighten($gray-base, 93.5%) // #eee
-
+   $gray-lighter:  #F0F0F0;    // lighten($gray-base, 93.5%) // #eee
 
    $brand-primary: #f0ad4e; // darken(#428bca, 6.5%) // #337ab7
    $brand-alt:     #00739E; // not predefined
    $brand-success: #5cb85c; // #5cb85c
    $brand-info:    #5bc0de; // #5bc0de
    $brand-warning: #f0ad4e; // #f0ad4e
-   $brand-danger:  #d9534f; // #d9534f
+   $brand-danger:  #EC6A5E; // #d9534f
 
 //## Other colors
 
    $gray-striped-table: #f8f8f8; // not predefined
    $gray-totals: #9f9f9f; //not predefined
    $dark-green: #3c763d; // not predefined
+   $gray-roles-description: #5a6167; // not predefined
+   $gray-no-permission: #3f3f3f; // not predefined
+   $gray-user-inactive: #8c8c8c;
 
 //== Scaffolding
 //
@@ -58,7 +60,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-// $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif
+   $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 // $font-family-serif:       Georgia, "Times New Roman", Times, serif
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 // $font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace
@@ -88,7 +90,7 @@
 // $headings-line-height:    1.1
 // $headings-color:          inherit
    $link-font-family:        $font-family-condensed; // not predefined
-   $link-font-weight:        700; // not predefined
+   $link-font-weight:        500; // not predefined
 
 
 //== Iconography
@@ -128,7 +130,7 @@
    $line-height-small:          1.5; // 1.5
    $line-height-small-computed: floor(($font-size-small * $line-height-small)); // not predefined
 
-// $border-radius-base:         4px
+   $border-radius-base:         4px;
 // $border-radius-large:        6px
 // $border-radius-small:        3px
 
@@ -252,9 +254,9 @@
 //** Large `.form-control` & `button` height
 // $input-height-large:             (ceil($font-size-large * $line-height-large) + ($padding-large-vertical * 2) + 2)
 //** Small `.form-control` & `button` height
-// $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2)
+   $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
 //** Extra small `button` height
-   $input-height-xs:                (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 2);
+   $input-height-xs:                (floor($font-size-small * $line-height-small) + ($padding-xs-vertical * 2) + 6);
 
 //** `.form-group` margin
 // $form-group-margin-bottom:       15px
@@ -667,7 +669,9 @@ $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
 //##
 
 //** Default label background color
-// $label-default-bg:            $gray-light
+   $label-default-bg:            $gray-base;
+//** Alternative label background color
+   $label-alt-bg:                $brand-alt;
 //** Primary label background color
 // $label-primary-bg:            $brand-primary
 //** Success label background color
@@ -709,9 +713,9 @@ $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
 //** Modal backdrop opacity
 // $modal-backdrop-opacity:      .5
 //** Modal header border color
-// $modal-header-border-color:   #e5e5e5
+$modal-header-border-color:   #e5e5e5;
 //** Modal footer border color
-// $modal-footer-border-color:   $modal-header-border-color
+$modal-footer-border-color:   $modal-header-border-color;
 
 // $modal-lg:                    900px
 // $modal-md:                    600px
@@ -808,7 +812,7 @@ $alert-success-border:        $state-success-border;
 // $panel-body-padding:          15px
 // $panel-heading-padding:       10px 15px
 // $panel-footer-padding:        $panel-heading-padding
-// $panel-border-radius:         $border-radius-base
+   $panel-border-radius:         $border-radius-base;
 
    $panel-heading-font-family:   $font-family-condensed; // not predefined
    $panel-heading-font-weight:   700; // not predefined

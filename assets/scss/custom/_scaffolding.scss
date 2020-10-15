@@ -2,20 +2,22 @@
 @import "_text-decoration.scss";
 
 a {
-  font-family: $link-font-family;
-  font-weight: $link-font-weight;
-  border-bottom: 1px solid transparent;
-
-  &:hover,
-  &:focus {
-    border-bottom: 1px $link-hover-border-style $link-hover-color;
-  }
-
-  &[href^="#"],
-  &[href=""] {
+  &:not(.btn),
+  &.btn.btn-link {
+    font-family: $font-family-sans-serif;
+    font-weight: $link-font-weight;
+    //border-bottom: 1px solid transparent;
     &:hover,
-    &:focus{
-      border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
+    &:focus {
+      //border-bottom: 1px $link-hover-border-style $link-hover-color;
+    }
+
+    &[href^="#"],
+    &[href=""] {
+      &:hover,
+      &:focus{
+          //border-bottom: 1px $internal-link-hover-border-style $link-hover-color;
+      }
     }
   }
 }
@@ -35,4 +37,8 @@ a.primary-link {
   font-weight: $link-font-weight;
   font-size:   $font-size-base;
   text-transform: none;
+}
+
+.panel-heading .col-md-3{
+  text-align: right;
 }

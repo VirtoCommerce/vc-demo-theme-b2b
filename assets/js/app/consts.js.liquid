@@ -1,13 +1,15 @@
 angular.module('storefrontApp.consts', [])
 .constant('baseUrl', '{{ "" | full_url }}')
 .constant('apiBaseUrl', '{{ application_settings['VirtoCommerce:B2B:ApiEndpoint'] }}')
+.constant('locale', '{{ current_language.culture_name }}')
+.constant('localization', {{ "" | t }})
 .constant('reCaptchaKey', '{{ application_settings['VirtoCommerce:B2B:reCaptcha:public'] }}')
 .constant('availableRoles', {{ available_roles | json }})
 .constant('b2bRoles', {{ business_to_business_roles | json }})
 .constant('availablePaymentPlans', {{ settings.available_paymentPlans | json }})
 .constant('sortAscending', 'asc')
 .constant('sortDescending', 'desc')
-.constant('orderStatuses', ['New','Cancelled','Processing','Completed','Pending'])
+.constant('orderStatuses', ['Unpaid','Paid','Completed'])
 .constant('itemResponseGroup', {
     None: 0,
     ItemInfo: 1,
@@ -29,4 +31,7 @@ angular.module('storefrontApp.consts', [])
     ItemMedium: this.ItemSmall | this.ItemProperties | this.ItemEditorialReviews,
     ItemLarge: this.ItemMedium | this.ItemAssociations | this.Variations | this.Inventory | this.ItemWithPrices | this.ItemWithDiscounts | this.ItemWithVendor | this.ItemWithPaymentPlan
 })
-.constant('defaultLists', {{ settings.lists | json }});
+.constant('defaultLists', {{ settings.lists | json }})
+.constant('purchasingAgentRole', 'purchasing-agent')
+.constant('creditCardPaymentMethodCode', 'DemoCreditCardPaymentMethod')
+.constant('invoicePaymentMethodCode', 'InvoicePaymentMethod');
