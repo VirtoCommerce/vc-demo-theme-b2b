@@ -6,9 +6,9 @@ if (storefrontAppDependencies !== undefined) {
 }
 angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.translate', 'ngSanitize', 'storefrontApp', 'storefrontApp.consts'])
 
-    .config(['$translateProvider', 'baseUrl', '$stateProvider', '$urlRouterProvider', function ($translateProvider, baseUrl, $stateProvider, $urlRouterProvider) {
+    .config(['$translateProvider', 'locale', 'localization', '$stateProvider', '$urlRouterProvider', function ($translateProvider, locale, localization, $stateProvider, $urlRouterProvider) {
         $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
-        $translateProvider.useUrlLoader(baseUrl + 'themes/localization.json');
+        $translateProvider.translations(locale, localization);
         $translateProvider.preferredLanguage('en');
 
         $urlRouterProvider.otherwise("/");
@@ -169,7 +169,8 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
     }])
 
-    .run(['$templateCache', function ($templateCache) {
+    .run(['$templateCache', 'locale', '$translate', function ($templateCache, locale, $translate) {
+        $translate.use(locale);
         // cache application level templates
         $templateCache.put('pagerTemplate.html', '<ul uib-pagination boundary-links="true" max-size="$ctrl.pageSettings.numPages" items-per-page="$ctrl.pageSettings.itemsPerPageCount" total-items="$ctrl.pageSettings.totalItems" ng-model="$ctrl.pageSettings.currentPage" ng-change="$ctrl.pageSettings.pageChanged()" class="pagination-sm" style="padding-bottom: 20px;" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul uib-pagination>');
     }])

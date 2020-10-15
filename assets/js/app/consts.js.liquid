@@ -1,6 +1,8 @@
 angular.module('storefrontApp.consts', [])
 .constant('baseUrl', '{{ "" | full_url }}')
 .constant('apiBaseUrl', '{{ application_settings['VirtoCommerce:B2B:ApiEndpoint'] }}')
+.constant('locale', '{{ current_language.culture_name }}')
+.constant('localization', {{ "" | t }})
 .constant('reCaptchaKey', '{{ application_settings['VirtoCommerce:B2B:reCaptcha:public'] }}')
 .constant('availableRoles', {{ available_roles | json }})
 .constant('b2bRoles', {{ business_to_business_roles | json }})
