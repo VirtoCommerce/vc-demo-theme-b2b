@@ -1,0 +1,40 @@
+{% include 'shared/item-response-group' %}
+{% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
+<div ng-if="!loader.isLoading" class="panel panel-default">
+    <div class="panel-heading">
+        <h4 clas="panel-title">{{ 'products.general.alternatives' | t }}</h4>
+    </div>
+    <div class="panel-body text-center">
+        <div class="row d-flex align-items-center">
+            <div class="col-xs-1 pb-5">
+                <button class="btn btn-alt btn-primary" ng-click="$ctrl.prev()">
+                  <i class="fa fa-angle-left fa-lg"></i>
+                </button>
+            </div>
+            <div class="col-xs-10">
+                <div class="owl-carousel owl-theme">
+                  <div class="m-3" ng-repeat="product in $ctrl.products">
+                      <a class="unstyled" href="{{ '{{ product.url + ' | append: '\'?resp_group=' | append: response_group | append: '\' }}' }}">
+                          <img ng-if="product.primaryImage.url"
+                               class="img-responsive border-0 m-3 p-3 w-auto"
+                               ng-src="{% raw %}{{ product.primaryImage.url | imgurl: '308x308' }}{% endraw %}"
+                               fallback-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}"
+                               alt="product.primaryImage.alt"/>
+                          <img ng-if="!product.primaryImage.url"
+                               class="img-responsive border-0 m-3 p-3 w-auto"
+                               src="{{ 'no-image.svg' | asset_url }}" />
+                      </a>
+                      <a class="text-truncate" href="{{ '{{ product.url + ' | append: '\'?resp_group=' | append: response_group | append: '\' }}' }}">{% raw %}{{ product.title }}{% endraw %}</a>
+                      <strong class="text-success" ng-bind="product.price.actualPrice.formattedAmount"></strong>
+                      <span class="price-unit">/ each</span>
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-1 pb-5">
+                <button class="btn btn-alt btn-primary" ng-click="$ctrl.next()">
+                  <i class="fa fa-angle-right fa-lg"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "outputFileName": "assets/static/bundle/dependencies.js",
         "inputFiles": [
@@ -23,7 +23,8 @@
             "bower_components/bootstrap-toc/dist/bootstrap-toc.js",
             "bower_components/prism/prism.js",
             "bower_components/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js",
-            "bower_components/angular-ui-router/release//angular-ui-router.js"
+            "bower_components/angular-ui-router/release//angular-ui-router.js",
+            "bower_components/owl.carousel/dist/owl.carousel.js"
         ]
     },
     {
@@ -57,7 +58,8 @@
             "bower_components/font-awesome/css/font-awesome.css",
             "bower_components/angular-wizard/dist/angular-wizard.css",
             "bower_components/bootstrap-toc/dist/bootstrap-toc.css",
-            "bower_components/prism/themes/prism.css"
+            "bower_components/prism/themes/prism.css",
+            "bower_components/owl.carousel/dist/assets/owl.carousel.css"
         ]
     },
     {
