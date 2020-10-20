@@ -131,8 +131,8 @@
    $line-height-small-computed: floor(($font-size-small * $line-height-small)); // not predefined
 
    $border-radius-base:         4px;
-// $border-radius-large:        6px
-// $border-radius-small:        3px
+   $border-radius-large:        6px;
+   $border-radius-small:        3px;
 
 //** Global color for active items (e.g., navs or dropdowns).
    $component-active-color:     $text-contrast; // #fff !default;
@@ -375,7 +375,6 @@
    $screen-lg-max:              ($screen-xl-min - 1); // not predefined
    $screen-xl-max:              ($screen-xxl-min - 1); // not predefined
 
-
 //== Grid system
 //
 //## Define your custom responsive grid.
@@ -600,9 +599,9 @@
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-$state-success-text:             $text-contrast;
-$state-success-bg:               $brand-primary;
-$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%);
+// $state-success-text:             #3c763d
+   $state-success-bg:               #dff0d8;
+// $state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%)
 
 // $state-info-text:                #31708f
 // $state-info-bg:                  #d9edf7
@@ -730,9 +729,9 @@ $modal-footer-border-color:   $modal-header-border-color;
 // $alert-border-radius:         $border-radius-base
 // $alert-link-font-weight:      bold
 
-$alert-success-bg:            $state-success-bg;
-$alert-success-text:          $state-success-text;
-$alert-success-border:        $state-success-border;
+$alert-success-bg:            $text-contrast; // $state-success-bg;
+$alert-success-text:          $brand-primary; // $state-success-text;
+$alert-success-border:        darken(adjust-hue($state-success-bg, -10), 5%); //$state-success-border;
 
 // $alert-info-bg:               $state-info-bg
 // $alert-info-text:             $state-info-text
@@ -1855,3 +1854,67 @@ $priceValueColor: #2c9243;
 $icon-bg-color-success: #008000;
 $icon-bg-color-danger: #008000;
 $icon-bg-color-warning: #008000;
+
+// Bootstrap 4
+
+$white: #fff;
+$black: #000;
+
+$theme-colors: (
+    (
+    "primary":    $brand-primary,
+    "alt":        $brand-alt,
+    "success":    $brand-success,
+    "info":       $brand-info,
+    "warning":    $brand-warning,
+    "danger":     $brand-danger,
+    "light":      $gray-light,
+    "dark":       $gray-dark
+    )
+);
+
+$border-width: 1px;
+$border-color: $gray;
+
+$border-radius: $border-radius-base;
+$border-radius-lg: $border-radius-large;
+$border-radius-sm: $border-radius-small;
+$rounded-pill: 50rem;
+
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+);
+
+$sizes: (
+    25: 25%,
+    50: 50%,
+    75: 75%,
+    100: 100%,
+    auto: auto
+);
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1366px
+);
+
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .075);
+$box-shadow: 0 .5rem 1rem rgba($black, .15);
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175);
+
+$displays: none, inline, inline-block, block, table, table-row, table-cell, flex, inline-flex;
+$overflows: auto, hidden;
+$positions: static, relative, absolute, fixed, sticky;
+
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
