@@ -1,16 +1,3 @@
 {% assign product_items = 'product/grid' %}
 {% assign product_item = 'product/grid-item' %}
 {% include 'collection/main' %}
-
-<script>
-    window.productList = [];
-    {% for product in collection.products %}
-        window.productList.push({
-            id: "{{ product.id }}",
-            catalogId: "{{ product.catalog_id }}",
-			      outline: "{{ product.outline }}",
-            categoryId: "{{ product.category_id }}",
-			      taxType: "{{ product.tax_type }}"
-        });
-    {% endfor %}
-</script>

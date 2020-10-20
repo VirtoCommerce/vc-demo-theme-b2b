@@ -87,11 +87,11 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         $scope.addSelectedProductsToCart = function() {
-            if($scope.productContext.productType != 'Configurable'){
+            if($window.product.productType != 'Configurable'){
                 throw new Error("addSelectedProductsToCart method is allowed only in scope of configurable product");
             }
 
-            var configuredProductId = $scope.productContext.id;
+            var configuredProductId = $window.product.id;
 
             var items = $scope.productParts.map(function(value){
                 return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
@@ -210,8 +210,8 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         function initialize(filters) {
-            var productContext = $scope.productContext;
-            if ( !productContext || (productContext.isGrid && productContext.productType != 'Configurable')) {
+            var product = $window.product;
+            if ($window.products || !product || product.productType != 'Configurable') {
                 return;
             }
             catalogService.getProduct([productContext.id]).then(function (response) {
