@@ -215,7 +215,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 return;
             }
             catalogService.getProduct([productContext.id]).then(function (response) {
-				var product = response.data[0];
+				product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
                 var filteredVariations = allVariations;
