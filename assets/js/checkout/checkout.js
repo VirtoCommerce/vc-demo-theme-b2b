@@ -134,8 +134,12 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 return wrapLoading(function () {
                     return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity })
                     .then(() => {
-                        $scope.reloadCart();
-                        $rootScope.$broadcast('cartItemsChanged');
+                        // Workaround: we need to update cart and then reload it to run cart recalculations
+                        cartService.updateCartComment('')
+                        .then(() => {
+                            $scope.reloadCart();
+                            $rootScope.$broadcast('cartItemsChanged');
+                        });
                     });
                 });
             };
