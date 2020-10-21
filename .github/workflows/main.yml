@@ -38,22 +38,22 @@ jobs:
       uses: warchant/setup-sonar-scanner@v1
 
     - name: Get Image Version
-      uses: VirtoCommerce/vc-github-actions/get-image-version@master
+      uses: VirtoCommerce/vc-github-actions/get-image-version@VP-5059
       id: image
 
     - name: Get changelog
       id: changelog
-      uses: VirtoCommerce/vc-github-actions/changelog-generator@master
+      uses: VirtoCommerce/vc-github-actions/changelog-generator@VP-5059
 
     - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@VP-5059
 
     - name: Build
-      uses: VirtoCommerce/vc-github-actions/build-theme@master
+      uses: VirtoCommerce/vc-github-actions/build-theme@VP-5059
 
     - name: Publish
       id: publish
-      uses: VirtoCommerce/vc-github-actions/publish-theme@master
+      uses: VirtoCommerce/vc-github-actions/publish-theme@VP-5059
 
     - name: Create Release
       if: github.ref == 'refs/heads/master'
