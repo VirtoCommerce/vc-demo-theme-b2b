@@ -49,9 +49,11 @@ jobs:
       uses: VirtoCommerce/vc-github-actions/sonar-theme@VP-5059
 
     - name: Build
+      if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
       uses: VirtoCommerce/vc-github-actions/build-theme@VP-5059
 
     - name: Publish
+      if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
       id: publish
       uses: VirtoCommerce/vc-github-actions/publish-theme@VP-5059
 
