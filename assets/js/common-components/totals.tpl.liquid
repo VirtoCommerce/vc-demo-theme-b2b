@@ -10,8 +10,8 @@
             <dt ng-if-start="$ctrl.options.show.shipping" class="text-normal text-bold" ng-init="title = '{{ 'totals.shipping' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
             <dd ng-if-end ng-init="field = $ctrl.order[$ctrl.fieldNames.shippingPrice] || $ctrl.order[$ctrl.fieldNames.shippingTotal]" ng-include="'totals-field-with-free-template.tpl'"></dd>
             <hr>
-            <dt ng-if-start="$ctrl.options.show.payment" ng-init="title = '{{ 'totals.paymentFees' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end ng-init="field = $ctrl.order[$ctrl.fieldNames.payment]" ng-include="'totals-field-with-free-template.tpl'"></dd>
+            <dt ng-if-start="$ctrl.options.show.payment" class="overflow-visible" ng-init="title = '{{ 'totals.paymentFees' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
+            <dd ng-if-end ng-init="field = $ctrl.order[$ctrl.fieldNames.payment]" class="fee-margin-bottom" ng-include="'totals-field-with-free-template.tpl'"></dd>
 
             {% unless settings.show_prices_with_taxes %}
             <dt ng-if-start="$ctrl.options.show.taxes" class="text-normal text-bold" ng-init="title = '{{ 'totals.taxes' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
