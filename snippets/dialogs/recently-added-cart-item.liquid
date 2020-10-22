@@ -1,57 +1,76 @@
 <script id="storefront.recently-added-cart-item-dialog.tpl" type="text/ng-template">
-    <div class="modal-header">
-        <h4 class="modal-title">{% raw %}{{ dialogData.items.length }}{% endraw %}&nbsp;{{ 'cart.general.added_to_cart' | t }}</h4>
-        <button type="button" class="close" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
+    <div class="modal-header text-contrast rounded-top" ng-class="{'bg-brand-success': !dialogData.inventoryError, 'bg-primary': dialogData.inventoryError }">
+        <h4 class="modal-title" ng-if="!dialogData.inventoryError">{% raw %}{{ dialogData.items.length }}{% endraw %}&nbsp;{{ 'cart.general.added_to_cart' | t }}</h4>
+        <h4 class="modal-title" ng-if="dialogData.inventoryError">{{ 'cart.general.limited_qty' | t }}</h4>
+        <button type="button" class="close text-contrast opacity-100" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
-    <div class="modal-body">
-        <div class="container-fluid">
-            <vc-errors level="'warning'" message="dialogData.errorMessage" errors="dialogData.errors"></vc-errors>
-            <div class="row" ng-repeat="item in dialogData.items">
-                <div class="col-md-2">
-                    <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}">
-                </div>
-                <div class="col-md-5">
-                    <a ng-href="{% raw %}{{ item.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="item.name"></a>
-                </div>
-                <div class="col-md-5">
-                    <div class="row">
-                        <div class="col-md-6"><p class="text-muted small">{{ 'cart.general.price' | t }}</p></div>
-                        <div class="col-md-6"><p class="text-muted small">{{ 'cart.general.quantity' | t }}</p></div>
-                        <!-- There is no such data as item.price.extendedPrice and item.price.extendedPriceWithTax. Therefore it is temporally hided -->
-                        <!-- <div class="col-md-4"><p class="text-muted small">{{ 'cart.general.total' | t }}</p></div> -->
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+    <form name="addToCartForm">
+    <div>
+        <table class="table mb-0 no-vertical-borders small-table-head table-row-padding border-bottom-0">
+            <thead>
+                <tr>
+                    <th>{{ 'customer.order.product' | t }}</th>
+                    <th></th>
+                    <th class="text-center">{{ 'customer.order.quantity' | t }}</th>
+                    <th class="text-right">{{ 'customer.order.total' | t }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr ng-repeat="item in dialogData.items" class="align-middle dialog-data-item">
+                        <td class="col-md-2 py-4">
+                            <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}">
+                        </td>
+                        <td class="col-md-7 py-4">
+                            <a ng-href="{% raw %}{{ item.url.replace(regex, baseUrl) }}{% endraw %}" class="text-bold" ng-bind="item.name"></a>
+                            <p ng-if="dialogData.inventoryError && item.inventoryError" class="mb-0 mt-2"><i class="fa fa-exclamation-circle fa-lg text-primary" aria-hidden="true"></i> <span class="small">Reduced quantity of goods due to stock restrictions</span></p>
+                        </td>
+                        <td class="text-center col-md-2">
+                            <span ng-if="!dialogData.inventoryError && !dialogData.configuredProductId" ng-bind="item.quantity"></span>
+                            <span ng-if="!dialogData.inventoryError && dialogData.configuredProductId" ng-bind="configurationQty"></span>
+
+                            <input ng-if="dialogData.inventoryError && !dialogData.configuredProductId"
+                            type="number" class="form-control text-center"
+                            min="1" max="{% raw %}{{ item.availableQuantity }}{% endraw %}"
+                            ng-init="item.quantity = setInitQuantity(item)"
+                            ng-model="item.quantity"
+                            required
+                            >
+                            <input ng-if="dialogData.inventoryError && dialogData.configuredProductId"
+                            type="number" class="form-control text-center"
+                            min="1" max="{% raw %}{{ maxConfigurationQty }}{% endraw %}"
+                            ng-model="configurationQty"
+                            ng-change="quantityChanged(configurationQty)"
+                            required
+                            >
+                            <span ng-if="dialogData.inventoryError" class="text-muted-contrast small">{% raw %}{{ item.availableQuantity }}{% endraw %}&nbsp;{{ 'cart.general.in_stock' | t }}</span>
+                        </td>
+                        <td class="text-right">
                             {% if settings.show_prices_with_taxes %}
-                            <span class="small" ng-bind="item.price.actualPriceWithTax.formattedAmount"></span>
+                            <span ng-if="!dialogData.configuredProductId" class="text-bold text-success" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, item.quantity)"></span>
+                            <span ng-if="dialogData.configuredProductId" class="text-bold text-success" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, configurationQty)"></span>
                             {% else %}
-                            <span class="small" ng-bind="item.price.actualPrice.formattedAmount"></span>
+                            <span ng-if="!dialogData.configuredProductId" class="text-bold text-success" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, item.quantity)"></span>
+                            <span ng-if="dialogData.configuredProductId" class="text-bold text-success" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, configurationQty)"></span>
                             {% endif %}
-                        </div>
-                        <div class="col-md-6"><span class="small" ng-bind="item.quantity"></span></div>
-                        <!-- There is no such data as item.price.extendedPrice and item.price.extendedPriceWithTax. Therefore it is temporally hided -->
-                        <!-- <div class="col-md-4">
-                            {% if settings.show_prices_with_taxes %}
-                            <span class="small" ng-bind="item.price.extendedPriceWithTax.formattedAmount"></span>
-                            {% else %}
-                            <span class="small" ng-bind="item.price.extendedPrice.formattedAmount"></span>
-                            {% endif %}
-                        </div>                         -->
-                    </div>
-                </div>
-            </div>
-            <div ng-show="relatedProducts.item.count">
-                <h3 clas="panel-title">{{ 'products.general.related_products' | t }}</h3>
-                <vc-related-products product-ids="dialogData.productIds"
-                                     responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
-                                     on-update="relatedProducts = $event">
-                </vc-related-products>
-            </div>
-        </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="modal-footer">
-        <span class="pull-left">{{ 'cart.general.products_in_cart' | t: cartItemsCount: cartItemsCount }}</span>
-        <button type="button" class="btn btn-default" ng-click="close()">{{ 'cart.general.continue_shopping' | t }}</button>
+    <div ng-show="relatedProducts.item.count && !dialogData.inventoryError">
+        <h3 clas="panel-title">{{ 'products.general.related_products' | t }}</h3>
+        <vc-related-products product-ids="dialogData.productIds"
+                             responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
+                             on-update="relatedProducts = $event">
+        </vc-related-products>
+    </div>
+    <div ng-if="dialogData.inventoryError" class="modal-footer d-flex justify-content-between">
+        <button type="button" class="btn btn-default btn-alt" ng-click="close()">{{ 'cart.general.cancel' | t }}</button>
+        <button ng-disabled="addToCartForm.$invalid" type="button" class="btn btn-primary" ng-click="addToCart()">{{ 'cart.general.confirm' | t }}</button>
+    </div>
+    <div ng-if="!dialogData.inventoryError" class="modal-footer">
+        <button type="button" class="btn btn-primary btn-alt" ng-click="close()">{{ 'cart.general.continue_shopping' | t }}</button>
         <button type="button" class="btn btn-primary" ng-click="redirect('{{ 'cart' | absolute_url }}')">{{ 'cart.general.view_cart' | t }}</button>
     </div>
+    </form>
 </script>

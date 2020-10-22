@@ -66,6 +66,8 @@ p.product-count {
 
 @include text-emphasis-variant('.text-contrast', $text-contrast);
 
+@include text-emphasis-variant('.text-muted-contrast', $text-muted-contrast);
+
 .text-serif {
     font-family: $font-family-serif !important;
 }
