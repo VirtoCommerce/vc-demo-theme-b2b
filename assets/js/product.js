@@ -121,23 +121,13 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             return { productIds: productIds, items: items };
         }
 
-        function toDialogDataModelMock(items, rejection) {
-            var dialogDataModel = {};
-            if (rejection) {
-                dialogDataModel.errorMessage = rejection.data.message;
-                dialogDataModel.errors = rejection.data.modelState;
-            }
-            dialogDataModel.items = items;
-            return dialogDataModel;
-        }
-
         function initialize(filters) {
             var product = $window.product;
             if ($window.products || !product || product.productType != 'Configurable') {
                 return;
             }
             catalogService.getProduct([product.id]).then(function (response) {
-				product = response.data[0];
+                product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
                 var filteredVariations = allVariations;

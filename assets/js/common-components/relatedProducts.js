@@ -10,6 +10,7 @@ storefrontApp.component('vcRelatedProducts', {
     controller: ['$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function ($timeout, $scope, $element, loader, recommendationService) {
         var $ctrl = this;
         $ctrl.loader = loader;
+        $ctrl.products = [];
 
         $ctrl.initCarousel = function () {
             var responsive = Object.assign($ctrl.responsive);
