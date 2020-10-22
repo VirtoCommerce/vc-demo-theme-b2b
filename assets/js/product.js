@@ -244,7 +244,6 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 
     $scope.addToCart = function() {
         $scope.dialogData.inventoryError = false;
-        console.log($scope.dialogData);
         if ($scope.dialogData.items.length === 1) {
             cartService.addLineItem($scope.dialogData.items[0].id, $scope.dialogData.items[0].quantity).then(() => {
                 $rootScope.$broadcast('cartItemsChanged');
