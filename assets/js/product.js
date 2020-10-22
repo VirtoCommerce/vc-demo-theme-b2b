@@ -136,7 +136,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             if ($window.products || !product || product.productType != 'Configurable') {
                 return;
             }
-            catalogService.getProduct([productContext.id]).then(function (response) {
+            catalogService.getProduct([product.id]).then(function (response) {
 				product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
@@ -167,7 +167,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 });
             });
 
-            catalogService.getProductConfiguration(productContext.id).then(function(response) {
+            catalogService.getProductConfiguration(product.id).then(function(response) {
                 $scope.productParts = response.data;
                 $scope.defaultProductParts = [];
                 _.each($scope.productParts, function (part) {
