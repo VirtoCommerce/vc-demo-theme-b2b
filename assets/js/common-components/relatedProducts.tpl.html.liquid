@@ -1,11 +1,11 @@
 {% include 'shared/item-response-group' %}
 {% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
-<div ng-if="!loader.isLoading" ng-init="responseGroup = {{ '?resp_group=' | append: response_group }}">
+<div ng-if="!loader.isLoading" ng-init="responseGroup = '{{ '?resp_group=' | append: response_group }}'">
     <div class="row row-no-gutters d-flex align-items-center text-center mx-n4">
         <div class="col-xs-1 px-0 pb-5">
             <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.prev()"
-                    ng-disabled="data.item.count <= data.page.size">
+                    ng-disabled="$ctrl.data.item.count <= $ctrl.data.page.size">
               <i class="fa fa-angle-left fa-2x mr-1"></i>
             </button>
         </div>
@@ -31,7 +31,7 @@
         <div class="col-xs-1 px-0 pb-5">
             <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.next()"
-                    ng-disabled="data.item.count <= data.page.size">
+                    ng-disabled="$ctrl.data.item.count <= $ctrl.data.page.size">
               <i class="fa fa-angle-right fa-2x ml-1"></i>
             </button>
         </div>

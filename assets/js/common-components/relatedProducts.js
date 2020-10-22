@@ -7,7 +7,7 @@ storefrontApp.component('vcRelatedProducts', {
         responsive: '<',
         onUpdate: '&'
     },
-    controller: ['baseUrl', '$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $scope, $element, loader, recommendationService) {
+    controller: ['baseUrl', '$timeout', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $element, loader, recommendationService) {
         var $ctrl = this;
         $ctrl.loader = loader;
         $ctrl.baseUrl = baseUrl;
@@ -17,20 +17,21 @@ storefrontApp.component('vcRelatedProducts', {
             var responsive = Object.assign($ctrl.responsive);
             Object.keys(responsive).map((key) => responsive[key].loop = responsive[key].items < $ctrl.products.length);
             $timeout(function () {
-                $scope.$carousel = $element.find(".owl-carousel");
-                $scope.$carousel.on('initialized.owl.carousel refreshed.owl.carousel', function (event) {
-                    $scope.data = event;
+                $ctrl.$carousel = $element.find(".owl-carousel");
+                $ctrl.$carousel.on('initialized.owl.carousel refreshed.owl.carousel', function (event) {
+                    $ctrl.data = event;
                     $ctrl.onUpdate({ $event: event });
                 });
-                $scope.$carousel.owlCarousel({
+                $ctrl.$carousel.owlCarousel({
                     nav: false,
                     dots: false,
+                    lazyLoad: true,
                     responsive: responsive
                 });
                 // Temporary workaround for fallback-src:
                 // Owl carousel will copy first and last item for infinity loop.
                 // It will copy ready html code and angular will not work on it.
-                // For some reason, fallback-src works AFTER timout, while it should before.
+                // For some reason, fallback-src works AFTER timeout, while it should before.
             }, 1000);
         }
 
@@ -48,11 +49,11 @@ storefrontApp.component('vcRelatedProducts', {
         }
 
         $ctrl.next = function () {
-            $scope.$carousel.trigger('next.owl.carousel');
+            $ctrl.$carousel.trigger('next.owl.carousel');
         }
 
         $ctrl.prev = function () {
-            $scope.$carousel.trigger('prev.owl.carousel');
+            $ctrl.$carousel.trigger('prev.owl.carousel');
         }
 
         $ctrl.getUrl = function(relative) {
