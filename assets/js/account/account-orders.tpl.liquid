@@ -61,13 +61,13 @@
 <script id="account-order-detail.tpl" type="text/ng-template">
     <div class="page-header">
         <h3>
-            <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})">
+            <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})" class="btn btn-primary btn-alt btn-xs btn-return">
                 <span class="fa fa-arrow-left"></span> {{ 'customer.orders.return' | t }}
             </a>
         </h3>
     </div>
     <div id="order-detail" class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-default">
@@ -109,23 +109,28 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-6">
-                            <button class="btn btn-primary btn-block btn-lg" ng-click="$ctrl.getInvoicePdf()">
+                        <div class="d-flex justify-content-between order-action-block">
+                            <button class="btn btn-primary btn-lg p-0" ng-click="$ctrl.getInvoicePdf()">
                                 <span class="btn-text">{{ 'customer.order.get_invoice' | t }}</span>
                                 <span class="btn-loading"></span>
                             </button>
-                        </div>
-                        <div class="col-md-6">
-                            <button class="btn btn-primary btn-block btn-lg">
+                            <button class="btn btn-primary btn-lg p-0">
                                 <span class="btn-text">{{ 'customer.order.reorder' | t }}</span>
                                 <span class="btn-loading"></span>
                             </button>
                         </div>
-                        <div class="col-xl-12 buffer"><span>&nbsp;</span></div>
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Order totals</div>
+                            <div class="panel-body">
+                                <vc-totals order="$ctrl.order"></vc-totals>
+                            </div>
+                        </div>
                     </div>
                     <div class="row" ng-if="$ctrl.deliveryMethod.type =='shipping'">
                         <div class="panel panel-default">
@@ -181,14 +186,6 @@
                                 <a ng-bind="$ctrl.order.subscriptionNumber" ui-sref="subscriptions.detail({number: $ctrl.order.subscriptionNumber})"></a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Order totals</div>
-                    <div class="panel-body">
-                        <vc-totals order="$ctrl.order"></vc-totals>
                     </div>
                 </div>
             </div>
