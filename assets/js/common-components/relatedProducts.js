@@ -26,7 +26,10 @@ storefrontApp.component('vcRelatedProducts', {
                     dots: false,
                     responsive: responsive
                 });
-                // Temporary workaround for fallback-src
+                // Temporary workaround for fallback-src:
+                // Owl carousel will copy first and last item for infinity loop.
+                // It will copy ready html code and angular will not work on it.
+                // For some reason, fallback-src works AFTER timout, while it should before.
             }, 1000);
         }
 
