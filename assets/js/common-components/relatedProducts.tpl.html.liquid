@@ -2,11 +2,11 @@
 {% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
 <div ng-if="!loader.isLoading">
     <div class="row row-no-gutters d-flex align-items-center text-center m-n4">
-        <div class="col-xs-1 pb-5">
-            <button class="btn btn-alt btn-primary"
+        <div class="col-xs-1 pr-0 pb-5">
+            <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.prev()"
                     ng-disabled="data.item.count <= data.page.size">
-              <i class="fa fa-angle-left fa-lg"></i>
+              <i class="fa fa-angle-left fa-2x mr-1"></i>
             </button>
         </div>
         <div class="col-xs-10">
@@ -28,11 +28,11 @@
               </div>
             </div>
         </div>
-        <div class="col-xs-1 pb-5">
-            <button class="btn btn-alt btn-primary"
+        <div class="col-xs-1 pl-0 pb-5">
+            <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.next()"
                     ng-disabled="data.item.count <= data.page.size">
-              <i class="fa fa-angle-right fa-lg"></i>
+              <i class="fa fa-angle-right fa-2x ml-1"></i>
             </button>
         </div>
     </div>
