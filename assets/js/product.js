@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper', 'storeCurrency',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper, storeCurrency) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -99,15 +99,15 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 total = roundHelper.bankersRound($scope.defaultPrice * $scope.configurationQty);
             }
 
-            return $filter('currency')(total ,'$');
+            return $filter('currency')(total, storeCurrency.symbol);
         }
 
         $scope.getDefaultPrice = function() {
-            return $filter('currency')($scope.defaultPrice, '$');
+            return $filter('currency')($scope.defaultPrice, storeCurrency.symbol);
         }
 
         $scope.getCustomChangesTotal = function() {
-            return $scope.differenceSign + $filter('currency')($scope.totalDifference, '$') || $filter('currency')(0, '$');
+            return $scope.differenceSign + $filter('currency')($scope.totalDifference, storeCurrency.symbol) || $filter('currency')(0, storeCurrency.symbol);
         }
 
         $scope.quantityChanged = function(qty) {
@@ -123,7 +123,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         function toDialogDataModel(products, quantity, inventoryError, configuredProductId) {
             let productIds = products.map(function(product) {
                 return product.id;
-            })
+            });
             let items = products.map(function(product) {
                 return angular.extend({ }, product, { quantity: +quantity, inventoryError: product.availableQuantity < quantity, configuredProductId: configuredProductId })
             });
@@ -233,7 +233,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.$watch('filters', initialize);
     }]);
 
-storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter) {
+storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
     $scope.dialogData = dialogData;
     $scope.baseUrl = baseUrl;
     $scope.regex = new RegExp(/^\/+/);
@@ -263,7 +263,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 
     $scope.calculateTotal = function(itemPrice, itemQuantity) {
         var total = roundHelper.bankersRound(itemPrice * itemQuantity);
-        return $filter('currency')(total ,'$');
+        return $filter('currency')(total, storeCurrency.symbol);
     }
 
     $scope.setInitQuantity = function(item) {
