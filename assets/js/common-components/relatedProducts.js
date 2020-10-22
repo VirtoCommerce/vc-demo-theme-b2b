@@ -7,9 +7,10 @@ storefrontApp.component('vcRelatedProducts', {
         responsive: '<',
         onUpdate: '&'
     },
-    controller: ['$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function ($timeout, $scope, $element, loader, recommendationService) {
+    controller: ['baseUrl', '$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $scope, $element, loader, recommendationService) {
         var $ctrl = this;
         $ctrl.loader = loader;
+        $ctrl.baseUrl = baseUrl;
         $ctrl.products = [];
 
         $ctrl.initCarousel = function () {
@@ -52,6 +53,10 @@ storefrontApp.component('vcRelatedProducts', {
 
         $ctrl.prev = function () {
             $scope.$carousel.trigger('prev.owl.carousel');
+        }
+
+        $ctrl.getUrl = function(relative) {
+            return new URL(relative, baseUrl).href;
         }
     }]
 });
