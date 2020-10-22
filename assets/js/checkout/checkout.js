@@ -134,8 +134,12 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 return wrapLoading(function () {
                     return cartService.changeLineItemsQuantity({ lineItemId: id, quantity: lineItem.quantity })
                     .then(() => {
-                        $scope.reloadCart();
-                        $rootScope.$broadcast('cartItemsChanged');
+                        // Workaround: we need to update cart and then reload it to run cart recalculations
+                        cartService.updateCartComment('')
+                        .then(() => {
+                            $scope.reloadCart();
+                            $rootScope.$broadcast('cartItemsChanged');
+                        });
                     });
                 });
             };
@@ -455,9 +459,17 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.initialize = function () {
 
-                $scope.reloadCart().then(function (cart) {
-                    $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
-                    $scope.getCustomerDefaults();
+                $scope.reloadCart()
+                .then(function() {
+                    // Workaround: we need to update cart and then reload it again to run cart recalculations
+                    cartService.updateCartComment('')
+                    .then(function() {
+                        $scope.reloadCart()
+                        .then(function (cart) {
+                            $scope.checkout.wizard.goToStep(cart.hasPhysicalProducts ? 'shipping-address' : 'payment-method');
+                            $scope.getCustomerDefaults();
+                        });
+                    });
                 });
             };
 
