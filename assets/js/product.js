@@ -249,10 +249,10 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
                 $rootScope.$broadcast('cartItemsChanged');
             });
         } else if ($scope.dialogData.configuredProductId) {
-            var items = $scope.dialogData.items.map(function(item) {
+            var items = $scope.dialogData.items.map(item => {
                 return { id: item.id, quantity: $scope.configurationQty, configuredProductId: item.configuredProductId };
             });
-            cartService.addLineItems(items).then(function (response) {
+            cartService.addLineItems(items).then(response => {
                 var result = response.data;
                 if (result.isSuccess) {
                     $rootScope.$broadcast('cartItemsChanged');
@@ -288,7 +288,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
     }
 
     function getMaxInventory() {
-        var inventoryArray = $scope.dialogData.items.map(function (item) {
+        var inventoryArray = $scope.dialogData.items.map(item => {
             return item.availableQuantity;
         });
         $scope.maxConfigurationQty = Math.min(...inventoryArray);
