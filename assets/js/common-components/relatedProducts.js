@@ -3,34 +3,30 @@ var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('vcRelatedProducts', {
     templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
     bindings: {
-        productIds: '<'
+        productIds: '<',
+        responsive: '<',
+        onUpdate: '&'
     },
-    controller: ['$timeout', '$scope', 'loadingIndicatorService', 'recommendationService', function ($timeout, $scope, loader, recommendationService) {
+    controller: ['$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function ($timeout, $scope, $element, loader, recommendationService) {
         var $ctrl = this;
         $ctrl.loader = loader;
 
-        $ctrl.initCarousel = function (itemsLength) {
+        $ctrl.initCarousel = function () {
+            var responsive = Object.assign($ctrl.responsive);
+            Object.keys(responsive).map((key) => responsive[key].loop = responsive[key].items < $ctrl.products.length);
             $timeout(function () {
-                $scope.$carousel = $(".owl-carousel");
+                $scope.$carousel = $element.find(".owl-carousel");
+                $scope.$carousel.on('initialized.owl.carousel refreshed.owl.carousel', function (event) {
+                    $scope.data = event;
+                    $ctrl.onUpdate({ $event: event });
+                });
                 $scope.$carousel.owlCarousel({
                     nav: false,
                     dots: false,
-                    responsive:{
-                        0:{
-                            items: 2,
-                            loop: itemsLength > 2
-                        },
-                        768:{
-                            items: 3,
-                            loop: itemsLength > 3
-                        },
-                        992:{
-                            items: 4,
-                            loop: itemsLength > 4
-                        }
-                    }
+                    responsive: responsive
                 });
-            });
+                // Temporary workaround for fallback-src
+            }, 1000);
         }
 
         $ctrl.$onChanges = function() {
@@ -40,7 +36,7 @@ storefrontApp.component('vcRelatedProducts', {
                         var products = response.data;
                         if (products.length) {
                             $ctrl.products = products;
-                            $ctrl.initCarousel(products.length);
+                            $ctrl.initCarousel();
                         }
                     });
             });
