@@ -5,7 +5,7 @@
         <button type="button" class="close text-contrast opacity-100" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <form name="addToCartForm">
-    <div>
+    <div ng-class="{'border-bottom-light': relatedProducts.item.count && !dialogData.inventoryError}">
         <table class="table mb-0 no-vertical-borders small-table-head table-row-padding border-bottom-0">
             <thead>
                 <tr>
@@ -57,8 +57,8 @@
             </tbody>
         </table>
     </div>
-    <div ng-show="relatedProducts.item.count && !dialogData.inventoryError">
-        <h3 clas="panel-title">{{ 'products.general.related_products' | t }}</h3>
+    <div ng-show="relatedProducts.item.count && !dialogData.inventoryError" class="py-5 px-4">
+        <h3 class="panel-title">{{ 'products.general.related_products' | t }}</h3>
         <vc-related-products product-ids="dialogData.productIds"
                              responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
                              on-update="relatedProducts = $event">
