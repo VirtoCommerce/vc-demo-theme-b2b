@@ -7,9 +7,10 @@ storefrontApp.component('vcRelatedProducts', {
         responsive: '<',
         onUpdate: '&'
     },
-    controller: ['$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function ($timeout, $scope, $element, loader, recommendationService) {
+    controller: ['baseUrl', '$timeout', '$scope', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $scope, $element, loader, recommendationService) {
         var $ctrl = this;
         $ctrl.loader = loader;
+        $ctrl.baseUrl = baseUrl;
         $ctrl.products = [];
 
         $ctrl.initCarousel = function () {
@@ -26,7 +27,10 @@ storefrontApp.component('vcRelatedProducts', {
                     dots: false,
                     responsive: responsive
                 });
-                // Temporary workaround for fallback-src
+                // Temporary workaround for fallback-src:
+                // Owl carousel will copy first and last item for infinity loop.
+                // It will copy ready html code and angular will not work on it.
+                // For some reason, fallback-src works AFTER timout, while it should before.
             }, 1000);
         }
 
@@ -49,6 +53,10 @@ storefrontApp.component('vcRelatedProducts', {
 
         $ctrl.prev = function () {
             $scope.$carousel.trigger('prev.owl.carousel');
+        }
+
+        $ctrl.getUrl = function(relative) {
+            return new URL(relative, baseUrl).href;
         }
     }]
 });

@@ -1,38 +1,38 @@
 {% include 'shared/item-response-group' %}
 {% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
-<div ng-if="!loader.isLoading">
-    <div class="row row-no-gutters d-flex align-items-center text-center m-n4">
-        <div class="col-xs-1 pb-5">
-            <button class="btn btn-alt btn-primary"
+<div ng-if="!loader.isLoading" ng-init="responseGroup = {{ '?resp_group=' | append: response_group }}">
+    <div class="row row-no-gutters d-flex align-items-center text-center mx-n4">
+        <div class="col-xs-1 px-0 pb-5">
+            <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.prev()"
                     ng-disabled="data.item.count <= data.page.size">
-              <i class="fa fa-angle-left fa-lg"></i>
+              <i class="fa fa-angle-left fa-2x mr-1"></i>
             </button>
         </div>
-        <div class="col-xs-10">
+        <div class="col-xs-10 px-0">
             <div class="owl-carousel owl-theme">
               <div class="m-3" ng-repeat="product in $ctrl.products">
-                  <a class="unstyled" href="{{ '{{ product.url + ' | append: '\'?resp_group=' | append: response_group | append: '\' }}' }}">
+                  <a class="unstyled" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}">
                       <img ng-if="product.primaryImage.url"
-                           class="img-responsive m-3 p-3 w-auto"
+                           class="img-responsive mx-auto my-3 p-3"
                            ng-src="{% raw %}{{ product.primaryImage.url | imgurl: '308x308' }}{% endraw %}"
                            fallback-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}"
                            alt="product.primaryImage.alt"/>
                       <img ng-if="!product.primaryImage.url"
-                           class="img-responsive m-3 p-3 w-auto"
+                           class="img-responsive mx-auto my-3 p-3"
                            src="{{ 'no-image.svg' | asset_url }}" />
                   </a>
-                  <a class="text-truncate" href="{{ '{{ product.url + ' | append: '\'?resp_group=' | append: response_group | append: '\' }}' }}">{% raw %}{{ product.title }}{% endraw %}</a>
+                  <a class="text-truncate" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}"><strong ng-bind="product.title"></strong></a>
                   <strong class="text-success" ng-bind="product.price.actualPrice.formattedAmount"></strong>
                   <span class="price-unit">/ each</span>
               </div>
             </div>
         </div>
-        <div class="col-xs-1 pb-5">
-            <button class="btn btn-alt btn-primary"
+        <div class="col-xs-1 px-0 pb-5">
+            <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.next()"
                     ng-disabled="data.item.count <= data.page.size">
-              <i class="fa fa-angle-right fa-lg"></i>
+              <i class="fa fa-angle-right fa-2x ml-1"></i>
             </button>
         </div>
     </div>
