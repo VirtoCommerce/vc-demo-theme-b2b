@@ -4,22 +4,22 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+    - '.github/**'
+    - 'docs/**'
+    - 'build/**'
+    - 'README.md'
+    - 'LICENSE'
     branches:
       [master, dev]
   pull_request:
     branches:
       [master, dev]
     paths-ignore:
-      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+    - '.github/**'
+    - 'docs/**'
+    - 'build/**'
+    - 'README.md'
+    - 'LICENSE'
 
 jobs:
   ci:
@@ -51,6 +51,8 @@ jobs:
     - name: Build
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
       uses: VirtoCommerce/vc-github-actions/build-theme@VP-5059
+      with:
+        versionSuffix: ${{ steps.image.outputs.suffix }}
 
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' }}
@@ -62,8 +64,8 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       with:
-        tag_name: ${{ steps.image.outputs.tag }}
-        release_name: ${{ steps.image.outputs.tag }}
+        tag_name: ${{ steps.image.outputs.prefix }}
+        release_name: ${{ steps.image.outputs.prefix }}
         draft: false
         prerelease: false
         body: ${{ steps.changelog.outputs.changelog }}
