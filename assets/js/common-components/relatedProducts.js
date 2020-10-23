@@ -62,7 +62,7 @@ storefrontApp.component('vcRelatedProducts', {
         }
 
         $ctrl.getUrl = function(relative) {
-            return new URL(relative, baseUrl).href;
+            return new URL(relative.replace(/^\/+/, ''), baseUrl).href;
         }
     }]
 });
