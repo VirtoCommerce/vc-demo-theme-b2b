@@ -9,6 +9,7 @@ storefrontApp.component('vcRelatedProducts', {
     },
     controller: ['baseUrl', '$timeout', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $element, loader, recommendationService) {
         var $ctrl = this;
+        $ctrl.ready = false;
         $ctrl.loader = loader;
         $ctrl.baseUrl = baseUrl;
         $ctrl.products = [];
@@ -22,10 +23,14 @@ storefrontApp.component('vcRelatedProducts', {
                     $ctrl.data = event;
                     $ctrl.onUpdate({ $event: event });
                 });
+                $ctrl.$carousel.on('refreshed.owl.carousel', function () {
+                    $ctrl.ready = true;
+                });
                 $ctrl.$carousel.owlCarousel({
                     nav: false,
                     dots: false,
                     lazyLoad: true,
+                    lazyLoadEager: $ctrl.products.length,
                     responsive: responsive
                 });
                 // Temporary workaround for fallback-src:
