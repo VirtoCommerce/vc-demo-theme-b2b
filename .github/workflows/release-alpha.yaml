@@ -33,6 +33,8 @@ jobs:
 
     - name: Build
       uses: VirtoCommerce/vc-github-actions/build-theme@VP-5059
+      with:
+        versionSuffix: ${{ steps.image.outputs.fullSuffix }}
 
     - name: Publish
       id: publish
