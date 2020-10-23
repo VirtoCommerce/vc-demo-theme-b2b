@@ -16,82 +16,12 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.configurationQty = 1;
         $scope.validateQtyInput = validationHelper.positiveInt;
 
-        // TODO: Replace mock with real function
-        $scope.addProductsToCartMock = function () {
-            var rejection = {
-                data: {
-                    message: "The 1 product(s) below was not added to cart:",
-                    modelState: {
-                        "Test": "Test"
-                    }
-                }
-            };
-            var items = [
-                {
-                    id: "9cbd8f316e254a679ba34a900fccb076",
-                    name: "3DR Solo Quadcopter (No Gimbal)",
-                    imageUrl: "//localhost/admin/assets/catalog/1428965138000_1133723.jpg",
-                    price: {
-                        actualPrice: {
-                            formattedAmount: "$896.39"
-                        },
-                        actualPriceWithTax: {
-                            formattedAmount: "$1,075.67"
-                        },
-                        listPrice: {
-                            formattedAmount: "$995.99"
-                        },
-                        listPriceWithTax: {
-                            formattedAmount: "$1,195.19"
-                        },
-                        extendedPrice: {
-                            formattedAmount: "$1,792.78"
-                        },
-                        extendedPriceWithTax: {
-                            formattedAmount: "$2,151.34"
-                        }
-                    },
-                    quantity: 2,
-                    url: "~/camcorders/aerial-imaging-drones/3dr-solo-quadcopter-no-gimbal"
-                },
-                {
-                    id: "ad4ae79ffdbc4c97959139a0c387c72e",
-                    name: "Samsung Galaxy Note 4 SM-N910C 32GB",
-                    imageUrl: "//localhost/admin/assets/catalog/1416164841000_1097106.jpg",
-                    price: {
-                        actualPrice: {
-                            formattedAmount: "$530.99"
-                        },
-                        actualPriceWithTax: {
-                            formattedAmount: "$637.19"
-                        },
-                        listPrice: {
-                            formattedAmount: "$589.99"
-                        },
-                        listPriceWithTax: {
-                            formattedAmount: "$707.99"
-                        },
-                        extendedPrice: {
-                            formattedAmount: "$1,592.97"
-                        },
-                        extendedPriceWithTax: {
-                            formattedAmount: "$1,911.57"
-                        }
-                    },
-                    quantity: 5,
-                    url: "~/cell-phones/samsung-galaxy-note-4-sm-n910c-32gb"
-                }
-            ];
-            var dialogData = toDialogDataModelMock(items, rejection);
-            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
-        }
-
         $scope.addSelectedProductsToCart = function() {
-            if($scope.productContext.productType != 'Configurable'){
+            if($window.product.productType != 'Configurable'){
                 throw new Error("addSelectedProductsToCart method is allowed only in scope of configurable product");
             }
 
-            var configuredProductId = $scope.productContext.id;
+            var configuredProductId = $window.product.id;
 
             var items = $scope.productParts.map(function(value){
                 return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
@@ -107,13 +37,13 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                     });
 
                     var dialogData = toDialogDataModel(products, $scope.configurationQty);
-                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
                 }
             });
         }
         $scope.addProductToCart = function (product, quantity) {
             var dialogData = toDialogDataModel([product], quantity);
-            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
+            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
             cartService.addLineItem(product.id, quantity).then(function (response) {
                 $rootScope.$broadcast('cartItemsChanged');
             });
@@ -131,7 +61,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
 
         $scope.addProductToActualQuoteRequest = function (product, quantity) {
             var dialogData = toDialogDataModel([product], quantity);
-            dialogService.showDialog(dialogData, 'recentlyAddedActualQuoteRequestItemDialogController', 'storefront.recently-added-actual-quote-request-item-dialog.tpl');
+            dialogService.showDialog(dialogData, 'recentlyAddedActualQuoteRequestItemDialogController', 'storefront.recently-added-actual-quote-request-item-dialog.tpl', 'lg');
             quoteRequestService.addProductToQuoteRequest(product.id, quantity).then(function (response) {
                 $rootScope.$broadcast('actualQuoteRequestItemsChanged');
             });
@@ -182,40 +112,22 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         }
 
         function toDialogDataModel(products, quantity) {
-            var dialogItems = products.map(function(product) {
-                                return angular.extend({ }, product, { quantity: quantity })
-                            });
-            return { items: dialogItems };
-            //     return {
-            //         id: product.id,
-            //         name: product.name,
-            //         imageUrl: product.primaryImage ? product.primaryImage.url : null,
-            //         listPrice: product.price.listPrice,
-            //listPriceWithTax: product.price.listPriceWithTax,
-            //         placedPrice: product.price.actualPrice,
-            //         placedPriceWithTax: product.price.actualPriceWithTax,
-            //         quantity: quantity,
-            //         updated: false
-            //     }
-        }
-
-        function toDialogDataModelMock(items, rejection) {
-            var dialogDataModel = {};
-            if (rejection) {
-                dialogDataModel.errorMessage = rejection.data.message;
-                dialogDataModel.errors = rejection.data.modelState;
-            }
-            dialogDataModel.items = items;
-            return dialogDataModel;
+            let productIds = products.map(function(product) {
+                return product.id;
+            });
+            let items = products.map(function(product) {
+                return angular.extend({ }, product, { quantity: quantity })
+            });
+            return { productIds: productIds, items: items };
         }
 
         function initialize(filters) {
-            var productContext = $scope.productContext;
-            if ( !productContext || (productContext.isGrid && productContext.productType != 'Configurable')) {
+            var product = $window.product;
+            if ($window.products || !product || product.productType != 'Configurable') {
                 return;
             }
-            catalogService.getProduct([productContext.id]).then(function (response) {
-				var product = response.data[0];
+            catalogService.getProduct([product.id]).then(function (response) {
+                product = response.data[0];
                 //Current product is also a variation (titular)
                 var allVariations = [product].concat(product.variations || []);
                 var filteredVariations = allVariations;
@@ -245,7 +157,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 });
             });
 
-            catalogService.getProductConfiguration(productContext.id).then(function(response) {
+            catalogService.getProductConfiguration(product.id).then(function(response) {
                 $scope.productParts = response.data;
                 $scope.defaultProductParts = [];
                 _.each($scope.productParts, function (part) {
@@ -304,23 +216,6 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
                                     ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
         }
-
-        //function findVariationBySelectedProps(variations, selectedPropMap) {
-        //    return _.find(variations, function (x) {
-        //        return comparePropertyMaps(getVariationPropertyMap(x), selectedPropMap);
-        //    });
-        //}
-
-        ////Method called from View when user clicks one property value
-        //$scope.checkProperty = function (property) {
-        //    //Select appropriate property and unselect previous selection
-        //    _.each($scope.allVariationPropsMap[property.displayName], function (x) {
-        //        x.selected = x != property ? false : !x.selected;
-        //    });
-
-        //    //try to find the best variation match for selected properties
-        //    $scope.selectedVariation = findVariationBySelectedProps(allVariations, getSelectedPropsMap($scope.allVariationPropsMap));
-        //};
 
         $scope.sendToEmail = function (storeId, productId, productUrl, language) {
             dialogService.showDialog({ storeId: storeId, productId: productId, productUrl: productUrl, language: language }, 'recentlyAddedCartItemDialogController', 'storefront.send-product-to-email.tpl');

@@ -49,32 +49,8 @@
                         {% include 'shared/pagination' %}
                         {% include 'collection/nav' %}
                     </div>
-                    <script>
-                        window.products = [];
-                        {% for product in collection.products %}
-                            window.products.push({
-                                id: "{{ product.id }}",
-                                catalogId: "{{ product.catalog_id }}",
-                                outline: "{{ product.outline }}",
-                                categoryId: "{{ product.category_id }}",
-                                taxType: "{{ product.tax_type }}"
-                            });
-                        {% endfor %}
-                    </script>
                 </div>
             </div>
-            <script>
-                window.productList = [];
-                {% for product in collection.products %}
-                    window.productList.push({
-                        id: "{{ product.id }}",
-                        catalogId: "{{ product.catalog_id }}",
-                        outline: "{{ product.outline }}",
-                        categoryId: "{{ product.category_id }}",
-                        taxType: "{{ product.tax_type }}"
-                    });
-                {% endfor %}
-            </script>
         </div>
     </main>
 

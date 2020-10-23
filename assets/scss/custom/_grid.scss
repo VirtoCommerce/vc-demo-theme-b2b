@@ -1,4 +1,4 @@
-﻿.container {
+.container {
   @media (min-width: $screen-xl-min) {
     width: $container-xl;
   }
@@ -69,42 +69,6 @@
   &:before, &:after {
     display: none;
   }
-}
-
-.d-flex {
-    display: flex !important;
-}
-
-.flex-column {
-    flex-direction: column !important;
-}
-
-.flex-wrap {
-    flex-wrap: wrap !important;
-}
-
-.align-items-center {
-    align-items: center;
-}
-
-.justify-content-between {
-    justify-content: space-between;
-}
-
-.justify-content-end {
-    justify-content: flex-end;
-}
-
-.align-self-start {
-    align-self: flex-start;
-}
-
-.justify-content-center {
-    justify-content: center;
-}
-
-.align-self-center {
-    align-self: center;
 }
 
 .nogap > [class*="col-"] {

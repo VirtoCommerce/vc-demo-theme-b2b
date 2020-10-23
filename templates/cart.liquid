@@ -69,9 +69,13 @@
                                     <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in regularLineItems">
                                         <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
                                     </div>
-                                    <div class="row">
+                                    <div ng-show="relatedProducts.item.count" class="row">
                                         <div class="col-xs-12">
                                             <p class="text-center"><strong>If you changed multiple quantities, </strong><a href="" ng-click="changeItemAllQty()">Update All</a></p>
+                                            <h2>{{ 'products.general.related_products' | t }}</h2>
+                                            <vc-related-products product-ids="checkout.productIds"
+                                                                 responsive="{ 0: { items: 2 }, 768: { items: 3 }, 992: { items: 5 } }"
+                                                                 on-update="relatedProducts = $event"></vc-related-products>
                                         </div>
                                     </div>
                                 </div>
