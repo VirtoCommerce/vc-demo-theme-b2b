@@ -4,22 +4,22 @@ on:
   workflow_dispatch:
   push:
     paths-ignore:
-      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+    - '.github/**'
+    - 'docs/**'
+    - 'build/**'
+    - 'README.md'
+    - 'LICENSE'
     branches:
       [master, dev]
   pull_request:
     branches:
       [master, dev]
     paths-ignore:
-      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+    - '.github/**'
+    - 'docs/**'
+    - 'build/**'
+    - 'README.md'
+    - 'LICENSE'
 
 jobs:
   ci:
