@@ -1,4 +1,4 @@
-﻿{% unless current_collection %}
+{% unless current_collection %}
     {% assign current_collection = collection %}
 {% endunless %}
 
@@ -15,7 +15,7 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible product-card" ng-controller="productController" ng-init="productContext = { id: '{{ product.id }}', productType: '{{product.product_type}}', isGrid: true }; products.push('{{ product.id }}')">
+<div class="col-md-3 flexible product-card" ng-controller="productController">
     {% include 'shared/item-response-group' %}
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
@@ -30,11 +30,4 @@
     {% include 'product/quantity-grid' %}
 </div>
 
-<script>
-    window.products = [];
-    window.products.push({
-        id: "{{ product.id }}",
-        catalogId: "{{ product.catalog_id }}",
-        categoryId: "{{ product.category_id }}"
-    });
-</script>
+{% include 'product/item/script' %}

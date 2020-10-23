@@ -25,6 +25,8 @@
 @import "custom/_icon.scss";
 @import "custom/_category-page.scss";
 @import "custom/_product-card.scss";
+@import "custom/_modals.scss";
+
 html {
     height: 100%;
 }
@@ -192,4 +194,20 @@ main {
 // For grid raw stripped view. Ex. on the 'select payment method' dialog
 .raw-striped:nth-of-type(odd) {
     background-color: $gray-striped-table;
+}
+
+// Add to cart modal
+
+.add-cart-item-total {
+    height: 40px;
+}
+
+.dialog-data-item:not(:last-child) {
+    border-bottom: 1px solid $gray-lighter;
+}
+
+// Totals block
+
+.fee-margin-bottom {
+    margin-bottom: 5px;
 }
