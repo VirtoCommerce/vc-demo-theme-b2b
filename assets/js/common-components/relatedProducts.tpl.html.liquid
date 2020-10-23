@@ -13,7 +13,7 @@
         </div>
         <div class="col-xs-10 px-0">
             <div class="owl-carousel owl-theme"
-                 ng-class="{ 'owl-hidden': $ctrl.ready }">
+                 ng-class="{ 'owl-hidden': !$ctrl.ready }">
               <div class="m-3" ng-repeat="product in $ctrl.products">
                   <a class="unstyled" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}">
                       <img ng-if="product.primaryImage.url"
