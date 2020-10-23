@@ -72,7 +72,7 @@
                                     <div ng-show="relatedProducts.item.count" class="row">
                                         <div class="col-xs-12">
                                             <p class="text-center"><strong>If you changed multiple quantities, </strong><a href="" ng-click="changeItemAllQty()">Update All</a></p>
-                                            <h2 clas="panel-title">{{ 'products.general.related_products' | t }}</h2>
+                                            <h2>{{ 'products.general.related_products' | t }}</h2>
                                             <vc-related-products product-ids="checkout.productIds"
                                                                  responsive="{ 0: { items: 2 }, 768: { items: 3 }, 992: { items: 5 } }"
                                                                  on-update="relatedProducts = $event"></vc-related-products>
