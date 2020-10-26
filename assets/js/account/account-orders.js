@@ -125,6 +125,36 @@ angular.module('storefront.account')
                 $window.open(url, '_blank');
             }
 
+            $ctrl.reorder = function() {
+                var productIdsQuery = $ctrl.order.items.map(item => {
+                    return 'productIds=' + item.productId;
+                }).join("&");
+
+                catalogService.getProducts(productIdsQuery).then(response => {
+                    if (response.data && response.data.length) {
+                        var orderProducts = response.data.map(item => {
+                            return angular.extend(item, { quantity: _.findWhere($ctrl.order.items, {productId: item.id}).quantity });
+                        });
+                        var inventoryError = orderProducts.some(product => {
+                            return product.availableQuantity < product.quantity;
+                        });
+                        var dialogData = toDialogDataModel(orderProducts, null, inventoryError, null);
+                        dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+                        if (!inventoryError) {
+                            var items = orderProducts.map(product => {
+                                return { id: product.id, quantity: product.quantity };
+                            });
+                            cartService.addLineItems(items).then(response => {
+                                var result = response.data;
+                                if (result.isSuccess) {
+                                    $rootScope.$broadcast('cartItemsChanged');
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+
             $ctrl.paymentMethodChanged = function () {
                 loader.wrapLoading(function() {
                     $ctrl.selectedPaymentMethod = _.find($ctrl.paymentMethods, function (pm) { return pm.code == $ctrl.selectedPaymentMethodCode; });
@@ -188,7 +218,7 @@ angular.module('storefront.account')
             };
 
             function addProductToCartById(productId, quantity) {
-                catalogService.getProduct([productId]).then(function (response) {
+                catalogService.getProduct([productId]).then(response => {
                     if (response.data && response.data.length) {
                         var product = response.data[0];
                         addProductToCart(product, quantity);
@@ -197,16 +227,27 @@ angular.module('storefront.account')
             }
 
             function addProductToCart(product, quantity) {
-                var dialogData = toDialogDataModel(product, quantity);
-                dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl');
-                cartService.addLineItem(product.id, quantity).then(function (response) {
-                    $rootScope.$broadcast('cartItemsChanged');
-                });
+                var inventoryError = product.availableQuantity < quantity;
+                angular.extend(product, { quantity });
+                var dialogData = toDialogDataModel([product], null, inventoryError, null);
+                dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+                if (!inventoryError) {
+                    cartService.addLineItem(product.id, quantity).then(() => {
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
+                }
             }
 
-            function toDialogDataModel(product, quantity) {
-                return { items: [angular.extend({ }, product, { quantity: quantity })] };
+            function toDialogDataModel(products, configurationQty, inventoryError, configuredProductId) {
+                let productIds = products.map(product => {
+                    return product.productId;
+                });
+                let items = products.map(product => {
+                    return angular.extend({ }, product, { inventoryError: product.availableQuantity < product.quantity, configuredProductId: configuredProductId })
+                });
+                return { productIds, items, inventoryError, configuredProductId, configurationQty };
             }
+
         }]
     })
     .filter('orderToSummarizedStatusLabel', [function () {

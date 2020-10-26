@@ -258,6 +258,16 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
                     $rootScope.$broadcast('cartItemsChanged');
                 }
             });
+        } else {
+            var items = $scope.dialogData.items.map(item => {
+                return { id: item.id, quantity: item.quantity };
+            });
+            cartService.addLineItems(items).then(response => {
+                var result = response.data;
+                if (result.isSuccess) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                }
+            });
         }
     }
 
