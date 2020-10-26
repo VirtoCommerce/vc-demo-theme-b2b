@@ -144,8 +144,8 @@ angular.module('storefront.account')
                             var items = orderProducts.map(product => {
                                 return { id: product.id, quantity: product.quantity };
                             });
-                            cartService.addLineItems(items).then(response => {
-                                var result = response.data;
+                            cartService.addLineItems(items).then(res => {
+                                var result = res.data;
                                 if (result.isSuccess) {
                                     $rootScope.$broadcast('cartItemsChanged');
                                 }
