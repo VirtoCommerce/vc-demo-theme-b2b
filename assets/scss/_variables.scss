@@ -729,8 +729,8 @@ $modal-footer-border-color:   $modal-header-border-color;
 // $alert-border-radius:         $border-radius-base
 // $alert-link-font-weight:      bold
 
-$alert-success-bg:            $text-contrast; // $state-success-bg;
-$alert-success-text:          $brand-primary; // $state-success-text;
+$alert-success-bg:            $brand-primary; // $state-success-bg;
+$alert-success-text:          $text-contrast; // $state-success-text;
 $alert-success-border:        darken(adjust-hue($state-success-bg, -10), 5%); //$state-success-border;
 
 // $alert-info-bg:               $state-info-bg

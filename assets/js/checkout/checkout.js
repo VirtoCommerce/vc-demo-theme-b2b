@@ -177,7 +177,9 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
                     $scope.checkout.cart = cart;
 
-                    $scope.checkout.productIds = cart.items.map(lineItem => lineItem.productId);
+                    if (!$scope.checkout.productIds) {
+                        $scope.checkout.productIds = cart.items.map(lineItem => lineItem.productId);
+                    }
 
                     if (cart.coupon) {
                         $scope.couponApplied = true;
