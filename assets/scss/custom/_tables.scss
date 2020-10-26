@@ -50,6 +50,9 @@
 .table > tbody > tr > td {
     border-right: 1px solid $gray-lighter;
     border-top: 0;
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+    padding: 8px 8px 8px 12px;
 }
 
 .table > tbody > tr > td.no-border {
@@ -65,6 +68,7 @@
     font-weight: bold;
     font-size: 14px;
     line-height: 20px;
+    padding: 14px 8px 14px 10px;
 }
 
 .table.no-vertical-borders {
@@ -79,17 +83,8 @@
     cursor: pointer;
 }
 
-.table > tbody > tr > td > .ng-binding {
-    font-family: $font-family-sans-serif;
-    font-size: 14px;
-}
-
 .orders-list-table tr td {
     width: 16.6%;
-}
-
-.table > thead > tr > th {
-    padding: 14px 8px 14px 10px;
 }
 
 .table.small-table-head {
@@ -108,10 +103,6 @@
     > tbody > tr > td:last-child {
         padding-right: 20px;
     }
-}
-
-.table > tbody > tr > td {
-    padding: 8px 8px 8px 12px;
 }
 
 .table > tbody > tr:last-child {
@@ -160,7 +151,7 @@ th {
     background-color: $body-bg;
 }
 
-.template-product .table > tbody > tr {
+.template-product .table-striped > tbody > tr:nth-of-type(even) {
     background-color: $gray-striped-table;
 }
 

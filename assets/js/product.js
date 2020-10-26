@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper', 'storeCurrency',
+    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper, storeCurrency) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -22,31 +22,40 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             }
 
             var configuredProductId = $window.product.id;
-
-            var items = $scope.productParts.map(function(value){
-                return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
+            var products = $scope.productParts.map(function(part) {
+                return part.items.find(function(item) {
+                    return item.id === part.selectedItemId;
+                });
             });
-            cartService.addLineItems(items).then(function (response) {
-                var result = response.data;
-                if(result.isSuccess) {
-                    $rootScope.$broadcast('cartItemsChanged');
-                    var products  = $scope.productParts.map(function(part){
-                        return part.items.find(function(item){
-                            return item.id === part.selectedItemId;
-                        });
-                    });
-
-                    var dialogData = toDialogDataModel(products, $scope.configurationQty);
-                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
-                }
+            var inventoryError = products.some(product => {
+                return product.availableQuantity < $scope.configurationQty;
             });
-        }
-        $scope.addProductToCart = function (product, quantity) {
-            var dialogData = toDialogDataModel([product], quantity);
+            var dialogData = toDialogDataModel(products, $scope.configurationQty, inventoryError, configuredProductId);
             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
-            cartService.addLineItem(product.id, quantity).then(function (response) {
-                $rootScope.$broadcast('cartItemsChanged');
-            });
+
+            if (!inventoryError) {
+                var items = $scope.productParts.map(function(value) {
+                    return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
+                });
+
+                cartService.addLineItems(items).then(function (response) {
+                    var result = response.data;
+                    if (result.isSuccess) {
+                        $rootScope.$broadcast('cartItemsChanged');
+                    }
+                });
+            }
+        }
+
+        $scope.addProductToCart = function (product, quantity) {
+            var inventoryError = product.availableQuantity < quantity;
+            var dialogData = toDialogDataModel([product], quantity, inventoryError, null);
+            dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+            if (!inventoryError) {
+                cartService.addLineItem(product.id, quantity).then(() => {
+                    $rootScope.$broadcast('cartItemsChanged');
+                });
+            }
         }
 
         $scope.addProductToCartById = function (productId, quantity, event) {
@@ -90,15 +99,15 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 total = roundHelper.bankersRound($scope.defaultPrice * $scope.configurationQty);
             }
 
-            return $filter('currency')(total ,'$');
+            return $filter('currency')(total, storeCurrency.symbol);
         }
 
         $scope.getDefaultPrice = function() {
-            return $filter('currency')($scope.defaultPrice, '$');
+            return $filter('currency')($scope.defaultPrice, storeCurrency.symbol);
         }
 
         $scope.getCustomChangesTotal = function() {
-            return $scope.differenceSign + $filter('currency')($scope.totalDifference, '$') || $filter('currency')(0, '$');
+            return $scope.differenceSign + $filter('currency')($scope.totalDifference, storeCurrency.symbol) || $filter('currency')(0, storeCurrency.symbol);
         }
 
         $scope.quantityChanged = function(qty) {
@@ -111,14 +120,14 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             }
         }
 
-        function toDialogDataModel(products, quantity) {
+        function toDialogDataModel(products, quantity, inventoryError, configuredProductId) {
             let productIds = products.map(function(product) {
                 return product.id;
             });
             let items = products.map(function(product) {
-                return angular.extend({ }, product, { quantity: quantity })
+                return angular.extend({ }, product, { quantity: +quantity, inventoryError: product.availableQuantity < quantity, configuredProductId: configuredProductId })
             });
-            return { productIds: productIds, items: items };
+            return { productIds, items, inventoryError, configuredProductId, configurationQty: quantity };
         }
 
         function initialize(filters) {
@@ -224,8 +233,8 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
         $scope.$watch('filters', initialize);
     }]);
 
-storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', function ($scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl) {
-    $scope.dialogData = dialogData;
+storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
+    $scope.dialogData = dialogData || {};
     $scope.baseUrl = baseUrl;
     $scope.regex = new RegExp(/^\/+/);
 
@@ -233,17 +242,73 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$scope', '$w
         $uibModalInstance.dismiss('cancel');
     }
 
+    $scope.addToCart = function() {
+        $scope.dialogData.inventoryError = false;
+        if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
+            cartService.addLineItem($scope.dialogData.items[0].id, $scope.dialogData.items[0].quantity).then(() => {
+                $rootScope.$broadcast('cartItemsChanged');
+            });
+        } else if ($scope.dialogData.configuredProductId) {
+            var items = $scope.dialogData.items.map(item => {
+                return { id: item.id, quantity: $scope.configurationQty, configuredProductId: item.configuredProductId };
+            });
+            cartService.addLineItems(items).then(response => {
+                var result = response.data;
+                if (result.isSuccess) {
+                    $rootScope.$broadcast('cartItemsChanged');
+                }
+            });
+        }
+    }
+
+    $scope.calculateTotal = function(itemPrice, itemQuantity) {
+        var total = roundHelper.bankersRound(itemPrice * itemQuantity);
+        return $filter('currency')(total, storeCurrency.symbol);
+    }
+
+    $scope.setInitQuantity = function(item) {
+        if (item.inventoryError) {
+            return item.availableQuantity;
+        } else {
+            return item.quantity;
+        }
+    }
+
+    $scope.quantityChanged = function(qty) {
+        $scope.configurationQty = qty;
+    }
+
     $scope.redirect = function (url) {
         $window.location.href = url;
     }
+
     $scope.send = function(email) {
         mailingService.sendProduct(dialogData.productId, { email: email, storeId: dialogData.storeId, productUrl: dialogData.productUrl, language: dialogData.language });
         $uibModalInstance.close();
     }
+
+    function getMaxInventory() {
+        var inventoryArray = $scope.dialogData.items.map(item => {
+            return item.availableQuantity;
+        });
+        $scope.maxConfigurationQty = Math.min(...inventoryArray);
+        $scope.configurationQty = $scope.maxConfigurationQty;
+    }
+
+    function initialize() {
+        if ($scope.dialogData.inventoryError && $scope.dialogData.configuredProductId) {
+            getMaxInventory();
+        } else if (!$scope.dialogData.inventoryError && $scope.dialogData.configuredProductId) {
+            $scope.configurationQty = $scope.dialogData.configurationQty;
+        }
+    }
+
+    initialize();
+
 }]);
 
 storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scope', '$window', '$uibModalInstance', 'dialogData', function ($scope, $window, $uibModalInstance, dialogData) {
-    $scope.dialogData = dialogData;
+    $scope.dialogData = dialogData || {};
     $scope.selectedId = dialogData.selectedItemId;
 
     $scope.close = function() {

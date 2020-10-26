@@ -253,7 +253,11 @@
             "product_search_empty": "No products found",
             "product_search_progress": "Searching...",
             "categories": "Categories",
-            "products": "Products"
+            "products": "Products",
+            "limited_qty": "Limited product quantity",
+            "in_stock": "in stock",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
         },
         "send_to_email": {
             "title": "Select persons to send the email",
