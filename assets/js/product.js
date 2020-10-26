@@ -244,7 +244,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 
     $scope.addToCart = function() {
         $scope.dialogData.inventoryError = false;
-        if ($scope.dialogData.items.length === 1) {
+        if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
             cartService.addLineItem($scope.dialogData.items[0].id, $scope.dialogData.items[0].quantity).then(() => {
                 $rootScope.$broadcast('cartItemsChanged');
             });
@@ -308,7 +308,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 }]);
 
 storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scope', '$window', '$uibModalInstance', 'dialogData', function ($scope, $window, $uibModalInstance, dialogData) {
-    $scope.dialogData = dialogData;
+    $scope.dialogData = dialogData || {};
     $scope.selectedId = dialogData.selectedItemId;
 
     $scope.close = function() {
