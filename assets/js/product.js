@@ -234,7 +234,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
     }]);
 
 storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
-    $scope.dialogData = dialogData;
+    $scope.dialogData = dialogData || {};
     $scope.baseUrl = baseUrl;
     $scope.regex = new RegExp(/^\/+/);
 
@@ -244,7 +244,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 
     $scope.addToCart = function() {
         $scope.dialogData.inventoryError = false;
-        if ($scope.dialogData.items.length === 1) {
+        if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
             cartService.addLineItem($scope.dialogData.items[0].id, $scope.dialogData.items[0].quantity).then(() => {
                 $rootScope.$broadcast('cartItemsChanged');
             });
@@ -318,7 +318,7 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
 }]);
 
 storefrontApp.controller('changeConfigurationGroupItemDialogController', ['$scope', '$window', '$uibModalInstance', 'dialogData', function ($scope, $window, $uibModalInstance, dialogData) {
-    $scope.dialogData = dialogData;
+    $scope.dialogData = dialogData || {};
     $scope.selectedId = dialogData.selectedItemId;
 
     $scope.close = function() {
