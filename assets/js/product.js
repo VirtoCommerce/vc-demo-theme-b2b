@@ -234,7 +234,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
     }]);
 
 storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
-    $scope.dialogData = dialogData;
+    $scope.dialogData = dialogData || {};
     $scope.baseUrl = baseUrl;
     $scope.regex = new RegExp(/^\/+/);
 
