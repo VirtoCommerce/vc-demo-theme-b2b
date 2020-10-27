@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                         {% capture order_number %}{% raw %}{{$ctrl.orderNumber}}{% endraw %}{% endcapture %}
-                                    <h3>{{ 'customer.order.title' | t: order_number }}</h3>
+                                    <h3 class="my-3">{{ 'customer.order.title' | t: order_number }}</h3>
                                     <div class="row">
                                         <div class="col-md-4">
                                             <p>{{ 'customer.orders.status' | t }}: <span ng-bind="$ctrl.order.status" class="info"></span></p>
@@ -98,11 +98,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body panel-table">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <vc-line-items items="$ctrl.order.items"></vc-line-items>
-                                </div>
+                        <div class="row" ng-if="$ctrl.order">
+                            <div class="col-md-12">
+                                <vc-line-items order="$ctrl.order"></vc-line-items>
                             </div>
                         </div>
                     </div>

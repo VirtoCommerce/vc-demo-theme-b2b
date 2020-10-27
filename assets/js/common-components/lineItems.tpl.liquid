@@ -1,17 +1,89 @@
-<table class="table table-hover">
+<table class="table no-vertical-borders small-table-head table-row-padding m-0">
     <thead>
         <tr>
             <th>{{ 'customer.order.product' | t }}</th>
             <th></th>
-            <th>{{ 'customer.order.quantity' | t }}</th>
-            <th>{{ 'customer.order.total' | t }}</th>
+            <th class="text-center">{{ 'customer.order.quantity' | t }}</th>
+            <th class="text-right">{{ 'customer.order.total' | t }}</th>
             <th></th>
         </tr>
     </thead>
-    <tbody>
-        <tr ng-repeat="lineItem in $ctrl.items">
+    <tbody ng-repeat="group in $ctrl.order.configuredGroups" class="order-line-item">
+        <tr class="py-4">
             <td class="col-xs-2 col-md-1">
-                <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-if="lineItem.imageUrl" />
+                <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+            </td>
+            <td>
+                <a ng-bind="group.product.name" href="{% raw %}{{ 'product/' + group.productId }}{% endraw %}"></a>
+                <p class="d-flex mt-1">
+                    <img class="img-responsive mr-2" src="{{ 'customize.svg' | asset_url }}" />
+                    <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer"></a>
+                </p>
+            </td>
+            <td class="text-center">
+                <span ng-bind="group.quantity"></span>
+            </td>
+            <td class="text-right">
+                {% if settings.show_prices_with_taxes %}
+                    <p ng-bind="group.placedPriceWithTax.formattedAmount"></p>
+                    <s ng-if="group.listPriceWithTax.amount > group.placedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
+                {% else %}
+                    <strong class="text-green" ng-bind="group.placedPrice.formattedAmount"></strong>
+                    <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
+                {% endif %}
+            </td>
+            <td>
+                <div class="btn-toolbar">
+                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addProductToCart(group.productId,group.quantity)">Reorder</button>
+                </div>
+            </td>
+        </tr>
+        <tr ng-show="group.showConfiguration">
+            <td></td>
+            <td colspan="4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="h4">Configuration parts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table no-vertical-borders small-table-head table-row-padding m-0">
+                        <thead class="d-none">
+                            <tr>
+                                <th></th>
+                                <th>Product</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="part in group.parts" class="border-bottom-light">
+                                <td class="text-center">
+                                    <img alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                                </td>
+                                <td>
+                                    <a ng-href="{% raw %}{{ part.items[0].product.url }}{% endraw %}" ng-bind="part.items[0].name" class="text-bold"></a>
+                                </td>
+                                <td ng-bind="part.items[0].quantity" class="text-center"></td>
+                            {% if settings.show_prices_with_taxes %}
+                                <td ng-bind="part.items[0].extendedPriceWithTax.formattedAmount" class="text-bold text-right"></td>
+                            {% else %}
+                                <td ng-bind="part.items[0].extendedPrice.formattedAmount" class="text-bold text-right"></td>
+                            {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <!-- <vc-order-configure-groups groups="$ctrl.order.configuredGroups"></vc-order-configure-groups> -->
+    <tbody>
+        <tr ng-repeat="lineItem in $ctrl.order.usualItems" class="py-4 order-line-item">
+            <td class="col-md-2">
+                <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td>
                 <a ng-bind="lineItem.name" href="{% raw %}{{ 'product/' + lineItem.productId }}{% endraw %}"></a>
@@ -21,10 +93,10 @@
                 </p>
                 {% endif %}
             </td>
-            <td>
+            <td class="text-center">
                 <span ng-bind="lineItem.quantity"></span>
             </td>
-            <td>
+            <td class="text-right">
                 {% if settings.show_prices_with_taxes %}
                 <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
                 <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
@@ -35,7 +107,7 @@
             </td>
             <td>
                 <div class="btn-toolbar">
-                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="addProductToCart(lineItem.productId,1)">Add to cart</button>
+                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
                 </div>
             </td>
         </tr>
