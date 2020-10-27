@@ -63,10 +63,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredItems">
-                                        <vc-checkout-configurable-line-item item="item" cart-items="checkout.cart.items" on-change-qty="changeItemQty(item)" on-remove="removeItem(item)"></vc-checkout-configurable-line-item>
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredGroups">
+                                        <vc-checkout-configurable-line-item item="item" on-change-qty="changeItemQty(item)" on-remove="removeItem(item)"></vc-checkout-configurable-line-item>
                                     </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in regularLineItems">
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in checkout.cart.usualItems">
                                         <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
                                     </div>
                                     <div ng-show="relatedProducts.item.count" class="row">
@@ -287,10 +287,10 @@
                                     <div class="row hidden-xs hidden-sm">
                                                <h2> MY PRODUCTS</h2>
                                     </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredItems">
-                                        <vc-checkout-configurable-line-item item="item" cart-items="checkout.cart.items" ></vc-checkout-configurable-line-item>
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredGroups">
+                                        <vc-checkout-configurable-line-item item="item" ></vc-checkout-configurable-line-item>
                                     </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in regularLineItems">
+                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in checkout.cart.usualItems">
                                         <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
                                     </div>
                                 </div>
@@ -374,6 +374,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
+                                        <!-- TODO: Do we need to show configured items here? We don't have design for this step.-->
                                         <div class="col-md-12" ng-repeat="lineItem in checkout.order.items">
                                             <vc-checkout-line-item line-item="lineItem" readOnly="true"></vc-checkout-line-item>
                                         </div>
