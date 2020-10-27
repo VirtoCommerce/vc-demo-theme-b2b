@@ -1,7 +1,7 @@
 <div class="d-flex flex-column">
     <div class="d-flex align-items-center">
         <div class="col-xs-2 col-md-1 align-self-start">
-            <img class="img-responsive" alt="{% raw %}{{ $ctrl.item.product.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.item.product.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+            <img class="img-responsive" alt="{% raw %}{{ $ctrl.item.product.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.item.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
         </div>
         <div class="col-xs-4 col-md-4">
             <p><span ng-bind="$ctrl.item.product.name" class="text-bold"></span></p>
