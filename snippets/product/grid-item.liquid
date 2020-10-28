@@ -15,7 +15,7 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible product-card" ng-controller="productController">
+<div class="col-md-3 flexible product-card" ng-controller="productController" ng-init="getProductConfigurationPrice('{{product.id}}')">
     {% include 'shared/item-response-group' %}
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
