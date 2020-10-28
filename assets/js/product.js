@@ -166,14 +166,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                 });
             });
 
-            catalogService.getProductConfiguration(product.id).then(function(response) {
-                $scope.productParts = response.data;
-                $scope.defaultProductParts = [];
-                _.each($scope.productParts, function (part) {
-                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
-                });
-                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
-            });
+            $scope.initProductConfiguration(product.id);
         };
 
         function getFlatternDistinctPropertiesMap(variations) {
@@ -224,6 +217,18 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
             $scope.totalDifference = roundHelper.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
             $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
                                     ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
+        }
+
+        $scope.initProductConfiguration = function(productId) {
+            catalogService.getProductConfiguration(productId).then(function(response) {
+                $scope.productParts = response.data;
+                $scope.defaultProductParts = [];
+                _.each($scope.productParts, function (part) {
+                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+                });
+
+                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            });
         }
 
         $scope.sendToEmail = function (storeId, productId, productUrl, language) {
