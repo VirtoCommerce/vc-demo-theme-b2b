@@ -254,21 +254,11 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
                 $rootScope.$broadcast('cartItemsChanged');
             });
         } else if ($scope.dialogData.configuredProductId) {
-            let items = $scope.dialogData.items.map(item => {
+            var items = $scope.dialogData.items.map(item => {
                 return { id: item.id, quantity: $scope.configurationQty, configuredProductId: item.configuredProductId };
             });
             cartService.addLineItems(items).then(response => {
-                let result = response.data;
-                if (result.isSuccess) {
-                    $rootScope.$broadcast('cartItemsChanged');
-                }
-            });
-        } else {
-            let items = $scope.dialogData.items.map(item => {
-                return { id: item.id, quantity: item.quantity };
-            });
-            cartService.addLineItems(items).then(response => {
-                let result = response.data;
+                var result = response.data;
                 if (result.isSuccess) {
                     $rootScope.$broadcast('cartItemsChanged');
                 }
@@ -286,6 +276,14 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
             return item.availableQuantity;
         } else {
             return item.quantity;
+        }
+    }
+
+    $scope.getConfirmationTitle = function() {
+        if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
+            return '1 item was added to cart';
+        } else {
+            return `${$scope.dialogData.items.length} items were added to cart`;
         }
     }
 

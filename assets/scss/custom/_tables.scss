@@ -71,6 +71,10 @@
     padding: 14px 8px 14px 10px;
 }
 
+.table > tbody + tbody {
+    border-top: 1px solid $gray-lighter;
+}
+
 .table.no-vertical-borders {
     > thead > tr > th,
     > tbody > tr > td {

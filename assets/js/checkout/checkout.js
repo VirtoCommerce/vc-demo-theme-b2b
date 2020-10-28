@@ -178,7 +178,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     $scope.checkout.cart = cart;
 
                     if (!$scope.checkout.productIds) {
-                        $scope.checkout.productIds = cart.items.map(lineItem => lineItem.productId);
+                        $scope.checkout.productIds = cart.usualItems.map(lineItem => lineItem.productId);
                     }
 
                     if (cart.coupon) {
@@ -187,21 +187,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     } else {
                         $scope.couponApplied = false;
                         $scope.checkout.coupon.code = null;
-                    }
-
-                    if (cart.configuredItems && cart.configuredItems.length) {
-                        $scope.configuredItemsIds = [];
-                        _.each($scope.checkout.cart.configuredItems, function (item) {
-                            _.each(item.parts, function (part) {
-                                $scope.configuredItemsIds.push(part.selectedItemId);
-                            });
-                        });
-                        $scope.configuredItemsIds = _.uniq($scope.configuredItemsIds);
-                        $scope.regularLineItems = _.filter($scope.checkout.cart.items, function(item) {
-                            return $scope.configuredItemsIds.indexOf(item.id) === -1;
-                        });
-                    } else {
-                        $scope.regularLineItems = $scope.checkout.cart.items;
                     }
 
                     if (cart.payments.length) {
