@@ -1,6 +1,6 @@
 <script id="storefront.recently-added-cart-item-dialog.tpl" type="text/ng-template">
     <div class="modal-header text-contrast rounded-top" ng-class="{'bg-brand-success': !dialogData.inventoryError, 'bg-primary': dialogData.inventoryError }">
-        <h4 class="modal-title" ng-if="!dialogData.inventoryError">{% raw %}{{ dialogData.items.length }}{% endraw %}&nbsp;{{ 'cart.general.added_to_cart' | t }}</h4>
+        <h4 class="modal-title" ng-if="!dialogData.inventoryError" ng-bind="getConfirmationTitle()"></h4>
         <h4 class="modal-title" ng-if="dialogData.inventoryError">{{ 'cart.general.limited_qty' | t }}</h4>
         <button type="button" class="close text-contrast opacity-100" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
@@ -22,7 +22,7 @@
                         </td>
                         <td class="col-md-7 py-4">
                             <a ng-href="{% raw %}{{ item.url.replace(regex, baseUrl) }}{% endraw %}" class="text-bold" ng-bind="item.name"></a>
-                            <p ng-if="dialogData.inventoryError && item.inventoryError" class="mb-0 mt-2"><i class="fa fa-exclamation-circle fa-lg text-primary" aria-hidden="true"></i> <span class="small">Reduced quantity of goods due to stock restrictions</span></p>
+                            <p ng-if="dialogData.inventoryError && item.inventoryError" class="mb-0 mt-2"><i class="fa fa-exclamation-circle fa-lg text-primary" aria-hidden="true"></i> <span class="small">Reduced quantity of products due to stock restrictions</span></p>
                         </td>
                         <td class="text-center col-md-2">
                             <span ng-if="!dialogData.inventoryError && !dialogData.configuredProductId" ng-bind="item.quantity"></span>

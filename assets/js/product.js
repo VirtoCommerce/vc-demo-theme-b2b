@@ -274,6 +274,14 @@ storefrontApp.controller('recentlyAddedCartItemDialogController', ['$rootScope',
         }
     }
 
+    $scope.getConfirmationTitle = function() {
+        if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
+            return '1 item was added to cart';
+        } else {
+            return `${$scope.dialogData.items.length} items were added to cart`;
+        }
+    }
+
     $scope.quantityChanged = function(qty) {
         $scope.configurationQty = qty;
     }
