@@ -1,4 +1,4 @@
-var storefrontApp = angular.module('storefrontApp');
+﻿var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.component('vcLineItems', {
     templateUrl: "themes/assets/js/common-components/lineItems.tpl.liquid",
@@ -12,6 +12,10 @@ storefrontApp.component('vcLineItems', {
 
         $ctrl.addProductToCart = function (productId, quantity) {
             $scope.$emit('lineItemAdded', {productId, quantity});
+        }
+
+        $ctrl.addConfigurationToCart = function (configuration) {
+            $scope.$emit('configurationAdded', {configuration});
         }
 
         $ctrl.getToggleTitle = function (group) {

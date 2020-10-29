@@ -9,8 +9,8 @@
         </tr>
     </thead>
     <tbody ng-repeat="group in $ctrl.order.configuredGroups" class="order-line-item">
-        <tr class="py-4">
-            <td class="col-xs-2 col-md-1">
+        <tr>
+            <td class="col-xs-2">
                 <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td>
@@ -34,7 +34,7 @@
             </td>
             <td>
                 <div class="btn-toolbar">
-                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addProductToCart(group.productId,group.quantity)">Reorder</button>
+                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
                 </div>
             </td>
         </tr>
@@ -80,8 +80,8 @@
         </tr>
     </tbody>
     <tbody>
-        <tr ng-repeat="lineItem in $ctrl.order.usualItems" class="py-4 order-line-item">
-            <td class="col-md-2">
+        <tr ng-repeat="lineItem in $ctrl.order.usualItems" class="order-line-item">
+            <td class="col-xs-2">
                 <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td>
