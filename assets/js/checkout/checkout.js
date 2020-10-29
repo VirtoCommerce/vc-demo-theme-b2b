@@ -57,7 +57,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changeShippingMethod = function () {
                 $scope.getAvailShippingMethods($scope.checkout.shipment).then(function (response) {
-                    var dialogInstance = dialogService.showDialog({ availShippingMethods: response, checkout: $scope.checkout }, 'universalDialogController', 'storefront.select-shipment-method-dialog.tpl');
+                    var dialogInstance = dialogService.showDialog({ availShippingMethods: response, checkout: $scope.checkout }, 'selectShipmentMethodDialogController', 'storefront.select-shipment-method-dialog.tpl');
                     dialogInstance.result.then(function (shipmentMethod) {
                         $scope.selectShippingMethod(shipmentMethod);
                     });
@@ -341,6 +341,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             $scope.selectPaymentMethod(customerDefaults.paymentMethod);
                         }
                         if (customerDefaults.shippingMethod) {
+                            $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
                             $scope.selectShippingMethod(customerDefaults.shippingMethod);
                         }
                     }

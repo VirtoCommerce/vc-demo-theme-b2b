@@ -445,28 +445,45 @@
 
 <script id="storefront.select-shipment-method-dialog.tpl" type="text/ng-template">
     <div class="modal-header">
-        <h4 class="modal-title">AVAILABLE SHIPPING METHODS / ESTIMATED ARRIVAL</h4>
-        <button class="close" type="button" ng-click="close()" title="SHIPPING METHOD" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Select shipping method</h4>
+        <button class="close" type="button" ng-click="close()" title="Select shipping method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
-    <div class="modal-body">
-        <div class="container-bordered container-drain">
-            <div ng-repeat="(key, value) in availShippingMethods | groupBy: 'shipmentMethodCode' ">
-                <div class="row" ng-repeat="method in value">
-                    <div class="col-md-9">
+        <table class="table no-vertical-borders small-table-head table-row-padding m-0">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Mehtod name</th>
+                    <th></th>
+                    <th class="text-center">Price</th>
+                    <th class="text-right">Active method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="method in availShippingMethods">
+                    <td>
+                        <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{method.logoUrl}}{% endraw %}" />
+                    </td>
+                    <td>
                         <span class="name" ng-bind="method.name"></span><span ng-bind="method.optionName"></span>
-                        <span>
-                            <strong ng-bind="'(' + method.price.formattedAmount + ')'"></strong>
-                        </span>
-                    </div>
-                    <div class="col-md-3 form-group">
-                        <a ng-if="checkout.shipment.shipmentMethodOption != method.optionName" class="btn btn-default form-control" ng-click="close(method)">Select</a>
-                        <a ng-if="checkout.shipment.shipmentMethodOption == method.optionName" class="btn btn-default form-control" ng-disabled="true">Selected</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </td>
+                    <td></td>
+                    <td class="text-center">
+                        <span ng-bind="method.price.formattedAmount"></span>
+                    </td>
+                    <td class="text-right">
+                        <label ng-if="!isActive(method)" class="text-nowrap">
+                            <a role="button" href="" ng-click="activate(method)">Choose</a>
+                        </label>
+                        <label ng-if="isActive(method)" class="text-nowrap">
+                            <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Active
+                        </label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" ng-click="close(checkout.shipmentMethod)">Ok</button>
     </div>
 </script>
 
