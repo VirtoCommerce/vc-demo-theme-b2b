@@ -64,7 +64,7 @@
                                     <img alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
                                 </td>
                                 <td>
-                                    <a ng-href="{% raw %}{{ part.items[0].product.url }}{% endraw %}" ng-bind="part.items[0].name" class="text-bold"></a>
+                                    <a ng-href="{% raw %}{{ part.items[0].product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.items[0].name"></a>
                                 </td>
                                 <td ng-bind="part.items[0].quantity" class="text-center"></td>
                             {% if settings.show_prices_with_taxes %}
