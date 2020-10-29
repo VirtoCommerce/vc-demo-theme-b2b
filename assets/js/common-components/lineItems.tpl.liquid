@@ -13,7 +13,7 @@
             <td class="col-xs-2">
                 <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
-            <td>
+            <td class="col-xs-6">
                 <a ng-bind="group.product.name" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
                 <p class="d-flex mt-1">
                     <img class="img-responsive mr-2" src="{{ 'customize.svg' | asset_url }}" />
