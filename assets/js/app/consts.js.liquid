@@ -10,6 +10,7 @@ angular.module('storefrontApp.consts', [])
 .constant('sortAscending', 'asc')
 .constant('sortDescending', 'desc')
 .constant('orderStatuses', ['Unpaid','Paid','Completed'])
+.constant('storeCurrency', {{ current_currency | json }})
 .constant('itemResponseGroup', {
     None: 0,
     ItemInfo: 1,

@@ -8,8 +8,7 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
     bindings: {
         item: '=',
         onChangeQty: '&',
-        onRemove: '&',
-        cartItems: '<'
+        onRemove: '&'
     },
     controller: ['$scope', 'availablePaymentPlans', 'baseUrl', function ($scope, availablePaymentPlans, baseUrl) {
         var ctrl = this;
@@ -28,12 +27,12 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
 
         this.changeQty = function () {
             if (ctrl.onChangeQty) {
-                ctrl.onChangeQty({ item: ctrl.item.configuredLineItem });
+                ctrl.onChangeQty({ item: ctrl.item });
             }
         };
 
         this.remove = function () {
-            ctrl.onRemove({ item: ctrl.item.configuredLineItem });
+            ctrl.onRemove({ item: ctrl.item });
         }
 
         this.validate = function () {
@@ -53,7 +52,7 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
 
         function getConfiguredLineItems(item) {
             _.each(item.parts, function (part) {
-                part.items = [ctrl.cartItems.find(x => x.id === part.selectedItemId)];
+                part.items = [item.items.find(x => x.id === part.selectedItemId)];
             });
         }
 
