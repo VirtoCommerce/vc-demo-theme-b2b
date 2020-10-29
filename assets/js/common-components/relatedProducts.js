@@ -5,6 +5,7 @@ storefrontApp.component('vcRelatedProducts', {
     bindings: {
         productIds: '<',
         responsive: '<',
+        imageSize: '@',
         onUpdate: '&'
     },
     controller: ['baseUrl', '$timeout', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $element, loader, recommendationService) {
@@ -13,6 +14,7 @@ storefrontApp.component('vcRelatedProducts', {
         $ctrl.loader = loader;
         $ctrl.baseUrl = baseUrl;
         $ctrl.products = [];
+        $ctrl.imageSize = $ctrl.imageSize || 'lg';
 
         $ctrl.initCarousel = function () {
             var responsive = Object.assign($ctrl.responsive);
