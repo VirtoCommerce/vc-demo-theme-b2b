@@ -3,7 +3,7 @@
 storefrontApp.component('vcLineItems', {
     templateUrl: "themes/assets/js/common-components/lineItems.tpl.liquid",
     bindings: {
-        order: '='
+        order: '<'
     },
     controller: ['$scope', 'baseUrl', function ($scope, baseUrl) {
         var $ctrl = this;
@@ -28,6 +28,10 @@ storefrontApp.component('vcLineItems', {
 
         $ctrl.getProductLink = function(productId) {
             return `product/${productId}`.replace($scope.regex, $scope.baseUrl);
+        };
+
+        $ctrl.$onChanges = function (params) {
+            getConfiguredLineItems($ctrl.order.configuredGroups);
         };
 
         function getConfiguredLineItems(groups) {
