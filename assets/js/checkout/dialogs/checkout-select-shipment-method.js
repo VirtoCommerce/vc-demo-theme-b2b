@@ -1,6 +1,7 @@
 angular.module('storefrontApp')
 .controller('selectShipmentMethodDialogController', ['$scope', '$uibModalInstance', 'dialogData', function ($scope, $uibModalInstance, dialogData) {
     angular.extend($scope, dialogData);
+    $scope.oldShippingMethod = $scope.checkout.shipmentMethod;
 
     $scope.isActive = function(shipmentMethod) {
         return $scope.checkout.shipmentMethod.optionName === shipmentMethod.optionName;
@@ -18,6 +19,7 @@ angular.module('storefrontApp')
         if (result) {
             $uibModalInstance.close(result);
         } else {
+            $scope.activate($scope.oldShippingMethod);
             $uibModalInstance.dismiss('cancel');
         }
     }

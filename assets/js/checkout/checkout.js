@@ -209,6 +209,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             var shipmentMethod = _.find(response, function (sm) { return sm.shipmentMethodCode == $scope.checkout.shipment.shipmentMethodCode && sm.optionName == $scope.checkout.shipment.shipmentMethodOption; });
                             if (shipmentMethod) {
                                 $scope.checkout.shipment.shipmentMethod = shipmentMethod;
+                                $scope.checkout.shipmentMethod = shipmentMethod;
                             }
                         });
                     }
@@ -340,7 +341,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                         if (customerDefaults.paymentMethod) {
                             $scope.selectPaymentMethod(customerDefaults.paymentMethod);
                         }
-                        if (customerDefaults.shippingMethod) {
+                        if (customerDefaults.shippingMethod && !$scope.checkout.shipmentMethod) {
                             $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
                             $scope.selectShippingMethod(customerDefaults.shippingMethod);
                         }
