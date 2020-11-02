@@ -2,7 +2,7 @@ angular.module('storefrontApp')
 .controller('selectPaymentMethodDialogController', ['$scope', 'authService', '$uibModalInstance', 'dialogData', 'iconUrlService', 'creditCardPaymentMethodCode', 'purchasingAgentRole',
             function ($scope, authService, $uibModalInstance, dialogData, iconUrlService, creditCardPaymentMethodCode, purchasingAgentRole) {
     angular.extend($scope, dialogData);
-
+    $scope.oldPaymentMethod = $scope.checkout.paymentMethod;
     $scope.creditCardEditorVisibility = null;
 
     $scope.isActive = function(paymentMethod) {
@@ -49,6 +49,7 @@ angular.module('storefrontApp')
         if (result) {
             $uibModalInstance.close(result);
         } else {
+            $scope.activate($scope.oldPaymentMethod);
             $uibModalInstance.dismiss('cancel');
         }
     }
