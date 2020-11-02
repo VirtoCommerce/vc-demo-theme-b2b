@@ -151,11 +151,11 @@ th {
     }
 }
 
-.template-product .table-striped > tbody > tr:nth-of-type(odd) {
+.table-striped > tbody > tr:nth-of-type(odd) {
     background-color: $body-bg;
 }
 
-.template-product .table-striped > tbody > tr:nth-of-type(even) {
+.table-striped > tbody > tr:nth-of-type(even) {
     background-color: $gray-striped-table;
 }
 
@@ -166,12 +166,6 @@ th {
 
 .address-list {
     border-top: 1px solid $gray-lighter;
-}
-
-.address-list a:not(.btn) {
-    font-weight: 500;
-    margin-left: 18px;
-    border-bottom: 1px dashed $brand-alt;
 }
 
 .product-properties {

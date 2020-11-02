@@ -391,51 +391,49 @@
 
 
 <script id="storefront.select-address-dialog.tpl" type="text/ng-template">
-    <div class="modal-header">
+    <div class="modal-header bg-gray-striped rounded-top">
         <h4 class="modal-title">SELECT ADDRESS</h4>
         <button class="close" type="button" ng-click="close()" title="Select address" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
-    <div class="modal-body">
-        <table class="table table-striped address-list">
-            <thead>
-                <tr>
-                    <th>Recipient's name</th>
-                    <th>Address</th>
-                    <th>{{ 'customer.addresses.phone' | t }}</th>
-                    <th>{{ 'customer.addresses.email' | t }}</th>
-                    <th>Current address</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="address in addresses">
-                    <td>
-                        <span ng-if="address.firstName" ng-bind="address.firstName"></span>
-                        <span ng-if="address.lastName" ng-bind="address.lastName"></span>
-                    </td>
-                    <td>
-                        <span ng-bind="address.line1"></span><span ng-if="address.line2">
-                            , <span ng-bind="address.line2"></span>
-                        </span>
-                        <span ng-bind="address.city"></span>, <span ng-bind="address.regionName"></span>, <span ng-bind="address.countryCode"></span> <span ng-bind="address.postalCode"></span>
-                    </td>
-                    <td>
-                        <span ng-bind="address.phone"></span>
-                    </td>
-                    <td>
-                        <span ng-bind="address.email"></span>
-                    </td>
-                    <td>
-                        <label ng-if="isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
-                            <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Current address
-                        </label>
-                        <label ng-if="!isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
-                            <a role="button" href="" ng-click="checkout.deliveryAddress = address">Select address</a>
-                        </label>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-striped no-vertical-borders small-table-head table-row-padding m-0 border-0">
+        <thead>
+            <tr>
+                <th>Recipient's name</th>
+                <th>Address</th>
+                <th>{{ 'customer.addresses.phone' | t }}</th>
+                <th>{{ 'customer.addresses.email' | t }}</th>
+                <th>Current address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="address in addresses">
+                <td>
+                    <span ng-if="address.firstName" ng-bind="address.firstName"></span>
+                    <span ng-if="address.lastName" ng-bind="address.lastName"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.line1"></span><span ng-if="address.line2">
+                        , <span ng-bind="address.line2"></span>
+                    </span>
+                    <span ng-bind="address.city"></span>, <span ng-bind="address.regionName"></span>, <span ng-bind="address.countryCode"></span> <span ng-bind="address.postalCode"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.phone"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.email"></span>
+                </td>
+                <td class="text-left">
+                    <label ng-if="isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
+                        <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Current address
+                    </label>
+                    <label ng-if="!isEqualAddress(checkout.deliveryAddress, address)" class="text-nowrap">
+                        <a role="button" class="dashed-link" href="" ng-click="checkout.deliveryAddress = address">Select address</a>
+                    </label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <div class="modal-footer">
         <button type="button" class="btn btn-default btn-alt pull-left" ng-click="close(false)">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="close(true)">Save</button>
@@ -444,35 +442,33 @@
 
 
 <script id="storefront.select-shipment-method-dialog.tpl" type="text/ng-template">
-    <div class="modal-header">
+    <div class="modal-header bg-gray-striped rounded-top">
         <h4 class="modal-title">Select shipping method</h4>
         <button class="close" type="button" ng-click="close()" title="Select shipping method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
-        <table class="table no-vertical-borders small-table-head table-row-padding m-0">
+        <table class="table table-striped no-vertical-borders small-table-head table-row-padding m-0 border-0">
             <thead>
                 <tr>
                     <th></th>
                     <th>Mehtod name</th>
-                    <th></th>
                     <th class="text-center">Price</th>
                     <th class="text-right">Active method</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="method in availShippingMethods">
-                    <td>
+                    <td class="col-xs-2">
                         <img class="img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{method.logoUrl}}{% endraw %}" />
                     </td>
-                    <td>
+                    <td ng-class="{'text-bold': isActive(method)}">
                         <span class="name" ng-bind="method.name"></span><span ng-bind="method.optionName"></span>
                     </td>
-                    <td></td>
+                    <td class="text-center text-muted-contrast">
                         <span ng-bind="getTotal(method)"></span>
-                        <span ng-bind="method.price.formattedAmount"></span>
                     </td>
                     <td class="text-right">
                         <label ng-if="!isActive(method)" class="text-nowrap">
-                            <a role="button" href="" ng-click="activate(method)">Choose</a>
+                            <a role="button" class="dashed-link" href="" ng-click="activate(method)">Choose</a>
                         </label>
                         <label ng-if="isActive(method)" class="text-nowrap">
                             <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Active
@@ -488,7 +484,7 @@
 </script>
 
 <script id="storefront.select-payment-method-dialog.tpl" type="text/ng-template">
-    <div class="modal-header">
+    <div class="modal-header bg-gray-striped rounded-top">
         <h4 class="modal-title">Select payment method</h4>
         <button class="close" type="button" ng-click="close()" title="Select payment method" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
@@ -512,7 +508,7 @@
                 <div ng-if="isAvailable(paymentMethod)" class="col-md-3"></div>
                 <div ng-if="isAvailable(paymentMethod)" class="col-md-2 text-center" >
                     <label ng-if="!isActive(paymentMethod)" class="text-nowrap">
-                        <a role="button" href="" ng-click="activate(paymentMethod)">Choose</a>
+                        <a role="button" class="dashed-link" href="" ng-click="activate(paymentMethod)">Choose</a>
                     </label>
                     <label ng-if="isActive(paymentMethod)" class="text-nowrap">
                         <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Active
