@@ -777,6 +777,12 @@
           "label": "Content",
           "type": "text",
           "default": "Text block content"
+        },
+        {
+            "id": "contentColor",
+            "label": "Choose content color",
+            "type": "color",
+            "default": ""
         }
       ]
     }

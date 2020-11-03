@@ -1,10 +1,10 @@
-<div id="{{ block.__id }}" style="position: relative;" class="{{ block.style }}">
+<div id="{{ block.__id }}" class="{{ block.style }}">
   <div class="{% include 'blocks/helpers/block-paddings' %} block container">
     <div class="px-5">
       {% include 'blocks/helpers/block-title' %}
 
       {% if block.content %}
-      <div class="block-text"> {{ block.content }} </div>
+        <div style="{% if block.contentColor != '' %}color: {{block.contentColor}};{% endif %}position: relative;"> {{ block.content }} </div>
       {% endif %}
     </div>
   </div>
@@ -23,6 +23,7 @@ noTop: bool
 noBottom: bool
 
 title: string
+contentColor: string (wysiwyg)
 content: string (wysiwyg)
 
 {% endcomment %}
