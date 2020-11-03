@@ -154,7 +154,7 @@
               "label": "Light"
             },
             {
-              "value": "bg-light",
+              "value": "bg-gray-darker",
               "label": "Dark"
             }
           ],
@@ -771,18 +771,6 @@
           "type": "string",
           "default": "Block title",
           "autofocus": true
-        },
-        {
-          "id": "content",
-          "label": "Content",
-          "type": "text",
-          "default": "Text block content"
-        },
-        {
-            "id": "contentColor",
-            "label": "Choose content color",
-            "type": "color",
-            "default": ""
         }
       ]
     }
