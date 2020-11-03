@@ -61,6 +61,7 @@
         <h3 class="panel-title">{{ 'products.general.related_products' | t }}</h3>
         <vc-related-products product-ids="dialogData.productIds"
                              responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
+                             image-size="sm"
                              on-update="relatedProducts = $event">
         </vc-related-products>
     </div>
