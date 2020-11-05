@@ -2,9 +2,9 @@
 
 {% assign catalog_script_rendered = false %}
 
-{% for item in blocks -%}
+{% for item in blocks %}
     {% if item.hidden != 'True' %}
-        {% assign templateName = "blocks/json-"|append:item.type -%}
-        {% include templateName block: item -%}
+        {% assign templateName = "blocks/json-"|append:item.type %}
+        {% include templateName block: item %}
     {% endif %}
-{% endfor -%}
+{% endfor %}

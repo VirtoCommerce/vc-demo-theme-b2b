@@ -2,10 +2,6 @@
     {% layout page.layout %}
 {% endif %}
 
-{% comment %}
-{{ 'blocks.css' | asset_url | stylesheet_tag }}
-{% endcomment %}
-
 <div class="page">
-    {% include 'json-blocks' -%}
+    {% include 'json-blocks' %}
 </div>
