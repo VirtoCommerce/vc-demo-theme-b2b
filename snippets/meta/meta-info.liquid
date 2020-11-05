@@ -2,14 +2,21 @@
     <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
 {% endif %}
 <title>
-    {{ page_title }}
-    {% if current_tags %}
-    {% include 'tags-joined' %}
-     - {{ 'general.meta.tags' | t: current_tags_joined }}
+    {% assign last_segment = request_url | split "/" | last %}
+
+    {% if last_segment == "account" %}
+        Virto Commerce Demo B2B My Account
+    {% elsif last_segment == "cart" %}
+        Virto Commerce Demo B2B Cart
+    {% else %}
+        Virto Commerce Demo B2B Online Shopping for
+        {%if page_title.empty? == true %}
+            you
+        {% else %}
+            {{ page_title }}
+        {% endif %}
     {% endif %}
-    {% if page_number != 1 %}
-      - {{ 'general.meta.page' | t: current_page }}
-    {% endif %}
+
     {% unless page_title contains shop.name %}
      - {{ shop.name }}
     {% endunless %}
@@ -17,3 +24,9 @@
 {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}" />
 {% endif %}
+
+<script>
+    console.log("{{page_title}}");
+    console.log("{{request_url}}");
+    console.log("{{last_segment}}");
+</script>
