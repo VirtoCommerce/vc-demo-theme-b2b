@@ -83,11 +83,14 @@
                             </div>
                             <div class="hidden-xs hidden-sm col-md-3">
                                 <p ng-if="customer && customer.isRegisteredUser" ng-cloak >
-                                    <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading" ng-click="checkout.wizard.nextStep()">
+                                    <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || checkout.cart.outOfStockError" ng-click="checkout.wizard.nextStep()">
                                         {{ 'cart.general.checkout' | t }}
                                     </button>
-                                <p ng-if="customer && !customer.isRegisteredUser" ng-cloak >
+                                <p ng-if="customer && !customer.isRegisteredUser && !checkout.cart.outOfStockError" ng-cloak >
                                     {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" href' }}
+                                </p>
+                                <p ng-if="customer && !customer.isRegisteredUser && checkout.cart.outOfStockError" ng-cloak >
+                                    {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" disabled href' }}
                                 </p>
                                 <div class="panel-group">
                                     <div class="panel panel-default panel-static">
@@ -95,7 +98,7 @@
                                             Order summary
                                         </div>
                                         <div class="panel-body">
-                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true } }"></vc-totals>
+                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true, outOfStockMessage: true } }"></vc-totals>
                                         </div>
                                     </div>
                                     <div class="panel panel-default panel-static">

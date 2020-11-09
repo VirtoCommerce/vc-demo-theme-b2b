@@ -23,6 +23,10 @@
             <dt><strong class="pull-left">{{ 'totals.total' | t }}</strong></dt>
             <dd><span class="pull-right text-bold text-green" ng-bind="$ctrl.order.total.formattedAmount"></span></dd>
         </dl>
+        <div ng-if="$ctrl.options.show.outOfStockMessage && $ctrl.order.outOfStockError" class="bg-danger p-3 mb-3 rounded d-flex">
+            <i class="fa fa-times-circle fa-lg text-danger mr-2 mt-1"></i>
+            <small>Some products went out of stock and for this reason can not be purchased</small>
+        </div>
         <p ng-if="!$ctrl.options.complete">
             <small class="text-gray-totals">{{ 'totals.estimated_fields' | t }} {{ 'totals.estimated_notice' | t }}</small>
         </p>
