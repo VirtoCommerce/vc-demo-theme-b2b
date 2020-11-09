@@ -86,11 +86,8 @@
                                     <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || checkout.cart.outOfStockError" ng-click="checkout.wizard.nextStep()">
                                         {{ 'cart.general.checkout' | t }}
                                     </button>
-                                <p ng-if="customer && !customer.isRegisteredUser && !checkout.cart.outOfStockError" ng-cloak >
-                                    {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" href' }}
-                                </p>
-                                <p ng-if="customer && !customer.isRegisteredUser && checkout.cart.outOfStockError" ng-cloak >
-                                    {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" disabled href' }}
+                                <p ng-if="customer && !customer.isRegisteredUser" ng-cloak >
+                                    {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" ng-class="{disabledLink: checkout.cart.outOfStockError}" ng-disabled="checkout.cart.outOfStockError" href' }}
                                 </p>
                                 <div class="panel-group">
                                     <div class="panel panel-default panel-static">
