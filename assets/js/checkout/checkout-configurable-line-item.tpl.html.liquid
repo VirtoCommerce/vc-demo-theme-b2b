@@ -5,9 +5,9 @@
         </div>
         <div class="col-xs-4 col-md-4">
             <p><span ng-bind="$ctrl.item.product.name" class="text-bold"></span></p>
-            <p><span class="text-bold">Item</span> <span ng-bind="$ctrl.item.product.sku"></span></p>
+            <p><span class="text-bold">{{ 'checkout.item' | t }}</span> <span ng-bind="$ctrl.item.product.sku"></span></p>
             <p>
-                <span class="text-bold">Price</span>
+                <span class="text-bold">{{ 'checkout.price' | t }}</span>
                 {% if settings.show_prices_with_taxes %}
                     <span ng-bind="$ctrl.item.placedPriceWithTax.formattedAmount" class="text-bold text-green"></span>
                 {% else %}
@@ -29,17 +29,17 @@
                 <div class="col-md-6 form-group pl-2 m-0">
                     <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" />
                     <input ng-if="outOfStockError" class="form-control text-center" type="text" ng-value="0" disabled />
-                    <small ng-if="outOfStockError" class="text-danger">Out of stock</small>
+                    <small ng-if="outOfStockError" class="text-danger">{{ 'checkout.out_of_stock' | t }}</small>
                 </div>
                 <div class="col-md-6">
-                    <a ng-if="!outOfStockError" href="" ng-click="$ctrl.changeQty()">Update</a>
-                    <a href="" ng-click="$ctrl.remove()">Remove</a>
+                    <a ng-if="!outOfStockError" href="" ng-click="$ctrl.changeQty()">{{ 'checkout.update' | t }}</a>
+                    <a href="" ng-click="$ctrl.remove()">{{ 'checkout.remove' | t }}</a>
                 </div>
             </div>
         </div>
         <div class="col-xs-3 col-md-2 text-bold">
             <p ng-class="{'m-0': !outOfStockError}">
-                <span class="text-condensed">Total</span><br>
+                <span class="text-condensed">{{ 'cart.general.total' | t }}</span><br>
                 {% if settings.show_prices_with_taxes %}
                     <span ng-if="!outOfStockError" ng-bind="$ctrl.item.extendedPriceWithTax.formattedAmount" class="text-green"></span>
                 {% else %}
@@ -54,7 +54,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-md-12">
-                        <span class="h4">Configuration parts</span>
+                        <span class="h4">{{ 'checkout.configuration_parts' | t }}</span>
                     </div>
                 </div>
             </div>
@@ -64,9 +64,9 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Product</th>
-                                <th class="text-center">Quantity</th>
-                                <th class="text-right">Total</th>
+                                <th>{{ 'checkout.product' | t }}</th>
+                                <th class="text-center">{{ 'cart.general.quantity' | t }}</th>
+                                <th class="text-right">{{ 'cart.general.total' | t }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
                                     <span class="text-bold" ng-bind="part.name"></span>
                                     <a ng-href="{% raw %}{{ part.items[0].product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.items[0].name" class="text-bold"></a>
                                     <p class="margin-0">
-                                        <span class="text-bold">Price</span>
+                                        <span class="text-bold">{{ 'checkout.price' | t }}</span>
                                         {% if settings.show_prices_with_taxes %}
                                             <span ng-bind="part.items[0].placedPriceWithTax.formattedAmount" class="text-bold text-green"></span>
                                         {% else %}
@@ -90,7 +90,7 @@
                                 <td ng-if="!part.quantityError" ng-bind="part.items[0].quantity" class="text-center"></td>
                                 <td ng-if="part.quantityError && part.quantityError.availableQuantity === 0" class="text-center text-danger">
                                     <span ng-bind="part.quantityError.availableQuantity"></span>
-                                    <small class="d-block">Out of stock</small>
+                                    <small class="d-block">{{ 'checkout.out_of_stock' | t }}</small>
                                 </td>
                                 <td ng-if="!part.quantityError" class="text-bold text-green text-right">
                                     {% if settings.show_prices_with_taxes %}
