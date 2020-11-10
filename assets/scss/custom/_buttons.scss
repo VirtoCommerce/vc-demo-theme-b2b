@@ -137,6 +137,10 @@ a.dashed-link:not(.btn) {
     margin-top: 10px !important;
 }
 
+.disabledLink {
+    pointer-events: none;
+}
+
 // Temporary workaround
 .dropdown-toggle .fa {
     color: $brand-primary;
