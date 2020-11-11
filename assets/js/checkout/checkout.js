@@ -181,6 +181,15 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                         $scope.checkout.productIds = cart.usualItems.map(lineItem => lineItem.productId);
                     }
 
+                    //Temporary solution for disabling checkout button in case of item going out of stock
+                    if ($scope.checkout.cart.itemsCount > 0) {
+                        $scope.checkout.cart.outOfStockError = _.some($scope.checkout.cart.items, item => {
+                            if (item.validationErrors && item.validationErrors.length) {
+                                return _.find(item.validationErrors, error => error.availableQuantity === 0);
+                            }
+                        });
+                    }
+
                     if (cart.coupon) {
                         $scope.couponApplied = true;
                         $scope.checkout.coupon = cart.coupon;
