@@ -1,3 +1,5 @@
+{% layout 'bootstrap_migration' %}
+
 {% if customer and customer.is_registered_user %}
     <script>
             window.location.replace("{{ '/account' | absolute_url }}");

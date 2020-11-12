@@ -19,9 +19,9 @@
     {% include 'main/dependencies-bootstrap-migration' %}
 </head>
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" ng-cloak ng-controller="mainController" ng-init="baseUrl='{{ '' | absolute_url }}'" data-target="#toc" data-spy="scroll">
-    {% include 'main/header' %}
+    {% include 'bootstrap-migration/main/header' %}
     {{ content_for_layout }}
-    {% include 'main/footer' %}
+    {% include 'bootstrap-migration/main/footer' %}
 </body>
 
 </html>
