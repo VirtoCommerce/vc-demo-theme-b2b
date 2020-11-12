@@ -132,7 +132,7 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
 
         function initialize(filters) {
             var product = $window.product;
-            if ($window.products || !product || product.productType != 'Configurable') {
+            if ($window.products || !product) {
                 return;
             }
             catalogService.getProduct([product.id]).then(function (response) {
@@ -165,6 +165,10 @@ storefrontApp.controller('productController', ['$rootScope', '$scope', '$window'
                     $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
                 });
             });
+
+            if (product.productType != 'Configurable') {
+                return;
+            }
 
             $scope.initProductConfiguration(product.id);
         };

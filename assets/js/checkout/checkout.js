@@ -57,7 +57,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.changeShippingMethod = function () {
                 $scope.getAvailShippingMethods($scope.checkout.shipment).then(function (response) {
-                    var dialogInstance = dialogService.showDialog({ availShippingMethods: response, checkout: $scope.checkout }, 'universalDialogController', 'storefront.select-shipment-method-dialog.tpl');
+                    var dialogInstance = dialogService.showDialog({ availShippingMethods: response, checkout: $scope.checkout }, 'selectShipmentMethodDialogController', 'storefront.select-shipment-method-dialog.tpl');
                     dialogInstance.result.then(function (shipmentMethod) {
                         $scope.selectShippingMethod(shipmentMethod);
                     });
@@ -181,6 +181,15 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                         $scope.checkout.productIds = cart.usualItems.map(lineItem => lineItem.productId);
                     }
 
+                    //Temporary solution for disabling checkout button in case of item going out of stock
+                    if ($scope.checkout.cart.itemsCount > 0) {
+                        $scope.checkout.cart.outOfStockError = _.some($scope.checkout.cart.items, item => {
+                            if (item.validationErrors && item.validationErrors.length) {
+                                return _.find(item.validationErrors, error => error.availableQuantity === 0);
+                            }
+                        });
+                    }
+
                     if (cart.coupon) {
                         $scope.couponApplied = true;
                         $scope.checkout.coupon = cart.coupon;
@@ -209,6 +218,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             var shipmentMethod = _.find(response, function (sm) { return sm.shipmentMethodCode == $scope.checkout.shipment.shipmentMethodCode && sm.optionName == $scope.checkout.shipment.shipmentMethodOption; });
                             if (shipmentMethod) {
                                 $scope.checkout.shipment.shipmentMethod = shipmentMethod;
+                                $scope.checkout.shipmentMethod = shipmentMethod;
                             }
                         });
                     }
@@ -340,7 +350,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                         if (customerDefaults.paymentMethod) {
                             $scope.selectPaymentMethod(customerDefaults.paymentMethod);
                         }
-                        if (customerDefaults.shippingMethod) {
+                        if (customerDefaults.shippingMethod && !$scope.checkout.shipmentMethod) {
+                            $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
                             $scope.selectShippingMethod(customerDefaults.shippingMethod);
                         }
                     }

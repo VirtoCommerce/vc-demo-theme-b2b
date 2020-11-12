@@ -1,0 +1,23 @@
+<div id="{{ block.__id }}" class="{{ block.style }}">
+  <div class="{% include 'blocks/helpers/block-paddings' %} container">
+    <div class="px-5">
+      {% include 'blocks/helpers/block-title' %}
+    </div>
+  </div>
+</div>
+
+{% comment %}
+
+__id: string (unique block id)
+
+name: string
+headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
+titleAlignment: [ center, left ]
+titleStyle: [ null, bg-light ]
+style: [ light, dark ]
+noTop: bool
+noBottom: bool
+
+title: string
+
+{% endcomment %}

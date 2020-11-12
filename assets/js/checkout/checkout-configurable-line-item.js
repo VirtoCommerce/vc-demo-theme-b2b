@@ -10,12 +10,13 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
         onChangeQty: '&',
         onRemove: '&'
     },
-    controller: ['$scope', 'availablePaymentPlans', 'baseUrl', function ($scope, availablePaymentPlans, baseUrl) {
+    controller: ['$scope', 'availablePaymentPlans', 'baseUrl', '$filter', 'storeCurrency', function ($scope, availablePaymentPlans, baseUrl, $filter, storeCurrency) {
         var ctrl = this;
         ctrl.availablePaymentPlans = availablePaymentPlans;
         $scope.baseUrl = baseUrl;
         $scope.regex = new RegExp(/^\/+/);
         $scope.showConfiguration = false;
+        $scope.outOfStockError = false;
 
         this.$onInit = function () {
             ctrl.checkoutStep.addComponent(this);
@@ -33,7 +34,7 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
 
         this.remove = function () {
             ctrl.onRemove({ item: ctrl.item });
-        }
+        };
 
         this.validate = function () {
             return true;
@@ -47,12 +48,22 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
             $scope.showConfiguration = !$scope.showConfiguration;
         };
 
+        this.setOutOfStockPrice = function() {
+            return $filter('currency')(0, storeCurrency.symbol);
+        };
+
         $scope.$watch('$ctrl.item', function (value) {
         }, true);
 
         function getConfiguredLineItems(item) {
-            _.each(item.parts, function (part) {
+            _.each(item.parts, part => {
                 part.items = [item.items.find(x => x.id === part.selectedItemId)];
+                if (part.items[0].validationErrors && part.items[0].validationErrors.length) {
+                    part.quantityError = _.find(part.items[0].validationErrors, error => error.errorCode === "QuantityError");
+                    if (part.quantityError && part.quantityError.availableQuantity === 0) {
+                        $scope.outOfStockError = true;
+                    }
+                }
             });
         }
 

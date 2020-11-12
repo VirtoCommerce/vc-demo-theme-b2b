@@ -126,16 +126,19 @@
     color: $brand-danger;
 }
 
-.address-list a:not(.btn) {
+a.dashed-link:not(.btn) {
     font-family: $font-family-sans-serif;
-    font-weight: 500;
-    margin-left: 16px;
+    font-weight: 300;
     border-bottom: 1px $brand-alt dashed;
 }
 
 .link-button {
     padding-top: 3px !important;
     margin-top: 10px !important;
+}
+
+.disabledLink {
+    pointer-events: none;
 }
 
 // Temporary workaround

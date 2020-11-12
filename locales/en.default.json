@@ -38,6 +38,9 @@
         "title": "Checkout",
         "description": "Description",
         "price": "Price",
+        "item": "Item",
+        "product":"Product",
+        "configuration_parts": "Configuration parts",
         "apply": "Apply",
         "cart": "Cart",
         "remove": "Remove",
@@ -73,6 +76,9 @@
         "order_summary": "Order summary",
         "pickup_address": "Pickup address",
         "payment_method": "Payment method",
+        "update": "Update",
+        "out_of_stock": "Out of stock",
+        "out_of_stock_error_message": "Some products went out of stock and for this reason can not be purchased",
         "purchased_products": "My purchased products",
         "purchase_order_number": {
             "title": "Purchase Order",
@@ -401,7 +407,6 @@
             "corporate": "Corporate",
             "details": "Account Details",
             "return": "Return to Account Details",
-            "specials": "Special order quotes",
             "menu_label": {
                 "orders": "Orders",
                 "subscriptions": "Subscriptions",

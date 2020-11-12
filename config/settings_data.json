@@ -37,7 +37,6 @@
             "footer_support_number_enable": true,
             "support_number": "<strong>1-800-555-CENT</strong>&nbsp;(1-800-555-2368)",
             "copyright": "VirtoCommerce. All Rights Reserved.",
-
             "product_list_capacity": "16",
             "product_list_capacity_steps": "3",
             "pickup_shipping_method": "FixedRate",
@@ -116,9 +115,7 @@
             "remove_dollar_symbol": false,
             "superscript_decimals": true,
             "store_selector_enable": true,
-            //Display all prices and totals with including tax
             "show_prices_with_taxes": false,
-            // possible interval: {days, weeks, months, years}
             "available_paymentPlans": [
                 {
                     "intervalCount": 1,
@@ -176,7 +173,6 @@
                     "name": "year"
                 }
             ],
-            //Collect usage events for product recommendations
             "collect_user_events_enabled": false,
             "lists": {
                 "default_list_type": "wishlist",
