@@ -69,6 +69,12 @@
         ]
     },
     {
+        "outputFileName": "assets/static/bundle/bootstrap-migration.scss.css",
+        "inputFiles": [
+            "assets/scss/bootstrap-migration/main.scss"
+        ]
+    },
+    {
         "outputFileName": "assets/static/bundle/checkout-scripts.js",
         "inputFiles": [
             "assets/js/services.js",
