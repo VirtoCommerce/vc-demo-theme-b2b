@@ -364,16 +364,16 @@
    $screen-xl-desktop:          $screen-xl-min;
 
 // Huge screen / HD desktop (not predefined)
-   $screen-xxl:                  1366px; // Migrating_To_Bootstrap4: ?? (not present in bs4, do we need it?)
-   $screen-xxl-min:              $screen-xxl; // Migrating_To_Bootstrap4: ?? (not present in bs4, do we need it?)
-   $screen-xxl-desktop:          $screen-xxl-min; // Migrating_To_Bootstrap4: ?? (not present in bs4, do we need it?)
+   $screen-xxl:                  1366px; // Migrating_To_Bootstrap4: DONE
+   $screen-xxl-min:              $screen-xxl; // Migrating_To_Bootstrap4: DONE
+   $screen-xxl-desktop:          $screen-xxl-min; // Migrating_To_Bootstrap4: DONE
 
 // So media queries don't overlap when required, provide a maximum
    $screen-xs-max:              ($screen-sm-min - 1); // ($screen-sm-min - 1); // Migrating_To_Bootstrap4: DONE, leave it as is
    $screen-sm-max:              ($screen-md-min - 1); // ($screen-md-min - 1); // Migrating_To_Bootstrap4: DONE, leave it as is
    $screen-md-max:              ($screen-lg-min - 1); // ($screen-lg-min - 1); // Migrating_To_Bootstrap4: DONE, leave it as is
    $screen-lg-max:              ($screen-xl-min - 1); // not predefined  // Migrating_To_Bootstrap4: DONE, leave it as is
-   $screen-xl-max:              ($screen-xxl-min - 1); // not predefined // Migrating_To_Bootstrap4: ?? (not present in bs4, do we need it?)
+   $screen-xl-max:              ($screen-xxl-min - 1); // not predefined // Migrating_To_Bootstrap4: DONE
 
 //== Grid system
 //
