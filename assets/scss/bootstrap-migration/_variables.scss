@@ -6,16 +6,16 @@ $warning: #f0ad4e;
 $danger: #EC6A5E;
 $body-color: #111;
 $text-muted: #757575;
-//$link-color: theme-color("secondary");
+$link-color: theme-color("secondary");
 $link-hover-decoration: none;
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $font-family-condensed: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-family: $font-family-condensed;
 $btn-font-family: $font-family-condensed;
-//$headings-font-weight: $font-weight-bold;
+$headings-font-weight: $font-weight-bold;
 $table-active-bg: $secondary;
-//$btn-font-weight: $font-weight-bold;
-//$input-bg: $body-bg;
+$btn-font-weight: $font-weight-bold;
+$input-bg: $body-bg;
 $input-bg-checked: $secondary;
 $input-border-radius: 0;
 $input-border-radius-lg: 0;
@@ -23,18 +23,13 @@ $input-border-radius-sm: 0;
 $input-focus-border-color: $secondary;
 $input-border-checked: $secondary;
 $nav-pills-border-radius: 0;
-$grid-breakpoints: (
-    xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1335px
-);
-$container-max-widths: (
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
-    xl: 1140px,
-    xxl: 1336px
+$grid-breakpoints: map-merge($grid-breakpoints, (xxl: 1335px));
+$container-max-widths: map-merge($container-max-widths, (xxl: 1336px));
+$theme-colors: (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger
 );

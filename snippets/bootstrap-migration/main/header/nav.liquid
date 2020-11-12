@@ -1,13 +1,13 @@
-﻿<nav class="navbar navbar-inverse-light navbar-static-top" role="navigation">
+﻿<nav class="navbar navbar-inverse-light p-0" role="navigation">
     <div class="container">
-        {% include 'main/header/nav/top-level-collections' %}
+        {% include 'bootstrap-migration/main/header/nav/top-level-collections' %}
         <ul class="nav navbar-nav navbar-right">
             {% if template != 'bulk-order' %}
                 {% assign dropdown = true %}
-                {% include 'main/header/nav/bulk-order-form' %}
+                {% include 'bootstrap-migration/main/header/nav/bulk-order-form' %}
             {% endif %}
-            {% include 'main/header/shared/cart' %}
+            {% include 'bootstrap-migration/main/header/shared/cart' %}
         </ul>
-        {% include 'shared/search-bar' %}
+        {% include 'bootstrap-migration/shared/search-bar' %}
     </div>
 </nav>
