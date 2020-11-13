@@ -6,3 +6,6 @@ $theme-colors: (
   "warning":   $warning,
   "danger":    $danger
 );
+
+$grid-breakpoints: map-merge($grid-breakpoints, (xxl: 1335px));
+$container-max-widths: map-merge($container-max-widths, (xxl: 1336px));
