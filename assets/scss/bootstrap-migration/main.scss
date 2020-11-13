@@ -1,5 +1,6 @@
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
-@import "_variables.scss";
+@import "variables";
+@import "override";
 @import "bootstrap/scss/bootstrap";
-@import "_custom.scss";
+@import "custom";
