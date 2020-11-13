@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light border-top border-primary border-4 small p-0" role="navigation">
+<nav class="border-top border-primary border-4 small" role="navigation">
     <div class="container">
         <div class="row w-100">
             <div class="col-md-8">
@@ -6,34 +6,34 @@
                     <ul class="list-inline list-divider m-0">
                         <li class="list-inline-item">
                             <span ng-if="customer && !customer.isRegisteredUser">
-                                {{ 'customer.account.title' | t | customer_login_link | replace: 'href', 'class="navbar-link" href' }}
+                                {{ 'customer.account.title' | t | customer_login_link }}
                             </span>
                             <span ng-if="customer && customer.isRegisteredUser">
-                                <a class="navbar-link" href="{{ 'account' | absolute_url }}">{{ 'customer.account.title' | t }}</a>
+                                <a href="{{ 'account' | absolute_url }}">{{ 'customer.account.title' | t }}</a>
                             </span>
                         </li>
                         <!-- TODO: Add links to orders, lists in account via ui-router -->
                         <li class="list-inline-item">
-                            <a class="navbar-link" href="account#/orders/">{{ 'customer.orders.title' | t }}</a>
+                            <a href="account#/orders/">{{ 'customer.orders.title' | t }}</a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="navbar-link" href="account#/lists/myLists">{{ 'customer.lists.title' | t }}</a>
+                            <a href="account#/lists/myLists">{{ 'customer.lists.title' | t }}</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-4 text-right">
-                <div class="navbar-text navbar-right" ng-if="customer && !customer.isRegisteredUser" ng-cloak>
+                <div class="navbar-text" ng-if="customer && !customer.isRegisteredUser" ng-cloak>
                     <ul class="list-inline m-0">
                         <li class="list-inline-item">
-                            {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="navbar-link text-uppercase" href' }}
+                            {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase" href' }}
                         </li>
                         <li class="list-inline-item">
-                            {{ 'layout.customer.register_now' | t | customer_register_link | replace: 'href', 'class="navbar-link text-uppercase" href' }}
+                            {{ 'layout.customer.register_now' | t | customer_register_link | replace: 'href', 'class="text-uppercase" href' }}
                         </li>
                     </ul>
                 </div>
-                <div class="navbar-text navbar-right" ng-if="customer && customer.isRegisteredUser" ng-cloak>
+                <div class="navbar-text" ng-if="customer && customer.isRegisteredUser" ng-cloak>
                     <ul class="list-inline list-divider m-0">
                         <li>
                             {% raw %}{{ customer.firstName }} {{ customer.lastName }}{% endraw %}

@@ -1,13 +1,17 @@
-﻿<nav class="navbar navbar-inverse-light p-0" role="navigation">
+﻿<nav class="navbar navbar-dark bg-gray-900 p-0" role="navigation">
     <div class="container">
-        {% include 'bootstrap-migration/main/header/nav/top-level-collections' %}
-        <ul class="nav navbar-nav navbar-right">
-            {% if template != 'bulk-order' %}
-                {% assign dropdown = true %}
-                {% include 'bootstrap-migration/main/header/nav/bulk-order-form' %}
-            {% endif %}
-            {% include 'bootstrap-migration/main/header/shared/cart' %}
-        </ul>
-        {% include 'bootstrap-migration/shared/search-bar' %}
+        <div class="row w-100">
+            {% include 'bootstrap-migration/main/header/nav/top-level-collections' %}
+            <div class="flex-grow-1">
+                {% include 'bootstrap-migration/shared/search-bar' %}
+            </div>
+            <ul class="list-inline m-0">
+                {% if template != 'bulk-order' %}
+                    {% assign dropdown = true %}
+                    {% include 'bootstrap-migration/main/header/nav/bulk-order-form' %}
+                {% endif %}
+                {% include 'bootstrap-migration/main/header/shared/cart' %}
+            </ul>
+        </div>
     </div>
 </nav>

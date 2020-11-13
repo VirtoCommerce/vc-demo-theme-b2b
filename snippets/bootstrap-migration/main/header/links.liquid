@@ -1,52 +1,37 @@
-﻿<nav class="navbar navbar-inverse bg-dark p-0" role="navigation">
+﻿<nav class="navbar navbar-dark bg-dark" role="navigation">
     <div class="container">
-        <div class="row w-100">
+        <div class="row align-items-center w-100">
             <div class="col-md-6 d-flex align-items-center" itemscope itemtype="http://schema.org/Organization">
                 {% include 'bootstrap-migration/main/header/links/brand' %}
                 {% if current_user.contact.organization.name %}
-                <div class="text-uppercase navbar-user-organization">{{current_user.contact.organization.name}}</div>
+                    <div class="text-uppercase navbar-user-organization">{{current_user.contact.organization.name}}</div>
                 {% endif %}
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="navbar-text navbar-right small">
-                        <ul class="list-inline m-0">
-                            {% for link in linklists[settings.service_menu].links %}
-                                <li class="list-inline-item">
-                                    <a class="navbar-link font-weight-normal" href="{{ link.url }}">{{ link.title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <div class="row justify-content-end">
-                    <div class="navbar-text navbar-right">
-                        <ul class="list-inline m-0">
-                            {% assign index = 0 %}
-                            {% for link in linklists[settings.main_menu].links %}
-                                {% assign child_list_handle = link.title | handleize %}
-                                {% if linklists[child_list_handle].links != blank %}
-                                    {% assign id = 'header-link-' | append: index %}
-                                    <li class="list-inline-item" uib-dropdown auto-close="mouseleave">
-                                        <a id="{{ id }}" class="navbar-link font-weight-normal" href="{{ link.url }}" uib-dropdown-toggle vc-dropdown-trigger="mouseenter">{{ link.title }}&ensp;<i class="fa fa-angle-down"></i></a>
-                                        <ul class="dropdown-menu dropdown-menu-left dropdown-menu-square" role="menu" uib-dropdown-menu aria-labelledby="{{ link.name }}">
-                                            {% for childlink in linklists[child_list_handle].links %}
-                                                <li>
-                                                    <a role="menuitem" tabindex="-1" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% else %}
-                                    <li class="list-inline-item">
-                                        <a class="navbar-link font-weight-normal" href="{{ link.url }}">{{ link.title }}</a>
-                                    </li>
-                                {% endif %}
-                                {% assign index = index | plus: 1 %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-md-6 navbar-text text-right">
+                <ul class="list-inline m-0">
+                    {% assign index = 0 %}
+                    {% for link in linklists[settings.main_menu].links %}
+                        {% assign child_list_handle = link.title | handleize %}
+                        {% if linklists[child_list_handle].links != blank %}
+                            {% assign id = 'header-link-' | append: index %}
+                            <li class="list-inline-item" uib-dropdown auto-close="mouseleave">
+                                <a id="{{ id }}" class="font-weight-normal" href="{{ link.url }}" uib-dropdown-toggle vc-dropdown-trigger="mouseenter">{{ link.title }}&ensp;<i class="fa fa-angle-down"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-left rounded-0" role="menu" uib-dropdown-menu aria-labelledby="{{ link.name }}">
+                                    {% for childlink in linklists[child_list_handle].links %}
+                                        <li>
+                                            <a role="menuitem" tabindex="-1" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="list-inline-item">
+                                <a class="font-weight-normal" href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                        {% endif %}
+                        {% assign index = index | plus: 1 %}
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
