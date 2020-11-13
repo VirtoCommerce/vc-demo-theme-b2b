@@ -68,19 +68,19 @@
    $font-family-alt:         Arial, "Helvetica Neue", Helvetica, sans-serif; // not predefined  // Migrating_To_Bootstrap4: not used in out theme
    $font-family-condensed:  "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; // not predefined  // Migrating_To_Bootstrap4: DONE, used as a custom variable
 
-   $font-size-base:          14px; // 14px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-   $font-size-large:         $font-size-base; // =14px // ceil( ($font-size-base * 1.25)) // ~18px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-   $font-size-small:         odd(($font-size-base * 0.85)); // =12px // ceil( ($font-size-base * 0.85)) // ~12px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
+   $font-size-base:          14px; // 14px  // Migrating_To_Bootstrap4: DONE, set to $font-size-base
+   $font-size-large:         $font-size-base; // =14px // ceil( ($font-size-base * 1.25)) // ~18px  // Migrating_To_Bootstrap4: DONE, set to $font-size-lg
+   $font-size-small:         odd(($font-size-base * 0.85)); // =12px // ceil( ($font-size-base * 0.85)) // ~12px  // Migrating_To_Bootstrap4: DONE, set to $font-size-sm
 
-   $font-size-h1:            odd(($font-size-base * 2.5));  // =34px // floor(($font-size-base * 2.6))  // ~36px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-   $font-size-h2:            odd(($font-size-base * 1.75)); // =24px // floor(($font-size-base * 2.15)) // ~30px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-   $font-size-h3:            odd(($font-size-base * 1.5));  // =20px // ceil( ($font-size-base * 1.7))  // ~24px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-   $font-size-h4:            odd(($font-size-base * 1.25)); // =18px // ceil( ($font-size-base * 1.25)) // ~18px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
-// $font-size-h5:            $font-size-base
-   $font-size-h6:            odd(($font-size-base * 0.85));  // =12px // ceil( ($font-size-base * 0.85)) // ~12px  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
+   $font-size-h1:            odd(($font-size-base * 2.5));  // =34px // floor(($font-size-base * 2.6))  // ~36px  // Migrating_To_Bootstrap4: DONE, set to $h1-font-size
+   $font-size-h2:            odd(($font-size-base * 1.75)); // =24px // floor(($font-size-base * 2.15)) // ~30px  // Migrating_To_Bootstrap4: DONE, set to $h2-font-size
+   $font-size-h3:            odd(($font-size-base * 1.5));  // =20px // ceil( ($font-size-base * 1.7))  // ~24px  // Migrating_To_Bootstrap4: DONE, set to $h3-font-size
+   $font-size-h4:            odd(($font-size-base * 1.25)); // =18px // ceil( ($font-size-base * 1.25)) // ~18px  // Migrating_To_Bootstrap4: DONE, set to $h4-font-size
+// $font-size-h5:            $font-size-base // Migrating_To_Bootstrap4: DONE, set to $h5-font-size
+   $font-size-h6:            odd(($font-size-base * 0.85));  // =12px // ceil( ($font-size-base * 0.85)) // ~12px  // Migrating_To_Bootstrap4: DONE, set to $h6-font-size
 
 //** Unit-less `line-height` for use in components like buttons.
-   $line-height-base:        1.428571429; // 1.428571429 // 20/14  // Migrating_To_Bootstrap4: ?? (use default from bs4?)
+   $line-height-base:        1.428571429; // 1.428571429 // 20/14  // Migrating_To_Bootstrap4: DONE, set to $line-height-base,$line-height-lg,$line-height-sm
 //** Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
    $line-height-computed:    floor(($font-size-base * $line-height-base)); // floor(($font-size-base * $line-height-base)) // ~20px  // Migrating_To_Bootstrap4: ??
 
