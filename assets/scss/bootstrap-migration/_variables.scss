@@ -4,21 +4,16 @@ $success: #5cb85c;
 $info: #5bc0de;
 $warning: #f0ad4e;
 $danger: #EC6A5E;
-
 $body-color: #111;
+$text-muted: #757575;
 $link-color: theme-color("secondary");
 $link-hover-decoration: none;
-
-$grid-breakpoints: map-merge($grid-breakpoints, (xxl: 1335px));
-$container-max-widths: map-merge($container-max-widths, (xxl: 1336px));
-
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$btn-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-weight: $font-weight-bold;
-
-$text-muted: #757575;
-
 $table-active-bg: $secondary;
+$btn-font-weight: $font-weight-bold;
 $input-bg: $body-bg;
 $input-bg-checked: $secondary;
 $input-border-radius: 0;
@@ -26,8 +21,4 @@ $input-border-radius-lg: 0;
 $input-border-radius-sm: 0;
 $input-focus-border-color: $secondary;
 $input-border-checked: $secondary;
-
-$btn-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$btn-font-weight: $font-weight-bold;
-
 $nav-pills-border-radius: 0;
