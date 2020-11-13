@@ -1,4 +1,4 @@
-﻿@mixin button-variant-disabled {
+@mixin button-variant-disabled {
   &.disabled,
   &[disabled],
   fieldset[disabled] & {
@@ -18,29 +18,29 @@
   &:focus,
   &.focus {
     color: $color;
-    background-color: call($colorizer, $background, 10% * $colorizer-multiplier);
-    border-color: call($colorizer, $border, 25%);
+    background-color: call(get-function($colorizer), $background, 10% * $colorizer-multiplier);
+    border-color: call(get-function($colorizer), $border, 25%);
   }
 
   &:hover {
     color: $color;
-    background-color: call($colorizer, $background, 10% * $colorizer-multiplier);
-    border-color: call($colorizer, $border, 12.5% * $colorizer-multiplier);
+    background-color: call(get-function($colorizer), $background, 10% * $colorizer-multiplier);
+    border-color: call(get-function($colorizer), $border, 12.5% * $colorizer-multiplier);
   }
 
   &:active,
   &.active,
   .open > &.dropdown-toggle {
     color: $color;
-    background-color: call($colorizer, $background, 10% * $colorizer-multiplier);
-    border-color: call($colorizer, $border, 12.5% * $colorizer-multiplier);
+    background-color: call(get-function($colorizer), $background, 10% * $colorizer-multiplier);
+    border-color: call(get-function($colorizer), $border, 12.5% * $colorizer-multiplier);
 
     &:hover,
     &:focus,
     &.focus {
       color: $color;
-      background-color: call($colorizer, $background, 17.5% * $colorizer-multiplier);
-      border-color: call($colorizer, $border, 25% * $colorizer-multiplier);
+      background-color: call(get-function($colorizer), $background, 17.5% * $colorizer-multiplier);
+      border-color: call(get-function($colorizer), $border, 25% * $colorizer-multiplier);
     }
   }
 

@@ -3,14 +3,15 @@ import cssnano from 'cssnano';
 import del from 'del';
 import { dest, parallel, series, src, watch } from 'gulp';
 import babel from 'gulp-babel';
-import bootlint from 'gulp-bootlint';
 import concat from 'gulp-concat';
 import eslint from 'gulp-eslint';
 import gitignore from 'gulp-exclude-gitignore';
 import htmlmin from 'gulp-htmlmin';
 import postcss from 'gulp-postcss';
 import rename from 'gulp-rename';
+import fiber from 'fibers';
 import sass from 'gulp-sass';
+sass.compiler = require('sass');
 import sourcemaps from 'gulp-sourcemaps';
 import terser from 'gulp-terser';
 import zip from 'gulp-zip';
@@ -80,8 +81,9 @@ const minScss = () => {
         return src(bundle.inputFiles, { base: '.', allowEmpty: true })
             .pipe(sourcemaps.init({ loadMaps: true }))
             .pipe(sass({
-                outputStyle: "nested",
-                precision: 10
+                fiber: fiber,
+                outputStyle: "expanded",
+                includePaths: ["node_modules/"]
             }))
             .pipe(concat(bundle.outputFileName))
             .pipe(postcss([autoprefixer(), cssnano()]))
@@ -154,28 +156,11 @@ const watchTask = () => {
         watch(bundle.inputFiles, series(minCss));
     });
 
-    getBundles(regex.html).forEach(function (bundle) {
-        watch(bundle.inputFiles, series(bootlintTask, minHtml));
-    });
-
-    getBundles(regex.liquid).forEach(function (bundle) {
-        watch(bundle.inputFiles, series(bootlintTask));
-    });
-
     getDirectories().map(function(item) {
         watch(item.inputFiles, series(copy));
     });
 };
 exports['watch'] = watchTask;
-
-export const bootlintTask = () => {
-    return src(['./**/*.html', './**/*.liquid', '!./design/**/*.*'])
-        .pipe(gitignore())
-        .pipe(bootlint({
-            disabledIds: ['E001', 'W001', 'W002', 'W003', 'W005']
-        }));
-};
-exports['bootlintTask'] = bootlintTask;
 
 export const eslintTask = () => {
     const tasks = getBundles(regex.js).filter(function(bundle) { return !bundle.disableLint || bundle.disableLint === undefined }).map(function(bundle) {
@@ -187,7 +172,7 @@ export const eslintTask = () => {
 };
 exports['eslint'] = eslintTask;
 
-export const lint = series(bootlintTask, eslintTask);
+export const lint = series(eslintTask);
 
 export const compress = series(min, function() {
     return merge(
