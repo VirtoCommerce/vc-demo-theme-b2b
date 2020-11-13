@@ -18,7 +18,7 @@ $warning: #f0ad4e;
 $danger: #ec6a5e;
 $body-color: #111;
 $text-muted: #757575;
-$link-color: theme-color("secondary");
+$link-color: $secondary;
 $link-hover-decoration: none;
 $font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $headings-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;

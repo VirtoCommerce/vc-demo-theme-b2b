@@ -11,3 +11,7 @@
 .text-condensed {
     font-family: $font-family-condensed !important;
 }
+
+.h2, .h3, .h4, h2, h3, h4 {
+  text-transform: uppercase;
+}
