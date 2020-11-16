@@ -4,7 +4,7 @@
             {{ 'layout.products.products' | t }}&ensp;<i class="fa fa-angle-down"></i>
         </a>
         <script id="all-products-popover.tpl" type="text/ng-template">
-            <div class="container-fluid container-drain container-bordered" ng-init='links = {{ linklists[settings.all_products_menu].links | json }}'>
+            <div class="container-fluid" ng-init='links = {{ linklists[settings.all_products_menu].links | json }}'>
                 <div class="row">
                     <div class="col-md-6" ng-repeat="link in links" ng-if="$even">
                         <ul class="nav nav-sm nav-pills nav-stacked text-nowrap">
