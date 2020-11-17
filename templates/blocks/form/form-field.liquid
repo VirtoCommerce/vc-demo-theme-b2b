@@ -1,0 +1,20 @@
+{% if item.fieldType == 'hidden' %}
+    <input type="text" {% if item.fieldId != '' %} id="{{item.fieldId}}" {% endif %} name="{{item.fieldName}}" value="{{item.fieldValue}}" style="display:none" />
+{% else %}
+    <div class="form-group" {% if block.type == 'headline-with-form' and item.fieldType == 'button' %} style="text-align: center;" {% endif %}>
+        {% assign showTitle = block.showFormLabels == 'True' and item.fieldType != 'checkbox' and item.fieldType != 'radio' and item.fieldType != 'button' %}
+        {% if showTitle %}
+            <label {% if block.subtitleColor %} style="color: {{block.subtitleColor}};" {% endif %} class="form-label" {% if item.fieldId != '' %} for="{{item.fieldId}}" {% endif %}>{{item.labelText}}</label>
+        {% endif %}
+
+        {% if item.fieldType != '' %}
+            {% assign viewName = 'blocks/form/form-input-' | append item.fieldType %}
+            {% if item.fieldType == 'text' or item.fieldType == 'phone' or item.fieldType == 'email' %}
+                {% assign viewName = 'blocks/form/form-input-text' %}
+            {% endif %}
+            {% include viewName inputItem: item %}
+            {% include 'blocks/form/form-validation-message' inputItem: item %}
+        {% endif %}
+    </div>
+
+{% endif %}
