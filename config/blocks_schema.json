@@ -1347,7 +1347,7 @@
             "body": {
               "operationName": null,
               "variables": {},
-              "query": "{products(storeId:\"odt\",filter:\"sku:{{__searchQuery}}\",userId:\"\"){items{id,code,name,imgSrc,descriptions{reviewType,content}prices{currency,actual{formattedAmount}}seoInfos{semanticUrl}}}}"
+              "query": "{products(storeId:\"B2B-store\",filter:\"sku:{{__searchQuery}}\",userId:\"\"){items{id,code,name,imgSrc,descriptions{reviewType,content}prices{currency,actual{formattedAmount}}seoInfos{semanticUrl}}}}"
             },
             "response": {
               "result": "data.products.items",
@@ -1419,7 +1419,7 @@
             "method": "post",
             "body": {
               "objectType": "Product",
-              "catalogId": "4974648a41df4e6ea67ef2ad76d7bbd4",
+              "catalogId": "fc596540864a41bf8ab78734ee7353a3",
               "take": 100
             },
             "response": {
@@ -1496,7 +1496,7 @@
             "method": "post",
             "body": {
               "objectType": "Category",
-              "catalogId": "4974648a41df4e6ea67ef2ad76d7bbd4"
+              "catalogId": "fc596540864a41bf8ab78734ee7353a3"
             },
             "response": {
               "result": "items",
