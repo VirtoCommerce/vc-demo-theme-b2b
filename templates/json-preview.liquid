@@ -1,5 +1,4 @@
-{% layout 'theme' %}
-
+{% layout 'bootstrap_migration' %}
 <script>
     var platformUrl = window.location.search.substr(1).split('&').find(q => q.startsWith('ep=')).substr(3);
     var relativeUrl = (platformUrl.endsWith('/') ? '' : '/') + 'Modules/$(VirtoCommerce.PageBuilderModule)/Content/store/designer.bundle.js';
@@ -8,7 +7,7 @@
     script.src = platformUrl + relativeUrl;
     document.body.appendChild(script);
 </script>
-<main id="designer-preview" class="container"></main>
+<main id="designer-preview" class="container flex-grow-1"></main>
 <style>
   #designer-preview>block {
     overflow: hidden;
