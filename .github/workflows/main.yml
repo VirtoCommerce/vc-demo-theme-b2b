@@ -79,3 +79,91 @@ jobs:
         asset_path: ${{ steps.publish.outputs.artifactPath }}
         asset_name: ${{ steps.publish.outputs.artifactName }}
         asset_content_type: application/zip
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps: 
+    
+    - run: echo "${{ jobs.ci.steps.publish.outputs.artifactPath }}"
+
+#    - name: Start deployment
+#      uses: bobheadxi/deployments@master
+#      id: deployment
+#      with:
+#        step: start
+#        token: ${{ secrets.GITHUB_TOKEN }}
+#        env: Development
+#        no_override: false
+
+    - name: Checkout VirtoCommerce/vc-deploy-apps
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.REPO_TOKEN }}
+        repository: "VirtoCommerce/vc-deploy-apps"
+        ref: "master"
+
+    - name: Update deployment-cm
+      shell: pwsh
+      run: |
+        cd ${{ github.workspace }}
+        cd vc-deploy-apps/webstore-app/overlays/dev
+        $fileName = './deployment-cm.yaml'
+        $content = Get-Content $fileName
+        $regex = '  B2B_THEME_URL:'
+        $artifactPath = '${{ jobs.ci.steps.publish.outputs.artifactPath }}'
+        $newContent = ''
+        foreach($line in $content)
+        {
+            if($line -match $regex)
+            {
+                $line = $regex + ' ' + $artifactPath
+            }
+            $newContent += $line + "`r`n"
+        }
+        Set-Content -Path $fileName -Value $newContent
+
+    - name: Commit deployment-cm change
+      run: |
+         git config --global user.name "GitHub Actions"
+         git config user.email --global  "github.actions@virtoway.com"
+         git commit -am "Automated update the ${{ github.repository }} version to ${{ jobs.ci.steps.image.outputs.prefix }}"
+         git push
+        # cd ${{ github.workspace }}
+        # git clone https://github.com/VirtoCommerce/vc-deploy-apps.git
+        # $REPOSITORY = "docker.pkg.github.com/$('${{ github.repository }}'.ToLower())"
+        # kustomize edit set image virtocommerce/platform=$REPOSITORY/platform:${{ github.event.inputs.versionTag }}
+
+        # git add .
+        # $remoteRepo="https://${{ github.actor }}:${{ secrets.REPO_TOKEN }}@github.com/VirtoCommerce/vc-deploy-apps.git"
+
+    # - name: Wait for environment is up
+    #   shell: pwsh
+    #   timeout-minutes: 5
+    #   run: | 
+    #     do {
+    #       Start-Sleep -s 15
+    #       $statusBage = (Invoke-WebRequest -Uri "https://cd.govirto.com/api/badge?name=webstore-dev-app").Content
+          
+    #       $syncedAndHealthy = $statusBage.Contains('>Healthy<') -and $statusBage.Contains('>Synced<')
+    #       if (-not $syncedAndHealthy) {
+    #         Write-Host "Sync pending..."
+    #       }
+    #     }
+    #     while (-not $syncedAndHealthy)
+    # - name: BUILD_STATE::successful
+    #   if: success()
+    #   run: echo "::set-env name=BUILD_STATE::successful"
+
+    # - name: BUILD_STATE::failed
+    #   if: failure()
+    #   run: echo "::set-env name=BUILD_STATE::failed"
+
+    # - name: Update GitHub deployment status
+    #   uses: bobheadxi/deployments@master
+    #   if: always()
+    #   with:
+    #     step: finish
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     status: ${{ job.status }}
+    #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
