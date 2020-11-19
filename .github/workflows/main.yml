@@ -116,7 +116,7 @@ jobs:
         $fileName = './deployment-cm.yaml'
         $content = Get-Content $fileName
         $regex = '  B2B_THEME_URL:'
-        $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
+        $artifactPath = '"${{ needs.ci.outputs.blobUrl }}"'
         $newContent = ''
         foreach($line in $content)
         {
