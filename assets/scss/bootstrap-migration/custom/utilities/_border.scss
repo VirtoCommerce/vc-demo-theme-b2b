@@ -1,0 +1,6 @@
+// Bootstrap v5 compatible
+@each $size, $width in $border-widths {
+    .border-#{$size} {
+        border-width: $width !important;
+    }
+}
