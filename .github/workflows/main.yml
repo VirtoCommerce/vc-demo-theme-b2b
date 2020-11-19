@@ -34,6 +34,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v3
@@ -108,23 +110,23 @@ jobs:
     - name: Update deployment-cm
       shell: pwsh
       run: |
+
         cd ${{ github.workspace }}
-        ls
-#        cd vc-deploy-apps/webstore-app/overlays/dev
-#         $fileName = './deployment-cm.yaml'
-#         $content = Get-Content $fileName
-#         $regex = '  B2B_THEME_URL:'
-#         $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
-#         $newContent = ''
-#         foreach($line in $content)
-#         {
-#             if($line -match $regex)
-#             {
-#                 $line = $regex + ' ' + $artifactPath
-#             }
-#             $newContent += $line + "`r`n"
-#         }
-#         Set-Content -Path $fileName -Value $newContent
+        cd ./webstore-app/overlays/dev
+        $fileName = './deployment-cm.yaml'
+        $content = Get-Content $fileName
+        $regex = '  B2B_THEME_URL:'
+        $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
+        $newContent = ''
+        foreach($line in $content)
+        {
+            if($line -match $regex)
+            {
+                $line = $regex + ' ' + $artifactPath
+            }
+            $newContent += $line + "`r`n"
+        }
+        Set-Content -Path $fileName -Value $newContent
 
     - name: Commit deployment-cm change
       run: |
