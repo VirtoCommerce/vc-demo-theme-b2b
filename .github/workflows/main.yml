@@ -25,7 +25,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     outputs:
-      artifactPath: ${{ steps.publish.outputs.artifactPath }}
+      blobUrl: ${{ steps.publish.outputs.blobUrl }}
       artifactVersion: ${{ steps.image.outputs.prefix }}
     env: 
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
@@ -34,8 +34,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
 
     - name: Setup sonarqube
       uses: warchant/setup-sonar-scanner@v3
@@ -60,7 +58,7 @@ jobs:
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/master')}}
       id: publish
-      uses: VirtoCommerce/vc-github-actions/publish-theme@master
+      uses: VirtoCommerce/vc-github-actions/publish-theme@VP-6093
 
     - name: Create Release
       if: ${{ github.ref == 'refs/heads/master' }}
@@ -87,7 +85,9 @@ jobs:
     needs: ci
     steps: 
     
-    - run: echo "${{ needs.ci.outputs.artifactPath }}"
+    - run: |
+        echo "${{ needs.ci.outputs.blobUrl }}"
+        echo "${{ needs.ci.outputs.artifactVersion }}"
 
 #    - name: Start deployment
 #      uses: bobheadxi/deployments@master
@@ -109,21 +109,22 @@ jobs:
       shell: pwsh
       run: |
         cd ${{ github.workspace }}
-        cd vc-deploy-apps/webstore-app/overlays/dev
-        $fileName = './deployment-cm.yaml'
-        $content = Get-Content $fileName
-        $regex = '  B2B_THEME_URL:'
-        $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
-        $newContent = ''
-        foreach($line in $content)
-        {
-            if($line -match $regex)
-            {
-                $line = $regex + ' ' + $artifactPath
-            }
-            $newContent += $line + "`r`n"
-        }
-        Set-Content -Path $fileName -Value $newContent
+        ls
+#        cd vc-deploy-apps/webstore-app/overlays/dev
+#         $fileName = './deployment-cm.yaml'
+#         $content = Get-Content $fileName
+#         $regex = '  B2B_THEME_URL:'
+#         $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
+#         $newContent = ''
+#         foreach($line in $content)
+#         {
+#             if($line -match $regex)
+#             {
+#                 $line = $regex + ' ' + $artifactPath
+#             }
+#             $newContent += $line + "`r`n"
+#         }
+#         Set-Content -Path $fileName -Value $newContent
 
     - name: Commit deployment-cm change
       run: |
