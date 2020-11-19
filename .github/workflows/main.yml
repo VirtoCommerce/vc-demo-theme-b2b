@@ -24,6 +24,9 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    outputs:
+      artifactPath: ${{ steps.publish.outputs.artifactPath }}
+      artifactVersion: ${{ steps.image.outputs.prefix }}
     env: 
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
@@ -84,7 +87,7 @@ jobs:
     needs: ci
     steps: 
     
-    - run: echo "${{ jobs.ci.steps.publish.outputs.artifactPath }}"
+    - run: echo "${{ needs.ci.outputs.artifactPath }}"
 
 #    - name: Start deployment
 #      uses: bobheadxi/deployments@master
@@ -110,7 +113,7 @@ jobs:
         $fileName = './deployment-cm.yaml'
         $content = Get-Content $fileName
         $regex = '  B2B_THEME_URL:'
-        $artifactPath = '${{ jobs.ci.steps.publish.outputs.artifactPath }}'
+        $artifactPath = '${{ needs.ci.outputs.artifactPath }}'
         $newContent = ''
         foreach($line in $content)
         {
@@ -126,7 +129,7 @@ jobs:
       run: |
          git config --global user.name "GitHub Actions"
          git config user.email --global  "github.actions@virtoway.com"
-         git commit -am "Automated update the ${{ github.repository }} version to ${{ jobs.ci.steps.image.outputs.prefix }}"
+         git commit -am "Automated update the ${{ github.repository }} version to ${{ needs.ci.outputs.artifactVersion }}"
          git push
         # cd ${{ github.workspace }}
         # git clone https://github.com/VirtoCommerce/vc-deploy-apps.git
