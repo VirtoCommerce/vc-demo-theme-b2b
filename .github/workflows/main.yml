@@ -119,20 +119,11 @@ jobs:
 
         cd ${{ github.workspace }}
         cd ./webstore-app/overlays/dev
-        $fileName = './deployment-cm.yaml'
+        $fileName = "./deployment-cm.yaml"
         $content = Get-Content $fileName
-        $regex = '  B2B_THEME_URL:'
-        $artifactPath = '"${{ needs.ci.outputs.blobUrl }}"'
-        $newContent = ''
-        foreach($line in $content)
-        {
-            if($line -match $regex)
-            {
-                $line = $regex + ' ' + $artifactPath
-            }
-            $newContent += $line + "`r`n"
-        }
-        Set-Content -Path $fileName -Value $newContent
+        $key = "B2B_THEME_URL"
+        $artifactPath = "${{ needs.ci.outputs.blobUrl }}"
+        $content -replace "$key\s*:.*", "$key`: $artifactPath" | Set-Content -Path $fileName
 
     - name: Commit deployment-cm change
       run: |
@@ -147,7 +138,7 @@ jobs:
       run: | 
         do {
           Start-Sleep -s 15
-          $statusBage = (Invoke-WebRequest -Uri "https://cd.govirto.com/api/badge?name=webstore-dev-app").Content
+          $statusBage = (Invoke-WebRequest -Uri "https://cd.govirto.com/api/badge?name=webstore-app-dev").Content
           
           $syncedAndHealthy = $statusBage.Contains('>Healthy<') -and $statusBage.Contains('>Synced<')
           if (-not $syncedAndHealthy) {
