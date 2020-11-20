@@ -1,0 +1,90 @@
+{% assign display_block = true %}
+{% assign request = request_url | format:null %}
+
+{% if block.utmString and block.utmString != '' %}
+  {% assign display_block = request contains block.utmString %}
+  {% if block.utmNegotiate == 'True' %}
+    {% comment %} i couldn't find a negotiate operator {% endcomment %}
+    {% if display_block %}
+      {% assign display_block = false %}
+    {% else %}
+      {% assign display_block = true %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% if display_block == true and current_user and current_user.contact and block.userGroup and block.userGroup.value %}
+
+{% assign display_block = current_user.contact.user_groups contains block.userGroup.value %}
+
+{% endif %}
+
+{% if display_block or is_preview_mode %}
+{% include 'blocks/helpers/color-style' %}
+<div id="{{ block.__id }}" style="position: relative;" class="{{ block.style }}">
+  <div class="{% include 'blocks/helpers/block-paddings' %} block container">
+    <div class="px-5">
+      {% include 'blocks/helpers/block-title' givenTitle: block.categoryId.name %}
+
+      {% if block.subtitle %}
+      <div class="text-container"> {{ block.subtitle }} </div>
+      {% endif %}
+
+      {% if block.categoryId and block.categoryId.id %}
+      <div>
+        <div class="row">
+          {% assign category = collections | where: 'Id', '==', block.categoryId.id | first %}
+
+          {% assign skus = block.excludes | split: '\n' %}
+
+          {% if category.products.empty? == false %}
+
+          {% comment %}dump way{% endcomment %}
+          {% assign p = category.products %}
+          {% for sku in skus %}
+          {% assign p = p | where: 'Sku', '!=', sku %}
+          {% endfor %}
+
+          {% assign count = category.products.size %}
+          {% if block.count %}
+              {% assign maxCount = block.count.value %}
+              {% if maxCount > 0 %}
+                  {% assign count = block.count %}
+              {% endif %}
+          {% endif %}
+
+          {% for product in p limit:count %}
+
+          {% assign grid_item_width = 'col-xl-3 col-lg-4 col-md-6 col-sm-6 product-card' %}
+          {% include 'product-grid-item' %}
+
+          {% endfor %}
+
+          {% else %}
+          <p class="col-12">{{ 'search.no_results' | t }}</p>
+            {% endif %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% include 'blocks/helpers/catalog-script' %}
+
+{% comment %}
+
+__id: string (unique block id)
+
+name: string
+headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
+titleStyle: [ null, bootstrap styles ]
+style: [ light, dark ]
+noTop: bool
+noBottom: bool
+
+title: string
+categoryId: string
+
+{% endcomment %}

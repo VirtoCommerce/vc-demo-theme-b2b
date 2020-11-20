@@ -1,0 +1,37 @@
+{% include 'blocks/helpers/cover-style' %}
+
+<div id="{{ block.__id }}" style="position: relative;">
+  <div class="{% include 'blocks/helpers/block-paddings' %} block container">
+      <div class="d-flex px-5 {{block.titleAlignment}} align-items-center">
+
+          {% if block.title %}
+              <div class="pr-5">
+                  {% include 'blocks/helpers/block-title' %}
+              </div>
+          {% endif %}
+
+          {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
+              <div>
+                  <a href="{{block.firstButton.url}}" class="btn {{ block.firstButton.style }}" {% if block.firstButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.firstButton.urlText}}</a>
+              </div>
+          {% endif %}
+
+      </div>
+  </div>
+</div>
+
+{% comment %}
+
+__id: string (unique block id)
+
+name: string
+headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
+noTop: bool
+noBottom: bool
+
+textAreaWidth: string (col-lg, col-lg-10, col-lg-8, col-lg-6)
+brandColor: string (color)
+subtitle: string
+displayType: string (logo | simple)
+
+{% endcomment %}

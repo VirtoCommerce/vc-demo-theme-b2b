@@ -1,7 +1,21 @@
-<div id="{{ block.__id }}" class="{{ block.style }}">
-  <div class="{% include 'blocks/helpers/block-paddings' %} container">
+{% include 'blocks/helpers/color-style' %}
+
+<div id="{{ block.__id }}" style="position: relative;">
+  <div class="{% include 'blocks/helpers/block-paddings' %} block container">
     <div class="px-5">
-      {% include 'blocks/helpers/block-title' %}
+      <div class="d-flex flex-column align-items-center row">
+          <div class="align-self-center {{ block.textAreaWidth }}">
+            {% include 'blocks/helpers/block-title' %}
+          </div>
+      </div>
+
+      {% if block.content %}
+          <div class="d-flex flex-column align-items-center row">
+              <div class="text-container align-self-center {{ block.textAreaWidth }}">
+                  {{ block.content }}
+              </div>
+          </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -19,5 +33,6 @@ noTop: bool
 noBottom: bool
 
 title: string
+content: string (wysiwyg)
 
 {% endcomment %}

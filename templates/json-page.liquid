@@ -1,7 +1,7 @@
 {% if page.layout != blank %}
     {% layout page.layout %}
 {% endif %}
-
-<main class="container">
+{% layout 'bootstrap_migration' %}
+<main class="container flex-grow-1">
     {% include 'json-blocks' %}
 </main>
