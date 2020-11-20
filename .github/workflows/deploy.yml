@@ -2,15 +2,16 @@
 name: Theme deployment
 on:
   workflow_dispatch:
-    blobUrl: 
-      description: 'Artifact download url'
-      required: true
-    artifactVersion: 
-      description: 'Full artifact build number'
-      required: true
-    key:
-      description: 'Deployment config map key'
-      required: true
+    inputs:
+      blobUrl: 
+        description: 'Artifact download url'
+        required: true
+      artifactVersion: 
+        description: 'Full artifact build number'
+        required: true
+      key:
+        description: 'Deployment config map key'
+        required: true
 
 jobs:
   cd:
