@@ -42,7 +42,7 @@ jobs:
         cd ./webstore-app/overlays/dev
         $fileName = "./deployment-cm.yaml"
         $content = Get-Content $fileName
-        $key = " ${{ github.event.inputs.key }}"
+        $key = "${{ github.event.inputs.key }}"
         $artifactPath = "${{ github.event.inputs.blobUrl }}"
         $content -replace "$key\s*:.*", "$key`: $artifactPath" | Set-Content -Path $fileName
 
