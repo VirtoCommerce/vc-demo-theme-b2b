@@ -1,0 +1,15 @@
+.dropdown-menu > {
+  .dropdown-item {
+    &.active > {
+      a,
+      a:focus,
+      a:hover {
+        color: $white;
+      }
+    }
+
+    > a {
+      color: $gray-900;
+    }
+  }
+}

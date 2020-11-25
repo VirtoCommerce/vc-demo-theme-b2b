@@ -1,0 +1,58 @@
+.popover {
+  &.popover-square {
+    border-radius: 0;
+
+    > * {
+      border-radius: 0;
+    }
+  }
+
+  &.hide-arrow {
+    .arrow {
+      display: none;
+    }
+  }
+
+  .popover-body {
+    padding: 0.5rem 1rem;
+  }
+
+  .bulk-order-popover {
+    li {
+      & > a {
+        color: $secondary;
+        &:hover,
+        &:focus {
+          color: $body-color;
+        }
+      }
+
+      &.active {
+        border-bottom: 3px solid $primary;
+        & > {
+          a,
+          a:hover,
+          a:focus {
+            color: $body-color;
+            background: none;
+          }
+        }
+      }
+    }
+  }
+
+  .all-products-popover {
+    li > a {
+      font-size: 0.75rem;
+      color: $body-color;
+      &:focus,
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .popover-category:nth-child(odd):not(:last-child) {
+    border-right: 1px solid $gray-300;
+  }
+}

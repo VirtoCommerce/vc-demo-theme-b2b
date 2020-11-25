@@ -4,20 +4,12 @@
             {{ 'layout.products.products' | t }}&ensp;<i class="fa fa-angle-down"></i>
         </a>
         <script id="all-products-popover.tpl" type="text/ng-template">
-            <div class="container-fluid" ng-init='links = {{ linklists[settings.all_products_menu].links | json }}'>
+            <div class="all-products-popover" ng-init='links = {{ linklists[settings.all_products_menu].links | json }}'>
                 <div class="row">
-                    <div class="col-md-6" ng-repeat="link in links" ng-if="$even">
-                        <ul class="nav nav-sm nav-pills nav-stacked text-nowrap">
+                    <div class="col-md-6 popover-category" ng-repeat="link in links">
+                        <ul class="nav text-nowrap">
                             <li>
-                                <a ng-href="{% raw %}{{ link.url}}{% endraw %}" ng-bind="link.title">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6" ng-repeat="link in links" ng-if="!$even">
-                        <ul class="nav nav-sm nav-pills nav-stacked text-nowrap">
-                            <li>
-                                <a ng-href="{% raw %}{{ link.url}}{% endraw %}" ng-bind="link.title">
+                                <a ng-href="{% raw %}{{ link.url }}{% endraw %}" ng-bind="link.title" class="font-weight-bold">
                                 </a>
                             </li>
                         </ul>

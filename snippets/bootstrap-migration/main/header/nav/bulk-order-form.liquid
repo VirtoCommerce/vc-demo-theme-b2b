@@ -1,8 +1,8 @@
 ﻿<li ng-class="{'active': isBulkOrderFormOpen}" class="d-inline-block navbar-text py-0">
-    <a id="bulk-order-popover" href="" class="text-uppercase d-block p-3 text-condensed" popover-class="popover-square hide-arrow" uib-popover-template="'bulk-order-popover.tpl'" popover-placement="bottom" popover-is-open="isBulkOrderFormOpen">
+    <a id="bulk-order-popover" href="" class="text-uppercase d-block p-3 text-condensed" popover-class="popover-square hide-arrow" uib-popover-template="'bulk-order-popover.tpl'" popover-placement="bottom-left" popover-is-open="isBulkOrderFormOpen">
         {{ 'bulk_order.general.title' | t }}&ensp;<i class="fa fa-angle-down"></i>
     </a>
     <script id="bulk-order-popover.tpl" type="text/ng-template">
-        {% include 'dashboard/bulk-order-content' %}
+        {% include 'bootstrap-migration/dashboard/bulk-order-content' %}
     </script>
 </li>
