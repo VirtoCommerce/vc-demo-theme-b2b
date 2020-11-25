@@ -1,0 +1,26 @@
+.form-control {
+  box-shadow: none;
+  font-size: $font-size-base;
+
+  &:focus {
+    box-shadow: 0 0 0 1px $input-focus-border-color inset;
+  }
+}
+
+textarea::placeholder {
+  font-size: $font-size-base;
+}
+
+// Remove arrows/spinners from input with type="number"
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}

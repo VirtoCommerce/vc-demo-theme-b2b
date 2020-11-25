@@ -5,7 +5,8 @@ $theme-colors: (
   "info":      $info,
   "warning":   $warning,
   "danger":    $danger,
-  "gray-900":  $gray-900
+  "gray-900":  $gray-900,
+  "gray-200":  $gray-200
 );
 
 $grid-breakpoints: map-merge($grid-breakpoints, (xxl: 1335px));
