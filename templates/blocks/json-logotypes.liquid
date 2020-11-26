@@ -1,0 +1,58 @@
+{% include 'blocks/helpers/color-style' %}
+
+<div id="{{ block.__id }}" style="position: relative;">
+    <div class="{% include 'blocks/helpers/block-paddings' %} block">
+        <div class="container">
+            <div class="px-5">
+                <div class="d-flex flex-column align-items-center row">
+                    <div class="text-center align-self-center {{ block.textAreaWidth }}">
+                      {% include 'blocks/helpers/block-title' %}
+                    </div>
+                </div>
+                {% if block.subtitle %}
+                    <div class="d-flex flex-column align-items-center row">
+                        <div class="text-center text-container align-self-center {{ block.textAreaWidth }}">
+                            {{ block.subtitle }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if block.logotypes.size > 0 %}
+                    <div class="d-flex flex-column align-items-center row">
+                        <div class="d-flex flex-row justify-content-between align-self-center {{ block.textAreaWidth }}">
+                            {% for logotype in block.logotypes %}
+                                <div>
+                                    {% if logotype.url != '' %}
+                                        <a href="{{logotype.url}}" {% if logotype.openInNewTab == 'True' %}target="_blank"{% endif %}>
+                                            <img src="{{ logotype.image.url }}" title="{{logotype.image.altText}}" class="img-fluid" />
+                                        </a>
+                                    {% else %}
+                                        <img src="{{ logotype.image.url }}" title="{{logotype.image.altText}}" class="img-fluid" />
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %}
+
+__id: string (unique block id)
+
+name: string
+headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
+titleStyle: [ null, bootstrap styles ]
+style: [ light, dark ]
+noTop: bool
+noBottom: bool
+
+textAreaWidth: string (col-lg, col-lg-10, col-lg-8, col-lg-6)
+title: string
+content: string (wysiwyg)
+logotypes: object (image, url, openInNewTab)
+
+{% endcomment %}

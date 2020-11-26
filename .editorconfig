@@ -10,5 +10,5 @@ insert_final_newline = true
 
 # JS, CSS code style settings:
 [*.{js,jsx,jsm,ts,tsx,scss,sass,css}]
-ident_size = 2
+indent_size = 2
 quote_type = single
