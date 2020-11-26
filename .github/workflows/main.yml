@@ -24,9 +24,6 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    outputs:
-      blobUrl: ${{ steps.publish.outputs.blobUrl }}
-      artifactVersion: ${{ steps.image.outputs.fullVersion }}
     env: 
       SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
