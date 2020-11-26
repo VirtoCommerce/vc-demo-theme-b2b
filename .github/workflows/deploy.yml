@@ -12,6 +12,15 @@ on:
       key:
         description: 'Deployment config map key'
         required: true
+      appDescriptionRepo:
+        description: 'ArgoCd repository'
+        required: true
+        default: 'VirtoCommerce/vc-deploy-apps'
+      appDescriptionBranch:
+        description: 'ArgoCd branch'
+        required: true
+        default: 'master'
+
 
 jobs:
   cd:
@@ -27,12 +36,12 @@ jobs:
         env: Development
         no_override: false
 
-    - name: Checkout VirtoCommerce/vc-deploy-apps
+    - name: Checkout ArgoCD repository 
       uses: actions/checkout@v2
       with:
         token: ${{ secrets.REPO_TOKEN }}
-        repository: "VirtoCommerce/vc-deploy-apps"
-        ref: "master"
+        repository: ${{ github.event.inputs.appDescriptionRepo }}
+        ref: ${{ github.event.inputs.appDescriptionBranch }}
 
     - name: Update deployment-cm
       shell: pwsh
@@ -47,11 +56,19 @@ jobs:
         $content -replace "$key\s*:.*", "$key`: $artifactPath" | Set-Content -Path $fileName
 
     - name: Commit deployment-cm change
+      shell: pwsh
       run: |
-         git config --global user.name "GitHub Actions"
-         git config user.email --global  "github.actions@virtoway.com"
-         git commit -am "Automated update ${{ github.repository }} to ${{ github.event.inputs.artifactVersion }}"
-         git push
+        if(git status --porcelain |Where {$_ -notmatch '^\?\?'}) # uncommitted changes exist
+        {
+          git config --global user.name 'GitHub Actions'
+          git config user.email --global  'github.actions@virtoway.com'
+          git commit -am 'Automated update ${{ github.repository }} to ${{ github.event.inputs.artifactVersion }}'
+          git push
+        }
+        else 
+        {
+          Write-Output 'Nothing to commit, working tree clean'
+        }
 
     - name: Wait for environment is up
       shell: pwsh
