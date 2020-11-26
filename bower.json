@@ -36,7 +36,8 @@
     "polyfills": "*",
     "prism": "^1.8.4",
     "underscore": "^1.8.3",
-    "owl.carousel": "^2.3.4"
+    "owl.carousel": "^2.3.4",
+    "ui-bootstrap4": "morgul/ui-bootstrap4#^3.0.7"
   },
   "license": "MIT",
   "homepage": "https://github.com/VirtoCommerce/vc-theme-b2b/",
