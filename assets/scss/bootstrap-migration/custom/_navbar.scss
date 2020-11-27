@@ -2,9 +2,10 @@
   min-height: 3.25rem;
 }
 
-.navbar.navbar-dark {
+.navbar-dark {
   li.active > {
     a,
+    a:focus,
     a:hover {
       color: $body-color;
       background-color: $gray-200;
