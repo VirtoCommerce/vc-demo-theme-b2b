@@ -34,3 +34,11 @@ input[type='search']::-webkit-search-results-button,
 input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
+
+// Remove button-border from input-group buttons, so they are aligned with inputs
+// (because input height calculation doesn't take into account the width of the button border)
+.input-group-append {
+  .btn {
+    border-width: 0;
+  }
+}
