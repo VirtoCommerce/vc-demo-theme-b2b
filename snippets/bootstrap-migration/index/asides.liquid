@@ -13,27 +13,6 @@
         <p class="mb-0 ml-3">Please <a class="font-weight-bold" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
     </div>
 </aside>
-{%- comment -%}
-{% assign found = false %}
-{% for blog in blogs %}
-    {% for article in blog.articles %}
-        {% assign found = article.is_sticked %}
-        {% if found %}
-            <aside class="thumbnail">
-                <figure>
-                    <img src="{{ article.image_url }}" class="img-responsive">
-                    <figcaption class="caption">
-                        <h4 class="text-center">{{ article.title }}</h4>
-                        <a href="{{ article.url }}" class="btn btn-alt btn-lg btn-block">{{ 'blogs.featured.learn_more' | t }}</a>
-                    </figcaption>
-                </figure>
-            </aside>
-            {% break %}
-        {% endif %}
-    {% endfor %}
-    {% if found %}{% break %}{% endif %}
-{% endfor %}
-{%- endcomment -%}
 {% if settings.footer_newsletter_enable %}
     <aside class="card mb-3 mb-md-0">
          <div class="card-header">
