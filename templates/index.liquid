@@ -5,51 +5,40 @@
             window.location.replace("{{ '/account' | absolute_url }}");
     </script>
 {% endif %}
-<main class="container" role="main">
-    <div class="row">
-        <div class="col-sm-4">
+<main class="container pt-4 pb-5" role="main">
+    <div class="row mb-4">
+        <div class="col-md-4 pr-md-2">
             {% include 'bootstrap-migration/index/asides' %}
         </div>
-        <div class="col-sm-8">
-                <div id="carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carusel-item active">
-                            <img class="d-block w-100" src="{{ 'main-page-pic@x2.png' | asset_url }}" alt="...">
-                        </div>
+        <div class="col-md-8 pl-md-2">
+            <div id="carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carusel-item active">
+                        <img class="d-block img-fluid" src="{{ 'main-page-pic@x2.png' | asset_url }}" alt="...">
                     </div>
                 </div>
-
+            </div>
         </div>
     </div>
-    <div id="four-blocks-on-main">
-        <div class="row flexible">
-            <div class="col-md-12">
-                <h3 class="text-center">Professional purchases have never been that easy</h3>
-            </div>
-            <div class="col-md-3">
-                <div class="block-wraper">
-                    <img src="{{ 'main-ico-corp.svg' | asset_url }}" alt="..." />
-                    <p class="decription">Corporate account <br /> management</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="block-wraper">
-                    <img src="{{ 'main-ico-price.svg' | asset_url }}" alt="..." />
-                    <p class="decription">Quote management price <br /> negotiation</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="block-wraper">
-                    <img src="{{ 'main-ico-shop.svg' | asset_url }}" alt="..." />
-                    <p class="decription">Multiple stores, channels <br /> and regions</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="block-wraper">
-                    <img src="{{ 'main-ico-calc.svg' | asset_url }}" alt="..." />
-                    <p class="decription">B2B personalization and price <br /> management</p>
-                </div>
-            </div>
+    <div class="row text-center">
+        <div class="col-md-12 mb-4">
+            <h3 class="text-center text-helvetica">Professional purchases have never been that easy</h3>
+        </div>
+        <div class="col-6 col-md-3">
+            <img src="{{ 'main-ico-corp.svg' | asset_url }}" alt="..." />
+            <p class="pt-4 font-weight-bolder">Corporate account <br /> management</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <img src="{{ 'main-ico-price.svg' | asset_url }}" alt="..." />
+            <p class="pt-4 font-weight-bolder">Quote management price <br /> negotiation</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <img src="{{ 'main-ico-shop.svg' | asset_url }}" alt="..." />
+            <p class="pt-4 font-weight-bolder">Multiple stores, channels <br /> and regions</p>
+        </div>
+        <div class="col-6 col-md-3">
+            <img src="{{ 'main-ico-calc.svg' | asset_url }}" alt="..." />
+            <p class="pt-4 font-weight-bolder">B2B personalization and price <br /> management</p>
         </div>
     </div>
 </main>
