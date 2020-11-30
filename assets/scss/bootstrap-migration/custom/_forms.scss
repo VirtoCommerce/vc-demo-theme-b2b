@@ -1,14 +1,9 @@
 .form-control {
   box-shadow: none;
-  font-size: $font-size-base;
 
   &:focus {
     box-shadow: 0 0 0 1px $input-focus-border-color inset;
   }
-}
-
-textarea::placeholder {
-  font-size: $font-size-base;
 }
 
 // Remove arrows/spinners from input with type="number"
