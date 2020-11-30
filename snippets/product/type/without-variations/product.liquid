@@ -40,40 +40,29 @@
                 </div>
             </div>
             <div class="panel-body">
-              <div class="price-block">
-                {% assign product = product %}
-                {% include 'product/price' %}
-              </div>
+                <div class="price-block">
+                  {% assign product = product %}
+                  {% include 'product/price' %}
+                </div>
 
-              <div class="delivery-cart">
-                <div ng-controller="purchaseController" ng-init='loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", "{{ product.id }}")'>
-                    <p ng-show="shipmentType == 'shipping' && shipmentAddress">Expected to arrive: <strong ng-bind="availability['{{ product.id }}'].expectedArrival | date: 'fullDate'"></strong></p>
-                    <p ng-show="shipmentType == 'pickup' && shipmentFulfillmentCenter">Available for pickup: <strong ng-bind="availability['{{ product.id }}'].availableSince | date: 'fullDate'"></strong></p>
-                    <vc-payment-plan available-payment-plans="::availablePaymentPlans"></vc-payment-plan>
-                    <div class="form-group">
-                        {% include 'product/quantity' %}
-                    </div>
+                <div class="delivery-cart">
+                    <div ng-controller="purchaseController" ng-init='loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", "{{ product.id }}")'>
+                        <p ng-show="shipmentType == 'shipping' && shipmentAddress">Expected to arrive: <strong ng-bind="availability['{{ product.id }}'].expectedArrival | date: 'fullDate'"></strong></p>
+                        <p ng-show="shipmentType == 'pickup' && shipmentFulfillmentCenter">Available for pickup: <strong ng-bind="availability['{{ product.id }}'].availableSince | date: 'fullDate'"></strong></p>
+                        <vc-payment-plan available-payment-plans="::availablePaymentPlans"></vc-payment-plan>
+                        <div class="form-group">
+                            {% include 'product/quantity' %}
+                        </div>
                     </div>
                 </div>
-                  <div class="action-buttons">
-                        <ul class="list-inline">
-                            <li>
-                                <add-to-list-button selected-variation="selectedVariation"></add-to-list-button>
-                            </li>
-                            <li>
-                                <a class="envelope" href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')">Email</a>
-                            </li>
-                            <li class="print">
-                                {% include 'shared/print' %}
-                            </li>
-                        </ul>
-                  </div>
-                    <div>
+
+                {% include 'product/type/common/product-action-buttons' %}
+
+                <div>
                     <vc-shipping-type is-dropdown="false" pickup-method-code="{{ settings.pickup_shipping_method }}"></vc-shipping-type>
                 </div>
             </div>
         </div>
-
     </div>
 
     {% include 'product/type/common/related-products' %}
