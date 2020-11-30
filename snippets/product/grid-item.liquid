@@ -23,7 +23,7 @@
 
     {% if product.product_type == "Configurable" %}
         {% include 'product/type/configured/item-price' %}
-        {% include 'product/type/configured/item-configure-btn' %}
+        {% include 'product/type/configured/item-configure-button' %}
     {% else %}
         {% include 'product/price' %}
         {% include 'product/quantity' %}
