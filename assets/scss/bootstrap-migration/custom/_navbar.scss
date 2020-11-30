@@ -3,7 +3,7 @@
     a,
     a:focus,
     a:hover {
-      color: $body-color;
+      color: $body-color !important;
       background-color: $gray-200;
     }
   }
