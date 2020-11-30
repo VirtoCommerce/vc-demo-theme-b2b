@@ -1,18 +1,18 @@
-﻿{% if show_label %}
+{% if show_label %}
     <label>{{ 'products.product.quantity' | t }}</label>
 {% endif %}
 <div class="input-group">
         <input type="text" class="form-control"
         ng-keydown="validateQtyInput($event)"
-        ng-init="product['{{product.id}}'].quantity = 1"
-        ng-model="product['{{product.id}}'].quantity"
+        ng-model="configurationQty"
+        ng-change="quantityChanged(configurationQty)"
+        ng-model-options="{ debounce: 300 }"
         >
         <span class="input-group-btn">
             <button class="btn btn-alt btn-primary"
                     {% if unavailable or sold_out %} disabled {% endif %}
                     title="{{ 'products.general.add_to_cart' | t }}"
-                    ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
-                    >
+                    ng-click="addSelectedProductsToCart()">
                         {% if unavailable %}
                         {{ 'products.product.unavailable' | t }}
                         {% elsif sold_out %}
@@ -20,6 +20,6 @@
                         {% else %}
                         {{ 'products.general.add_to_cart' | t }}
                         {% endif %}
-                </button>
+            </button>
         </span>
 </div>

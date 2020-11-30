@@ -1,0 +1,10 @@
+<div ng-show="relatedProducts.item.count" class="col-md-9">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">{{ 'products.general.related_products' | t }}</h4>
+        </div>
+        <div class="panel-body">
+            <vc-related-products product-ids="['{{ product.id }}']" responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }" on-update="relatedProducts = $event"></vc-related-products>
+        </div>
+    </div>
+</div>

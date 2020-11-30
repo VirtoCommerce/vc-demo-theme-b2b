@@ -14,7 +14,28 @@
     {% assign unavailable = true %}
 {% endif %}
 
-{% include 'product/main' %}
+<main class="container container-drain" role="main">
+    <div class="row breadcrumbs-wrapper">
+        <div class="col-xs-12">
+            {% include 'shared/breadcrumb' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 container-drain" itemscope itemtype="http://schema.org/Product">
+           <meta itemprop="url" content="{{ product.url | absolute_url}}">
+            <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}">
+
+        {% if product.product_type == "Configurable" %}
+            {% include 'product/type/configured/product' %}
+        {% elsif variants_size != 1 %}
+            {% include 'product/type/with-variations/product' %}
+        {% else %}
+            {% include 'product/type/without-variations/product' %}
+        {% endif %}
+
+    </div>
+</div>
+</main>
 
 </ng-controller>
 
