@@ -1,22 +1,22 @@
 ﻿<nav class="navbar navbar-dark bg-dark d-block d-md-none p-0" role="navigation">
     <div class="container-fluid">
         <div itemscope itemtype="http://schema.org/Organization">
-            {% include 'main/header/links/brand' %}
+            {% include 'bootstrap-migration/main/header/links/brand' %}
         </div>
-        <ul class="list-inline m-0" ng-cloak>
-            <li ng-if="customer && !customer.isRegisteredUser" class="d-inline-block navbar-text py-0">
-                {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase text-condensed" href' | replace: '">', '"><i class="fa fa-sign-in"></i>&ensp;' }}
+        <ul class="nav" ng-cloak>
+            <li ng-if="customer && !customer.isRegisteredUser" class="nav-item">
+                {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase nav-link p-3 text-condensed text-white" href' | replace: '">', '"><i class="fa fa-sign-in"></i>&ensp;' }}
             </li>
-            <li class="dropdown d-inline-block navbar-text py-0" uib-dropdown ng-if="customer && customer.isRegisteredUser">
-                <a id="account-dropdown" class="text-uppercase text-condensed" href="" uib-dropdown-toggle><i class="fa fa-user"></i>&ensp;{{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu dropdown-menu-left" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
-                    <li>
-                        <a href="{{ 'account' | absolute_url }}">
+            <li class="dropdown nav-item" uib-dropdown ng-if="customer && customer.isRegisteredUser">
+                <a id="account-dropdown" class="text-uppercase nav-link p-3 text-condensed text-white" href="" uib-dropdown-toggle><i class="fa fa-user text-primary"></i>&ensp;{{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary"></i></a>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
+                    <li class="dropdown-item">
+                        <a href="{{ 'account' | absolute_url }}" class="text-body">
                             <i class="fa fa-user"></i>&ensp;{{ 'customer.account.title' | t }}
                         </a>
                     </li>
-                    <li>
-                        {{ 'layout.customer.log_out' | t | customer_logout_link | replace: '">', '"><i class="fa fa-sign-out"></i>&ensp;' }}
+                    <li class="dropdown-item">
+                        {{ 'layout.customer.log_out' | t | customer_logout_link | replace: '">', '" class="text-body"><i class="fa fa-sign-out"></i>&ensp;' }}
                     </li>
                 </ul>
             </li>

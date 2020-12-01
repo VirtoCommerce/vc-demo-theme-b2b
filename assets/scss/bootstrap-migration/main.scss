@@ -1,6 +1,7 @@
 @import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
+@import "default-variables";
 @import "variables";
 @import "maps";
 @import "bootstrap/scss/bootstrap";
+@import "override";
 @import "custom";

@@ -1,12 +1,21 @@
-$theme-colors: (
-  "primary":   $primary,
-  "secondary": $secondary,
-  "success":   $success,
-  "info":      $info,
-  "warning":   $warning,
-  "danger":    $danger,
-  "gray-900":  $gray-900
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    'gray-900': $gray-900,
+    'gray-200': $gray-200,
+  )
 );
 
-$grid-breakpoints: map-merge($grid-breakpoints, (xxl: 1335px));
-$container-max-widths: map-merge($container-max-widths, (xxl: 1336px));
+$grid-breakpoints: map-merge(
+  $grid-breakpoints,
+  (
+    xxl: 1335px,
+  )
+);
+
+$container-max-widths: map-merge(
+  $container-max-widths,
+  (
+    xxl: 1336px,
+  )
+);

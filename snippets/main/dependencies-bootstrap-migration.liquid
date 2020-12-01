@@ -5,10 +5,11 @@
 
 {{ content_for_header }}
 
-{{ 'bundle/dependencies.js' | static_asset_url | append_version | script_tag }}
+{{ 'bundle/dependencies-bootstrap-migration.js' | static_asset_url | append_version | script_tag }}
 {{ 'consts.js' | asset_url | script_tag }}
 {{ 'bundle/scripts.js' | static_asset_url | append_version | script_tag }}
 
 {{ 'shop.js' | asset_url | script_tag }}
 {{ 'shopify_common.js' | asset_url | script_tag }}
 {{ 'customer_area.js'  | asset_url | script_tag }}
+

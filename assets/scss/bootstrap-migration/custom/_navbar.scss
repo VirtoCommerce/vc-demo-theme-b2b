@@ -1,4 +1,10 @@
-.navbar-search-bar {
-    min-height: 3.25rem;
-    font-size: $font-size-base;
+.navbar-dark {
+  li.active > {
+    a,
+    a:focus,
+    a:hover {
+      color: $body-color !important;
+      background-color: $gray-200;
+    }
+  }
 }
