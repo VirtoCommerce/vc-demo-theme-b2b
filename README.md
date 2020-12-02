@@ -1,4 +1,6 @@
-# B2B theme for VirtoCommerce Storefront
+# B2B theme for VirtoCommerce Storefront 
+
+[![CI status](https://github.com/VirtoCommerce/vc-demo-theme-b2b/workflows/Theme%20CI/badge.svg?branch=dev)](https://github.com/VirtoCommerce/vc-demo-theme-b2b/actions?query=workflow%3A"Theme+CI") [![Deployment status](https://github.com/VirtoCommerce/vc-demo-theme-b2b/workflows/Theme%20deployment/badge.svg?branch=dev)](https://github.com/VirtoCommerce/vc-demo-theme-b2b/actions?query=workflow%3A"Theme+deployment") [![Quality gate](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-demo-theme-b2b&metric=alert_status&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-demo-theme-b2b) [![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-demo-theme-b2b&metric=reliability_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-demo-theme-b2b) [![Security rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-demo-theme-b2b&metric=security_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-demo-theme-b2b) [![Sqale rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-demo-theme-b2b&metric=sqale_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-demo-theme-b2b)
 
 _B2B theme_ for VirtoCommerce Storefront used by _B2B-Store_ sample store. It is a showcase for b2b features support of VirtoCommerce.
 
