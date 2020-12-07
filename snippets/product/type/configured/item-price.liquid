@@ -1,5 +1,5 @@
 
-<dl class="dl-horizontal">
+<dl class="dl-horizontal" ng-controller="configurableProductCardController" ng-init="initProductConfiguration('{{product.id}}')">
     <dt class="text-normal">
         <span class="product-pull-left">
                 {% if customer %}
