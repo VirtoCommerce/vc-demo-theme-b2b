@@ -25,10 +25,10 @@
         {% include 'product/type/configured/item-price' %}
         {% include 'product/type/configured/item-configure-button' %}
     {% else %}
-        <div ng-controller="commonProductCardController">
+        <ng-controller ng-controller="commonProductCardController">
             {% include 'product/price' %}
             {% include 'product/quantity' %}
-        </div>
+        </ng-controller>
     {% endif %}
 
 </div>
