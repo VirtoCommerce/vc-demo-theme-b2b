@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', '$timeout', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper', 'storeCurrency',
-    function ($rootScope, $scope, $window, $timeout, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper, storeCurrency) {
+storefrontApp.controller('productController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', 'quoteRequestService', 'availabilityService', '$filter', 'roundHelper', 'validationHelper', 'storeCurrency',
+    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, quoteRequestService, availabilityService, $filter, roundHelper, validationHelper, storeCurrency) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
