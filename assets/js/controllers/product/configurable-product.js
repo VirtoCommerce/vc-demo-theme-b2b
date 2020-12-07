@@ -95,11 +95,11 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
               product = response.data[0];
               $scope.selectedVariation = product;
 
-              return availabilityService.getProductsAvailability([product.id]).then(function(response) {
-                  $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
+              return availabilityService.getProductsAvailability([product.id]).then(function(res) {
+                  $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
               });
           });
-        };
+        }
 
         function recalculateTotals() {
             $scope.selectedProductParts = [];

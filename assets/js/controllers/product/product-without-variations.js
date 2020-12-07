@@ -44,11 +44,11 @@ storefrontApp.controller('productWithoutVariationsController', ['$rootScope', '$
                 product = response.data[0];
                 $scope.selectedVariation = product;
 
-                return availabilityService.getProductsAvailability([product.id]).then(function(response) {
-                    $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
+                return availabilityService.getProductsAvailability([product.id]).then(function(res) {
+                    $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
                 });
             });
-        };
+        }
 
         $scope.sendToEmail = function (storeId, productId, productUrl, language) {
             dialogService.showDialog({ storeId: storeId, productId: productId, productUrl: productUrl, language: language }, 'recentlyAddedCartItemDialogController', 'storefront.send-product-to-email.tpl');

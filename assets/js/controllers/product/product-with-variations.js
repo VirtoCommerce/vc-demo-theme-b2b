@@ -75,11 +75,11 @@ storefrontApp.controller('productWithVariationsController', ['$rootScope', '$sco
                 //});
                 $scope.selectedVariation = product;
 
-                return availabilityService.getProductsAvailability([product.id]).then(function(response) {
-                    $scope.availability = _.object(_.pluck(response.data, 'productId'), response.data);
+                return availabilityService.getProductsAvailability([product.id]).then(function(res) {
+                    $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
                 });
             });
-        };
+        }
 
         function getFlatternDistinctPropertiesMap(variations) {
             var retVal = {};
@@ -91,7 +91,7 @@ storefrontApp.controller('productWithVariationsController', ['$rootScope', '$sco
                 });
             });
             return retVal;
-        };
+        }
 
         function getVariationPropertyMap(variation) {
             return _.groupBy(variation.variationProperties, function (x) { return x.displayName });
