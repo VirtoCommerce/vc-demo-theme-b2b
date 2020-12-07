@@ -3,7 +3,7 @@
         <li>
             <add-to-list-button selected-variation="selectedVariation"></add-to-list-button>
         </li>
-        <li>
+        <li ng-controller="commonProductCardController">
             <a class="envelope" href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')">Email</a>
         </li>
         <li class="print">

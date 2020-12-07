@@ -124,9 +124,5 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
             });
         }
 
-        $scope.sendToEmail = function (storeId, productId, productUrl, language) {
-            dialogService.showDialog({ storeId: storeId, productId: productId, productUrl: productUrl, language: language }, 'recentlyAddedCartItemDialogController', 'storefront.send-product-to-email.tpl');
-        };
-
         initialize();
     }]);

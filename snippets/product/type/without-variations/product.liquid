@@ -51,7 +51,9 @@
                         <p ng-show="shipmentType == 'pickup' && shipmentFulfillmentCenter">Available for pickup: <strong ng-bind="availability['{{ product.id }}'].availableSince | date: 'fullDate'"></strong></p>
                         <vc-payment-plan available-payment-plans="::availablePaymentPlans"></vc-payment-plan>
                         <div class="form-group">
-                            {% include 'product/quantity' %}
+                            <ng-controller ng-controller="commonProductCardController">
+                                {% include 'product/quantity' %}
+                            </ng-controller>
                         </div>
                     </div>
                 </div>
