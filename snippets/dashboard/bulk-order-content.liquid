@@ -14,7 +14,7 @@
             </li>
         </ul>
     </div>
-    <div class="panel-body" ng-controller="productController">
+    <div class="panel-body" ng-controller="productWithVariationsController">
             <form action="{{ '/bulkorder/addfielditems' | absolute_url }}" method="POST" ng-show="state == 'manual'">
                 {% assign column_count = 1 %}
                 {% assign rows_count = 6 %}
