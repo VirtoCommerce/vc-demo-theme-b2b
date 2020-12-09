@@ -12,12 +12,12 @@
             <p>
                 {{ 'customer.sign_in.registration_advantages_title' | t: shop.name }}
                 <ul>
-                    {% for i in (0..10) %}
-                    {% assign registration_advantage_path = 'customer.sign_in.registration_advantages[' | append: i | append: ']' %}
-                    {% assign registration_advantage = registration_advantage_path | t %}
-                    {% if registration_advantage != registration_advantage_path %}
-                    <li>{{ registration_advantage }}</li>
-                    {% endif %}
+                    {% assign advantages_size = 'customer.sign_in.registration_advantages' | t | size | minus: 2 %}
+                    {% assign registration_advantage = 'customer.sign_in.registration_advantages' | t | slice: 1, advantages_size %}
+                    {% assign advantages = registration_advantage | split: ',' %}
+                    {% for phrase in advantages %}
+                        {% assign phrase_size = phrase | strip | size | minus: 2 %}
+                        <li>{{ phrase | strip | slice: 1, phrase_size }}</li>
                     {% endfor %}
                 </ul>
             </p>
