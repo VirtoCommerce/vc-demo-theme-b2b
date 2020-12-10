@@ -3,5 +3,6 @@ a {
   &.btn.btn-link {
     font-family: $font-family-sans-serif;
     font-weight: $link-font-weight;
+    cursor: pointer;
   }
 }
