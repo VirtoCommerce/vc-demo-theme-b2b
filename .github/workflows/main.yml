@@ -39,7 +39,7 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
 
     - name: Get Image Version
-      uses: VirtoCommerce/vc-github-actions/get-image-version@VP-6093
+      uses: VirtoCommerce/vc-github-actions/get-image-version@master
       id: image
 
     - name: Set release variables
@@ -67,7 +67,7 @@ jobs:
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/master')}}
       id: publish
-      uses: VirtoCommerce/vc-github-actions/publish-theme@VP-6093
+      uses: VirtoCommerce/vc-github-actions/publish-theme@master
 
     - name: Create Release
       if: ${{ github.ref == 'refs/heads/master' }}

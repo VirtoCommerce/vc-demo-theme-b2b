@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0",
+    "version": "1.6.0",
     "name": "vc-demo-theme-b2b",
     "author": "VirtoCommerce",
     "description": "B2B theme for Storefront",
@@ -18,7 +18,8 @@
         "bootstrap": "^4.5.3",
         "es6-promise": "^4.2.4",
         "isomorphic-fetch": "^2.2.1",
-        "npm-check-updates": "^7.1.1"
+        "npm-check-updates": "^7.1.1",
+        "ui-bootstrap4": "^3.0.7"
     },
     "devDependencies": {
         "@babel/core": "^7.11.1",

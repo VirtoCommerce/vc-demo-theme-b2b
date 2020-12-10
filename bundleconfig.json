@@ -27,6 +27,33 @@
         ]
     },
     {
+        "outputFileName": "assets/static/bundle/dependencies-bootstrap-migration.js",
+        "inputFiles": [
+            "bower_components/polyfills/polyfill.js",
+            "bower_components/jquery/dist/jquery.js",
+            "bower_components/underscore/underscore.js",
+            "bower_components/angularjs/angular.js",
+            "bower_components/angular-filter/dist/angular-filter.js",
+            "bower_components/angular-resource/angular-resource.js",
+            "bower_components/ngstorage/ngStorage.js",
+            "bower_components/angular-credit-cards/release/angular-credit-cards.js",
+            "bower_components/angular-animate/angular-animate.js",
+            "node_modules/ui-bootstrap4/dist/ui-bootstrap.js",
+            "node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js",
+            "bower_components/angular-recaptcha/release/angular-recaptcha.js",
+            "bower_components/angular-sanitize/angular-sanitize.js",
+            "bower_components/angular-translate/angular-translate.js",
+            "bower_components/angular-translate-loader-url/angular-translate-loader-url.js",
+            "bower_components/angular-wizard/dist/angular-wizard.js",
+            "bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js",
+            "bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js",
+            "bower_components/prism/prism.js",
+            "bower_components/prism/plugins/normalize-whitespace/prism-normalize-whitespace.js",
+            "bower_components/angular-ui-router/release/angular-ui-router.js",
+            "bower_components/owl.carousel/dist/owl.carousel.js"
+        ]
+    },
+    {
         "outputFileName": "assets/static/fonts",
         "inputFiles": [
             "bower_components/font-awesome/fonts/**"
