@@ -1,54 +1,49 @@
-{% layout settings.customer_layout %}
-<main class="main" role="main">
-    <aside class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h1>{{ 'customer.invite.title' | t }}</h1>
-                <form accept-charset="UTF-8" action="{{ '~/account/confirminvitation' | absolute_url }}" method="post" id="confirm_invitation" name="confirm_invitation">
-                    {% include 'form-errors-custom' %}
-
-                    <input type="hidden" value="{{ form.email }}" name="customer[email]">
-                    <input type="hidden" value="{{ form.organization_id }}" name="customer[organization_id]">
-                    <input type="hidden" value="{{ form.token }}" name="customer[token]">
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" name="customer[first_name]" type="text" required placeholder="{{ 'customer.invite.first_name' | t }}" />
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="customer[last_name]" type="text" required placeholder="{{ 'customer.invite.last_name' | t }}" />
-                            </div>
+{% layout 'bootstrap_migration' %}
+<main class="container pt-4 pb-5 flex-grow-1" role="main">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <h1>{{ 'customer.invite.title' | t }}</h1>
+            <form accept-charset="UTF-8" action="{{ '~/account/confirminvitation' | absolute_url }}" method="post" id="confirm_invitation" name="confirm_invitation">
+                {% include 'bootstrap-migration/form-errors-custom' %}
+                <input type="hidden" value="{{ form.email }}" name="customer[email]">
+                <input type="hidden" value="{{ form.organization_id }}" name="customer[organization_id]">
+                <input type="hidden" value="{{ form.token }}" name="customer[token]">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-sm-0">
+                            <input class="form-control" name="customer[first_name]" type="text" required placeholder="{{ 'customer.invite.first_name' | t }}" />
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="customer[last_name]" type="text" required placeholder="{{ 'customer.invite.last_name' | t }}" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input class="form-control" name="customer[user_name]" type="text" required placeholder="{{ 'customer.invite.user_name' | t }}" />
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input class="form-control" name="customer[user_name]" type="text" required placeholder="{{ 'customer.invite.user_name' | t }}" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input class="form-control" name="customer[password]" type="password" required placeholder="{{ 'customer.invite.password' | t }}" />
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-control" name="customer[confirm_password]" type="password" required placeholder="{{ 'customer.invite.confirm_password' | t }}" />
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-3 mb-sm-0">
+                            <input class="form-control" name="customer[password]" type="password" required placeholder="{{ 'customer.invite.password' | t }}" />
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" name="customer[confirm_password]" type="password" required placeholder="{{ 'customer.invite.confirm_password' | t }}" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-primary pull-right" value="{{ 'customer.invite.submit' | t }}"/>
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary pull-right" value="{{ 'customer.invite.submit' | t }}"/>
                         </div>
                     </div>
-
-                    {{ antiforgery }}
-                </form>
-            </div>
+                </div>
+                {{ antiforgery }}
+            </form>
         </div>
-    </aside>
+    </div>
 </main>
