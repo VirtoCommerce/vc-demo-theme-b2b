@@ -34,7 +34,7 @@
                                     </a>
                                 </div>
                                 <a ng-href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}">
-                                    <img style="max-width: 150px;" ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" ng-if="product.primaryImage.url" />
+                                    <img ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" ng-if="product.primaryImage.url" />
                                     <div ng-if="!product.primaryImage.url">
                                         <img src="{{ 'images/no-image.svg' | asset_url }}" />
                                     </div>
