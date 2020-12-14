@@ -656,10 +656,10 @@
             "sort": 310
           }
         ],
-        "margins": [
+        "paddings": [
           {
             "id": "noTop",
-            "label": "Remove top margin",
+            "label": "Remove top padding",
             "type": "checkbox",
             "tab": "Settings",
             "sort": 235,
@@ -667,7 +667,7 @@
           },
           {
             "id": "noBottom",
-            "label": "Remove bottom margin",
+            "label": "Remove bottom padding",
             "type": "checkbox",
             "tab": "Settings",
             "sort": 236,
@@ -881,7 +881,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "buttons", "margins", "text-width" ],
+      "includeShared": [ "notes", "cover-items", "buttons", "paddings", "text-width" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "How to write headlines that actually work?",
@@ -899,7 +899,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "margins", "form", "text-width" ],
+      "includeShared": [ "notes", "cover-items", "paddings", "form", "text-width" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "Subscribe to our promotions",
@@ -966,7 +966,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Paragraphs and Links",
-      "includeShared": [ "text-width", "margins", "colors" ],
+      "includeShared": [ "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "textAreaWidth": "col-md-12",
@@ -993,7 +993,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Media and Logotypes",
-      "includeShared": [ "text-width", "margins", "colors" ],
+      "includeShared": [ "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "titleColor": "#000000",
@@ -1080,7 +1080,7 @@
       "icon": "image-text",
       "displayField": "title",
       "category": "Features and Cards",
-      "includeShared": [ "text-width", "colors", "margins" ],
+      "includeShared": [ "text-width", "colors", "paddings" ],
       "default": {
         "backgroundColor": "#efefef",
         "name": "Features with icons"
@@ -1305,7 +1305,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "margins", "colors" ],
+      "includeShared": [ "utm-marks", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "headerType": "like-h1",
@@ -1469,7 +1469,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "margins", "colors" ],
+      "includeShared": [ "utm-marks", "paddings", "colors" ],
       "default": {
         "name": "Category promotion"
       },
