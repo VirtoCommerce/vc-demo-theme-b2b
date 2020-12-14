@@ -710,6 +710,16 @@
             "default": "48"
           }
         ],
+        "full-width-option": [
+          {
+            "id": "fullWidth",
+            "label": "Full width",
+            "type": "checkbox",
+            "tab": "Settings",
+            "sort": 39,
+            "default": false
+          }
+        ],
         "colors": [
           {
             "id": "backgroundColor",
@@ -746,7 +756,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings" ],
+      "includeShared": [ "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings", "full-width-option" ],
       "excludeShared": [],
       "default": {
         "background": {
