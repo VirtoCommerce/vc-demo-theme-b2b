@@ -674,6 +674,42 @@
             "default": false
           }
         ],
+        "top/bottom-margins": [
+          {
+            "id": "marginTop",
+            "label": "Margin top",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 280,
+            "default": "0"
+          },
+          {
+            "id": "marginBottom",
+            "label": "Margin bottom",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 281,
+            "default": "0"
+          }
+        ],
+        "top/bottom-paddings": [
+          {
+            "id": "paddingTop",
+            "label": "Padding top",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 282,
+            "default": "0"
+          },
+          {
+            "id": "paddingBottom",
+            "label": "Padding bottom",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 283,
+            "default": "0"
+          }
+        ],
         "colors": [
           {
             "id": "backgroundColor",
@@ -710,7 +746,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "cover-items", "notes", "buttons" ],
+      "includeShared": [ "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings" ],
       "excludeShared": [],
       "default": {
         "background": {

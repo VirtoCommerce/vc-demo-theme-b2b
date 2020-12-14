@@ -1,8 +1,8 @@
 {% include 'blocks/helpers/cover-style' %}
 
-<div id="{{ block.__id }}" style="position: relative;">
-    <div class="{% include 'blocks/helpers/block-paddings' %} block block-cover"
-        {% if block.background != empty and block.background.url != '' %} style="background-image: url({{ block.background.url }});" {% endif %}>
+<div id="{{ block.__id }}" style="position: relative;margin-top: {{ block.marginTop }}px;margin-bottom: {{ block.marginBottom }}px;">
+    <div class="block block-cover"
+         style="padding-top: {{ block.paddingTop }}px;padding-bottom: {{ block.paddingBottom }}px;{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url }});{% endif %}">
         <div class="container cover-container">
             <div class="d-flex {{ block.columnsPosition }} row
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
