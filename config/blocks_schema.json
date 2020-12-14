@@ -699,7 +699,7 @@
             "type": "string",
             "tab": "Settings",
             "sort": 282,
-            "default": "0"
+            "default": "48"
           },
           {
             "id": "paddingBottom",
@@ -707,7 +707,7 @@
             "type": "string",
             "tab": "Settings",
             "sort": 283,
-            "default": "0"
+            "default": "48"
           }
         ],
         "colors": [
