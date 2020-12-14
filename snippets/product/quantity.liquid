@@ -14,11 +14,11 @@
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
                     >
                         {% if unavailable %}
-                        {{ 'products.product.unavailable' | t }}
+                            {{ 'products.product.unavailable' | t }}
                         {% elsif sold_out %}
-                        {{ 'products.product.sold_out' | t }}
+                            {{ 'products.product.sold_out' | t }}
                         {% else %}
-                        {{ 'products.general.add_to_cart' | t }}
+                            {{ 'products.general.add_to_cart' | t }}
                         {% endif %}
                 </button>
         </span>
