@@ -15,19 +15,22 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible product-card" ng-controller="productController" ng-init="initProductConfiguration('{{product.id}}')">
+<div class="col-md-3 flexible product-card">
     {% include 'shared/item-response-group' %}
     {% include 'product/item/image' %}
     {% include 'product/compare' %}
     {% include 'product/item/title-and-codes' %}
-    {% comment %}
-    <div class="configurable-wrapper">
-        {% include 'product/price' %}
-        {% include 'product/configurable' %}
-    </div>
-    {% endcomment %}
-    {% include 'product/price' %}
-    {% include 'product/quantity-grid' %}
+
+    {% if product.product_type == "Configurable" %}
+        {% include 'product/type/configured/item-price' %}
+        {% include 'product/type/configured/item-configure-button' %}
+    {% else %}
+        <ng-controller ng-controller="commonProductCardController">
+            {% include 'product/price' %}
+            {% include 'product/quantity' %}
+        </ng-controller>
+    {% endif %}
+
 </div>
 
 {% include 'product/item/script' %}

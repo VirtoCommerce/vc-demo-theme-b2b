@@ -9,7 +9,7 @@
             </li>
         </ul>
     </div>
-    <div class="p-3" ng-controller="productController">
+    <div class="p-3" ng-controller="productWithVariationsController">
             <form action="{{ '/bulkorder/addfielditems' | absolute_url }}" method="POST" ng-show="state == 'manual'">
                 {% assign column_count = 1 %}
                 {% assign rows_count = 6 %}
