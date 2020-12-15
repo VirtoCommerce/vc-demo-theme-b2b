@@ -7,13 +7,13 @@
             <div class="d-flex {{ block.columnsPosition }} flex-wrap
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
                     style="min-height: 420px;">
-                  <div class="align-self-center {{ block.secondColumnWidth }} px-0 px-sm-5 pl-md-4 pr-md-5 {% if block.containerImage and block.containerImage.url == '' %}d-none{% endif %}">
+                  <div class="align-self-center {{ block.secondColumnWidth }} px-0 px-sm-6 pl-md-4 pr-md-6 {% if block.containerImage and block.containerImage.url == '' %}d-none{% endif %}">
                     {% if block.containerImage and block.containerImage.url != '' %}
                           <img src="{{ block.containerImage.url }}" title="{{block.containerImage.altText}}" class="img-fluid" />
                     {% endif %}
                   </div>
 
-                  <div class="px-0 px-sm-5 pl-md-5 pr-md-4 text-center text-md-left {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
+                  <div class="px-0 px-sm-6 pl-md-6 pr-md-4 text-center text-md-left {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
                     {% if block.note %}
                         <div class="text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
                     {% endif %}
