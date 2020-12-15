@@ -7,7 +7,7 @@
             <div class="d-flex {{ block.columnsPosition }} flex-wrap
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
                     style="min-height: 420px;">
-                  <div class="align-self-center {{ block.secondColumnWidth }} px-0 px-sm-6 pl-md-4 pr-md-6 {% if block.containerImage and block.containerImage.url == '' %}d-none{% endif %}">
+                  <div class="align-self-center {{ block.secondColumnWidth }} px-0 px-sm-6 pl-md-4 pr-md-6 mb-5 mb-md-0 {% if block.containerImage and block.containerImage.url == '' %}d-none{% endif %}">
                     {% if block.containerImage and block.containerImage.url != '' %}
                           <img src="{{ block.containerImage.url }}" title="{{block.containerImage.altText}}" class="img-fluid" />
                     {% endif %}
@@ -19,14 +19,15 @@
                     {% endif %}
 
                     {% if block.title %}
-                        <div class="px-2 px-sm-0">
+                        <div class="px-2 px-sm-0 mb-5">
                             {% include 'blocks/helpers/block-title' %}
                         </div>
                     {% endif %}
 
                     {% if block.subtitle %}
-                        <div class="subtitle-container px-4 px-sm-0"> {{ block.subtitle }} </div>
-
+                        <div class="subtitle-container px-4 px-sm-0 mb-5">
+                            {{ block.subtitle }}
+                        </div>
                     {% endif %}
 
                     {% if (block.firstButton and block.firstButton.urlText) or (block.secondButton and block.secondButton.urlText) %}
