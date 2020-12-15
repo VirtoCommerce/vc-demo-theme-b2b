@@ -1,4 +1,4 @@
-<div class="px-0 px-sm-5 pl-md-5 pr-md-4 text-center text-md-left {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
+<div class="px-5 {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
     {% if block.note %}
         <div class="text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
     {% endif %}
@@ -8,10 +8,10 @@
     {% endif %}
 
     {% if block.subtitle %}
-        <div class="subtitle-container px-4 px-sm-0"> {{ block.subtitle }} </div>
-                        
+        <div class="subtitle-container"> {{ block.subtitle }} </div>
+
     {% endif %}
-                    
+
     {% if (block.firstButton and block.firstButton.urlText) or (block.secondButton and block.secondButton.urlText) %}
         <div class="block__actions">
             {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
