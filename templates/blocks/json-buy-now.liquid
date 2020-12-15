@@ -20,12 +20,12 @@
 <div id="{{ block.__id }}" style="position: relative;" class="{{ block.style }}">
   <div class="{% include 'blocks/helpers/block-paddings' %} block container">
     {% assign product = block.product %}
-    <div class="px-5">
+    <div class="px-6">
       {% include 'blocks/helpers/block-title' givenTitle: product.name %}
     </div>
     {% if product %}
       {% if block.hidePrice != 'True' %}
-        <div class="px-5 py-3">
+        <div class="px-6 py-3">
           <div class="d-flex flex-column price-block">
             <span class="d-flex">
               <strong class="font-weight-bold h5 basic-price align-self-center product-price">
@@ -35,11 +35,11 @@
           </div>
         </div>
       {% endif %}
-    <div class="px-5 row {% if block.reverse == 'True' %} flex-row-reverse {% endif %}">
+    <div class="px-6 row {% if block.reverse == 'True' %} flex-row-reverse {% endif %}">
       <div class="col">
         <img class="img-fluid" src="{{ product.imgSrc | img_url }}" />
       </div>
-      <div class="col">        
+      <div class="col">
         <div class="text-container py-3">
           {% if block.description != '' %}
           {{ block.description }}

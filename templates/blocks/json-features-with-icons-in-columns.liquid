@@ -1,9 +1,9 @@
 <div id="{{ block.__id }}" style="position: relative;" class="{{ block.style }}">
   <div class="{% include 'blocks/helpers/block-paddings' %} block container">
-    <div class="px-5">
+    <div class="px-6">
       {% include 'blocks/helpers/block-title' %}
     </div>
-    <div class="row px-5 justify-content-center">
+    <div class="row px-6 justify-content-center">
       <div class="{{block.textAreaWidth}}">
         {% if block.content %}
         {{ block.content }}
