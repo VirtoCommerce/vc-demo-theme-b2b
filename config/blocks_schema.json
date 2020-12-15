@@ -227,50 +227,50 @@
             "type": "url",
             "urlLabel": "Url",
             "textLabel": "Button text",
-            "styleLabel": "Link style",
+            "styleLabel": "Color",
             "sort": 100,
             "styles": [
               {
-                "value": "btn-primary",
-                "label": "Primary button"
+                "value": "primary",
+                "label": "Primary"
               },
               {
-                "value": "btn-secondary",
-                "label": "Secondary button"
+                "value": "secondary",
+                "label": "Secondary"
               },
               {
-                "value": "btn-success",
-                "label": "Success button"
+                "value": "success",
+                "label": "Success"
               },
               {
-                "value": "btn-danger",
-                "label": "Danger button"
+                "value": "danger",
+                "label": "Danger"
               },
               {
-                "value": "btn-warning",
-                "label": "Warning button"
+                "value": "warning",
+                "label": "Warning"
               },
               {
-                "value": "btn-info",
-                "label": "Info button"
+                "value": "info",
+                "label": "Info"
               },
               {
-                "value": "btn-light",
-                "label": "Light button"
+                "value": "light",
+                "label": "Light"
               },
               {
-                "value": "btn-dark",
-                "label": "Dark button"
+                "value": "dark",
+                "label": "Dark"
               },
               {
-                "value": "btn-link",
-                "label": "Link button"
+                "value": "link",
+                "label": "Link"
               }
             ],
             "default": {
               "url": "",
               "urlText": "",
-              "style": "btn-primary"
+              "style": "primary"
             },
             "group": "Buttons"
           },
@@ -280,51 +280,85 @@
             "type": "url",
             "urlLabel": "Url",
             "textLabel": "Button text",
-            "styleLabel": "Link style",
+            "styleLabel": "Color",
             "sort": 101,
             "styles": [
               {
-                "value": "btn-primary",
-                "label": "Primary button"
+                "value": "primary",
+                "label": "Primary"
               },
               {
-                "value": "btn-secondary",
-                "label": "Secondary button"
+                "value": "secondary",
+                "label": "Secondary"
               },
               {
-                "value": "btn-success",
-                "label": "Success button"
+                "value": "success",
+                "label": "Success"
               },
               {
-                "value": "btn-danger",
-                "label": "Danger button"
+                "value": "danger",
+                "label": "Danger"
               },
               {
-                "value": "btn-warning",
-                "label": "Warning button"
+                "value": "warning",
+                "label": "Warning"
               },
               {
-                "value": "btn-info",
-                "label": "Info button"
+                "value": "info",
+                "label": "Info"
               },
               {
-                "value": "btn-light",
-                "label": "Light button"
+                "value": "light",
+                "label": "Light"
               },
               {
-                "value": "btn-dark",
-                "label": "Dark button"
+                "value": "dark",
+                "label": "Dark"
               },
               {
-                "value": "btn-link",
-                "label": "Link button"
+                "value": "link",
+                "label": "Link"
               }
             ],
             "default": {
               "url": "",
               "urlText": "",
-              "style": "btn-secondary"
+              "style": "secondary"
             },
+            "group": "Buttons"
+          },
+          {
+            "id": "firstButtonStyle",
+            "label": "First button style",
+            "type":"select",
+            "default": "outline-",
+            "options": [
+              {
+                "label": "Solid",
+                "value": null
+              },
+              {
+                "label": "Outline",
+                "value": "outline-"
+              }
+            ],
+            "group": "Buttons"
+          },
+          {
+            "id": "secondButtonStyle",
+            "label": "Second button style",
+            "type":"select",
+            "default": null,
+            "options": [
+              {
+                "label": "Solid",
+                "value": null
+              },
+              {
+                "label": "Outline",
+                "value": "outline-"
+              }
+            ],
             "group": "Buttons"
           }
         ],
@@ -765,11 +799,24 @@
         "firstButton": {
           "url": "",
           "urlText": "Learn more",
-          "style": "btn-dark"
+          "style": "primary"
         },
         "name": "Cover with image"
       },
       "settings": [
+        {
+            "id": "firstButton",
+            "styles": [
+                {
+                  "value": "primary",
+                  "label": "Primary button"
+                },
+                {
+                  "value": "secondary",
+                  "label": "Secondary button"
+                }
+              ]
+          },
         {
           "id": "containerImage",
           "label": "Side image",
@@ -870,7 +917,7 @@
         "firstButton": {
           "url": "",
           "urlText": "Learn why",
-          "style": "btn-warning"
+          "style": "warning"
         },
         "titleColor": "#ffffff",
         "subtitleColor": "#c4c4c4",
@@ -1323,7 +1370,7 @@
           "default": {
             "url": "",
             "urlText": "Get my seat reserved",
-            "style": "btn-warning"
+            "style": "warning"
           }
         },
         {

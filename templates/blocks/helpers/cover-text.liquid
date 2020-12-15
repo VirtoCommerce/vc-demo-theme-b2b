@@ -15,10 +15,10 @@
     {% if (block.firstButton and block.firstButton.urlText) or (block.secondButton and block.secondButton.urlText) %}
         <div class="block__actions">
             {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
-                <a href="{{block.firstButton.url}}" class="btn {{ block.firstButton.style }}" {% if block.firstButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.firstButton.urlText}}</a>
+                <a href="{{block.firstButton.url}}" class="btn btn-{{ block.firstButtonStyle }}{{ block.firstButton.style }}" {% if block.firstButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.firstButton.urlText}}</a>
             {% endif %}
             {% if block.secondButton and block.secondButton.urlText and block.secondButton.urlText != '' %}
-                <a href="{{block.secondButton.url}}" class="btn {{block.secondButton.style}} {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}ml-3{% endif %}" {% if block.secondButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.secondButton.urlText}}</a>
+                <a href="{{block.secondButton.url}}" class="btn btn-{{ block.secondButtonStyle }}{{block.secondButton.style}} {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}ml-3{% endif %}" {% if block.secondButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.secondButton.urlText}}</a>
             {% endif %}
         </div>
     {% endif %}
