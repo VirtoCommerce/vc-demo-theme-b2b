@@ -237,34 +237,6 @@
               {
                 "value": "secondary",
                 "label": "Secondary"
-              },
-              {
-                "value": "success",
-                "label": "Success"
-              },
-              {
-                "value": "danger",
-                "label": "Danger"
-              },
-              {
-                "value": "warning",
-                "label": "Warning"
-              },
-              {
-                "value": "info",
-                "label": "Info"
-              },
-              {
-                "value": "light",
-                "label": "Light"
-              },
-              {
-                "value": "dark",
-                "label": "Dark"
-              },
-              {
-                "value": "link",
-                "label": "Link"
               }
             ],
             "default": {
@@ -290,34 +262,6 @@
               {
                 "value": "secondary",
                 "label": "Secondary"
-              },
-              {
-                "value": "success",
-                "label": "Success"
-              },
-              {
-                "value": "danger",
-                "label": "Danger"
-              },
-              {
-                "value": "warning",
-                "label": "Warning"
-              },
-              {
-                "value": "info",
-                "label": "Info"
-              },
-              {
-                "value": "light",
-                "label": "Light"
-              },
-              {
-                "value": "dark",
-                "label": "Dark"
-              },
-              {
-                "value": "link",
-                "label": "Link"
               }
             ],
             "default": {
@@ -805,19 +749,6 @@
       },
       "settings": [
         {
-            "id": "firstButton",
-            "styles": [
-                {
-                  "value": "primary",
-                  "label": "Primary button"
-                },
-                {
-                  "value": "secondary",
-                  "label": "Secondary button"
-                }
-              ]
-          },
-        {
           "id": "containerImage",
           "label": "Side image",
           "type": "image",
@@ -917,7 +848,7 @@
         "firstButton": {
           "url": "",
           "urlText": "Learn why",
-          "style": "warning"
+          "style": "primary"
         },
         "titleColor": "#ffffff",
         "subtitleColor": "#c4c4c4",
