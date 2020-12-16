@@ -658,7 +658,7 @@
             "label": "Margin top",
             "type": "string",
             "tab": "Settings",
-            "sort": 280,
+            "sort": 284,
             "default": "0"
           },
           {
@@ -666,7 +666,7 @@
             "label": "Margin bottom",
             "type": "string",
             "tab": "Settings",
-            "sort": 281,
+            "sort": 285,
             "default": "0"
           }
         ],
@@ -676,7 +676,7 @@
             "label": "Padding top",
             "type": "string",
             "tab": "Settings",
-            "sort": 282,
+            "sort": 286,
             "default": "48"
           },
           {
@@ -684,7 +684,7 @@
             "label": "Padding bottom",
             "type": "string",
             "tab": "Settings",
-            "sort": 283,
+            "sort": 287,
             "default": "48"
           }
         ],
@@ -775,6 +775,44 @@
               "label": "Right"
             }
           ]
+        },
+        {
+          "id": "criteria",
+          "label": "Criteria",
+          "tab": "Settings",
+          "sort": 281,
+          "type": "select",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "url",
+              "label": "URL parameter"
+            },
+            {
+              "value": "userGroup",
+              "label": "User group"
+            }
+          ]
+        },
+        {
+          "id": "criteriaValue",
+          "label": "Criteria value",
+          "type": "string",
+          "sort": 282,
+          "tab": "Settings"
+        },
+        {
+          "id": "hideOnMatch",
+          "label": "Hide on match",
+          "type": "checkbox",
+          "default": false,
+          "tab": "Settings",
+          "info": "When checked then block will be hidden when criteria matches, when unchecked block will be show only when criteria matches",
+          "sort": 283
         }
       ]
     },

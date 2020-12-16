@@ -1,6 +1,7 @@
+{% include 'blocks/helpers/hide-criteria' %}
 {% include 'blocks/helpers/cover-style' %}
 
-<div id="{{ block.__id }}" class="{% if block.fullWidth != 'True' %}container-md{% else %}container-fluid{% endif %}" style="position: relative;{% include 'blocks/helpers/block-margins' %}">
+<div id="{{ block.__id }}" class="{% if hideBlock == true %}d-none{% endif %} {% if block.fullWidth != 'True' %}container-md{% else %}container-fluid{% endif %}" style="position: relative;{% include 'blocks/helpers/block-margins' %}">
     <div class="block block-cover row"
          style="{% include 'blocks/helpers/block-inner-paddings' %}{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url }});{% endif %}">
         <div class="cover-container">
