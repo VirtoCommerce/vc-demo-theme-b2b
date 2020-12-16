@@ -1301,7 +1301,7 @@
           "default": {
             "url": "",
             "urlText": "Get my seat reserved",
-            "style": "warning"
+            "style": "primary"
           }
         },
         {
