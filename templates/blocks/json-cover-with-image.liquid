@@ -2,7 +2,7 @@
 
 <div id="{{ block.__id }}" class="{% if block.fullWidth != 'True' %}container-md{% else %}container-fluid{% endif %}" style="position: relative;margin-top: {{ block.marginTop }}px;margin-bottom: {{ block.marginBottom }}px;">
     <div class="block block-cover row"
-         style="padding-top: {{ block.paddingTop }}px;padding-bottom: {{ block.paddingBottom }}px;{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url }});{% endif %}">
+         style="{% include 'blocks/helpers/block-inner-paddings' %}{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url }});{% endif %}">
         <div class="cover-container">
             <div class="d-flex {{ block.columnsPosition }} flex-wrap
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
