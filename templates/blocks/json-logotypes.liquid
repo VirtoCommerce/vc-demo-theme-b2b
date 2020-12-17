@@ -24,10 +24,10 @@
                                 <div>
                                     {% if logotype.url != '' %}
                                         <a href="{{logotype.url}}" {% if logotype.openInNewTab == 'True' %}target="_blank"{% endif %}>
-                                            <img src="{{ logotype.image.url }}" title="{{logotype.image.altText}}" class="img-fluid" />
+                                            <img src="{{ logotype.image.url | strip_start '/' }}" title="{{logotype.image.altText}}" class="img-fluid" />
                                         </a>
                                     {% else %}
-                                        <img src="{{ logotype.image.url }}" title="{{logotype.image.altText}}" class="img-fluid" />
+                                        <img src="{{ logotype.image.url | strip_start '/' }}" title="{{logotype.image.altText}}" class="img-fluid" />
                                     {% endif %}
                                 </div>
                             {% endfor %}
