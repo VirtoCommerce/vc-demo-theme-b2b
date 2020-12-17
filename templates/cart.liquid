@@ -18,10 +18,10 @@
         <div class="hidden-xs hidden-sm col-md-12 hidden-print">
             <div class="page-header clearfix">
                 <ol class="nav nav-pills pull-left">
-                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'active': step.isActive}">
-                        <a href="" ng-click="checkout.wizard.goToStep(step)">
-                            <span class="h1 text-middle" ng-bind="$index + 1"></span>
-                            <u class="h2 text-middle" ng-bind="step.title"></u>
+                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'checkout-wizard-active-step': step.isActive, 'disabled': !step.isActive}">
+                        <a href="">
+                            <span class="h2 text-middle" ng-bind="$index + 1"></span>
+                            <u class="h2 text-decoration-none text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></u>
                         </a>
                     </li>
                 </ol>
@@ -297,11 +297,15 @@
                                 </div>
                             </div>
                             <div class="hidden-xs hidden-sm col-md-3">
-                                <p>
-                                    <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || !checkout.isValid" ng-click="createOrder()">
-                                        Submit order
+                                <div class="d-flex justify-content-between order-action-block">
+                                    <button class="btn btn-lg btn-alt btn-primary btn-return d-flex justify-content-center" type="button" ng-click="checkout.wizard.prevStep()">
+                                        <span class="fa fa-arrow-left"></span>
+                                        <span>Back to cart</span>
                                     </button>
-                                </p>
+                                    <button class="btn btn-lg btn-primary d-flex justify-content-center" type="button" ng-disabled="checkout.loading || !checkout.isValid" ng-click="createOrder()">
+                                        <span>Submit order</span>
+                                    </button>
+                                </div>
                                 <div class="panel-group">
                                     <div class="panel panel-default panel-static">
                                         <div class="panel-heading">
