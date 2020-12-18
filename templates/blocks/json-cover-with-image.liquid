@@ -1,18 +1,48 @@
+{% include 'blocks/helpers/hide-criteria' %}
 {% include 'blocks/helpers/cover-style' %}
 
-<div id="{{ block.__id }}" style="position: relative;">
-    <div class="{% include 'blocks/helpers/block-paddings' %} block block-cover"
-        {% if block.background != empty and block.background.url != '' %} style="background-image: url({{ block.background.url }});" {% endif %}>
-        <div class="container cover-container">
-            <div class="d-flex {{ block.columnsPosition }} row
+<div id="{{ block.__id }}" class="{% if hideBlock == true %}d-none{% endif %} {% if block.fullWidth != 'True' %}container-md{% else %}container-fluid{% endif %}" style="position: relative;{% include 'blocks/helpers/block-margins' %}">
+    <div class="block block-cover row"
+         style="{% include 'blocks/helpers/block-inner-paddings' %}{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url | strip_start '/' }});{% endif %}">
+        <div class="cover-container">
+            <div class="d-flex {{ block.columnsPosition }} flex-wrap
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
-                    style="min-height: 550px;">
-                  <div class="align-self-center {{ block.secondColumnWidth }}">
+                    style="min-height: 420px;">
+                  <div class="align-self-center {{ block.secondColumnWidth }} px-0 px-sm-6 pl-md-4 pr-md-6 mb-5 mb-md-0 {% if block.containerImage and block.containerImage.url == '' %}d-none{% endif %}">
                     {% if block.containerImage and block.containerImage.url != '' %}
-                          <img src="{{ block.containerImage.url }}" title="{{block.containerImage.altText}}" class="img-fluid" />
+                          <img src="{{ block.containerImage.url | strip_start '/' }}" title="{{block.containerImage.altText}}" class="img-fluid" />
                     {% endif %}
                   </div>
-              {% include 'blocks/helpers/cover-text' %}
+
+                  <div class="px-0 px-sm-6 pl-md-6 pr-md-4 text-center text-md-left {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
+                    {% if block.note %}
+                        <div class="text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
+                    {% endif %}
+
+                    {% if block.title %}
+                        <div class="px-2 px-sm-0 mb-5">
+                            {% include 'blocks/helpers/block-title' %}
+                        </div>
+                    {% endif %}
+
+                    {% if block.subtitle %}
+                        <div class="subtitle-container text-condensed px-4 px-sm-0 mb-5" style="font-size: 1.1rem;">
+                            {{ block.subtitle }}
+                        </div>
+                    {% endif %}
+
+                    {% if (block.firstButton and block.firstButton.urlText) or (block.secondButton and block.secondButton.urlText) %}
+                        <div class="block__actions">
+                            {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
+                                <a href="{{block.firstButton.url}}" class="btn btn-{{ block.firstButtonStyle }}{{ block.firstButton.style }}" {% if block.firstButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.firstButton.urlText}}</a>
+                            {% endif %}
+                            {% if block.secondButton and block.secondButton.urlText and block.secondButton.urlText != '' %}
+                                <a href="{{block.secondButton.url}}" class="btn btn-{{ block.secondButtonStyle }}{{block.secondButton.style}} {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}ml-3{% endif %}" {% if block.secondButton.openInNewTab == 'True' %} target="_blank" {% endif %}>{{block.secondButton.urlText}}</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+
             </div>
         </div>
     </div>
@@ -27,6 +57,14 @@ headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
 noTop: bool
 noBottom: bool
 
+fullWidth: bool
+marginTop: string (px)
+marginBottom: string (px)
+paddingTop: string (px)
+paddingBottom: string (px)
+criteria: string [none, url, userGroup]
+criteriaValue: string
+hideOnMatch: bool
 backgroundColor: string (hex color)
 overlayColor: string (hex color)
 imagePosition: string [ null, right ]

@@ -227,50 +227,22 @@
             "type": "url",
             "urlLabel": "Url",
             "textLabel": "Button text",
-            "styleLabel": "Link style",
+            "styleLabel": "Color",
             "sort": 100,
             "styles": [
               {
-                "value": "btn-primary",
-                "label": "Primary button"
+                "value": "primary",
+                "label": "Primary"
               },
               {
-                "value": "btn-secondary",
-                "label": "Secondary button"
-              },
-              {
-                "value": "btn-success",
-                "label": "Success button"
-              },
-              {
-                "value": "btn-danger",
-                "label": "Danger button"
-              },
-              {
-                "value": "btn-warning",
-                "label": "Warning button"
-              },
-              {
-                "value": "btn-info",
-                "label": "Info button"
-              },
-              {
-                "value": "btn-light",
-                "label": "Light button"
-              },
-              {
-                "value": "btn-dark",
-                "label": "Dark button"
-              },
-              {
-                "value": "btn-link",
-                "label": "Link button"
+                "value": "secondary",
+                "label": "Secondary"
               }
             ],
             "default": {
               "url": "",
               "urlText": "",
-              "style": "btn-primary"
+              "style": "primary"
             },
             "group": "Buttons"
           },
@@ -280,51 +252,57 @@
             "type": "url",
             "urlLabel": "Url",
             "textLabel": "Button text",
-            "styleLabel": "Link style",
+            "styleLabel": "Color",
             "sort": 101,
             "styles": [
               {
-                "value": "btn-primary",
-                "label": "Primary button"
+                "value": "primary",
+                "label": "Primary"
               },
               {
-                "value": "btn-secondary",
-                "label": "Secondary button"
-              },
-              {
-                "value": "btn-success",
-                "label": "Success button"
-              },
-              {
-                "value": "btn-danger",
-                "label": "Danger button"
-              },
-              {
-                "value": "btn-warning",
-                "label": "Warning button"
-              },
-              {
-                "value": "btn-info",
-                "label": "Info button"
-              },
-              {
-                "value": "btn-light",
-                "label": "Light button"
-              },
-              {
-                "value": "btn-dark",
-                "label": "Dark button"
-              },
-              {
-                "value": "btn-link",
-                "label": "Link button"
+                "value": "secondary",
+                "label": "Secondary"
               }
             ],
             "default": {
               "url": "",
               "urlText": "",
-              "style": "btn-secondary"
+              "style": "secondary"
             },
+            "group": "Buttons"
+          },
+          {
+            "id": "firstButtonStyle",
+            "label": "First button style",
+            "type":"select",
+            "default": "outline-",
+            "options": [
+              {
+                "label": "Solid",
+                "value": null
+              },
+              {
+                "label": "Outline",
+                "value": "outline-"
+              }
+            ],
+            "group": "Buttons"
+          },
+          {
+            "id": "secondButtonStyle",
+            "label": "Second button style",
+            "type":"select",
+            "default": null,
+            "options": [
+              {
+                "label": "Solid",
+                "value": null
+              },
+              {
+                "label": "Outline",
+                "value": "outline-"
+              }
+            ],
             "group": "Buttons"
           }
         ],
@@ -656,10 +634,10 @@
             "sort": 310
           }
         ],
-        "margins": [
+        "paddings": [
           {
             "id": "noTop",
-            "label": "Remove top margin",
+            "label": "Remove top padding",
             "type": "checkbox",
             "tab": "Settings",
             "sort": 235,
@@ -667,10 +645,56 @@
           },
           {
             "id": "noBottom",
-            "label": "Remove bottom margin",
+            "label": "Remove bottom padding",
             "type": "checkbox",
             "tab": "Settings",
             "sort": 236,
+            "default": false
+          }
+        ],
+        "top/bottom-margins": [
+          {
+            "id": "marginTop",
+            "label": "Margin top",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 284,
+            "default": "0"
+          },
+          {
+            "id": "marginBottom",
+            "label": "Margin bottom",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 285,
+            "default": "0"
+          }
+        ],
+        "top/bottom-paddings": [
+          {
+            "id": "paddingTop",
+            "label": "Padding top",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 286,
+            "default": "48"
+          },
+          {
+            "id": "paddingBottom",
+            "label": "Padding bottom",
+            "type": "string",
+            "tab": "Settings",
+            "sort": 287,
+            "default": "48"
+          }
+        ],
+        "full-width-option": [
+          {
+            "id": "fullWidth",
+            "label": "Full width",
+            "type": "checkbox",
+            "tab": "Settings",
+            "sort": 39,
             "default": false
           }
         ],
@@ -710,7 +734,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "cover-items", "notes", "buttons" ],
+      "includeShared": [ "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings", "full-width-option" ],
       "excludeShared": [],
       "default": {
         "background": {
@@ -719,7 +743,7 @@
         "firstButton": {
           "url": "",
           "urlText": "Learn more",
-          "style": "btn-dark"
+          "style": "primary"
         },
         "name": "Cover with image"
       },
@@ -751,6 +775,44 @@
               "label": "Right"
             }
           ]
+        },
+        {
+          "id": "criteria",
+          "label": "Criteria",
+          "tab": "Settings",
+          "sort": 281,
+          "type": "select",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "url",
+              "label": "URL parameter"
+            },
+            {
+              "value": "userGroup",
+              "label": "User group"
+            }
+          ]
+        },
+        {
+          "id": "criteriaValue",
+          "label": "Criteria value",
+          "type": "string",
+          "sort": 282,
+          "tab": "Settings"
+        },
+        {
+          "id": "hideOnMatch",
+          "label": "Hide on match",
+          "type": "checkbox",
+          "default": false,
+          "tab": "Settings",
+          "info": "When checked then block will be hidden when criteria matches, when unchecked block will be show only when criteria matches",
+          "sort": 283
         }
       ]
     },
@@ -824,7 +886,7 @@
         "firstButton": {
           "url": "",
           "urlText": "Learn why",
-          "style": "btn-warning"
+          "style": "primary"
         },
         "titleColor": "#ffffff",
         "subtitleColor": "#c4c4c4",
@@ -881,7 +943,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "buttons", "margins", "text-width" ],
+      "includeShared": [ "notes", "cover-items", "buttons", "paddings", "text-width" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "How to write headlines that actually work?",
@@ -899,7 +961,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "margins", "form", "text-width" ],
+      "includeShared": [ "notes", "cover-items", "paddings", "form", "text-width" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "Subscribe to our promotions",
@@ -966,7 +1028,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Paragraphs and Links",
-      "includeShared": [ "text-width", "margins", "colors" ],
+      "includeShared": [ "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "textAreaWidth": "col-md-12",
@@ -993,7 +1055,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Media and Logotypes",
-      "includeShared": [ "text-width", "margins", "colors" ],
+      "includeShared": [ "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "titleColor": "#000000",
@@ -1080,7 +1142,7 @@
       "icon": "image-text",
       "displayField": "title",
       "category": "Features and Cards",
-      "includeShared": [ "text-width", "colors", "margins" ],
+      "includeShared": [ "text-width", "colors", "paddings" ],
       "default": {
         "backgroundColor": "#efefef",
         "name": "Features with icons"
@@ -1277,7 +1339,7 @@
           "default": {
             "url": "",
             "urlText": "Get my seat reserved",
-            "style": "btn-warning"
+            "style": "primary"
           }
         },
         {
@@ -1305,7 +1367,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "margins", "colors" ],
+      "includeShared": [ "utm-marks", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "headerType": "like-h1",
@@ -1469,7 +1531,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "margins", "colors" ],
+      "includeShared": [ "utm-marks", "paddings", "colors" ],
       "default": {
         "name": "Category promotion"
       },

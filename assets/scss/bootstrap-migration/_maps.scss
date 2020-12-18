@@ -19,3 +19,12 @@ $container-max-widths: map-merge(
     xxl: 1336px,
   )
 );
+
+$spacers: map-merge(
+  $spacers,
+  (
+    5: ($spacer * 2),
+    6: ($spacer * 3)
+  )
+);
+
