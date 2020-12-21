@@ -17,8 +17,8 @@
     <div class="row" ng-show="checkout.cart.itemsCount > 0">
         <div class="hidden-xs hidden-sm col-md-12 hidden-print">
             <div class="page-header clearfix d-flex align-items-center">
-                <ol class="nav nav-pills">
-                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'checkout-wizard-active-step': step.isActive, 'disabled': !step.isActive}">
+                <ol class="nav nav-outline">
+                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'active': step.isActive, 'disabled': !step.isActive}">
                         <a href="" class="py-3 mr-4">
                             <span class="h2 text-middle" ng-bind="$index + 1"></span>
                             <span class="h2 text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></span>
