@@ -21,7 +21,7 @@
                     <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'checkout-wizard-active-step': step.isActive, 'disabled': !step.isActive}">
                         <a href="" class="py-3 mr-4">
                             <span class="h2 text-middle" ng-bind="$index + 1"></span>
-                            <u class="h2 text-decoration-none text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></u>
+                            <span class="h2 text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></span>
                         </a>
                     </li>
                 </ol>
