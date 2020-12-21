@@ -1,3 +1,15 @@
 .btn {
-    @include button-variant-disabled();
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $gray-200;
+      border-color: $gray-500;
+      color: $text-muted;
+      cursor: default;
+    }
+  }
 }
