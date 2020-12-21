@@ -16,16 +16,16 @@
     </div>
     <div class="row" ng-show="checkout.cart.itemsCount > 0">
         <div class="hidden-xs hidden-sm col-md-12 hidden-print">
-            <div class="page-header clearfix">
-                <ol class="nav nav-pills pull-left">
+            <div class="page-header clearfix d-flex align-items-center">
+                <ol class="nav nav-pills">
                     <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'checkout-wizard-active-step': step.isActive, 'disabled': !step.isActive}">
-                        <a href="">
+                        <a href="" class="py-3 mr-4">
                             <span class="h2 text-middle" ng-bind="$index + 1"></span>
                             <u class="h2 text-decoration-none text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></u>
                         </a>
                     </li>
                 </ol>
-                <ul class="list-inline pull-right">
+                <ul class="list-inline mb-0 ml-auto">
                     <li>
                         <a href="" class="btn btn-link bullhorn" ng-click=""><i class="fa fa-bullhorn"></i>&ensp;Feedback</a>
                     </li>
