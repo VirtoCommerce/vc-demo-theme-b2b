@@ -2,7 +2,7 @@
 {% anti_forgery %}
 <main class="container pt-4 pb-5 flex-grow-1" role="main">
     <div class="row justify-content-md-center" ng-controller="accountRegisterController" ng-init="init('{{ shop.id }}')" ng-cloak>
-        <vc-loader isLoading="loader.isLoading"></vc-loader>
+        <vc-loader is-loading="loader.isLoading"></vc-loader>
         <div class="col-md-8">
             <vc-errors message="errorMessage" errors="errors"></vc-errors>
             <wizard on-finish="finishedWizard()" indicators-position="top">
