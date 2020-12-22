@@ -4,5 +4,8 @@ storefrontApp.component('vcLoader', {
     templateUrl: "themes/assets/js/bootstrap-migration/common-components/loader.tpl.html",
     bindings: {
         isLoading: '<'
-    }
+    },
+    controller: [function () {
+      var $ctrl = this;
+  }]
 });
