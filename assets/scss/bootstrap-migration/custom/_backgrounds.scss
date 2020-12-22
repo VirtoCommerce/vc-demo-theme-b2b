@@ -2,5 +2,5 @@
 //The official @mixin for bg-variant and bg-gradient-variant in bootstrap 4.5.0 is now @mixin bg-variant($parent, $color, $ignore-warning: false)
 //But in official docs this mixin is still presented and there's no alternatives right now.
 @each $color, $value in $theme-colors {
-  @include bg-variant('.bg-#{$color}-transparent', rgba($value, 0.5), true);
+  @include bg-variant('.bg-#{$color}-semitransparent', rgba($value, 0.5), true);
 }
