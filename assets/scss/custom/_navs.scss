@@ -1,91 +1,112 @@
 ﻿.nav-sm {
-    > li > a {
-        padding: $nav-small-link-padding;
-    }
+  > li > a {
+    padding: $nav-small-link-padding;
+  }
 }
 
 .nav-lg {
-    > li > a {
-        padding: $nav-large-link-padding;
-    }
+  > li > a {
+    padding: $nav-large-link-padding;
+  }
 }
 
 .nav-pills {
-    > li > a {
-        color: $text-color;
-        font-weight: $btn-font-weight;
-        font-family: $font-family-condensed;
-    }
+  > li > a {
+    color: $text-color;
+    font-weight: $btn-font-weight;
+    font-family: $font-family-condensed;
+  }
 }
 
 .left-nav li a {
-        font-weight: $link-font-weight;
+  font-weight: $link-font-weight;
 }
 
 .nav-stacked > li > a:focus,
 .nav-stacked > li > a:hover {
-    background-color: $body-bg;
-    color: $brand-primary;
-    //border-left: 3px $brand-primary solid;
+  background-color: $body-bg;
+  color: $brand-primary;
+  //border-left: 3px $brand-primary solid;
 }
-
 
 .left-nav > li > a:hover,
 .left-nav > li > a:focus {
-    background: $gray-lighter;
-    border: 0 !important;
-    color: $text-color;
+  background: $gray-lighter;
+  border: 0 !important;
+  color: $text-color;
 }
 
-.left-nav > li.active > a, .left-nav > li.active:hover > a, .left-nav > li.active:focus > a   {
-    background-color: $gray-lighter !important;
-    border-left: 3px $brand-primary solid !important;
-    color: $text-color !important;
-    font-weight: bold;
-    padding-left: 12px;
+.left-nav > li.active > a,
+.left-nav > li.active:hover > a,
+.left-nav > li.active:focus > a {
+  background-color: $gray-lighter !important;
+  border-left: 3px $brand-primary solid !important;
+  color: $text-color !important;
+  font-weight: bold;
+  padding-left: 12px;
 }
 
 .nav-pills-transparent li:first-child {
-    margin-left: 18px;
+  margin-left: 18px;
 }
 
 .nav-pills-transparent > li + li {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .nav-pills-transparent > li > a {
-    color: $brand-alt;
-    border-left: none;
-    padding-left: 0;
-    padding-right: 0;
-    &:focus,
-    &:hover {
-        background-color: $body-bg;
-        color: $text-color;
-    }
+  color: $brand-alt;
+  border-left: none;
+  padding-left: 0;
+  padding-right: 0;
+  &:focus,
+  &:hover {
+    background-color: $body-bg;
+    color: $text-color;
+  }
 }
 
 .nav-pills-transparent > li.active > a,
 .nav-pills-transparent > li.active > a:focus,
 .nav-pills-transparent > li.active > a:hover {
-    border-bottom: 2px $brand-primary solid;
-    background-color: $body-bg;
-    color: $text-color;
+  border-bottom: 2px $brand-primary solid;
+  background-color: $body-bg;
+  color: $text-color;
 }
 
 .pagination {
-    margin: 0;
+  margin: 0;
 }
 
-.pagination li a, .pagination li {
+.pagination li a,
+.pagination li {
   font-weight: $btn-font-weight;
   font-family: $font-family-condensed;
 }
 
 .coll-top-nav {
-    width: 102.6%;
+  width: 102.6%;
 }
 
-.view-switcher{
-    margin-right: 15px;
+.view-switcher {
+  margin-right: 15px;
+}
+
+.nav-outline {
+  > li {
+    float: left;
+    > a {
+      border-radius: $nav-outline-border-radius;
+    }
+    &.active {
+      > a {
+        color: $brand-primary;
+        border: 1px solid $brand-primary !important;
+        &:hover,
+        &:focus {
+          background-color: $body-bg;
+        }
+      }
+    }
+  }
 }
