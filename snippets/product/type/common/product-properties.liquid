@@ -1,0 +1,25 @@
+<div class="panel panel-default panel-table-inside">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h4">Technical Specs</span>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            {% for property in product.properties %}
+                {% assign column_count = 1 %}
+                {% include 'shared/grid/rows' %}
+                {% if should_start_row %}
+                    <tr>
+                {% endif %}
+                    <td class="no-border"><span class="text-muted">{{ property.name }}</span></td>
+                    <td class="no-border"><strong>{{ property.value }}</strong></td>
+                {% if should_end_row %}
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{% assign hideBlock = true %}
+{% if block.criteria == 'url' %}
+    {% if request_url contains block.criteriaValue.value %}
+        {% assign hideBlock = false %}
+    {% endif %}
+{% elsif block.criteria == 'userGroup' and current_user and current_user.contact %}
+    {% assign variantGroups = block.criteriaValue | string.split ',' %}
+    {% assign allEquals = true %}
+    {% for variantGroup in variantGroups %}
+        {% unless current_user.contact.user_groups contains variantGroup %}
+            {% assign allEquals = false %}
+        {% endunless %}
+    {% endfor %}
+    {% if allEquals %}
+        {% assign hideBlock = false %}
+    {% endif %}
+{% elsif block.criteria == 'none' %}
+    {% assign hideBlock = false %}
+{% endif %}
+
+{% if block.criteria != 'none' and block.hideOnMatch == 'True' %}
+    {% if hideBlock == false %}
+        {% assign hideBlock = true %}
+    {% elsif hideBlock == true %}
+        {% assign hideBlock = false %}
+    {% endif %}
+{% endif %}

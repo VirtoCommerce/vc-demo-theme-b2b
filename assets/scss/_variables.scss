@@ -523,6 +523,7 @@
    $nav-link-padding:                          $padding-base-vertical $padding-base-horizontal; // 10px 15px // Migrating_To_Bootstrap4: DONE, not used in theme
    $nav-large-link-padding:                    $padding-large-vertical $padding-large-horizontal; // not predefined // Migrating_To_Bootstrap4: DONE, not used in theme
    $nav-small-link-padding:                    $padding-small-vertical $padding-small-horizontal; // not predefined // Migrating_To_Bootstrap4: ?? (not present in bs4)
+   $nav-outline-border-radius:                 $border-radius-base; //not predefined
 // $nav-link-hover-bg:                         $gray-lighter
 
 // $nav-disabled-link-color:                   $gray-light

@@ -5,18 +5,18 @@
             bg-dark text-white
         {% endif %}">
       <div class="row">
-      <div class="px-5">
+      <div class="px-6">
         {% include 'blocks/helpers/block-title' %}
       </div>
       </div>
       <div class="row">
         {% if block.contentBefore != '' %}
-        <div class="col-12 px-5">
+        <div class="col-12 px-6">
           {{ block.contentBefore }}
         </div>
         {% endif %}
         {% for item in block.items %}
-        <div class="py-3 px-5 {% if (forloop.index | modulo:2) == 0 and forloop.last %}
+        <div class="py-3 px-6 {% if (forloop.index | modulo:2) == 0 and forloop.last %}
                             col-12
                         {% else %}
                             col-6

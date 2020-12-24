@@ -2,12 +2,12 @@
 
 <div id="{{ block.__id }}" style="position: relative;">
     <div class="{% include 'blocks/helpers/block-paddings' %} block block-cover"
-        {% if block.background != '' and block.background.url != '' %} style="background-image: url({{ block.background.url }})" {% endif %}>
+        {% if block.background != '' and block.background.url != '' %} style="background-image: url({{ block.background.url | strip_start '/' }})" {% endif %}>
         <div class="container cover-container">
             <div class="d-flex justify-content-center {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}">
               {% if block.containerImage and block.containerImage.url %}
                 <div>
-                    <img src="{{ block.containerImage.url }}" title="{{block.containerImage.altText}}" class="img-fluid" />
+                    <img src="{{ block.containerImage.url | strip_start '/' }}" title="{{block.containerImage.altText}}" class="img-fluid" />
                 </div>
               {% endif %}
 
