@@ -32,3 +32,11 @@ storefrontApp.component('vcTotals', {
         };
     }]
 });
+
+
+storefrontApp.component('vcTotalsFieldWithFree', {
+  templateUrl: "totals-field-with-free-template.tpl",
+bindings: {
+      field: '<'
+  }
+});
