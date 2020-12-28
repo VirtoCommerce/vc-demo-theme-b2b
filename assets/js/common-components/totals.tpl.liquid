@@ -9,7 +9,7 @@
             <hr>
             <dt ng-if-start="$ctrl.options.show.shipping" class="text-normal text-bold" ng-init="title = '{{ 'totals.shipping' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
             <dd ng-if-end>
-                <vc-totals-field-with-free field="$ctrl.order[$ctrl.fieldNames.shippingPrice]"></vc-totals-field-with-free>
+                <vc-totals-field-with-free field="$ctrl.order[$ctrl.fieldNames.shippingPrice] || $ctrl.order[$ctrl.fieldNames.shippingTotal]"></vc-totals-field-with-free>
             </dd>
             <hr>
             <dt ng-if-start="$ctrl.options.show.payment" class="overflow-visible" ng-init="title = '{{ 'totals.paymentFees' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
