@@ -14,10 +14,10 @@
                         </li>
                         <!-- TODO: Add links to orders, lists in account via ui-router -->
                         <li class="list-inline-item">
-                            <a href="account#/orders/">{{ 'customer.orders.title' | t }}</a>
+                            <a href="{{ 'account#/orders/' | absolute_url }}">{{ 'customer.orders.title' | t }}</a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="account#/lists/">{{ 'customer.lists.title' | t }}</a>
+                            <a href="{{ 'account#/lists/' | absolute_url }}">{{ 'customer.lists.title' | t }}</a>
                         </li>
                     </ul>
                 </div>

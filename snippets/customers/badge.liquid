@@ -1,13 +1,13 @@
 ﻿<p>{{ 'layout.customer.account' | t }} <strong>{% raw %}{{ customer.userName }}{% endraw %}</strong></p>
 <ul class="list-unstyled well well-sm">
     <li>
-        <a href="account#/orders/">{{ 'customer.orders.title' | t }}</a>
+        <a href="{{ 'account#/orders/' | absolute_url }}">{{ 'customer.orders.title' | t }}</a>
     </li>
     <li>
-        <a href="account#/">{{ 'customer.invoices.title' | t }}</a>
+        <a href="{{ 'account#/' | absolute_url }}">{{ 'customer.invoices.title' | t }}</a>
     </li>
     <li>
-        <a href="#">{{ 'customer.lists.title' | t }}</a>
+        <a href="{{ 'account#/lists/' | absolute_url }}">{{ 'customer.lists.title' | t }}</a>
     </li>
 </ul>
 <div class="aside-actions">
