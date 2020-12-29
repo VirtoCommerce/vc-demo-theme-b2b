@@ -4,14 +4,15 @@
 <div class="input-group">
         <input type="text" class="form-control"
         only-integer
-        ng-init="product['{{product.id}}'].quantity = 1"
+        ng-init="product['{{product.id}}'].quantity = 1; unavailable = {{unavailable}} || {{sold_out}} "
         ng-model="product['{{product.id}}'].quantity"
         >
         <span class="input-group-btn">
             <button class="btn btn-alt btn-primary"
-                    {% if unavailable or sold_out %} disabled {% endif %}
+
                     title="{{ 'products.general.add_to_cart' | t }}"
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
+                    ng-disabled="unavailable || product['{{product.id}}'].quantity <= 0"
                     >
                         {% if unavailable %}
                             {{ 'products.product.unavailable' | t }}
