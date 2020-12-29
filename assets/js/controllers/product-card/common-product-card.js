@@ -1,8 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('commonProductCardController', ['$rootScope', '$scope', 'dialogService', 'catalogService', 'cartService', 'validationHelper',
-    function ($rootScope, $scope, dialogService, catalogService, cartService, validationHelper) {
-        $scope.validateQtyInput = validationHelper.positiveInt;
+storefrontApp.controller('commonProductCardController', ['$rootScope', '$scope', 'dialogService', 'catalogService', 'cartService',
+    function ($rootScope, $scope, dialogService, catalogService, cartService) {
 
         $scope.addProductToCart = function (product, quantity) {
             var inventoryError = product.availableQuantity < quantity;
