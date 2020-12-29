@@ -9,6 +9,7 @@
     <div class="panel-body">
         <table class="table table-striped">
             {% for property in product.properties %}
+            {% unless property.hidden %}
                 {% assign column_count = 1 %}
                 {% include 'shared/grid/rows' %}
                 {% if should_start_row %}
@@ -19,6 +20,7 @@
                 {% if should_end_row %}
                     </tr>
                 {% endif %}
+            {% endunless %}
             {% endfor %}
         </table>
     </div>
