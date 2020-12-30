@@ -21,15 +21,18 @@ angular.module('storefront.account')
             hasError = hasError || errorMsg;
 
             if (!hasError) {
-                errorMsg = ctrl.passwordChangeData.newPassword !== ctrl.passwordChangeData.newPassword2;
-                ctrl.error.newPassword2 = errorMsg;
+                errorMsg = ctrl.passwordChangeData.newPassword !== ctrl.passwordChangeData.newPasswordConfirm;
+                ctrl.error.newPasswordConfirm = errorMsg;
                 hasError = hasError || errorMsg;
             }
 
             if (!hasError) {
                 loader.wrapLoading(function () {
                     return accountApi.changeUserPassword(ctrl.passwordChangeData).then(function (result) {
-                        angular.extend(ctrl, result);
+                        angular.extend(ctrl, result.data);
+                        if(ctrl.errors && ctrl.errors.length) {
+                          ctrl.errors = ctrl.errors.map(x=>x.description);
+                        }
                         ctrl.passwordChangeData = {};
                         ctrl.form.$setPristine();
                         return result;
