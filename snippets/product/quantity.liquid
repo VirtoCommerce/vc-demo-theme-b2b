@@ -12,7 +12,7 @@
 
                     title="{{ 'products.general.add_to_cart' | t }}"
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"
-                    ng-disabled="unavailable || product['{{product.id}}'].quantity <= 0"
+                    ng-disabled="unavailable || !product['{{product.id}}'].quantity || product['{{product.id}}'].quantity <=0"
                     >
                         {% if unavailable %}
                             {{ 'products.product.unavailable' | t }}
