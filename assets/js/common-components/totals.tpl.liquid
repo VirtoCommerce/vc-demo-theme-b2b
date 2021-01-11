@@ -8,10 +8,14 @@
             <dd ng-if-end><span class="pull-right" ng-bind="$ctrl.order[$ctrl.fieldNames.discount].formattedAmount"></span></dd>
             <hr>
             <dt ng-if-start="$ctrl.options.show.shipping" class="text-normal text-bold" ng-init="title = '{{ 'totals.shipping' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end ng-init="field = $ctrl.order[$ctrl.fieldNames.shippingPrice] || $ctrl.order[$ctrl.fieldNames.shippingTotal]" ng-include="'totals-field-with-free-template.tpl'"></dd>
+            <dd ng-if-end>
+                <vc-totals-field-with-free field="$ctrl.order[$ctrl.fieldNames.shippingPrice] || $ctrl.order[$ctrl.fieldNames.shippingTotal]"></vc-totals-field-with-free>
+            </dd>
             <hr>
             <dt ng-if-start="$ctrl.options.show.payment" class="overflow-visible" ng-init="title = '{{ 'totals.paymentFees' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end ng-init="field = $ctrl.order[$ctrl.fieldNames.payment]" class="fee-margin-bottom" ng-include="'totals-field-with-free-template.tpl'"></dd>
+            <dd ng-if-end class="fee-margin-bottom">
+                <vc-totals-field-with-free field="$ctrl.order[$ctrl.fieldNames.payment]"></vc-totals-field-with-free>
+            </dd>
 
             {% unless settings.show_prices_with_taxes %}
             <dt ng-if-start="$ctrl.options.show.taxes" class="text-normal text-bold" ng-init="title = '{{ 'totals.taxes' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
@@ -36,7 +40,8 @@
 <script id="totals-title-template.tpl" type="text/ng-template">
     <span class="pull-left" ng-if="!$ctrl.options.complete"> {% raw %} {{ title }} {% endraw %} </span> {% if settings.show_prices_with_taxes %} {{ 'totals.withTax' | t }} {% endif %}
 </script>
+
 <script id="totals-field-with-free-template.tpl" type="text/ng-template">
-    <span ng-if="field.amount > 0" class="pull-right" ng-bind="field.formattedAmount"></span>
-    <span ng-if="field.amount <= 0" class="pull-right">{{ 'totals.free' | t }}</span>
+    <span ng-if="$ctrl.field.amount > 0" class="pull-right" ng-bind="$ctrl.field.formattedAmount"></span>
+    <span ng-if="$ctrl.field.amount <= 0" class="pull-right">{{ 'totals.free' | t }}</span>
 </script>
