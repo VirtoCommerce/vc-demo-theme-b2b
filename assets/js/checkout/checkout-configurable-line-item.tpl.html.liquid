@@ -27,7 +27,7 @@
         <div class="col-xs-3 col-md-2">
             <div class="row nogap d-flex" ng-class="{'align-items-baseline': outOfStockError}">
                 <div class="col-md-6 form-group pl-2 m-0">
-                    <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" only-integer />
+                    <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" vc-integer />
                     <input ng-if="outOfStockError" class="form-control text-center" type="text" ng-value="0" disabled />
                     <small ng-if="outOfStockError" class="text-danger">{{ 'checkout.out_of_stock' | t }}</small>
                 </div>

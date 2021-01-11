@@ -1,6 +1,6 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.directive('onlyInteger', function () {
+storefrontApp.directive('vcInteger', function () {
   return  {
       restrict: 'A',
       require: 'ngModel',

@@ -3,7 +3,7 @@
 {% endif %}
 <div class="input-group">
         <input type="text" class="form-control"
-        only-integer
+        vc-integer
         ng-init="product['{{product.id}}'].quantity = 1; unavailable = {{unavailable}} || {{sold_out}} "
         ng-model="product['{{product.id}}'].quantity"
         >
