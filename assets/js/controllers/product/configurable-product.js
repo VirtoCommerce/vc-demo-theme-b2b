@@ -1,9 +1,8 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('configurableProductController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', '$filter', 'roundHelper', 'availabilityService', 'validationHelper', 'storeCurrency',
-    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, $filter, roundHelper, availabilityService, validationHelper, storeCurrency) {
+storefrontApp.controller('configurableProductController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', '$filter', 'roundHelper', 'availabilityService', 'storeCurrency',
+    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, $filter, roundHelper, availabilityService, storeCurrency) {
         $scope.configurationQty = 1;
-        $scope.validateQtyInput = validationHelper.positiveInt;
 
         $scope.addSelectedProductsToCart = function() {
             var configuredProductId = $window.product.id;

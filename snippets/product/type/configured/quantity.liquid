@@ -3,7 +3,7 @@
 {% endif %}
 <div class="input-group">
         <input type="text" class="form-control"
-        ng-keydown="validateQtyInput($event)"
+        vc-integer
         ng-model="configurationQty"
         ng-change="quantityChanged(configurationQty)"
         ng-model-options="{ debounce: 300 }"
