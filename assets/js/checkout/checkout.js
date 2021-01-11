@@ -304,6 +304,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             $scope.createOrder = function () {
                 wrapLoading(function() {
                     return cartService.createOrder($scope.checkout.paymentMethod.card).then(function(response) {
+                        $rootScope.$broadcast('cartItemsChanged');
 
                         var orderProcessingResult = response.data.orderProcessingResult;
                         var paymentMethod = response.data.paymentMethod;
