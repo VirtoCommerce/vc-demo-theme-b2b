@@ -7,7 +7,7 @@
         <div class="col-12">
             <div ng-if="!products.length">
                 <h2>{{ 'products.compare_list.compare_list_empty_header' | t }}</h2>
-                {% assign url = 'collections/all' | absolute_url %}
+                {% assign url = '' | absolute_url %}
                 <p>{{ 'products.compare_list.compare_list_empty_body' | t: url }}</p>
             </div>
             <div ng-if="products.length" id="compare-toolbar">
