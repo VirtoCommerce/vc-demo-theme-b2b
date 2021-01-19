@@ -1,0 +1,16 @@
+{% for product in collection.products %}
+    
+    {% assign column_count = 4 %}
+    {% include 'shared/grid/rows' %}
+    {% if should_start_row %}
+        <div class="row flexible">
+    {% endif %}
+    
+    {% include 'bootstrap-migration/product/grid-item' %}
+    {% if should_end_row %}
+        </div>
+    {% endif %}
+    
+   
+{% endfor %}
+

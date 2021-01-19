@@ -1,0 +1,6 @@
+<uib-accordion close-others="false" ng-init="filters = { terms: undefined }" vc-query-target="filters">
+    {% include 'bootstrap-migration/collection/sidebar/applied-filters' %}
+    {% include 'bootstrap-migration/collection/sidebar/keyword' %}
+    <filter-by-fulfillment-center-widget></filter-by-fulfillment-center-widget>
+</uib-accordion>
+{% include 'bootstrap-migration/collection/sidebar/filters' %}
