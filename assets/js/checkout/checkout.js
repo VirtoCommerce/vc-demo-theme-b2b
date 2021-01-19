@@ -7,6 +7,7 @@ if (storefrontAppDependencies != undefined) {
 angular.module(moduleName, ['credit-cards', 'angular.filter'])
     .controller('checkoutController', ['$rootScope', '$scope', '$window', '$log', 'cartService', 'commonService', 'dialogService', 'orderService', 'iconUrlService', 'creditCardPaymentMethodCode',
         function ($rootScope, $scope, $window, $log, cartService, commonService, dialogService, orderService, iconUrlService, creditCardPaymentMethodCode) {
+            let originalPurchaseOrderNumber = undefined;
             $scope.checkout = {
                 wizard: {},
                 cart: {},
@@ -38,12 +39,34 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 angular.element('#purchaseOrderNumberSubmit').blur();
                 return wrapLoading(function () {
                     return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
+                        originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
                         $rootScope.$broadcast('successOperation', {
                             type: 'success',
                             title: ['Purchase order number has successfully changed']
                         });
                     });
                 });
+            }
+
+            $scope.removePurchaseOrderNumber = () => {
+              $scope.checkout.cart.purchaseOrderNumber = "";
+              return wrapLoading(function () {
+                return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
+                    originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
+                    $rootScope.$broadcast('successOperation', {
+                        type: 'success',
+                        title: ['Purchase order number has successfully removed']
+                    });
+                });
+            });
+            }
+
+            $scope.purchaseOrderNumberExist = () => {
+              return !!originalPurchaseOrderNumber;
+            }
+
+            $scope.purchaseOrderNumberChanged = () => {
+              return $scope.checkout.cart.purchaseOrderNumber !== originalPurchaseOrderNumber;
             }
 
             $scope.sendToEmail = function () {
@@ -189,6 +212,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                             }
                         });
                     }
+
+                    originalPurchaseOrderNumber =  cart.purchaseOrderNumber;
 
                     if (cart.coupon) {
                         $scope.couponApplied = true;

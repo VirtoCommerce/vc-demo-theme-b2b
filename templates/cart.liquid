@@ -111,12 +111,19 @@
                                                        placeholder="{{ 'checkout.purchase_order_number.placeholder' | t }}"
                                                        type="text">
                                             </div>
-                                            <button id="purchaseOrderNumberSubmit"
+                                            <button ng-if="!purchaseOrderNumberExist() || purchaseOrderNumberChanged()"
+                                                    id="purchaseOrderNumberSubmit"
                                                     class="btn pull-right d-flex align-items-center justify-content-center"
                                                     ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
                                                     ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
                                                     ng-click="setPurchaseOrderNumber()">
                                                 <i class="fa fa-check"></i>
+                                            </button>
+                                            <button ng-if="purchaseOrderNumberExist() && !purchaseOrderNumberChanged()"
+                                            id="removePurchaseOrderNumber"
+                                            class="btn pull-right btn-alt btn-danger d-flex align-items-center justify-content-center"
+                                            ng-click="removePurchaseOrderNumber()">
+                                                <i class="fa fa-times"></i>
                                             </button>
                                         </form>
                                     </div>
