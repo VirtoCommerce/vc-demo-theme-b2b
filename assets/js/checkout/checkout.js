@@ -34,40 +34,34 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     firstAddress.postalCode == secondAddress.postalCode;
             };
 
-            $scope.setPurchaseOrderNumber = function () {
-                this.purchaseOrderNumberForm.$setPristine();
+            $scope.setPurchaseOrderNumber = (purchaseOrderNumberForm) => {
+                purchaseOrderNumberForm.$setPristine();
                 angular.element('#purchaseOrderNumberSubmit').blur();
-                return wrapLoading(function () {
-                    return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
-                        originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
-                        $rootScope.$broadcast('successOperation', {
-                            type: 'success',
-                            title: ['Purchase order number has successfully changed']
-                        });
-                    });
-                });
+                return wrapLoading(() => cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(() => {
+                      originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
+                      $rootScope.$broadcast('successOperation', {
+                          type: 'success',
+                          title: ['Purchase order number has successfully changed']
+                      });
+                    })
+                );
             }
 
             $scope.removePurchaseOrderNumber = () => {
               $scope.checkout.cart.purchaseOrderNumber = "";
-              return wrapLoading(function () {
-                return cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(function() {
-                    originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
-                    $rootScope.$broadcast('successOperation', {
-                        type: 'success',
-                        title: ['Purchase order number has successfully removed']
-                    });
-                });
-            });
+              return wrapLoading( () => cartService.updatePurchaseOrderNumber($scope.checkout.cart.purchaseOrderNumber).then(() => {
+                  originalPurchaseOrderNumber = $scope.checkout.cart.purchaseOrderNumber;
+                  $rootScope.$broadcast('successOperation', {
+                      type: 'success',
+                      title: ['Purchase order number has successfully removed']
+                  });
+                })
+              );
             }
 
-            $scope.purchaseOrderNumberExist = () => {
-              return !!originalPurchaseOrderNumber;
-            }
+            $scope.purchaseOrderNumberExist = () => !!originalPurchaseOrderNumber;
 
-            $scope.purchaseOrderNumberChanged = () => {
-              return $scope.checkout.cart.purchaseOrderNumber !== originalPurchaseOrderNumber;
-            }
+            $scope.purchaseOrderNumberChanged = () => $scope.checkout.cart.purchaseOrderNumber !== originalPurchaseOrderNumber;
 
             $scope.sendToEmail = function () {
                 dialogService.showDialog({}, 'sendCartToEmailDialogController', 'storefront.send-cart-to-email.tpl');
