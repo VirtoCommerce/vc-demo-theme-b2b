@@ -702,7 +702,13 @@
             "createdBy": "Created by",
             "status": "Status",
             "actions": "Actions",
-            "delete_confirm": "Are you sure you wish to delete this member?"
+            "delete_confirm": "Are you sure you wish to delete this member?",
+            "edit": "Edit",
+            "delete": "Delete",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "inactive": "Inactive",
+            "active": "Active"
         },
         "edit_company_member": {
             "return_text": "Back",
