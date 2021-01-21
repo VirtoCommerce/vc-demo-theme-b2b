@@ -34,14 +34,14 @@ storefrontApp.controller('collectionController', ['$scope', '$location', 'invent
     }
 
     $scope.adaptFilterName = function (termKey) {
-      return termKey == 'available_in' ? 'Available in' : termKey;
+      return termKey === 'available_in' ? 'Available in' : termKey;
     }
 
     $scope.adaptFilterValue = function (termKey, termValue) {
       let resultValue = termValue;
 
-      if (termKey == 'available_in') {
-        const fulfillmentCenter = $scope.fulfillmentCenters.find(x=>x.id === termValue);
+      if (termKey === 'available_in') {
+        const fulfillmentCenter = $scope.fulfillmentCenters.find(x => x.id === termValue);
         resultValue = !!fulfillmentCenter ? fulfillmentCenter.name : '';
       }
 
