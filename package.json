@@ -1,81 +1,81 @@
 {
-    "version": "1.8.0",
-    "name": "vc-demo-theme-b2b",
-    "author": "VirtoCommerce",
-    "description": "B2B theme for Storefront",
-    "private": true,
-    "tags": [
-        "virtocommerce",
-        "theme",
-        "b2b"
-    ],
-    "keywords": [
-        "virtocommerce",
-        "theme",
-        "b2b"
-    ],
-    "dependencies": {
-        "bootstrap": "^4.5.3",
-        "es6-promise": "^4.2.4",
-        "isomorphic-fetch": "^2.2.1",
-        "npm-check-updates": "^7.1.1",
-        "ui-bootstrap4": "^3.0.7"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.11.1",
-        "@babel/preset-env": "^7.11.0",
-        "autoprefixer": "^9.8.6",
-        "babel-eslint": "^10.1.0",
-        "babel-plugin-angularjs-annotate": "^0.10.0",
-        "bower": "~1.8.0",
-        "cssnano": "^4.1.10",
-        "del": "^5.1.0",
-        "eslint": "^7.7.0",
-        "eslint-config-angular": "^0.5.0",
-        "eslint-config-default": "^0.2.1",
-        "eslint-config-google": "^0.14.0",
-        "eslint-config-standard": "^14.1.1",
-        "eslint-plugin-angular": "^4.0.1",
-        "eslint-plugin-import": "^2.6.1",
-        "eslint-plugin-node": "^11.1.0",
-        "eslint-plugin-promise": "^4.2.1",
-        "eslint-plugin-standard": "^4.0.1",
-        "esm": "^3.2.25",
-        "fibers": "^5.0.0",
-        "gulp": "^4.0.2",
-        "gulp-babel": "^8.0.0",
-        "gulp-concat": "^2.6.1",
-        "gulp-eslint": "^6.0.0",
-        "gulp-exclude-gitignore": "^1.1.1",
-        "gulp-htmlmin": "^5.0.1",
-        "gulp-postcss": "^8.0.0",
-        "gulp-rename": "^2.0.0",
-        "gulp-sass": "^4.1.0",
-        "gulp-sourcemaps": "^2.6.0",
-        "gulp-svg2png": "^2.0.2",
-        "gulp-terser": "^1.3.2",
-        "gulp-using": "^0.1.1",
-        "gulp-util": "^3.0.8",
-        "gulp-zip": "^5.0.2",
-        "merge2": "^1.2.3",
-        "postcss-smart-import": "^0.7.5",
-        "sass": "^1.29.0",
-        "svg2png": "^3.0.1"
-    },
-    "engineStrict": true,
-    "engines": {
-        "node": ">=10.0.0"
-    },
-    "license": "MIT",
-    "homepage": "https://github.com/VirtoCommerce/vc-b2b-theme/",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/VirtoCommerce/vc-b2b-theme.git"
-    },
-    "bugs": {
-        "url": "https://github.com/VirtoCommerce/vc-b2b-theme/issues"
-    },
-    "scripts": {
-        "postinstall": "node_modules/.bin/bower install"
-    }
+  "version": "1.9.0",
+  "name": "vc-demo-theme-b2b",
+  "author": "VirtoCommerce",
+  "description": "B2B theme for Storefront",
+  "private": true,
+  "tags": [
+    "virtocommerce",
+    "theme",
+    "b2b"
+  ],
+  "keywords": [
+    "virtocommerce",
+    "theme",
+    "b2b"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "es6-promise": "^4.2.4",
+    "isomorphic-fetch": "^2.2.1",
+    "npm-check-updates": "^7.1.1",
+    "ui-bootstrap4": "^3.0.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "autoprefixer": "^9.8.6",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-angularjs-annotate": "^0.10.0",
+    "bower": "~1.8.0",
+    "cssnano": "^4.1.10",
+    "del": "^5.1.0",
+    "eslint": "^7.7.0",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-config-default": "^0.2.1",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-angular": "^4.0.1",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "esm": "^3.2.25",
+    "fibers": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^6.0.0",
+    "gulp-exclude-gitignore": "^1.1.1",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-svg2png": "^2.0.2",
+    "gulp-terser": "^1.3.2",
+    "gulp-using": "^0.1.1",
+    "gulp-util": "^3.0.8",
+    "gulp-zip": "^5.0.2",
+    "merge2": "^1.2.3",
+    "postcss-smart-import": "^0.7.5",
+    "sass": "^1.29.0",
+    "svg2png": "^3.0.1"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/VirtoCommerce/vc-b2b-theme/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VirtoCommerce/vc-b2b-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/VirtoCommerce/vc-b2b-theme/issues"
+  },
+  "scripts": {
+    "postinstall": "node_modules/.bin/bower install"
+  }
 }
