@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div>
     <ui-view></ui-view>
 </div>
 <script id="account-company-members-list.tpl" type="text/ng-template">
@@ -7,32 +7,39 @@
         <div class="page-header">
             <h3>{{ 'customer.edit_company_members.title' | t }}</h3>
         </div>
-        <table class="table table-striped border-top-light" ng-if="$ctrl.entries.length">
+        <table class="table table-striped table-bordless-body border-top-light" ng-if="$ctrl.entries.length">
             <thead>
                 <tr>
-                    <th>{{ 'customer.edit_company_members.name' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.full_name' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.user_name' | t }}</th>
                     <th>{{ 'customer.edit_company_members.job_title' | t }}</th>
                     <th>{{ 'customer.edit_company_members.email' | t }}</th>
                     <th>{{ 'customer.edit_company_members.role' | t }}</th>
-                    <th>Budget</th>
                     <th>{{ 'customer.edit_company_members.status' | t }}</th>
                     <th>{{ 'customer.edit_company_members.actions' | t }}</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="member in $ctrl.entries">
+                <tr ng-repeat="member in $ctrl.entries" ng-class="{ 'user-inactive': member.isLockedOut }">
+                    <td ng-bind="member.fullName"></td>
                     <td ng-bind="member.userName"></td>
                     <td ng-bind="member.title"></td>
                     <td ng-bind="member.email"></td>
                     <td ng-bind="member.role.name"></td>
-                    <td ng-bind="member.salutation ? '$' + member.salutation : 'n/a'"></td>
-                    <td ng-bind="member.isLockedOut ?'Not active':'Active'"></td>
+                    <td ng-bind="member.isLockedOut ? '{{ 'customer.edit_company_members.inactive' | t }}':'{{ 'customer.edit_company_members.active' | t }}'"></td>
                     <td>
-                        <span ng-show="$ctrl.showActions(member)">
-                            <a ng-if="member.firstName" ui-sref="members.detail({ member: member.id, pageNumber: $ctrl.pageSettings.currentPage })">Edit | </a>
-                            <a ng-click="$ctrl.delete(member)" href="">Delete</a>
-                            <a ng-click="$ctrl.changeStatus(member)" href="" ng-bind="member.isLockedOut ? '| Activate' : '| Deactivate'"></a>
-                        </span>
+                        <div ng-show="$ctrl.showActions(member)">
+                            <button ng-if="member.firstName" ui-sref="members.detail({ member: member.id, pageNumber: $ctrl.pageSettings.currentPage })" type="button" class="btn btn-white">
+                                <img alt="{{ 'customer.edit_company_members.edit' | t }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                            </button>
+                            <button type="button" class="btn btn-white" ng-click="$ctrl.delete(member)">
+                               <img alt="{{ 'customer.edit_company_members.delete' | t }}" src="{{ 'context-delete.svg' | asset_url }}"  height="14" width="14" />
+                            </button>
+                            <button type="button" class="btn btn-white" ng-click="$ctrl.changeStatus(member)">
+                                <img ng-if="member.isLockedOut" alt="{{ 'customer.edit_company_members.activate' | t }}" src="{{ 'context-activate.svg' | asset_url }}"  height="14" width="14" />
+                                <img ng-if="!member.isLockedOut" alt="{{ 'customer.edit_company_members.deactivate' | t }}" src="{{ 'context-deactivate.svg' | asset_url }}"  height="14" width="14" />
+                            </button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

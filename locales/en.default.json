@@ -693,7 +693,8 @@
         "edit_company_members": {
             "title": "Company members",
             "none": "There is no members yet.",
-            "name": "Name",
+            "full_name": "Name",
+            "user_name": "User name",
             "job_title": "Title",
             "email": "Email",
             "role": "Role",
@@ -702,7 +703,13 @@
             "createdBy": "Created by",
             "status": "Status",
             "actions": "Actions",
-            "delete_confirm": "Are you sure you wish to delete this member?"
+            "delete_confirm": "Are you sure you wish to delete this member?",
+            "edit": "Edit",
+            "delete": "Delete",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "inactive": "Inactive",
+            "active": "Active"
         },
         "edit_company_member": {
             "return_text": "Back",
