@@ -108,6 +108,10 @@ angular.module('storefront.account')
                                 $ctrl.cancel();
                                 $ctrl.pageSettings.currentPage = 1;
                                 $ctrl.pageSettings.pageChanged();
+                                $rootScope.$broadcast('successOperation', {
+                                  type: 'success',
+                                  message: 'Company member was successfully added',
+                              });
                             }
                             else {
                                 $ctrl.errors = _.pluck(response.data.errors, 'description');
