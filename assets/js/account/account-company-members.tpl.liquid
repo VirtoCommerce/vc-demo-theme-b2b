@@ -10,7 +10,8 @@
         <table class="table table-striped table-bordless-body border-top-light" ng-if="$ctrl.entries.length">
             <thead>
                 <tr>
-                    <th>{{ 'customer.edit_company_members.name' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.full_name' | t }}</th>
+                    <th>{{ 'customer.edit_company_members.user_name' | t }}</th>
                     <th>{{ 'customer.edit_company_members.job_title' | t }}</th>
                     <th>{{ 'customer.edit_company_members.email' | t }}</th>
                     <th>{{ 'customer.edit_company_members.role' | t }}</th>
@@ -20,6 +21,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="member in $ctrl.entries" ng-class="{ 'user-inactive': member.isLockedOut }">
+                    <td ng-bind="member.fullName"></td>
                     <td ng-bind="member.userName"></td>
                     <td ng-bind="member.title"></td>
                     <td ng-bind="member.email"></td>

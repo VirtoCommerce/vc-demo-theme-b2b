@@ -693,7 +693,8 @@
         "edit_company_members": {
             "title": "Company members",
             "none": "There is no members yet.",
-            "name": "Name",
+            "full_name": "Name",
+            "user_name": "User name",
             "job_title": "Title",
             "email": "Email",
             "role": "Role",
