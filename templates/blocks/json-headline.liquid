@@ -2,20 +2,20 @@
 {% include 'blocks/helpers/cover-style' %}
 
 <div id="{{ block.__id }}"
-     class="{%- if block.fullWidth == 'True' -%}
+     class="{% if block.fullWidth == 'True' %}
                 container-fluid w-auto mx-md-4
-            {%- else -%}
+            {% else %}
                 container-md
-            {%- endif -%}
-            {%- if hideBlock == true -%}
+            {% endif %}
+            {% if hideBlock == true %}
               d-none
-            {%- endif -%}"
+            {% endif %}"
      style="{% include 'blocks/helpers/block-margins' %}">
     <div class="block row position-relative justify-content-center"
-         style="{%- include 'blocks/helpers/block-inner-paddings' -%}
-                {%- if block.background != empty and block.background.url != '' -%}
+         style="{% include 'blocks/helpers/block-inner-paddings' %}
+                {% if block.background != empty and block.background.url != '' %}
                     background-image: url({{ block.background.url | strip_start: '/' }});
-                {%- endif -%}">
+                {% endif %}">
         <div class="{{ block.textAreaWidth }} text-center ">
             {% if block.note %}
                 <div class="note h2 text-muted mb-3">
@@ -42,9 +42,9 @@
 
             {% if block.secondButton and block.secondButton.urlText and block.secondButton.urlText != '' %}
                 <span class="mt-4 mt-md-0 
-                            {%- if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' -%}
+                            {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
                                 ml-md-4
-                            {%- endif -%}">
+                            {% endif %}">
                     {% assign button = block.secondButton %}
                     {% include 'blocks/helpers/button' %}
                 </span>
