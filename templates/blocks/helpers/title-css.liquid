@@ -1,0 +1,8 @@
+{%- if block.titleColor -%}
+    #{{block.__id}} h1, #{{block.__id}} h2, #{{block.__id}} h3,
+    #{{block.__id}} h4, #{{block.__id}} h5, #{{block.__id}} h6,
+    #{{block.__id}} .h1, #{{block.__id}} .h2, #{{block.__id}} .h3,
+    #{{block.__id}} .h4, #{{block.__id}} .h5, #{{block.__id}} .h6 {
+      color: {{block.titleColor}};
+    }
+{%- endif -%}

@@ -1,27 +1,39 @@
 {% assign titleStyle = block.titleAlignment | append ' ' |append block.titleStyle %}
 
 {% if givenTitle == null %}
-{% assign givenTitle = block.title %}
+    {% assign givenTitle = block.title %}
 {% endif %}
 
 {% assign classClause = '' %}
 {% if titleStyle %}
-  {% assign classClause = 'class="text-helvetica '|append titleStyle|append '"' %}
+    {% assign classClause = 'class="text-helvetica '|append titleStyle|append '"' %}
 {% endif %}
 
 {% if givenTitle != "" %}
-  {% if block.headerType == 'h1' %}
-    <h1 {{ classClause }}>{{ givenTitle}}</h1>
-  {% elsif block.headerType == 'h2' %}
-    <h2 {{ classClause }}">{{ givenTitle }}</h2>
-  {% elsif block.headerType == 'h3' %}
-    <h3 {{ classClause }}">{{ givenTitle }}</h3>
-  {% elsif block.headerType == 'like-h1' %}
-    <div class="h1 like-h1 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
-  {% elsif block.headerType == 'like-h3' %}
-    <div class="h3 like-h3 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
-  {% else %}
-    <div class="h2 like-h2 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
-  {% endif %}
+    {% if block.headerType == 'h1' %}
+        <h1 {{ classClause }}>{{ givenTitle}}</h1>
+    {% elsif block.headerType == 'h2' %}
+        <h2 {{ classClause }}">{{ givenTitle }}</h2>
+    {% elsif block.headerType == 'h3' %}
+        <h3 {{ classClause }}">{{ givenTitle }}</h3>
+    {% elsif block.headerType == 'h4' %}
+        <h4 {{ classClause }}">{{ givenTitle }}</h3>
+    {% elsif block.headerType == 'h5' %}
+        <h5 {{ classClause }}">{{ givenTitle }}</h3>
+    {% elsif block.headerType == 'h6' %}
+        <h6 {{ classClause }}">{{ givenTitle }}</h3>
+    {% elsif block.headerType == 'like-h1' %}
+        <div class="h1 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% elsif block.headerType == 'like-h2' %}
+        <div class="h2 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% elsif block.headerType == 'like-h3' %}
+        <div class="h3 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% elsif block.headerType == 'like-h4' %}
+        <div class="h4 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% elsif block.headerType == 'like-h5' %}
+        <div class="h5 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% elsif block.headerType == 'like-h6' %}
+        <div class="h6 text-helvetica {{ titleStyle }}">{{ givenTitle }}</div>
+    {% endif %}
 {% endif %}
 {% assign givenTitle = null %}

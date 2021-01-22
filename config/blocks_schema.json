@@ -47,43 +47,105 @@
           "type": "string",
           "default": null,
           "tab": "Settings"
-        },
-        {
-          "id": "headerType",
-          "label": "Title SEO tag",
-          "default": "like-h1",
-          "tab": "Settings",
-          "sort": 230,
-          "type": "select",
-          "options": [
-            {
-              "value": "h1",
-              "label": "H1"
-            },
-            {
-              "value": "h2",
-              "label": "H2"
-            },
-            {
-              "value": "h3",
-              "label": "H3"
-            },
-            {
-              "value": "like-h1",
-              "label": "Like H1"
-            },
-            {
-              "value": "like-h2",
-              "label": "Like H2"
-            },
-            {
-              "value": "like-h3",
-              "label": "Like H3"
-            }
-          ]
         }
       ],
       "namedSettings": {
+        "title-seo-tag": [
+          {
+            "id": "headerType",
+            "label": "Title SEO tag",
+            "default": "like-h1",
+            "tab": "Settings",
+            "sort": 230,
+            "type": "select",
+            "options": [
+              {
+                "value": "h1",
+                "label": "H1"
+              },
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "like-h1",
+                "label": "Like H1"
+              },
+              {
+                "value": "like-h2",
+                "label": "Like H2"
+              },
+              {
+                "value": "like-h3",
+                "label": "Like H3"
+              }
+            ]
+          }
+        ],
+        "title-seo-tag-full": [
+          {
+            "id": "headerType",
+            "label": "Title SEO tag",
+            "default": "like-h1",
+            "tab": "Settings",
+            "sort": 230,
+            "type": "select",
+            "options": [
+              {
+                "value": "h1",
+                "label": "H1"
+              },
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "h4",
+                "label": "H4"
+              },
+              {
+                "value": "h5",
+                "label": "H5"
+              },
+              {
+                "value": "h6",
+                "label": "H6"
+              },
+              {
+                "value": "like-h1",
+                "label": "Like H1"
+              },
+              {
+                "value": "like-h2",
+                "label": "Like H2"
+              },
+              {
+                "value": "like-h3",
+                "label": "Like H3"
+              },
+              {
+                "value": "like-h4",
+                "label": "Like H4"
+              },
+              {
+                "value": "like-h5",
+                "label": "Like H5"
+              },
+              {
+                "value": "like-h6",
+                "label": "Like H6"
+              }
+            ]
+          }
+        ],
         "cover-items": [
           {
             "id": "title",
@@ -274,7 +336,7 @@
           {
             "id": "firstButtonStyle",
             "label": "First button style",
-            "type":"select",
+            "type": "select",
             "default": "outline-",
             "options": [
               {
@@ -291,7 +353,7 @@
           {
             "id": "secondButtonStyle",
             "label": "Second button style",
-            "type":"select",
+            "type": "select",
             "default": null,
             "options": [
               {
@@ -615,6 +677,47 @@
             "group": "Main block settings"
           }
         ],
+        "text-width-limited": [
+          {
+            "id": "textAreaWidth",
+            "label": "Text container width",
+            "type": "select",
+            "default": "fluid",
+            "options": [
+              {
+                "label": "3 cols",
+                "value": "col-md-3"
+              },
+              {
+                "label": "4 cols",
+                "value": "col-md-4"
+              },
+              {
+                "label": "5 cols",
+                "value": "col-md-5"
+              },
+              {
+                "label": "6 cols",
+                "value": "col-md-6"
+              },
+              {
+                "label": "7 cols",
+                "value": "col-md-7"
+              },
+              {
+                "label": "8 cols",
+                "value": "col-md-8"
+              },
+              {
+                "label": "Fluid",
+                "value": "col"
+              }
+            ],
+            "tab": "Settings",
+            "sort": 215,
+            "group": "Main block settings"
+          }
+        ],
         "utm-marks": [
           {
             "id": "utmString",
@@ -726,6 +829,46 @@
             "tab": "Settings",
             "group": "Background"
           }
+        ],
+        "criteria": [
+          {
+            "id": "criteria",
+            "label": "Criteria",
+            "tab": "Settings",
+            "sort": 281,
+            "type": "select",
+            "default": "none",
+            "options": [
+              {
+                "value": "none",
+                "label": "None"
+              },
+              {
+                "value": "url",
+                "label": "URL parameter"
+              },
+              {
+                "value": "userGroup",
+                "label": "User group"
+              }
+            ]
+          },
+          {
+            "id": "criteriaValue",
+            "label": "Criteria value",
+            "type": "string",
+            "sort": 282,
+            "tab": "Settings"
+          },
+          {
+            "id": "hideOnMatch",
+            "label": "Hide on match",
+            "type": "checkbox",
+            "default": false,
+            "tab": "Settings",
+            "info": "When checked then block will be hidden when criteria matches, when unchecked block will be show only when criteria matches",
+            "sort": 283
+          }
         ]
       }
     },
@@ -734,7 +877,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings", "full-width-option" ],
+      "includeShared": [ "title-seo-tag", "cover-items", "notes", "buttons", "top/bottom-margins", "top/bottom-paddings", "full-width-option", "criteria" ],
       "excludeShared": [],
       "default": {
         "background": {
@@ -775,44 +918,6 @@
               "label": "Right"
             }
           ]
-        },
-        {
-          "id": "criteria",
-          "label": "Criteria",
-          "tab": "Settings",
-          "sort": 281,
-          "type": "select",
-          "default": "none",
-          "options": [
-            {
-              "value": "none",
-              "label": "None"
-            },
-            {
-              "value": "url",
-              "label": "URL parameter"
-            },
-            {
-              "value": "userGroup",
-              "label": "User group"
-            }
-          ]
-        },
-        {
-          "id": "criteriaValue",
-          "label": "Criteria value",
-          "type": "string",
-          "sort": 282,
-          "tab": "Settings"
-        },
-        {
-          "id": "hideOnMatch",
-          "label": "Hide on match",
-          "type": "checkbox",
-          "default": false,
-          "tab": "Settings",
-          "info": "When checked then block will be hidden when criteria matches, when unchecked block will be show only when criteria matches",
-          "sort": 283
         }
       ]
     },
@@ -821,7 +926,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "cover-items", "notes", "form" ],
+      "includeShared": [ "title-seo-tag", "cover-items", "notes", "form" ],
       "excludeShared": [],
       "default": {
         "title": "Meet the expert, explore the tool and get a free consultation",
@@ -875,7 +980,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Covers and Hero",
-      "includeShared": [ "notes", "cover-items", "buttons" ],
+      "includeShared": [ "title-seo-tag", "notes", "cover-items", "buttons" ],
       "excludeShared": [ "secondColumnWidth" ],
       "default": {
         "title": "Probably the best digital agency for SMBs in the market",
@@ -943,12 +1048,18 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "buttons", "paddings", "text-width" ],
+      "includeShared": [ "title-seo-tag-full", "notes", "buttons", "text-width-limited", "cover-items", "top/bottom-paddings", "top/bottom-margins", "criteria", "full-width-option" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "How to write headlines that actually work?",
         "subtitle": "<p>A headline's purpose is to quickly and briefly draw attention to the story. It is generally written by a copy editor, but may also be written by the writer, the page layout designer, or other editors.</p>",
         "note": "HOW-TOs",
+        "firstButton": {
+          "urlText": "Learn more", 
+          "style": "primary"
+        },
+        "firstButtonStyle": "outline-",
+        "textAreaWidth": "col",
         "titleColor": "#000000",
         "subtitleColor": "#737373",
         "noteColor": "#6c757d",
@@ -961,7 +1072,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Headlines and Forms",
-      "includeShared": [ "notes", "cover-items", "paddings", "form", "text-width" ],
+      "includeShared": [ "title-seo-tag", "notes", "cover-items", "paddings", "form", "text-width" ],
       "excludeShared": [ "textColumnWidth", "secondColumnWidth" ],
       "default": {
         "title": "Subscribe to our promotions",
@@ -1028,7 +1139,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Paragraphs and Links",
-      "includeShared": [ "text-width", "paddings", "colors" ],
+      "includeShared": [ "title-seo-tag", "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "textAreaWidth": "col-md-12",
@@ -1055,7 +1166,7 @@
       "icon": "image-text",
       "displayField": "name",
       "category": "Media and Logotypes",
-      "includeShared": [ "text-width", "paddings", "colors" ],
+      "includeShared": [ "title-seo-tag", "text-width", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "titleColor": "#000000",
@@ -1142,7 +1253,7 @@
       "icon": "image-text",
       "displayField": "title",
       "category": "Features and Cards",
-      "includeShared": [ "text-width", "colors", "paddings" ],
+      "includeShared": [ "title-seo-tag", "text-width", "colors", "paddings" ],
       "default": {
         "backgroundColor": "#efefef",
         "name": "Features with icons"
@@ -1317,7 +1428,7 @@
       "icon": "image-text",
       "displayField": "title",
       "category": "Promotions and CTAs",
-      "includeShared": [ "buttons", "colors" ],
+      "includeShared": [ "title-seo-tag", "buttons", "colors" ],
       "excludeShared": [ "contentColor" ],
       "default": {
         "headerType": "like-h1",
@@ -1367,7 +1478,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "paddings", "colors" ],
+      "includeShared": [ "title-seo-tag", "utm-marks", "paddings", "colors" ],
       "excludeShared": [],
       "default": {
         "headerType": "like-h1",
@@ -1531,7 +1642,7 @@
       "icon": "text",
       "displayField": "name",
       "category": "Queries and Others",
-      "includeShared": [ "utm-marks", "paddings", "colors" ],
+      "includeShared": [ "title-seo-tag", "utm-marks", "paddings", "colors" ],
       "default": {
         "name": "Category promotion"
       },

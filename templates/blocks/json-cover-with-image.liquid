@@ -3,7 +3,7 @@
 
 <div id="{{ block.__id }}" class="{% if hideBlock == true %}d-none{% endif %} {% if block.fullWidth != 'True' %}container-md{% else %}container-fluid{% endif %}" style="position: relative;{% include 'blocks/helpers/block-margins' %}">
     <div class="block block-cover row"
-         style="{% include 'blocks/helpers/block-inner-paddings' %}{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url | strip_start '/' }});{% endif %}">
+         style="{% include 'blocks/helpers/block-inner-paddings' %}{% if block.background != empty and block.background.url != '' %}background-image: url({{ block.background.url | strip_start: '/' }});{% endif %}">
         <div class="cover-container">
             <div class="d-flex {{ block.columnsPosition }} flex-wrap
                     {% if block.imagePosition == 'right' %} flex-row-reverse {% endif %}"
@@ -16,7 +16,7 @@
 
                   <div class="px-0 px-sm-6 pl-md-6 pr-md-4 text-center text-md-left {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
                     {% if block.note %}
-                        <div class="text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
+                        <div class="note text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
                     {% endif %}
 
                     {% if block.title %}
@@ -26,7 +26,7 @@
                     {% endif %}
 
                     {% if block.subtitle %}
-                        <div class="subtitle-container text-condensed px-4 px-sm-0 mb-5" style="font-size: 1.1rem;">
+                        <div class="subtitle text-condensed px-4 px-sm-0 mb-5" style="font-size: 1.1rem;">
                             {{ block.subtitle }}
                         </div>
                     {% endif %}

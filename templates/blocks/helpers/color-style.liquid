@@ -1,9 +1,4 @@
 <style>
-    #{{ block.__id }} {
-      {% if block.backgroundColor %}
-        background-color: {{ block.backgroundColor }};
-      {% endif %}
-    }
 
   {%- if block.contentColor %}
     #{{block.__id}} .text-container {
@@ -11,10 +6,7 @@
     }
   {% endif %}
 
-  {%- if block.titleColor %}
-    #{{block.__id}} h1, #{{block.__id}} h2, #{{block.__id}} h3, #{{block.__id}} .like-h1, #{{block.__id}} .like-h2, #{{block.__id}} .like-h3 {
-      color: {{block.titleColor}};
-    }
-  {% endif %}
+  {% include 'blocks/helpers/background-css' %}
+  {% include 'blocks/helpers/title-css' %}
 
 </style>

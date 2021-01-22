@@ -1,0 +1,9 @@
+{% if button and button.urlText and button.urlText != '' %}
+    <a href="{{button.url}}"
+       class="btn btn-lg btn-{{ buttonStyle }}{{button.style}} w-50 w-md-auto"
+       {% if button.openInNewTab == 'True' %}
+           target="_blank"
+       {% endif %}>
+        {{button.urlText}}
+    </a>
+{% endif %}
