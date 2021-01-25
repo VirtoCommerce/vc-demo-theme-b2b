@@ -56,12 +56,17 @@
     </div>
     <div class="col-md-5" ng-controller="commonProductCardController">
         <div class="row">
-            <div class="col-md-4">{% include 'product/price' %}</div>
-            <div class="col-md-8">
-                {% assign show_label = true %}
-                {% include 'product/quantity' %}
-                <vc-shipping-type is-dropdown="true" title="Ship or pickup" pickup-method-code="{{ settings.pickup_shipping_method }}"></vc-shipping-type>
-            </div>
+            {% if product.product_type == "Configurable" %}
+                <div class="col-md-4">{% include 'product/type/configured/item-price' %}</div>
+                <div class="col-md-8">{% include 'product/type/configured/item-configure-button' %}</div>
+            {% else %}
+                <div class="col-md-4">{% include 'product/price' %}</div>
+                <div class="col-md-8">
+                    {% assign show_label = true %}
+                    {% include 'product/quantity' %}
+                    <vc-shipping-type is-dropdown="true" title="Ship or pickup" pickup-method-code="{{ settings.pickup_shipping_method }}"></vc-shipping-type>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
