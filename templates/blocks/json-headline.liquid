@@ -11,7 +11,7 @@
               d-none
             {% endif %}"
      style="{% include 'blocks/helpers/block-margins' %}">
-    <div class="block row position-relative justify-content-center"
+    <div class="block row position-relative justify-content-center align-items-center"
          style="{% include 'blocks/helpers/block-inner-paddings' %}
                 {% if block.background != empty and block.background.url != '' %}
                     background-image: url({{ block.background.url | strip_start: '/' }});
@@ -41,14 +41,36 @@
             <div class="w-100 d-md-none"></div>
 
             {% if block.secondButton and block.secondButton.urlText and block.secondButton.urlText != '' %}
-                <span class="mt-4 mt-md-0 
+                <div class="d-inline-block d-block-md w-100 w-md-auto mt-4 mt-md-0 
                             {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
                                 ml-md-4
                             {% endif %}">
                     {% assign button = block.secondButton %}
                     {% include 'blocks/helpers/button' %}
-                </span>
+                </div>
             {% endif %}
         </div>
     </div>
 </div>
+<style>
+@media (min-width: 1200px) {
+    #{{ block.__id }} .block {
+        min-height: 645px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    #{{ block.__id }} .block {
+        min-height: 515px;
+    }
+}
+@media (min-width: 576px) and (max-width: 992px) {
+    #{{ block.__id }} .block {
+        min-height: 778px;
+    }
+}
+@media (max-width: 576px) {
+    #{{ block.__id }} .block {
+        min-height: 672px;
+    }
+}
+<style>
