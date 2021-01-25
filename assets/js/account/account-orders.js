@@ -7,7 +7,20 @@ angular.module('storefront.account')
     })
     .component('vcAccountOrdersList', {
         templateUrl: "account-orders-list.tpl",
-        controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortAscending', 'sortDescending', 'orderStatuses', '$stateParams', function (accountApi, loader, $window, sortAscending, sortDescending, orderStatuses, $stateParams) {
+        controller: ['accountApi',
+        'loadingIndicatorService',
+        '$window',
+        'sortAscending',
+        'sortDescending',
+        'orderStatuses',
+        '$stateParams',
+        function (accountApi,
+          loader,
+          $window,
+          sortAscending,
+          sortDescending,
+          orderStatuses,
+          $stateParams) {
             var $ctrl = this;
             $ctrl.sortDescending = sortDescending;
             $ctrl.sortAscending = sortAscending;
@@ -75,7 +88,36 @@ angular.module('storefront.account')
         require: {
             accountManager: '^vcAccountManager'
         },
-        controller: ['$rootScope', '$window', 'loadingIndicatorService', 'confirmService', 'accountApi', 'inventoryApi', 'orderService', '$stateParams', '$scope', 'catalogService', 'dialogService', 'cartService', function($rootScope, $window, loader, confirmService, accountApi, inventoryApi, orderService, $stateParams, $scope, catalogService, dialogService, cartService ) {
+        controller: ['$rootScope',
+        '$window',
+        'loadingIndicatorService',
+        'confirmService',
+        'accountApi',
+        'inventoryApi',
+        'orderService',
+        '$stateParams',
+        '$scope',
+        'catalogService',
+        'dialogService',
+        'cartService',
+        'authService',
+        'creditCardPaymentMethodCode',
+        'purchasingAgentRole',
+        function ($rootScope,
+          $window,
+          loader,
+          confirmService,
+          accountApi,
+          inventoryApi,
+          orderService,
+          $stateParams,
+          $scope,
+          catalogService,
+          dialogService,
+          cartService,
+          authService,
+          creditCardPaymentMethodCode,
+          purchasingAgentRole) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.hasPhysicalProducts = true;
@@ -98,7 +140,7 @@ angular.module('storefront.account')
                             _.first(order.addresses);
 
                         accountApi.getUserOrderNewPaymentData(order.number).then(function (response) {
-                            $ctrl.paymentMethods = response.data.paymentMethods;
+                            $ctrl.paymentMethods = response.data.paymentMethods.filter(x => isAvailablePaymentMethod(x));
                             _.each($ctrl.order.inPayments, function (x) {
                                 $ctrl.selectedPaymentMethod = _.find($ctrl.paymentMethods, function (pm) { return pm.code == x.gatewayCode; });
                                 if ($ctrl.selectedPaymentMethod) {
@@ -207,6 +249,16 @@ angular.module('storefront.account')
             $ctrl.removeComponent = function (component) {
                 components = _.without(components, component);
             };
+
+            function isAvailablePaymentMethod (paymentMethod) {
+              var result = true;
+
+              if(paymentMethod.code === creditCardPaymentMethodCode) {
+                  result = authService.canByRole(purchasingAgentRole);
+              }
+
+              return result;
+            }
 
             function outerRedirect(absUrl) {
                 $window.location.href = absUrl;
