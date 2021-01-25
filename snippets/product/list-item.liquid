@@ -4,6 +4,18 @@
 
 <!-- TODO: Badges -->
 
+{% assign unavailable = false %}
+{% assign sold_out = false %}
+
+{% if product.buyable and product.in_stock != true %}
+    {% assign sold_out = true %}
+{% endif %}
+
+{% if product.buyable != true  %}
+    {% assign unavailable = true %}
+{% endif %}
+
+
 <div class="row product-row">
     <div class="col-md-2">
         {% include 'shared/item-response-group' %}
@@ -42,7 +54,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-5" ng-controller="commonProductCardController">
         <div class="row">
             <div class="col-md-4">{% include 'product/price' %}</div>
             <div class="col-md-8">
