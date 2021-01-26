@@ -1,0 +1,67 @@
+name: B2B E2E
+on:
+  workflow_dispatch:
+    inputs:
+      testSuite:
+        description: "Test Suite"
+        required: false
+        default: "Test Suites/B2B"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Get Image Version
+        uses: VirtoCommerce/vc-github-actions/get-image-version@master
+        id: image
+
+      - name: Build
+        id: build
+        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.event_name == 'workflow_dispatch' }}
+        uses: VirtoCommerce/vc-github-actions/build-theme@master
+        with:
+          versionSuffix:  ${{ env.VERSION_SUFFIX }}
+
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker Env
+        uses: VirtoCommerce/vc-github-actions/docker-env@master
+        with:
+          githubUser: ${{ env.GITHUB_ACTOR }}
+          githubToken: ${{ env.GITHUB_TOKEN }}
+          platformImage: docker.pkg.github.com/virtocommerce/vc-platform/platform
+          storefrontImage: docker.pkg.github.com/virtocommerce/vc-storefront/storefront
+          validateSwagger: 'false'
+
+      - name: Install Theme
+        uses: VirtoCommerce/vc-github-actions/docker-install-theme@VP-6710
+        with:
+          artifactPath: ${{ steps.build.outputs.artifactPath }}
+          containerName: 'virtocommerce_vc-platform-web_1'
+          containerDestination: '/opt/virtocommerce/platform/wwwroot/cms-content/Themes/default'
+
+      - name: Getting tests
+        shell: sh
+        run: git clone https://github.com/VirtoCommerce/vc-quality-gate-katalon.git
+
+      - name: Katalon Studio Github Action
+        uses: katalon-studio/katalon-studio-github-action@v2.2
+        with:
+          version: '7.5.5'
+          projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
+          args: '-noSplash -retry=0 -testSuitePath="${{ github.event.inputs.testSuite }}" -browserType="Chrome" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090" -g_urlFront="http://localhost:8080" -executionProfile="default"' 
+
+      - name: Katalon Report
+        if: ${{ success() || failure() }}
+        uses: VirtoCommerce/vc-github-actions/publish-katalon-report@master
+        with: 
+          testProjectPath: ${{ github.workspace }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          publishComment: 'false'
