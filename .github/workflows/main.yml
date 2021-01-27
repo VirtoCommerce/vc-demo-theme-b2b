@@ -73,6 +73,12 @@ jobs:
         path: ${{ steps.build.outputs.artifactPath }}
         name: ${{ steps.build.outputs.artifactName }}
 
+    - name: Add link to PR
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: VirtoCommerce/vc-github-actions/publish-artifact-link@VDS-414
+      with:
+        artifactName: ${{ steps.build.outputs.artifactName }}
+
 
     - name: Publish
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || (github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/master')}}
