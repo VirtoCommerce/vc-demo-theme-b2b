@@ -14,12 +14,12 @@ on:
   pull_request:
     branches:
       [master, dev]
-    paths-ignore:
+#    paths-ignore:
 #      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+#      - 'docs/**'
+#      - 'build/**'
+#      - 'README.md'
+#      - 'LICENSE'
 
 jobs:
   ci:
