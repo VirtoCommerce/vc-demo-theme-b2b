@@ -73,9 +73,6 @@ jobs:
         artifactPath: ${{ steps.build.outputs.artifactPath }}
         artifactName: ${{ steps.build.outputs.artifactName }}
 
-    - name: Show blobUrl
-      run: echo ${{ steps.publish.outputs.blobUrl }}
-
     - name: Add link to PR
       if: ${{ github.event_name == 'pull_request' }}
       uses: VirtoCommerce/vc-github-actions/publish-artifact-link@VDS-414
