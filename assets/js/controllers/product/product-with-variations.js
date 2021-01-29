@@ -13,7 +13,7 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
         $scope.selectedVariation = {};
 
         $scope.variationsQuantities = undefined;
-        $scope.totalPrice = undefined;
+        $scope.totalPrice = "$0";
 
 
         function initialize(filters) {
