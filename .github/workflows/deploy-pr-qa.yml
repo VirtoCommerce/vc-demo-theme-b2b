@@ -7,10 +7,12 @@ on:
     types: [labeled]
 
 jobs:
-  build:
+  deploy:
     if: contains(github.event.pull_request.labels.*.name, 'deploy-qa')
 
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
     steps:
     - name: Get artifact link
