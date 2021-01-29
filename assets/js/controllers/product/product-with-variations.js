@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productWithVariationsController', ['$scope', '$window', 'catalogService', 'availabilityService',
-    function ($scope, $window, catalogService, availabilityService) {
+storefrontApp.controller('productWithVariationsController', ['$scope', '$window', 'catalogService', 'availabilityService', 'pricingService',
+    function ($scope, $window, catalogService, availabilityService, pricingService) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -11,6 +11,10 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
         $scope.allVariationPropsMapCount = null;
         $scope.filterableVariationPropsMap = { };
         $scope.selectedVariation = {};
+
+        $scope.variationsQuantities = undefined;
+        $scope.totalPrice = undefined;
+
 
         function initialize(filters) {
             var product = $window.product;
@@ -65,5 +69,27 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
             return _.groupBy(variation.variationProperties, function (x) { return x.displayName });
         }
 
-        $scope.$watch('filters', initialize);
+        // $scope.$watch('filters', initialize);
+
+
+        $scope.recalculateTotalPrice = () => {
+          //filter map
+          const variationsWithQuantity = _.pairs($scope.allVariationsMap).map(x => x[1]).filter(x => !!x.quantity);
+
+          if (variationsWithQuantity.length === 0) {
+            $scope.totalPrice = "$0";
+          }
+
+          const items = variationsWithQuantity.map( x => { return { productId: x.id, quantity: x.quantity}; });
+          pricingService.getProductsTotal(items).then( (result) => {
+            $scope.totalPrice = result.data.total.formattedAmount;
+          });
+
+        }
+
+        $scope.addSelectedProductsToCart = () => {
+
+        }
+
+        initialize();
     }]);
