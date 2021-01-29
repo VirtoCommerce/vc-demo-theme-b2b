@@ -14,12 +14,12 @@ on:
   pull_request:
     branches:
       [master, dev]
-    paths-ignore:
-      - '.github/**'
-      - 'docs/**'
-      - 'build/**'
-      - 'README.md'
-      - 'LICENSE'
+    # paths-ignore:
+    #   - '.github/**'
+    #   - 'docs/**'
+    #   - 'build/**'
+    #   - 'README.md'
+    #   - 'LICENSE'
 
 jobs:
   ci:
@@ -35,8 +35,8 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v3
+    # - name: Setup sonarqube
+    #   uses: warchant/setup-sonar-scanner@v3
 
     - name: Get Image Version
       uses: VirtoCommerce/vc-github-actions/get-image-version@master
@@ -55,8 +55,8 @@ jobs:
       id: changelog
       uses: VirtoCommerce/vc-github-actions/changelog-generator@master
 
-    - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+    # - name: SonarCloud Scan
+    #   uses: VirtoCommerce/vc-github-actions/sonar-theme@master
 
     - name: Build
       if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' }}
