@@ -12,7 +12,6 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         $scope.filterableVariationPropsMap = { };
         $scope.selectedVariation = {};
         
-        $scope.variationsQuantities = undefined;
         $scope.totalPrice = getDefaultTotalPrice();
 
         function initialize(filters) {
@@ -70,11 +69,11 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         }
         
         function getVariationsWithQuantity() {
-          return _.pairs($scope.allVariationsMap).map(x => x[1]).filter(x => !!x.quantity);
+          return _.pairs($scope.allVariationsMap).map(x => x[1]).filter(x => !!(+x.quantity));
         }
 
         function convertVariationsToAddItems(variations) {
-          return variations.map( x => { return { productId: x.id, quantity: x.quantity}; });
+          return variations.map( x => { return { productId: x.id, quantity: +x.quantity}; });
         }
 
         $scope.recalculateTotalPrice = () => {

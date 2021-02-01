@@ -1,5 +1,5 @@
 {% include 'product/type/with-variations/product-title-info' %}
-<div class="row flexible">
+<div class="row flexible" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
     <div class="col-md-3">
         {% include 'product/image' %}
         {% include 'product/compare' %}
