@@ -11,7 +11,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         $scope.allVariationPropsMapCount = null;
         $scope.filterableVariationPropsMap = { };
         $scope.selectedVariation = {};
-
+        
         $scope.variationsQuantities = undefined;
         $scope.totalPrice = getDefaultTotalPrice();
 
@@ -88,7 +88,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
           const items = convertVariationsToAddItems(variationsWithQuantity);
 
           pricingService.getProductsTotal(items).then( (result) => {
-            $scope.totalPrice = result.data.total.formattedAmount;
+            $scope.totalPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.formattedAmount : result.data.total.formattedAmount;
           });
 
         }
