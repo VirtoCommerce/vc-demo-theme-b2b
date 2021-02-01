@@ -41,7 +41,8 @@
                 <div class="delivery-cart">
                         <button class="btn btn-lg btn-primary btn-block"
                         title="{{ 'products.general.add_to_cart' | t }}"
-                        ng-click="addSelectedProductsToCart()">
+                        ng-click="addVariationsToCart()"
+                        ng-disabled = "!hasVariationsWithQuantity()">
                             {{ 'products.general.add_to_cart' | t }}
                         </button>
                 </div>

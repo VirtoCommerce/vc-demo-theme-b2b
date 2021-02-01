@@ -31,7 +31,7 @@
                             <input ng-if="dialogData.inventoryError && !dialogData.configuredProductId"
                             type="number" class="form-control text-center"
                             min="1" max="{% raw %}{{ item.availableQuantity }}{% endraw %}"
-                            ng-init="item.quantity = setInitQuantity(item)"
+                            ng-init="setInitItemQuantity(item)"
                             ng-model="item.quantity"
                             required
                             >
