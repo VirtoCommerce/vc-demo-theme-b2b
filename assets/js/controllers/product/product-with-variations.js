@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$scope', '$window', 'catalogService', 'availabilityService', 'pricingService', 'dialogService', 'cartService',
-    function ($rootScope, $scope, $window, catalogService, availabilityService, pricingService, dialogService, cartService) {
+storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$scope', '$window', '$filter', 'catalogService', 'availabilityService', 'pricingService', 'dialogService', 'cartService', 'storeCurrency',
+    function ($rootScope, $scope, $window, $filter, catalogService, availabilityService, pricingService, dialogService, cartService, storeCurrency) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -13,8 +13,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         $scope.selectedVariation = {};
 
         $scope.variationsQuantities = undefined;
-        $scope.totalPrice = "$0";
-
+        $scope.totalPrice = getDefaultTotalPrice();
 
         function initialize(filters) {
             var product = $window.product;
@@ -49,6 +48,11 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
             });
         }
 
+
+        function getDefaultTotalPrice() {
+          return $filter('currency')(0, storeCurrency.symbol);
+        }
+
         function getFlatternDistinctPropertiesMap(variations) {
             var retVal = {};
             _.each(variations, function (variation) {
@@ -77,7 +81,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
           const variationsWithQuantity = getVariationsWithQuantity();
 
           if (variationsWithQuantity.length === 0) {
-            $scope.totalPrice = "$0";
+            $scope.totalPrice = getDefaultTotalPrice();
             return;
           }
 
