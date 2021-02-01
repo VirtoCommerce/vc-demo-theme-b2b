@@ -87,25 +87,20 @@ angular.module('storefrontApp')
       }
 
       function initialize() {
-          if ( !$scope.dialogData || !$scope.dialogData.items || $scope.dialogData.items.length < 1 ) {
-              throw new Error('Initial dialog data is invalid');
-          }
+        if ( !$scope.dialogData || !$scope.dialogData.items || $scope.dialogData.items.length < 1 ) {
+            throw new Error('Initial dialog data is invalid');
+        }
 
-          if($scope.dialogData.configuredProductId) {
-              dialogBehavior = dialogBehaviorType.configured;
-          } else if($scope.dialogData.items.length > 1) {
-              dialogBehavior = dialogBehaviorType.manyItems;
-          } else {
-              dialogBehavior = dialogBehaviorType.oneItem;
-          }
+        if ($scope.dialogData.configuredProductId) {
+            dialogBehavior = dialogBehaviorType.configured;
+        } else if ($scope.dialogData.items.length > 1) {
+            dialogBehavior = dialogBehaviorType.manyItems;
+        } else {
+            dialogBehavior = dialogBehaviorType.oneItem;
+        }
 
-        switch (dialogBehavior) {
-            case dialogBehaviorType.configured:
-                $scope.configurationQty = $scope.dialogData.inventoryError ? getMaxInventory() : $scope.dialogData.configurationQty;                 
-                break;
-        
-            default:
-                break;
+        if (dialogBehavior === dialogBehaviorType.configured) {
+            $scope.configurationQty = $scope.dialogData.inventoryError ? getMaxInventory() : $scope.dialogData.configurationQty;            
         }
          
       }
