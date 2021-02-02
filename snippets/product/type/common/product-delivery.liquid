@@ -2,7 +2,6 @@
     <div ng-controller="purchaseController" ng-init='loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", "{{ product.id }}")'>
         <p ng-show="shipmentType == 'shipping' && shipmentAddress">Expected to arrive: <strong ng-bind="availability['{{ product.id }}'].expectedArrival | date: 'fullDate'"></strong></p>
         <p ng-show="shipmentType == 'pickup' && shipmentFulfillmentCenter">Available for pickup: <strong ng-bind="availability['{{ product.id }}'].availableSince | date: 'fullDate'"></strong></p>
-        <vc-payment-plan available-payment-plans="::availablePaymentPlans"></vc-payment-plan>
         <div class="form-group">
             {% if product.product_type == "Configurable" %}
                 {% include 'product/type/configured/quantity' %}
