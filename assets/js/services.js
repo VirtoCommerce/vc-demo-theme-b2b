@@ -46,7 +46,10 @@ storefrontApp.service('pricingService', ['$http', function ($http) {
 	return {
 		getActualProductPrices: function (products) {
 		    return $http.post('storefrontapi/pricing/actualprices', products);
-		}
+    },
+    getProductsTotal: function (items) {
+      return $http.post('storefrontapi/pricing/total', items)
+    }
 	}
 }]);
 
