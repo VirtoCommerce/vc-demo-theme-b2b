@@ -35,10 +35,8 @@
                         </dl>
                     </div>
                     {% if settings.show_prices_with_taxes %}
-                        {% assign price = variant.price_with_tax %}
                         {% include 'product/price' %}
                     {% else %}
-                        {% assign price = variant.price %}
                         {% include 'product/price' %}
                     {% endif %}
                 </div>
