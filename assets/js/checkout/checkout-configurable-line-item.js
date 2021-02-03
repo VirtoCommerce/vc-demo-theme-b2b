@@ -56,10 +56,9 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
         }, true);
 
         function getConfiguredLineItems(item) {
-            _.each(item.parts, part => {
-                part.items = [item.items.find(x => x.id === part.selectedItemId)];
-                if (part.items[0].validationErrors && part.items[0].validationErrors.length) {
-                    part.quantityError = _.find(part.items[0].validationErrors, error => error.errorCode === "QuantityError");
+            _.each(item.items, part => {
+                if (part.validationErrors && part.validationErrors.length) {
+                    part.quantityError = _.find(part.validationErrors, error => error.errorCode === "QuantityError");
                     if (part.quantityError && part.quantityError.availableQuantity === 0) {
                         $scope.outOfStockError = true;
                     }
