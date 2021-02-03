@@ -8,8 +8,8 @@
             </div>
         </div>
         <div ng-repeat="part in productParts" class="flex border-bottom-light panel-body align-items-center">
-            <div>
-                <img ng-if="part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
+            <div class="col-md-2">
+                <img ng-if="part.image.url" class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
                 <img ng-if="!part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
 
