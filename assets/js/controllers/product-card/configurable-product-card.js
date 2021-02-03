@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('configurableProductCardController', ['$scope', 'catalogService', '$filter', 'storeCurrency',
-    function ($scope, catalogService, $filter, storeCurrency) {
+storefrontApp.controller('configurableProductCardController', ['$scope', 'catalogService', '$filter', 'storeCurrency', 'pricingService',
+    function ($scope, catalogService, $filter, storeCurrency, pricingService) {
 
         $scope.getDefaultPrice = function() {
             return $filter('currency')($scope.defaultPrice, storeCurrency.symbol);
