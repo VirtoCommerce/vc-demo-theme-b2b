@@ -15,7 +15,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
 
     steps:
-    - name: Get artifact link
+    - name: Create deploy step
       if: ${{ github.event_name == 'pull_request' }}
       uses: VirtoCommerce/vc-github-actions/create-deploy-pr@VDS-414
       with:
