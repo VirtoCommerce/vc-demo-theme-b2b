@@ -8,13 +8,18 @@ angular.module('storefrontApp')
           $uibModalInstance.dismiss('cancel');
       }
 
+      const dialogBehaviorType = {oneItem: 0, manyItems: 1, configured: 2}
+
+      let dialogBehavior = 0;
+
       $scope.addToCart = function() {
           $scope.dialogData.inventoryError = false;
-          if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
-              cartService.addLineItem($scope.dialogData.items[0].id, $scope.dialogData.items[0].quantity).then(() => {
+          if (dialogBehavior === dialogBehaviorType.oneItem) {
+              const product = $scope.dialogData.items[0];
+              cartService.addLineItem(product.id, product.quantity).then(() => {
                   $rootScope.$broadcast('cartItemsChanged');
               });
-          } else if ($scope.dialogData.configuredProductId) {
+          } else if (dialogBehavior === dialogBehaviorType.configured) {
               let items = $scope.dialogData.items.map(item => {
                   return { id: item.id, quantity: $scope.configurationQty, configuredProductId: item.configuredProductId };
               });
@@ -24,7 +29,7 @@ angular.module('storefrontApp')
                       $rootScope.$broadcast('cartItemsChanged');
                   }
               });
-          } else {
+          } else { //many items
               let items = $scope.dialogData.items.map(item => {
                   return { id: item.id, quantity: item.quantity };
               });
@@ -42,16 +47,16 @@ angular.module('storefrontApp')
           return $filter('currency')(total, storeCurrency.symbol);
       }
 
-      $scope.setInitQuantity = function(item) {
+      $scope.setInitItemQuantity = function(item) {
           if (item.inventoryError) {
-              return item.availableQuantity;
+            item.quantity = item.availableQuantity;
           } else {
-              return item.quantity;
+            item.quantity = +item.quantity;
           }
       }
 
       $scope.getConfirmationTitle = function() {
-          if ($scope.dialogData && $scope.dialogData.items && $scope.dialogData.items.length === 1) {
+          if (dialogBehavior === dialogBehaviorType.oneItem) {
               return '1 item was added to cart';
           } else {
               return `${$scope.dialogData.items.length} items were added to cart`;
@@ -71,20 +76,33 @@ angular.module('storefrontApp')
           $uibModalInstance.close();
       }
 
+          
+
       function getMaxInventory() {
           var inventoryArray = $scope.dialogData.items.map(item => {
               return item.availableQuantity;
           });
           $scope.maxConfigurationQty = Math.min(...inventoryArray);
-          $scope.configurationQty = $scope.maxConfigurationQty;
+          return $scope.maxConfigurationQty;
       }
 
       function initialize() {
-          if ($scope.dialogData.inventoryError && $scope.dialogData.configuredProductId) {
-              getMaxInventory();
-          } else if (!$scope.dialogData.inventoryError && $scope.dialogData.configuredProductId) {
-              $scope.configurationQty = $scope.dialogData.configurationQty;
-          }
+        if ( !$scope.dialogData || !$scope.dialogData.items || $scope.dialogData.items.length < 1 ) {
+            throw new Error('Initial dialog data is invalid');
+        }
+
+        if ($scope.dialogData.configuredProductId) {
+            dialogBehavior = dialogBehaviorType.configured;
+        } else if ($scope.dialogData.items.length > 1) {
+            dialogBehavior = dialogBehaviorType.manyItems;
+        } else {
+            dialogBehavior = dialogBehaviorType.oneItem;
+        }
+
+        if (dialogBehavior === dialogBehaviorType.configured) {
+            $scope.configurationQty = $scope.dialogData.inventoryError ? getMaxInventory() : $scope.dialogData.configurationQty;            
+        }
+         
       }
 
       initialize();

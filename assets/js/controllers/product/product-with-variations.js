@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productWithVariationsController', ['$scope', '$window', 'catalogService', 'availabilityService',
-    function ($scope, $window, catalogService, availabilityService) {
+storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$scope', '$window', '$filter', 'catalogService', 'availabilityService', 'pricingService', 'dialogService', 'cartService', 'storeCurrency',
+    function ($rootScope, $scope, $window, $filter, catalogService, availabilityService, pricingService, dialogService, cartService, storeCurrency) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -11,6 +11,8 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
         $scope.allVariationPropsMapCount = null;
         $scope.filterableVariationPropsMap = { };
         $scope.selectedVariation = {};
+        
+        $scope.totalPrice = getDefaultTotalPrice();
 
         function initialize(filters) {
             var product = $window.product;
@@ -36,17 +38,18 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
                 angular.copy(getFlatternDistinctPropertiesMap(allVariations), $scope.allVariationPropsMap);
                 angular.copy(_.pick($scope.allVariationPropsMap, function (value, key, object) { return value.length > 1; }), $scope.filterableVariationPropsMap);
                 $scope.allVariationPropsMapCount = _.keys($scope.allVariationPropsMap).length;
-                //Auto select initial product as default variation  (its possible because all our products is variations)
-                //var propertyMap = getVariationPropertyMap(product);
-                //_.each(_.keys(propertyMap), function (x) {
-                //    $scope.checkProperty(propertyMap[x][0])
-                //});
+               
                 $scope.selectedVariation = product;
 
                 return availabilityService.getProductsAvailability([product.id]).then(function(res) {
                     $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
                 });
             });
+        }
+
+
+        function getDefaultTotalPrice() {
+          return $filter('currency')(0, storeCurrency.symbol);
         }
 
         function getFlatternDistinctPropertiesMap(variations) {
@@ -64,6 +67,64 @@ storefrontApp.controller('productWithVariationsController', ['$scope', '$window'
         function getVariationPropertyMap(variation) {
             return _.groupBy(variation.variationProperties, function (x) { return x.displayName });
         }
+        
+        function getVariationsWithQuantity() {
+          return _.pairs($scope.allVariationsMap).map(x => x[1]).filter(x => !!(+x.quantity));
+        }
 
-        $scope.$watch('filters', initialize);
+        function convertVariationsToAddItems(variations) {
+          return variations.map( x => { return { productId: x.id, quantity: +x.quantity}; });
+        }
+
+        $scope.recalculateTotalPrice = () => {
+          const variationsWithQuantity = getVariationsWithQuantity();
+
+          if (variationsWithQuantity.length === 0) {
+            $scope.totalPrice = getDefaultTotalPrice();
+            return;
+          }
+
+          const items = convertVariationsToAddItems(variationsWithQuantity);
+
+          pricingService.getProductsTotal(items).then( (result) => {
+            $scope.totalPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.formattedAmount : result.data.total.formattedAmount;
+          });
+
+        }
+
+        $scope.hasVariationsWithQuantity = () => {
+          const variationsWithQuantity = getVariationsWithQuantity();
+          return variationsWithQuantity.length > 0;
+        }
+
+        function toDialogDataModel(products, inventoryError) {
+            let productIds = products.map(function(product) {
+                return product.id;
+            });
+            let items = products.map(function(product) {
+                return angular.extend({ }, product, { inventoryError: product.availableQuantity < +product.quantity, quantity: +product.quantity })
+            });
+            return { productIds, items, inventoryError };
+        }
+
+        $scope.addVariationsToCart = function() {
+           const variations = getVariationsWithQuantity();
+
+           var inventoryError = variations.some(product => product.availableQuantity < product.quantity);
+           var dialogData = toDialogDataModel(variations, inventoryError);
+           dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+
+           if (!inventoryError) {
+               var items = convertVariationsToAddItems(variations);
+
+               cartService.addLineItems(items).then(function (response) {
+                   var result = response.data;
+                   if (result.isSuccess) {
+                       $rootScope.$broadcast('cartItemsChanged');
+                   }
+               });
+           }
+        }
+
+        initialize();
     }]);

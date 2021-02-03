@@ -1,5 +1,5 @@
-{% include 'product/type/common/product-title-info' %}
-<div class="row flexible">
+{% include 'product/type/with-variations/product-title-info' %}
+<div class="row flexible" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
     <div class="col-md-3">
         {% include 'product/image' %}
         {% include 'product/compare' %}
@@ -14,7 +14,7 @@
         {% include 'product/variations-panel' %}
     </div>
 
-    <div class="col-md-3" ng-controller="priceController">
+    <div class="col-md-3">
         <div class="panel panel-default price-panel">
             <div class="panel-heading">
                 <div class="row">
@@ -25,11 +25,29 @@
             </div>
             <div class="panel-body">
                 <div class="price-block">
-                  {% assign product = product %}
-                  {% include 'product/price' %}
+                    <dl class="dl-horizontal">
+                        <dt class="text-bold">
+                            <span class="pull-left">
+                                    {{ 'products.variation.total_price' | t }}
+                            </span>
+                        </dt>
+                        <dd>
+                            <span class="pull-right text-bold text-green" ng-bind="totalPrice">
+                            </span>
+                        </dd>
+                    </dl>
                 </div>
 
-                {% include 'product/type/common/product-delivery' %}
+                <div class="delivery-cart">
+                        <button class="btn btn-lg btn-primary btn-block"
+                        title="{{ 'products.general.add_to_cart' | t }}"
+                        ng-click="addVariationsToCart()"
+                        ng-disabled = "!hasVariationsWithQuantity()">
+                            {{ 'products.general.add_to_cart' | t }}
+                        </button>
+                </div>
+
+
                 {% include 'product/type/common/product-action-buttons' %}
 
                 <div>

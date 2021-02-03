@@ -848,7 +848,9 @@
             "sign_in_to_see_price": "Sign in to see the price"
         },
         "variation": {
-            "product_variations": "Product variations"
+            "product_variations": "Product variations",
+            "customize_your_order": "Customize your order",
+            "total_price": "Total price"
         },
         "price": {
             "public": "Web price",

@@ -22,7 +22,6 @@
         </div>
         <div class="hidden-xs hidden-sm col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.item.productId)'>
             <vc-item-availability availability="$ctrl.item.availability"></vc-item-availability>
-            <vc-payment-plan available-payment-plans="$ctrl.availablePaymentPlans" payment-plan="$ctrl.item.paymentPlan"></vc-payment-plan>
         </div>
         <div class="col-xs-3 col-md-2">
             <div class="row nogap d-flex" ng-class="{'align-items-baseline': outOfStockError}">

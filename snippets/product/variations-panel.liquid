@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-12">
-                    <span class="h4">{{ 'products.variation.product_variations' | t }}</span>
+                    <span class="h4">{{ 'products.variation.customize_your_order' | t }}</span>
                 </div>
             </div>
         </div>
@@ -11,9 +11,9 @@
             <div class="panel-body row flex">
                 <div class="variation-img">
                     {% if variant.primary_image %}
-                        <img class="img-responsive" ng-src="{{ variant.primary_image.url | img_url: "46x46" }}" alt="{{ variant.primary_image.alt | escape }}" />
+                        <img class="img-responsive img-thumbnail" ng-src="{{ variant.primary_image.url | img_url: "64x64" }}" fallback-src="{{ variant.primary_image.url | img_url }}"  alt="{{ variant.primary_image.alt | escape }}" />
                     {% else %}
-                        <img class="img-responsive" src="{{ 'no-image.svg' | asset_url }}" />
+                        <img class="img-responsive img-thumbnail" src="{{ 'no-image.svg' | asset_url }}" />
                     {% endif %}
                 </div>
 
@@ -23,22 +23,20 @@
                         <dl class="dl-horizontal">
                             <dt class="text-normal">
                                 <span class="product-pull-left">
-                                    <span>{% raw %}{{ property.name }}{% endraw %}</span>
+                                    <span ng-bind="property.name"></span>
                                 </span>
                             </dt>
 
                             <dd>
                                 <span class="product-pull-right">
-                                <span><strong>{% raw %}{{ property.value }}{% endraw %}</strong></span>
+                                <span><strong ng-bind="property.value"></strong></span>
                                 </span>
                             </dd>
                         </dl>
                     </div>
                     {% if settings.show_prices_with_taxes %}
-                        {% assign price = variant.price_with_tax %}
                         {% include 'product/price' %}
                     {% else %}
-                        {% assign price = variant.price %}
                         {% include 'product/price' %}
                     {% endif %}
                 </div>
@@ -46,7 +44,7 @@
                 <div class="col-md-3 qty-col">
                     <div class="quantity">
                         <label for="qty">Quantity</label>
-                        <input id="qty" class="form-control" />
+                        <input id="qty_{{ variant.id }}" class="form-control" vc-integer ng-model="allVariationsMap['{{ variant.id }}'].quantity" ng-blur="recalculateTotalPrice()"/>
                     </div>
                 </div>
             </div>
