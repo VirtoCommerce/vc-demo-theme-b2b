@@ -17,6 +17,6 @@ jobs:
     steps:
     - name: Get artifact link
       if: ${{ github.event_name == 'pull_request' }}
-      uses: VirtoCommerce/vc-github-actions/get-artifact-link@VDS-414
+      uses: VirtoCommerce/vc-github-actions/create-deploy-pr@VDS-414
       with:
         artifactKey: "B2B_THEME_URL"
