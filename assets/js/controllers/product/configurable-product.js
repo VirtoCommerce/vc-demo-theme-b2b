@@ -93,6 +93,9 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
               $scope.productParts = response.data[0].parts;
               $scope.defaultProductParts = [];
               _.each($scope.productParts, part => {
+                  if (!part.items || !part.items.length) {
+                    return
+                  }
                   $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
                   defaultPartsTotalsObject.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
               });

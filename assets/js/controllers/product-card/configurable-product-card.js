@@ -12,6 +12,9 @@ storefrontApp.controller('configurableProductCardController', ['$scope', 'catalo
               let defaultPartsTotalsObject = [];
               $scope.productParts = response.data[0].parts;
               _.each($scope.productParts, part => {
+                  if (!part.items || !part.items.length) {
+                    return
+                  }
                   defaultPartsTotalsObject.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
               });
               pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
