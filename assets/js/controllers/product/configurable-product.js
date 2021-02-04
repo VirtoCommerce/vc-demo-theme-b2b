@@ -3,6 +3,7 @@ var storefrontApp = angular.module('storefrontApp');
 storefrontApp.controller('configurableProductController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', '$filter', 'roundHelper', 'availabilityService', 'storeCurrency', 'pricingService',
     function ($rootScope, $scope, $window, dialogService, catalogService, cartService, $filter, roundHelper, availabilityService, storeCurrency, pricingService) {
         $scope.configurationQty = 1;
+        $scope.isProductUnavailable = false;
 
         $scope.addSelectedProductsToCart = function() {
             const configuredProductId = $window.product.id;
@@ -92,22 +93,29 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
               $scope.selectedVariation = product;
               $scope.productParts = response.data[0].parts;
               $scope.defaultProductParts = [];
-              _.each($scope.productParts, part => {
+
+              if ($scope.productParts.length) {
+                _.each($scope.productParts, part => {
                   if (!part.items || !part.items.length) {
                     $scope.isProductUnavailable = true;
                     return;
                   }
                   $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
                   defaultPartsTotalsObject.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
-              });
-
-              if (!$scope.isProductUnavailable) {
-                pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
-                  $scope.defaultPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
                 });
+
+                if (!$scope.isProductUnavailable) {
+                  pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
+                    $scope.defaultPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
+                  });
+                } else {
+                  $scope.defaultPrice = 0;
+                }
+
               } else {
                 $scope.defaultPrice = 0;
               }
+
 
               return availabilityService.getProductsAvailability([product.id]).then(res => {
                   $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
