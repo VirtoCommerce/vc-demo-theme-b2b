@@ -37,9 +37,6 @@ storefrontApp.component('vcLineItems', {
         function getConfiguredLineItems(groups) {
             _.each(groups, group => {
                 angular.extend(group, { showConfiguration: false });
-                _.each(group.parts, part => {
-                    part.items = [group.items.find(x => x.id === part.selectedItemId)];
-                });
             });
         }
 

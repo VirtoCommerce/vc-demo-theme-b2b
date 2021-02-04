@@ -24,7 +24,7 @@
             <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}">
 
         {% if product.product_type == "Configurable" %}
-            <ng-controller ng-controller="configurableProductController" ng-init="initProductConfiguration('{{product.id}}')">
+            <ng-controller ng-controller="configurableProductController">
                 {% include 'product/type/configured/product' %}
             </ng-controller>
         {% elsif variants_size != 1 %}

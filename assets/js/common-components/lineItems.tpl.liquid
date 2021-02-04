@@ -59,18 +59,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="part in group.parts" class="border-bottom-light">
-                                <td class="text-center">
-                                    <img alt="{% raw %}{{ part.items[0].name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                            <tr ng-repeat="part in group.items" class="border-bottom-light">
+                                <td class="text-center col-xs-2">
+                                    <img class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
                                 </td>
                                 <td>
-                                    <a ng-href="{% raw %}{{ part.items[0].product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.items[0].name"></a>
+                                    <a ng-href="{% raw %}{{ part.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.name"></a>
                                 </td>
-                                <td ng-bind="part.items[0].quantity" class="text-center"></td>
+                                <td ng-bind="part.quantity" class="text-center"></td>
                             {% if settings.show_prices_with_taxes %}
-                                <td ng-bind="part.items[0].extendedPriceWithTax.formattedAmount" class="text-bold text-right"></td>
+                                <td ng-bind="part.extendedPriceWithTax.formattedAmount" class="text-bold text-right"></td>
                             {% else %}
-                                <td ng-bind="part.items[0].extendedPrice.formattedAmount" class="text-bold text-right"></td>
+                                <td ng-bind="part.extendedPrice.formattedAmount" class="text-bold text-right"></td>
                             {% endif %}
                             </tr>
                         </tbody>

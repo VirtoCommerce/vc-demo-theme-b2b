@@ -10,7 +10,7 @@
         </span>
     </dt>
 
-    <dd>
+    <dd ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
         <span class="product-pull-right">
         <strong ng-bind="getDefaultPrice()"></strong>
         <!-- TODO: Replace with product unit -->

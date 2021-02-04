@@ -1,29 +1,26 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('configurableProductController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', '$filter', 'roundHelper', 'availabilityService', 'storeCurrency',
-    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, $filter, roundHelper, availabilityService, storeCurrency) {
+storefrontApp.controller('configurableProductController', ['$rootScope', '$scope', '$window', 'dialogService', 'catalogService', 'cartService', '$filter', 'roundHelper', 'availabilityService', 'storeCurrency', 'pricingService',
+    function ($rootScope, $scope, $window, dialogService, catalogService, cartService, $filter, roundHelper, availabilityService, storeCurrency, pricingService) {
         $scope.configurationQty = 1;
+        $scope.isProductUnavailable = false;
 
         $scope.addSelectedProductsToCart = function() {
-            var configuredProductId = $window.product.id;
-            var products = $scope.productParts.map(function(part) {
-                return part.items.find(function(item) {
-                    return item.id === part.selectedItemId;
-                });
+            const configuredProductId = $window.product.id;
+            const products = $scope.productParts.map(part => {
+                return part.items.find(item => item.id === part.selectedItemId);
             });
-            var inventoryError = products.some(product => {
-                return product.availableQuantity < $scope.configurationQty;
-            });
-            var dialogData = toDialogDataModel(products, $scope.configurationQty, inventoryError, configuredProductId);
+            const inventoryError = products.some(product => product.availableQuantity < $scope.configurationQty);
+            const dialogData = toDialogDataModel(products, $scope.configurationQty, inventoryError, configuredProductId);
             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
 
             if (!inventoryError) {
-                var items = $scope.productParts.map(function(value) {
+                const items = $scope.productParts.map(value => {
                     return { id: value.selectedItemId, quantity: $scope.configurationQty, configuredProductId: configuredProductId };
                 });
 
-                cartService.addLineItems(items).then(function (response) {
-                    var result = response.data;
+                cartService.addLineItems(items).then(response => {
+                    const result = response.data;
                     if (result.isSuccess) {
                         $rootScope.$broadcast('cartItemsChanged');
                     }
@@ -32,8 +29,8 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
         }
 
         $scope.changeGroupItem = function (productPart) {
-            var dialogInstance = dialogService.showDialog(productPart, 'changeConfigurationGroupItemDialogController', 'storefront.select-configuration-item-dialog.tpl');
-            dialogInstance.result.then(function (id) {
+            const dialogInstance = dialogService.showDialog(productPart, 'changeConfigurationGroupItemDialogController', 'storefront.select-configuration-item-dialog.tpl');
+            dialogInstance.result.then(id => {
                 const foundIndex = $scope.productParts.findIndex(x => x.name === productPart.name);
                 $scope.productParts[foundIndex].selectedItemId = id;
                 recalculateTotals();
@@ -46,7 +43,7 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
         }
 
         $scope.getCurrentTotal = function() {
-            var total;
+            let total;
 
             if ($scope.updatedTotal) {
                 total = roundHelper.bankersRound($scope.updatedTotal * $scope.configurationQty);
@@ -76,50 +73,66 @@ storefrontApp.controller('configurableProductController', ['$rootScope', '$scope
         }
 
         function toDialogDataModel(products, quantity, inventoryError, configuredProductId) {
-            let productIds = products.map(function(product) {
+            const productIds = products.map(product => {
                 return product.id;
             });
-            let items = products.map(function(product) {
+            const items = products.map(product => {
                 return angular.extend({ }, product, { quantity: +quantity, inventoryError: product.availableQuantity < quantity, configuredProductId: configuredProductId })
             });
             return { productIds, items, inventoryError, configuredProductId, configurationQty: quantity };
         }
 
         function initialize() {
-          var product = $window.product;
+          let product = $window.product;
           if (!product) {
               return;
           }
-          catalogService.getProduct([product.id]).then(function (response) {
+          catalogService.getProduct([product.id]).then(response => {
+              let defaultPartsTotalsObject = [];
               product = response.data[0];
               $scope.selectedVariation = product;
+              $scope.productParts = response.data[0].parts;
+              $scope.defaultProductParts = [];
 
-              return availabilityService.getProductsAvailability([product.id]).then(function(res) {
+              if ($scope.productParts.length) {
+                _.each($scope.productParts, part => {
+                  if (!part.items || !part.items.length) {
+                    $scope.isProductUnavailable = true;
+                    return;
+                  }
+                  $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+                  defaultPartsTotalsObject.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
+                });
+
+                if (!$scope.isProductUnavailable) {
+                  pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
+                    $scope.defaultPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
+                  });
+                } else {
+                  $scope.defaultPrice = 0;
+                }
+
+              } else {
+                $scope.defaultPrice = 0;
+              }
+
+
+              return availabilityService.getProductsAvailability([product.id]).then(res => {
                   $scope.availability = _.object(_.pluck(res.data, 'productId'), res.data);
               });
           });
         }
 
         function recalculateTotals() {
-            $scope.selectedProductParts = [];
-            _.each($scope.productParts, function (part) {
-                $scope.selectedProductParts.push(part.items.find(x => x.id === part.selectedItemId));
+            let selectedProductParts = [];
+            _.each($scope.productParts, part => {
+              selectedProductParts.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
             });
-            $scope.updatedTotal = roundHelper.bankersRound($scope.selectedProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
-            $scope.totalDifference = roundHelper.bankersRound(Math.abs($scope.updatedTotal - $scope.defaultPrice));
-            $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
-                                    ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
-        }
-
-        $scope.initProductConfiguration = function(productId) {
-            catalogService.getProductConfiguration(productId).then(function(response) {
-                $scope.productParts = response.data;
-                $scope.defaultProductParts = [];
-                _.each($scope.productParts, function (part) {
-                    $scope.defaultProductParts.push(part.items.find(x => x.id === part.selectedItemId));
-                });
-
-                $scope.defaultPrice = roundHelper.bankersRound($scope.defaultProductParts.reduce((prev, cur) => prev + cur.price.actualPrice.amount, 0));
+            pricingService.getProductsTotal(selectedProductParts).then(result => {
+              $scope.updatedTotal = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
+              $scope.totalDifference = Math.abs($scope.updatedTotal - $scope.defaultPrice);
+              $scope.differenceSign = ($scope.updatedTotal === $scope.defaultPrice) ? '' :
+                                      ($scope.updatedTotal > $scope.defaultPrice) ? '+' : '-';
             });
         }
 
