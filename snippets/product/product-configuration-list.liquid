@@ -1,5 +1,5 @@
 {% if product.product_type == "Configurable" %}
-    <div class="panel panel-default" ng-if="productParts">
+    <div class="panel panel-default" ng-if="productParts && productParts.length">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-12">
