@@ -13,13 +13,20 @@ storefrontApp.controller('configurableProductCardController', ['$scope', 'catalo
               $scope.productParts = response.data[0].parts;
               _.each($scope.productParts, part => {
                   if (!part.items || !part.items.length) {
-                    return
+                    $scope.isProductUnavailable = true;
+                    return;
                   }
                   defaultPartsTotalsObject.push({id: part.items.find(x => x.id === part.selectedItemId).id, quantity: 1});
               });
-              pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
-                $scope.defaultPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
-              });
+
+              if (!$scope.isProductUnavailable) {
+                pricingService.getProductsTotal(defaultPartsTotalsObject).then(result => {
+                  $scope.defaultPrice = $scope.showPricesWithTaxes ? result.data.totalWithTax.amount : result.data.total.amount;
+                });
+              } else {
+                $scope.defaultPrice = 0;
+              }
+
           });
         }
 
