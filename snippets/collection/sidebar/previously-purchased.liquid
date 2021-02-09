@@ -1,0 +1,29 @@
+{% assign tag_checked = current_product_search_criteria.is_select_only_purchased_products %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">
+            {{ 'collections.sidebar.previously_purchased' | t }}
+        </div>
+    </div>
+    <div class="panel-collapse collapse in" role="tabpanel">
+        <div class="panel-body">
+            <div class="checkbox">
+                {% if tag_checked %}
+                    <li class="checkbox advanced-filter active-filter">
+                        {% assign reversed_value = 'false' %}
+                {% else %}
+                    <li class="checkbox advanced-filter">
+                        {% assign reversed_value = 'true' %}
+                {% endif %}
+                        <label>
+                            <input type="checkbox" ng-checked="{{ tag_checked }}">
+                            <a vc-query-source="{ select_only_purchased_products: ['{{reversed_value}}'] }" switchable="false">
+                                <span class="switch"></span>
+                                <span class="name">{{ 'collections.sidebar.previously_purchased_label' | t }}</span>
+                            </a>
+                        </label>
+                    </li>
+            </div>
+        </div>
+    </div>
+</div>
