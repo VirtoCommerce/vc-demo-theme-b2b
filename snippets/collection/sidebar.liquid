@@ -2,7 +2,9 @@
     {% include 'collection/sidebar/applied-filters' %}
     {% include 'collection/sidebar/keyword' %}
     {% if customer and customer.is_registered_user %}
-        {% include 'collection/sidebar/previously-purchased' %}
+        {% unless customer.is_first_time_buyer %}
+            {% include 'collection/sidebar/previously-purchased' %}
+        {% endunless %}
     {% endif %}
     <filter-by-fulfillment-center-widget></filter-by-fulfillment-center-widget>
 </uib-accordion>
