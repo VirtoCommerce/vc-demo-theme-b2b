@@ -42,6 +42,12 @@ storefrontApp.service('searchQueryService', ['$location', function ($location) {
         },
 
         merge: function (searchQuery, changes, switchable) {
+
+            // Rewind page if filter is selected
+            if (searchQuery.hasOwnProperty('page')) {
+              delete searchQuery['page'];
+            }
+
             if (!switchable) {
                 return _.extend(searchQuery, changes);
             } else {
@@ -76,7 +82,7 @@ storefrontApp.service('searchQueryService', ['$location', function ($location) {
             }
         },
 
-        // Serializes search query objects like { view: ['list'], terms: { Color: ["Black, "Red"], Brand: ["VirtoCommerce", "Microsoft"] } }  to string 
+        // Serializes search query objects like { view: ['list'], terms: { Color: ["Black, "Red"], Brand: ["VirtoCommerce", "Microsoft"] } }  to string
         serialize: function (searchQuery, defaults) {
             var serializeValues = function (values) {
                 return values.join(',');
