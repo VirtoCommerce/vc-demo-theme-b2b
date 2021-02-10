@@ -1,10 +1,8 @@
 <uib-accordion close-others="false" ng-init="filters = { terms: undefined }" vc-query-target="filters">
     {% include 'collection/sidebar/applied-filters' %}
     {% include 'collection/sidebar/keyword' %}
-    {% if customer and customer.is_registered_user %}
-        {% unless customer.is_first_time_buyer %}
-            {% include 'collection/sidebar/previously-purchased' %}
-        {% endunless %}
+    {% if customer and customer.is_registered_user and customer.is_first_time_buyer != true %}
+        {% include 'collection/sidebar/previously-purchased' %}
     {% endif %}
     <filter-by-fulfillment-center-widget></filter-by-fulfillment-center-widget>
 </uib-accordion>
