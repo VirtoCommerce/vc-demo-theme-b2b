@@ -83,3 +83,6 @@ $RECYCLE.BIN/
 .DS_Store
 wwwroot/lib
 assets/static/bundle
+
+# Page Builder
+config/drafts

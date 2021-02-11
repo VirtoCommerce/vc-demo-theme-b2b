@@ -1,57 +1,76 @@
+{% include 'blocks/helpers/hide-criteria' %}
 {% include 'blocks/helpers/cover-style' %}
-<div id="{{ block.__id }}" style="position: relative;">
-    <div class="{% include 'blocks/helpers/block-paddings' %} block block-cover"
-        {% if block.background != '' and block.background.url != '' %} style="background-image: url({{ block.background.url | strip_start '/' }})" {% endif %}>
 
-        <div class="container cover-container">
-            <div class="d-flex flex-column align-items-center row">
-                <div class="text-center align-self-center {{ block.textAreaWidth }}">
-                    {% include 'blocks/helpers/cover-text' %}
+<div id="{{ block.__id }}"
+     class="{% if block.fullWidth == 'True' %}
+                container-fluid w-auto mx-md-4
+            {% else %}
+                container-md
+            {% endif %}
+            {% if hideBlock == true %}
+              d-none
+            {% endif %}"
+     style="{% include 'blocks/helpers/block-margins' %}">
+    <div class="block row position-relative justify-content-center align-items-center"
+         style="{% include 'blocks/helpers/block-inner-paddings' %}
+                {% if block.background != empty and block.background.url != '' %}
+                    background-image: url({{ block.background.url | strip_start: '/' }});
+                {% endif %}">
+        <div class="{{ block.textAreaWidth }} text-center ">
+            {% if block.note %}
+                <div class="note h2 text-muted mb-3">
+                    {{ block.note }}
                 </div>
-            </div>
+            {% endif %}
+
+            {% if block.title %}
+                <div class="mb-4 mb-md-3">
+                    {% include 'blocks/helpers/block-title' %}
+                </div>
+            {% endif %}
+
+            {% if block.subtitle %}
+                <div class="subtitle lead font-weight-bold mb-5">
+                    {{ block.subtitle }}
+                </div>
+            {% endif %}
+            
+            {% assign button = block.firstButton %}
+            {% include 'blocks/helpers/button' %}
+
+            <div class="w-100 d-md-none"></div>
+
+            {% if block.secondButton and block.secondButton.urlText and block.secondButton.urlText != '' %}
+                <div class="d-inline-block d-block-md w-100 w-md-auto mt-4 mt-md-0 
+                            {% if block.firstButton and block.firstButton.urlText and block.firstButton.urlText != '' %}
+                                ml-md-4
+                            {% endif %}">
+                    {% assign button = block.secondButton %}
+                    {% include 'blocks/helpers/button' %}
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
-
-{% comment %}
-
-__id: string (unique block id)
-
-name: string
-headerType: [ h1, h2, h3, like-h1, like-h2, like-h3 ]
-noTop: bool
-noBottom: bool
-
-formId: string
-formName: string
-formSubmitRedirectUrl: string
-formSubmitButtonStyle: string (bootstrap buttons styles)
-formFields: object[]{
-    fieldType: string (button, checkbox, email, hidden, phone, radio, select, text, textarea)
-    fieldName: string
-    fieldId: string
-    labelText: string
-    placeholder: string
-    fieldValue: string
-    required: bool
-    validationMessage: string
-    radioListItems: object[] {
-        title: string
-        text: string
-        id: string
-        value: string
-        isChecked: bool
-        isDisabled: bool
+<style>
+@media (min-width: 1200px) {
+    #{{ block.__id }} .block {
+        min-height: 645px;
     }
-    selectOptions: object[] {
-        label: string
-        value: string
-        isSelected: bool
-        isDisabled: bool
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+    #{{ block.__id }} .block {
+        min-height: 515px;
     }
-showFormLabels: bool
-firstButton: object (url, text, style [ bootstrap buttons styles ], openInNewTab [True, False]),
-secondButton: object (url, text, style [ bootstrap buttons styles ], openInNewTab [True, False]),
-
-{% endcomment %}
-
+}
+@media (min-width: 576px) and (max-width: 992px) {
+    #{{ block.__id }} .block {
+        min-height: 778px;
+    }
+}
+@media (max-width: 576px) {
+    #{{ block.__id }} .block {
+        min-height: 672px;
+    }
+}
+<style>

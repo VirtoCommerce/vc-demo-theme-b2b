@@ -1,6 +1,6 @@
 <div class="px-6 {% if block.centerText != 'False' %} align-self-center {% endif %} {{ block.textColumnWidth }}">
     {% if block.note %}
-        <div class="text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
+        <div class="note text-muted h4" {% if block.noteColor != '' %} style="color: {{block.noteColor}};" {% endif %}>{{ block.note }}</div>
     {% endif %}
 
     {% if block.title %}
@@ -8,8 +8,7 @@
     {% endif %}
 
     {% if block.subtitle %}
-        <div class="subtitle-container text-condensed" style="font-size: 1.1rem;"> {{ block.subtitle }} </div>
-
+        <div class="subtitle text-condensed" style="font-size: 1.1rem;"> {{ block.subtitle }} </div>
     {% endif %}
 
     {% if (block.firstButton and block.firstButton.urlText) or (block.secondButton and block.secondButton.urlText) %}
