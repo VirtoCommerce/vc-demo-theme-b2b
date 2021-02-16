@@ -1,0 +1,35 @@
+
+<dl class="d-flex justify-content-between">
+    <dt>
+        <span class="text-helvetica font-weight-normal text-gray-600 fs-13">
+            {% if customer %}
+                {{ 'products.price.private' | t }}
+            {% else %}
+                {{ 'products.price.public' | t }}
+            {% endif %}
+        </span>
+    </dt>
+
+    <dd class="font-weight-bold">
+        <span class="text-dark-green">
+            {% if variant != null %}
+                {% assign productOrVariant = variant %}
+            {% else %}
+                {% assign productOrVariant = product %}
+            {% endif %}
+            {% if settings.show_prices_with_taxes %}
+                {% assign price = productOrVariant.price_with_tax %}
+                {% include 'bootstrap-migration/product/price/static' %}
+                {% assign price_name = 'actualPriceWithTax' %}
+                {% include 'bootstrap-migration/product/price/dynamic' %}
+            {% else %}
+                {% assign price = productOrVariant.price %}
+                {% include 'bootstrap-migration/product/price/static' %}
+                {% assign price_name = 'actualPrice' %}
+                {% include 'bootstrap-migration/product/price/dynamic' %}
+            {% endif %}
+            <!-- TODO: Replace with product unit -->
+            <span>/ each</span>
+        </span>
+    </dd>
+</dl>

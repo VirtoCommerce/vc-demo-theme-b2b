@@ -1,0 +1,45 @@
+{% include 'bootstrap-migration/product/type/common/product-title-info' %}
+<div class="row">
+    <div class="col-md-3">
+        {% include 'bootstrap-migration/product/image' %}
+        {% include 'bootstrap-migration/product/compare' %}
+        {% include 'bootstrap-migration/product/product-compare-list-bar' %}
+    </div>
+
+    <div class="col-md-6">
+        {% if product.properties.size > 0 %}
+            {% include 'bootstrap-migration/product/type/common/product-properties' %}
+            {% include 'bootstrap-migration/product/type/common/product-description' %}
+        {% endif %}
+    </div>
+
+    <div class="col-md-3" ng-controller="priceController">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="h4">Price & delivery</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0">
+                <div class="price-block border-bottom px-3 mb-3">
+                  {% assign product = product %}
+                  {% include 'bootstrap-migration/product/price' %}
+                </div>
+
+                {% include 'bootstrap-migration/product/type/common/product-delivery' %}
+                {% include 'bootstrap-migration/product/type/common/product-action-buttons' %}
+
+                <div>
+                    <!-- TODO: MIGRATE THIS COMPONENT TEMPLATE! -->
+                    <vc-shipping-type-migration is-dropdown="false" pickup-method-code="{{ settings.pickup_shipping_method }}"></vc-shipping-type-migration>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include 'bootstrap-migration/product/type/common/related-products' %}
+
+</div>

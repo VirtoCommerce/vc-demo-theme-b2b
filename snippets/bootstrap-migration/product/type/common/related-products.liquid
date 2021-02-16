@@ -1,0 +1,10 @@
+<div ng-show="relatedProducts.item.count" class="col-md-9">
+    <div class="card">
+        <div class="card-header">
+            <span class="h4">{{ 'products.general.related_products' | t }}</span>
+        </div>
+        <div class="card-body">
+            <vc-related-products-migration product-ids="['{{ product.id }}']" responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }" on-update="relatedProducts = $event"></vc-related-products-migration>
+        </div>
+    </div>
+</div>

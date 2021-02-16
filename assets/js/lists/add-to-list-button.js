@@ -1,11 +1,6 @@
-﻿angular.module('storefrontApp')
-	.component('addToListButton', {
-		templateUrl: 'themes/assets/js/lists/add-to-list-button.tpl.html',
-		bindings: {
-			selectedVariation: '<'
-		},
-        controller: ['accountApi', 'dialogService', 'listsApi', 'customerService', function (accountApi, dialogService, listsApi, customerService) {
-			var $ctrl = this;
+﻿addToListButtonController.$inject = ['accountApi', 'dialogService', 'listsApi', 'customerService'];
+function addToListButtonController(accountApi, dialogService, listsApi, customerService) {
+    var $ctrl = this;
 			$ctrl.$onInit = function () {
 				compareProductInLists();
 			}
@@ -52,6 +47,22 @@
             $ctrl.signInToProceed = function() {
                 dialogService.showDialog({ title: 'Add product to list...' }, 'universalDialogController', 'storefront.sign-in-to-proceed.tpl');
             }
+}
 
-		}]
-	})
+var storefrontApp = angular.module('storefrontApp');
+storefrontApp.component('addToListButton', {
+  templateUrl: "themes/assets/js/lists/add-to-list-button.tpl.html",
+  bindings: {
+    selectedVariation: '<'
+  },
+  controller: addToListButtonController
+});
+
+var storefrontApp = angular.module('storefrontApp');
+storefrontApp.component('addToListButtonMigration', {
+  templateUrl: "themes/assets/js/bootstrap-migration/lists/add-to-list-button.tpl.html",
+  bindings: {
+    selectedVariation: '<'
+  },
+  controller: addToListButtonController
+});
