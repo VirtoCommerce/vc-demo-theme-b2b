@@ -58,7 +58,6 @@ storefrontApp.component('addToListButton', {
   controller: addToListButtonController
 });
 
-var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('addToListButtonMigration', {
   templateUrl: "themes/assets/js/bootstrap-migration/lists/add-to-list-button.tpl.html",
   bindings: {
