@@ -29,7 +29,7 @@
             </ng-controller>
         {% elsif variants_size != 1 %}
             <ng-controller ng-controller="productWithVariationsController">
-                {% include 'product/type/with-variations/product' %}
+                {% include 'bootstrap-migration/product/type/with-variations/product' %}
             </ng-controller>
         {% else %}
             <ng-controller ng-controller="productWithoutVariationsController">

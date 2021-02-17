@@ -1,5 +1,5 @@
-{% include 'bootstrap-migration/product/type/common/product-title-info' %}
-<div class="row">
+{% include 'bootstrap-migration/product/type/with-variations/product-title-info' %}
+<div class="row" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
     <div class="col-md-3 mb-3 mb-md-0">
         {% include 'bootstrap-migration/product/image' %}
         {% include 'bootstrap-migration/product/compare' %}
@@ -11,10 +11,10 @@
             {% include 'bootstrap-migration/product/type/common/product-properties' %}
             {% include 'bootstrap-migration/product/type/common/product-description' %}
         {% endif %}
+        {% include 'bootstrap-migration/product/variations-panel' %}
     </div>
 
-    <div class="col-md-3 mb-3 mb-md-0" ng-controller="priceController">
-
+    <div class="col-md-3 mb-3 mb-md-0">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -24,12 +24,29 @@
                 </div>
             </div>
             <div class="card-body px-0">
-                <div class="border-bottom px-3 pb-3 mb-3">
-                  {% assign product = product %}
-                  {% include 'bootstrap-migration/product/price' %}
+                <div class="border-bottom px-3">
+                    <dl class="d-flex justify-content-between">
+                        <dt>
+                            <span class="text-helvetica">
+                                    {{ 'products.variation.total_price' | t }}
+                            </span>
+                        </dt>
+                        <dd class="font-weight-bold text-dark-green">
+                            <span ng-bind="totalPrice"></span>
+                        </dd>
+                    </dl>
                 </div>
 
-                {% include 'bootstrap-migration/product/type/common/product-delivery' %}
+                <div class="delivery-cart m-3">
+                        <button class="btn btn-lg btn-primary btn-block"
+                        title="{{ 'products.general.add_to_cart' | t }}"
+                        ng-click="addVariationsToCart()"
+                        ng-disabled = "!hasVariationsWithQuantity()">
+                            {{ 'products.general.add_to_cart' | t }}
+                        </button>
+                </div>
+
+
                 {% include 'bootstrap-migration/product/type/common/product-action-buttons' %}
 
                 <div>
