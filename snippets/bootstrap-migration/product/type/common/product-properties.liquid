@@ -15,7 +15,7 @@
                 {% if should_start_row %}
                     <tr>
                 {% endif %}
-                    <td><span class="text-muted">{{ property.name }}</span></td>
+                    <th scope="row" class="font-weight-normal"><span class="text-muted">{{ property.name }}</span></th>
                     <td><strong>{{ property.value }}</strong></td>
                 {% if should_end_row %}
                     </tr>
