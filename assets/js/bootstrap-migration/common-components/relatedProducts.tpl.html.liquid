@@ -17,13 +17,13 @@
               <div class="m-2" ng-repeat="product in $ctrl.products">
                   <a class="unstyled" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}">
                       <img ng-if="product.primaryImage.url"
-                           class="img-responsive img-thumbnail mx-auto my-3 p-3"
+                           class="img-fluid img-thumbnail mx-auto my-3 p-3"
                            ng-class="'img-' + $ctrl.imageSize"
                            ng-src="{% raw %}{{ product.primaryImage.url | imgurl: '308x308' }}{% endraw %}"
                            fallback-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}"
                            alt="product.primaryImage.alt"/>
                       <img ng-if="!product.primaryImage.url"
-                           class="img-responsive img-thumbnail mx-auto my-3 p-3"
+                           class="img-fluid img-thumbnail mx-auto my-3 p-3"
                            ng-class="'img-' + $ctrl.imageSize"
                            alt="No image"
                            src="{{ 'no-image.svg' | asset_url }}" />

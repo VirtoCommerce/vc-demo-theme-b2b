@@ -12,9 +12,9 @@
                 <div class="row">
                     <div class="col">
                         {% if variant.primary_image %}
-                            <img class="img-responsive img-thumbnail" ng-src="{{ variant.primary_image.url | img_url: "64x64" }}" fallback-src="{{ variant.primary_image.url | img_url }}"  alt="{{ variant.primary_image.alt | escape }}" />
+                            <img class="img-fluid img-thumbnail" ng-src="{{ variant.primary_image.url | img_url: "64x64" }}" fallback-src="{{ variant.primary_image.url | img_url }}"  alt="{{ variant.primary_image.alt | escape }}" />
                         {% else %}
-                            <img class="img-responsive img-thumbnail" src="{{ 'no-image.svg' | asset_url }}" alt="No image" />
+                            <img class="img-fluid img-thumbnail" src="{{ 'no-image.svg' | asset_url }}" alt="No image" />
                         {% endif %}
                     </div>
                     <div class="col-md-7">
