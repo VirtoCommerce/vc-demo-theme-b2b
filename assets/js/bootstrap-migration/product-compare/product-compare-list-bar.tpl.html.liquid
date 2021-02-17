@@ -11,7 +11,7 @@
                 <div class="col-md-4 text-center border-left border-gray-700">
                     <a href class="text-white" ng-click="$ctrl.showBody()">
                         <span ng-bind="$ctrl.showBodyText"></span>
-                        <i ng-class="$ctrl.showBodyIcon"></i>
+                        <i ng-class="$ctrl.showBodyIcon" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                         <a class="d-inline-block mr-1 position-relative" ng-href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}">
                             <img ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" alt="" class="list-pic border border-gray-300">
                             <a href="#" ng-click="$ctrl.removeProduct(product)">
-                                <i class="list-remove position-absolute fa fa-times-circle"></i>
+                                <i class="list-remove position-absolute fa fa-times-circle" aria-hidden="true"></i>
                             </a>
                         </a>
                         <div>

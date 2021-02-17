@@ -8,7 +8,7 @@
             <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.prev()"
                     ng-disabled="$ctrl.data.item.count <= $ctrl.data.page.size">
-              <i class="fa fa-angle-left fa-2x mr-1"></i>
+              <i class="fa fa-angle-left fa-2x mr-1" aria-hidden="true"></i>
             </button>
         </div>
         <div class="col-10 px-0">
@@ -25,6 +25,7 @@
                       <img ng-if="!product.primaryImage.url"
                            class="img-responsive img-thumbnail mx-auto my-3 p-3"
                            ng-class="'img-' + $ctrl.imageSize"
+                           alt="No image"
                            src="{{ 'no-image.svg' | asset_url }}" />
                   </a>
                   <a class="text-truncate" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}"><strong ng-bind="product.title"></strong></a>
@@ -37,7 +38,7 @@
             <button class="btn btn-alt btn-primary px-3 py-0"
                     ng-click="$ctrl.next()"
                     ng-disabled="$ctrl.data.item.count <= $ctrl.data.page.size">
-              <i class="fa fa-angle-right fa-2x ml-1"></i>
+              <i class="fa fa-angle-right fa-2x ml-1" aria-hidden="true"></i>
             </button>
         </div>
     </div>
