@@ -3,7 +3,7 @@
 <div ng-if="!loader.isLoading"
      ng-init="responseGroup = '{{ '?resp_group=' | append: response_group }}'"
      class="related-products">
-    <div class="row d-flex align-items-center text-center">
+    <div class="row align-items-center text-center">
         <div class="col-1 px-0 pb-5">
             <button class="btn btn-outline-primary px-2 py-0"
                     ng-click="$ctrl.prev()"
@@ -15,7 +15,7 @@
             <div class="owl-carousel owl-theme"
                  ng-class="{ 'owl-hidden': !$ctrl.ready }">
               <div class="m-2" ng-repeat="product in $ctrl.products">
-                  <a class="unstyled" href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}">
+                  <a href="{% raw %}{{ $ctrl.getUrl(product.url + responseGroup) }}{% endraw %}">
                       <img ng-if="product.primaryImage.url"
                            class="img-fluid img-thumbnail mx-auto my-3 p-3"
                            ng-class="'img-' + $ctrl.imageSize"
