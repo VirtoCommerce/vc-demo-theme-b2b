@@ -1,6 +1,6 @@
 <div class="border-top pt-3">
     <ul class="list-inline px-3 mb-0">
-        <li class="list-inline-item">
+        <li class="list-inline-item" ng-hide="!customer.isRegisteredUser">
             <add-to-list-button-migration selected-variation="selectedVariation"></add-to-list-button-migration>
         </li>
         <li ng-controller="commonProductCardController" class="list-inline-item">
