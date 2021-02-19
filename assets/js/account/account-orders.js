@@ -1,6 +1,8 @@
 angular.module('storefront.account')
     .component('vcAccountOrders', {
-        templateUrl: "themes/assets/js/account/account-orders.tpl.liquid",
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders.tpl.liquid");
+        }],
         controller: [function () {
             var $ctrl = this;
         }]
