@@ -13,30 +13,38 @@
                 <div class="row">
                     <ul class="nav nav-pills nav-stacked left-nav">
                         <li ui-sref-active="active">
-                            <a ui-sref="dashboard">{{ 'customer.account.menu_label.dashboard' | t }}</a>
+                            <!-- <a ui-sref="dashboard">{{ 'customer.account.menu_label.dashboard' | t }}</a> -->
+                            <a href="{{ 'account#/' | absolute_url }}">{{ 'customer.account.menu_label.dashboard' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="orders.list">{{ 'customer.account.menu_label.orders' | t }}</a>
+                            <!-- <a ui-sref="orders.list">{{ 'customer.account.menu_label.orders' | t }}</a> -->
+                            <a href="{{ 'account#/orders/' | absolute_url }}">{{ 'customer.account.menu_label.orders' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="profile">{{ 'customer.account.menu_label.profile' | t }}</a>
+                            <!-- <a ui-sref="profile">{{ 'customer.account.menu_label.profile' | t }}</a> -->
+                            <a href="{{ 'account#/profile/' | absolute_url }}">{{ 'customer.account.menu_label.profile' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="addresses">{{ 'customer.account.menu_label.addresses' | t }}</a>
+                            <!-- <a ui-sref="addresses">{{ 'customer.account.menu_label.addresses' | t }}</a> -->
+                            <a href="{{ 'account#/addresses/' | absolute_url }}">{{ 'customer.account.menu_label.addresses' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="passwordChange">{{ 'customer.account.menu_label.change_password' | t }}</a>
+                            <!-- <a ui-sref="passwordChange">{{ 'customer.account.menu_label.change_password' | t }}</a> -->
+                            <a href="{{ 'account#/changePassword/' | absolute_url }}">{{ 'customer.account.menu_label.change_password' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a>
+                            <!-- <a ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a> -->
+                            <a href="{{ 'account#/lists/' | absolute_url }}">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                         </li>
                         {% if shop.quotes_enabled %}
                         <li ui-sref-active="active">
-                            <a ui-sref="quotes">{{ 'customer.account.menu_label.quotes' | t }}</a>
+                            <!-- <a ui-sref="quotes">{{ 'customer.account.menu_label.quotes' | t }}</a> -->
+                            <a href="{{ 'account#/quotes/' | absolute_url }}">{{ 'customer.account.menu_label.quotes' | t }}</a>
                         </li>
                         {% endif %}
                         <li ui-sref-active="active">
-                            <a ui-sref="checkoutDefaults">Checkout Details</a>
+                            <!-- <a ui-sref="checkoutDefaults">Checkout Details</a> -->
+                            <a href="{{ 'account#/checkoutDefaults/' | absolute_url }}">Checkout Details</a>
                         </li>
                     </ul>
                 </div>
