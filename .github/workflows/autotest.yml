@@ -1,17 +1,18 @@
 name: B2B E2E
 on:
   workflow_dispatch:
-    inputs:
-      testSuite:
-        description: "Test Suite"
-        required: false
-        default: "Test Suites/B2B"
+  pull_request:
+    branches:
+      [master, dev]
 
 jobs:
-  publish:
+  autotests:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Get Image Version
         uses: VirtoCommerce/vc-github-actions/get-image-version@master
@@ -19,7 +20,6 @@ jobs:
 
       - name: Build
         id: build
-        if: ${{ github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.event_name == 'workflow_dispatch' }}
         uses: VirtoCommerce/vc-github-actions/build-theme@master
         with:
           versionSuffix:  ${{ env.VERSION_SUFFIX }}
@@ -31,37 +31,55 @@ jobs:
           username: $GITHUB_ACTOR
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Docker Env
-        uses: VirtoCommerce/vc-github-actions/docker-env@master
-        with:
-          githubUser: ${{ env.GITHUB_ACTOR }}
-          githubToken: ${{ env.GITHUB_TOKEN }}
+      - name: Start Containers
+        uses: VirtoCommerce/vc-github-actions/docker-start-environment@master
+        with: 
           platformImage: docker.pkg.github.com/virtocommerce/vc-platform/platform
-          storefrontImage: docker.pkg.github.com/virtocommerce/vc-storefront/storefront
-          validateSwagger: 'false'
+          platformDockerTag: 3.35.0-master-d0f77ea9
+          storefrontImage: docker.pkg.github.com/virtocommerce/vc-demo-storefront/demo-storefront
+          storefrontDockerTag: 1.8.0-master-29a8325e
+
+      - name: Restore Dump
+        uses: VirtoCommerce/vc-github-actions/docker-restore-dump@master
+        with:
+          dumpUrl: 'https://devdemovc3.blob.core.windows.net/demosd/qa3.sql'
+
+      - name: Install Modules
+        uses: VirtoCommerce/vc-github-actions/docker-install-modules@master
+        with:
+          githubToken: ${{ secrets.REPO_TOKEN }}
+          manifestUrl: 'https://raw.githubusercontent.com/VirtoCommerce/vc-webstore-deploy/qa/webstore-app/resources/deployment-cm.yaml'
+          manifestFormat: 'yml'
+          containerName: 'virtocommerce_vc-platform-web_1'
+          containerDestination: '/opt/virtocommerce/platform/modules'
+          sleepAfterRestart: '90000'
+
+      - name: Check Installed Modules
+        uses: VirtoCommerce/vc-github-actions/docker-check-modules@master
 
       - name: Install Theme
-        uses: VirtoCommerce/vc-github-actions/docker-install-theme@VP-6710
+        uses: VirtoCommerce/vc-github-actions/docker-install-theme@master
         with:
           artifactPath: ${{ steps.build.outputs.artifactPath }}
-          containerName: 'virtocommerce_vc-platform-web_1'
-          containerDestination: '/opt/virtocommerce/platform/wwwroot/cms-content/Themes/default'
+          containerName: 'virtocommerce_vc-storefront-web_1'
+          containerDestination: '/opt/virtocommerce/storefront/wwwroot/cms-content/Themes/B2B-store/default'
+          restartContainer: 'true'
 
       - name: Getting tests
         shell: sh
-        run: git clone https://github.com/VirtoCommerce/vc-quality-gate-katalon.git
+        run: git clone https://github.com/VirtoCommerce/vc-quality-gate-katalon.git --branch dev
 
       - name: Katalon Studio Github Action
-        uses: katalon-studio/katalon-studio-github-action@v2.2
+        uses: krankenbro/katalon-studio-github-action@master
         with:
-          version: '7.5.5'
+          version: '7.7.2'
           projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
-          args: '-noSplash -retry=0 -testSuitePath="${{ github.event.inputs.testSuite }}" -browserType="Chrome" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090" -g_urlFront="http://localhost:8080" -executionProfile="default"' 
+          args: '-noSplash -retry=0 -testSuiteCollectionPath="B2B-Collection" -browserType="Chrome (headless)" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090" -g_urlFront="http://localhost:8080/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
 
-      - name: Katalon Report
-        if: ${{ success() || failure() }}
-        uses: VirtoCommerce/vc-github-actions/publish-katalon-report@master
-        with: 
-          testProjectPath: ${{ github.workspace }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          publishComment: 'false'
+      - name: 'Katalon Reports'
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: reports
+          path: vc-quality-gate-katalon/Reports
+          retention-days: 5
