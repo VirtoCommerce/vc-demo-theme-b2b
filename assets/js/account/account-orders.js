@@ -8,7 +8,9 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrdersList', {
-        templateUrl: "themes/assets/js/account/account-orders-list.tpl",
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders-list.tpl");
+        }],
         controller: ['accountApi',
         'loadingIndicatorService',
         '$window',
