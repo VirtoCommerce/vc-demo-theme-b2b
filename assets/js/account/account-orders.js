@@ -8,7 +8,7 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrdersList', {
-        templateUrl: "account-orders-list.tpl",
+        templateUrl: "themes/assets/js/account/account-orders-list.tpl",
         controller: ['accountApi',
         'loadingIndicatorService',
         '$window',
@@ -86,7 +86,7 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrderDetail', {
-        templateUrl: "account-order-detail.tpl",
+        templateUrl: "themes/assets/js/account/account-order-detail.tpl",
         require: {
             accountManager: '^vcAccountManager'
         },
