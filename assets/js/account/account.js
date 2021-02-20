@@ -181,8 +181,8 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
                 return templateUrl;
             }
 
-            templateUrl.replace('/account/', '/account/b4/');
-            return "/themes/assets/js/account/b4/account-manager.tpl"
+            var result = templateUrl.replace('/account/', '/account/b4/');
+            return result;
         };
     }])
 
