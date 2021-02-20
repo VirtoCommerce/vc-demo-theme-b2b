@@ -8,11 +8,14 @@
     }
   }
 }
-
 .vertical-menu {
-  .nav-link {
-    font-weight: bold;
-    padding-left: 0.75rem;
+  .item-active {
+    .nav-link {
+      font-weight: bold;
+      padding-left: 0.75rem;
+    }
+  }
+  .nav-link:hover {
+    background-color: $gray-200;
   }
 }
-
