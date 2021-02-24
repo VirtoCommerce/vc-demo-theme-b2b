@@ -5,17 +5,17 @@
         <button type="button" class="close text-white opacity-100 py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <form name="addToCartForm">
-    <div ng-class="{'border-bottom-light': relatedProducts.item.count && !dialogData.inventoryError}">
-        <table class="table table-sm mb-0">
-            <thead>
-                <tr class="d-flex text-condensed">
-                    <th class="col-2 border-0">{{ 'customer.order.product' | t }}</th>
-                    <th class="col-6 border-0"></th>
-                    <th class="col-2 text-center border-0">{{ 'customer.order.quantity' | t }}</th>
-                    <th class="col-2 text-right border-0">{{ 'customer.order.total' | t }}</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div ng-class="{'border-bottom-light': relatedProducts.item.count && !dialogData.inventoryError}">
+            <table class="table table-sm mb-0">
+                <thead>
+                    <tr class="d-flex text-condensed">
+                        <th class="col-2 border-0">{{ 'customer.order.product' | t }}</th>
+                        <th class="col-6 border-0"></th>
+                        <th class="col-2 text-center border-0">{{ 'customer.order.quantity' | t }}</th>
+                        <th class="col-2 text-right border-0">{{ 'customer.order.total' | t }}</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr ng-repeat="item in dialogData.items" class="d-flex align-items-center border-top border-gray-200">
                         <td class="col-2 py-4 border-0">
                             <img class="img-fluid" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" alt="{% raw %}{{ item.name }}{% endraw %}">
@@ -27,7 +27,6 @@
                         <td class="col-2 text-center border-0">
                             <span ng-if="!dialogData.inventoryError && !dialogData.configuredProductId" ng-bind="item.quantity"></span>
                             <span ng-if="!dialogData.inventoryError && dialogData.configuredProductId" ng-bind="configurationQty"></span>
-
                             <input ng-if="dialogData.inventoryError && !dialogData.configuredProductId"
                             type="number" class="form-control text-center"
                             min="1" max="{% raw %}{{ item.availableQuantity }}{% endraw %}"
@@ -46,32 +45,32 @@
                         </td>
                         <td class="col-2 text-right border-0">
                             {% if settings.show_prices_with_taxes %}
-                            <span ng-if="!dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, item.quantity)"></span>
-                            <span ng-if="dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, configurationQty)"></span>
+                                <span ng-if="!dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, item.quantity)"></span>
+                                <span ng-if="dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPriceWithTax.amount, configurationQty)"></span>
                             {% else %}
-                            <span ng-if="!dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, item.quantity)"></span>
-                            <span ng-if="dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, configurationQty)"></span>
+                                <span ng-if="!dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, item.quantity)"></span>
+                                <span ng-if="dialogData.configuredProductId" class="font-weight-bold text-dark-green" ng-class="{'d-inline-block add-cart-item-total': dialogData.inventoryError }" ng-bind="calculateTotal(item.price.actualPrice.amount, configurationQty)"></span>
                             {% endif %}
                         </td>
                     </tr>
-            </tbody>
-        </table>
-    </div>
-    <div ng-show="relatedProducts.item.count && !dialogData.inventoryError" class="py-5 px-4">
-        <h3 class="panel-title">{{ 'products.general.related_products' | t }}</h3>
-        <vc-related-products-migration product-ids="dialogData.productIds"
-                             responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
-                             image-size="sm"
-                             on-update="relatedProducts = $event">
-        </vc-related-products-migration>
-    </div>
-    <div ng-if="dialogData.inventoryError" class="modal-footer d-flex justify-content-between">
-        <button type="button" class="btn btn-outline-dark" ng-click="close()">{{ 'cart.general.cancel' | t }}</button>
-        <button ng-disabled="addToCartForm.$invalid" type="button" class="btn btn-primary" ng-click="addToCart()">{{ 'cart.general.confirm' | t }}</button>
-    </div>
-    <div ng-if="!dialogData.inventoryError" class="modal-footer">
-        <button type="button" class="btn btn-outline-primary" ng-click="close()">{{ 'cart.general.continue_shopping' | t }}</button>
-        <button type="button" class="btn btn-primary" ng-click="redirect('{{ 'cart' | absolute_url }}')">{{ 'cart.general.view_cart' | t }}</button>
-    </div>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="relatedProducts.item.count && !dialogData.inventoryError" class="py-5 px-4">
+            <h3 class="panel-title">{{ 'products.general.related_products' | t }}</h3>
+            <vc-related-products-migration product-ids="dialogData.productIds"
+                                 responsive="{ 0: { items: 1 }, 768: { items: 2 }, 992: { items: 4 } }"
+                                 image-size="sm"
+                                 on-update="relatedProducts = $event">
+            </vc-related-products-migration>
+        </div>
+        <div ng-if="dialogData.inventoryError" class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-outline-dark" ng-click="close()">{{ 'cart.general.cancel' | t }}</button>
+            <button ng-disabled="addToCartForm.$invalid" type="button" class="btn btn-primary" ng-click="addToCart()">{{ 'cart.general.confirm' | t }}</button>
+        </div>
+        <div ng-if="!dialogData.inventoryError" class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" ng-click="close()">{{ 'cart.general.continue_shopping' | t }}</button>
+            <button type="button" class="btn btn-primary" ng-click="redirect('{{ 'cart' | absolute_url }}')">{{ 'cart.general.view_cart' | t }}</button>
+        </div>
     </form>
 </script>
