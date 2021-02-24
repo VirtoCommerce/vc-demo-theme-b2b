@@ -10,7 +10,7 @@
         </span>
     </dt>
 
-    <dd class="font-weight-bold">
+    <dd>
         <span class="{% if variation_price %}{% else %}text-dark-green{% endif %}">
             {% if variant != null %}
                 {% assign productOrVariant = variant %}
@@ -28,7 +28,7 @@
                 {% assign price_name = 'actualPrice' %}
                 {% include 'bootstrap-migration/product/price/dynamic' %}
             {% endif %}
-            <span class="{% if variation_price %}font-weight-normal{% endif %}">/ each</span>
+            <span class="{% if variation_price %}font-weight-normal{% else %}font-weight-bold{% endif %}">/ each</span>
         </span>
     </dd>
 </dl>
