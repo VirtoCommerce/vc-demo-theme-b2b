@@ -1,0 +1,5 @@
+{% if product.featured_image %}
+    <img class="img-fluid img-thumbnail" ng-src="{{ product.featured_image | img_url: "308x308" }}" fallback-src="{{ product.featured_image | img_url }}" alt="{{ product.featured_image.alt | escape }}" />
+{% else %}
+    <img class="img-fluid img-thumbnail" src="{{ 'no-image.svg' | asset_url }}" alt="No image" />
+{% endif %}

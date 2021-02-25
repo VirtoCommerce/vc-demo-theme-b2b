@@ -1,0 +1,34 @@
+
+<dl class="d-flex justify-content-between mb-0">
+    <dt>
+        <span class="text-helvetica {% if variation_price %}font-weight-normal text-uppercase text-muted{% endif %}">
+            {% if customer %}
+                {{ 'products.price.private' | t }}
+            {% else %}
+                {{ 'products.price.public' | t }}
+            {% endif %}
+        </span>
+    </dt>
+
+    <dd>
+        <span class="{% if variation_price %}{% else %}text-dark-green{% endif %}">
+            {% if variant != null %}
+                {% assign productOrVariant = variant %}
+            {% else %}
+                {% assign productOrVariant = product %}
+            {% endif %}
+            {% if settings.show_prices_with_taxes %}
+                {% assign price = productOrVariant.price_with_tax %}
+                {% include 'bootstrap-migration/product/price/static' %}
+                {% assign price_name = 'actualPriceWithTax' %}
+                {% include 'bootstrap-migration/product/price/dynamic' %}
+            {% else %}
+                {% assign price = productOrVariant.price %}
+                {% include 'bootstrap-migration/product/price/static' %}
+                {% assign price_name = 'actualPrice' %}
+                {% include 'bootstrap-migration/product/price/dynamic' %}
+            {% endif %}
+            <span class="{% if variation_price %}font-weight-normal{% else %}font-weight-bold{% endif %}">/ each</span>
+        </span>
+    </dd>
+</dl>
