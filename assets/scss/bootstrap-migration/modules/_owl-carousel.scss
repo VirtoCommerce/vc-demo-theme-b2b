@@ -1,0 +1,22 @@
+.related-products {
+    .owl-carousel {
+        .owl-item img {
+            &.img-sm {
+                width: 128px;
+                height: 128px;
+            }
+            &.img-md {
+                width: 148px;
+                height: 148px;
+            }
+            &.img-lg {
+                width: 168px;
+                height: 168px;
+            }
+        }
+
+        .owl-stage {
+            display: flex;
+        }
+    }
+}

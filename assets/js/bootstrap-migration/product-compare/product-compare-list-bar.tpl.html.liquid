@@ -1,0 +1,42 @@
+<div class="modal-compare position-fixed col" ng-show="$ctrl.itemsCount > 0 && $ctrl.showBar">
+    <div class="compare-head bg-gray-900 text-white row">
+        <div class="col-md-8">
+            You have <span class="visible-count" id="productCompareListCount" ng-bind="$ctrl.itemsCount"></span> out of 5 products to compare selected.
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-5 text-center border-left border-gray-700">
+                    <a href class="text-white" ng-click="$ctrl.clearCompareList()" >Clear all</a>
+                </div>
+                <div class="col-md-4 text-center border-left border-gray-700">
+                    <a href class="text-white" ng-click="$ctrl.showBody()">
+                        <span ng-bind="$ctrl.showBodyText"></span>
+                        <i ng-class="$ctrl.showBodyIcon" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white overflow-hidden p-2 row justify-content-between" ng-show="$ctrl.showedBody">
+        <div class="col-md-9">
+            <ul class="list p-0">
+                <li class="list-item d-inline-block pr-2 position-relative align-top" ng-repeat="product in $ctrl.products">
+                    <div class="list-img">
+                        <a class="d-inline-block mr-1 position-relative" ng-href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}">
+                            <img ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" alt="" class="list-pic border border-gray-300">
+                            <a href="#" ng-click="$ctrl.removeProduct(product)">
+                                <i class="list-remove position-absolute fa fa-times-circle" aria-hidden="true"></i>
+                            </a>
+                        </a>
+                        <div>
+                            Item #<a href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="product.sku"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <a href="{{ 'compare' | absolute_url }}" class="btn btn-dark">View compare</a>
+        </div>
+    </div>
+</div>

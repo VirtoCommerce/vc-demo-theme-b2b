@@ -374,7 +374,9 @@
             "shop_by": "Shop By",
             "all": "All",
             "all_collection": "All {0}",
-            "no_tags": "Add tags to your products for this list to build itself."
+            "no_tags": "Add tags to your products for this list to build itself.",
+            "previously_purchased": "Previously Purchased",
+            "previously_purchased_label": "Previously Purchased Products"
         },
         "sorting": {
             "title": "Sort results by:",

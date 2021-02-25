@@ -20,6 +20,9 @@
     {% include 'main/dependencies-bootstrap-migration' %}
 </head>
 <body id="{{ page_title | handle }}" class="h-100 d-flex flex-column {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" ng-cloak ng-controller="mainController" ng-init="baseUrl='{{ '' | absolute_url }}'" data-target="#toc" data-spy="scroll">
+    {% include 'bootstrap-migration/dialogs/recently-added-cart-item' %}
+    {% include 'bootstrap-migration/dialogs/send-product-to-email' %}
+    {% include 'js/bootstrap-migration/lists/lists-added-list-item-dialog' %}
     {% include 'bootstrap-migration/main/header' %}
     {{ content_for_layout }}
     {% include 'bootstrap-migration/main/footer' %}
