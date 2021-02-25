@@ -51,6 +51,11 @@ jobs:
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.fullSuffix }}" >> $GITHUB_ENV
 
+    - name: Set PR variables
+      if: ${{ github.event_name == 'pull_request' }}
+      run: |
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}-${{ steps.image.outputs.SHA }}" >> $GITHUB_ENV
+
     - name: Get changelog
       id: changelog
       uses: VirtoCommerce/vc-github-actions/changelog-generator@master
