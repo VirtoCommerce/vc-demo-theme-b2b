@@ -39,7 +39,7 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
 
     - name: Get Image Version
-      uses: VirtoCommerce/vc-github-actions/get-image-version@VDS-414
+      uses: VirtoCommerce/vc-github-actions/get-image-version@master
       id: image
 
     - name: Set release variables
@@ -50,6 +50,11 @@ jobs:
       if: ${{ github.event_name == 'workflow_dispatch' }}
       run: |
         echo "VERSION_SUFFIX=${{ steps.image.outputs.fullSuffix }}" >> $GITHUB_ENV
+
+    - name: Set PR variables
+      if: ${{ github.event_name == 'pull_request' }}
+      run: |
+        echo "VERSION_SUFFIX=${{ steps.image.outputs.suffix }}-${{ steps.image.outputs.SHA }}" >> $GITHUB_ENV
 
     - name: Get changelog
       id: changelog
