@@ -39,7 +39,7 @@ jobs:
       uses: warchant/setup-sonar-scanner@v3
 
     - name: Get Image Version
-      uses: VirtoCommerce/vc-github-actions/get-image-version@master
+      uses: VirtoCommerce/vc-github-actions/get-image-version@VDS-414
       id: image
 
     - name: Set release variables
