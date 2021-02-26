@@ -1,7 +1,8 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productWithoutVariationsController', ['$scope', '$window', 'catalogService', 'availabilityService',
-    function ($scope, $window, catalogService, availabilityService) {
+storefrontApp.controller('productWithoutVariationsController', ['$scope', '$window', 'catalogService', 'availabilityService', 'storefrontApp.mainContext',
+    function ($scope, $window, catalogService, availabilityService, mainContext) {
+        $scope.customer = mainContext.customer;
 
         function initialize() {
             var product = $window.product;

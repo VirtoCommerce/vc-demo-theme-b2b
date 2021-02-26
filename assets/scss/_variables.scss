@@ -903,7 +903,7 @@ $alert-success-border:        darken(adjust-hue($state-success-bg, -10), 5%); //
 //** Breadcrumb text color
 // $breadcrumb-color:              #ccc
 //** Text color of current page in the breadcrumb
-   $breadcrumb-active-color:       $text-muted; // $gray-light // Migrating_To_Bootstrap4: ?? (which gray color from bs4 we should use?)
+   $breadcrumb-active-color:       $text-muted; // $gray-light // Migrating_To_Bootstrap4: done
 //** Textual separator for between breadcrumb elements
 // $breadcrumb-separator:          "/"
 
