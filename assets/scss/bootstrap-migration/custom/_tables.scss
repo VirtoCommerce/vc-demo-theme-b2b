@@ -36,6 +36,18 @@ th {
   }
 }
 
-div[ng-dropdown-multiselect] > div > ul > li.divider { margin-top: 5px !important; margin-bottom: 5px !important; height: 1px; background-color: #e5e5e5; } div[ng-dropdown-multiselect] > div > ul > li > a:hover { text-decoration: none; } div[ng-dropdown-multiselect] > div > ul > li:hover { background-color: #F5F5F5; }
+[ng-transclude='toggleDropdown'] {
+  width: 100%;
+}
 
+[ng-dropdown-multiselect] > div > ul > li.divider {
+  margin: 0.563rem 0;
+  height: 1px;
+  overflow: hidden;
+  background-color: $gray-200;
+}
+
+[ng-dropdown-multiselect] > div > ul > li > a:focus {
+  background: none;
+}
 
