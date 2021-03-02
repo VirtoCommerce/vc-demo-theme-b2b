@@ -368,7 +368,7 @@
                                                 <div class="panel-heading">{{ 'checkout.payment_method.title' | t }}</div>
                                                 <div class="panel-body">
                                                     <div class="row flexible nogap align-items-center">
-                                                        <img class="col-xs-2 img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
+                                                        <img class="col-xs-2 img-responsive" alt="Payment method" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                         <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                             <span ng-bind="checkout.payment.name"></span>
                                                             <span><small ng-bind="checkout.payment.description"></small></span>
