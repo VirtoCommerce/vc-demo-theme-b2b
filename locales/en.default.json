@@ -71,7 +71,7 @@
         "invalid_bank_card_expiration_date_message": "Please enter valid expiration date of your bank card in MM / YY format",
         "bank_card_cvv_required_message": "Please enter verification code of your bank card",
         "invalid_bank_card_cvv_message": "Please enter correct verification code of your bank card",
-        "order_successfully": "Order <strong class=\"text-uppercase\" >{0}</strong> has successfully been submitted. You will be sent an email notification as soon as your order is ready.",
+        "order_successfully": "has been successfully submitted. You will be notified via email when your order is ready for shipping",
         "order_print": "Print order",
         "order_summary": "Order summary",
         "pickup_address": "Pickup address",

@@ -82,7 +82,7 @@
 
 <address ng-if="!$ctrl.editMode">
     <ng-transclude ng-transclude-slot="header"></ng-transclude>
-    <div class="h5" ng-if="$ctrl.address.firstName || $ctrl.address.lastName || $ctrl.address.organization">
+    <div class="h5 mt-0" ng-if="$ctrl.address.firstName || $ctrl.address.lastName || $ctrl.address.organization">
         <span ng-if="$ctrl.address.firstName" ng-bind="$ctrl.address.firstName"></span> <span ng-if="$ctrl.address.lastName" ng-bind="$ctrl.address.lastName"></span>
         <span ng-if="organization"><small ng-bind="$ctrl.address.organization"></small></span>
     </div>

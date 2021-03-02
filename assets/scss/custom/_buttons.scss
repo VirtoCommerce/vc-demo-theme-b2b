@@ -67,6 +67,10 @@
     margin-right: 8px;
 }
 
+.btn-white-checkout {
+  @include button-variant( $btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
+}
+
 .btn-white.btn-alt {
     @include button-variant-alt( $btn-white-color, $btn-white-bg, $btn-white-border, 'lighten', 0);
 }

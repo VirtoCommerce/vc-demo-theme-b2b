@@ -3,7 +3,8 @@
 storefrontApp.component('vcLineItems', {
     templateUrl: "themes/assets/js/common-components/lineItems.tpl.liquid",
     bindings: {
-        order: '<'
+        order: '<',
+        checkoutCompletePage: '<'
     },
     controller: ['$scope', 'baseUrl', function ($scope, baseUrl) {
         var $ctrl = this;
