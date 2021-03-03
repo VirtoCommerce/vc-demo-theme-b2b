@@ -51,3 +51,9 @@ th {
   background: none;
 }
 
+.table-head-hover {
+  th:hover {
+    cursor: pointer;
+    background-color: $gray-modal-bg;
+  }
+}
