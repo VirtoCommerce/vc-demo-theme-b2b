@@ -5,12 +5,12 @@
             <th></th>
             <th class="text-center">{{ 'customer.order.quantity' | t }}</th>
             <th class="text-right">{{ 'customer.order.total' | t }}</th>
-            <th ng-if="!$ctrl.checkoutCompletePage"></th>
+            <th ng-if="!$ctrl.hideReorder"></th>
         </tr>
     </thead>
     <tbody ng-repeat="group in $ctrl.order.configuredGroups" class="order-line-item">
         <tr>
-            <td ng-class="$ctrl.checkoutCompletePage ? 'col-xs-1' : 'col-xs-2'">
+            <td ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
                 <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td class="col-xs-6">
@@ -32,7 +32,7 @@
                     <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
                 {% endif %}
             </td>
-            <td ng-if="!$ctrl.checkoutCompletePage">
+            <td ng-if="!$ctrl.hideReorder">
                 <div class="btn-toolbar">
                     <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
                 </div>
@@ -60,7 +60,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="part in group.items" class="border-bottom-light">
-                                <td class="text-center" ng-class="$ctrl.checkoutCompletePage ? 'col-xs-1' : 'col-xs-2'">
+                                <td class="text-center" ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
                                     <img class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
                                 </td>
                                 <td>
@@ -81,7 +81,7 @@
     </tbody>
     <tbody>
         <tr ng-repeat="lineItem in $ctrl.order.usualItems" class="order-line-item">
-            <td ng-class="$ctrl.checkoutCompletePage ? 'col-xs-1' : 'col-xs-2'">
+            <td ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
                 <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td>
@@ -104,7 +104,7 @@
                 <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
                 {% endif %}
             </td>
-            <td ng-if="!$ctrl.checkoutCompletePage">
+            <td ng-if="!$ctrl.hideReorder">
                 <div class="btn-toolbar">
                     <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
                 </div>
