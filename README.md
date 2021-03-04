@@ -1,4 +1,4 @@
-# B2B theme for VirtoCommerce Storefront 
+# B2B demo theme for VirtoCommerce Storefront
 
 [![Share on Facebook](https://img.shields.io/badge/facebook--blue.svg?style=social&label=Share&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyNjYuODkzcHgiIGhlaWdodD0iMjY2Ljg5NXB4IiB2aWV3Qm94PSIwIDAgMjY2Ljg5MyAyNjYuODk1IiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyNjYuODkzIDI2Ni44OTUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGlkPSJCbHVlXzFfIiBmaWxsPSIjM0M1QTk5IiBkPSJNMjQ4LjA4MiwyNjIuMzA3YzcuODU0LDAsMTQuMjIzLTYuMzY5LDE0LjIyMy0xNC4yMjVWMTguODEyYzAtNy44NTctNi4zNjgtMTQuMjI0LTE0LjIyMy0xNC4yMjRIMTguODEyYy03Ljg1NywwLTE0LjIyNCw2LjM2Ny0xNC4yMjQsMTQuMjI0djIyOS4yN2MwLDcuODU1LDYuMzY2LDE0LjIyNSwxNC4yMjQsMTQuMjI1SDI0OC4wODJ6Ii8%2BPHBhdGggaWQ9ImYiIGZpbGw9IiNGRkZGRkYiIGQ9Ik0xODIuNDA5LDI2Mi4zMDd2LTk5LjgwM2gzMy40OTlsNS4wMTYtMzguODk1aC0zOC41MTVWOTguNzc3YzAtMTEuMjYxLDMuMTI3LTE4LjkzNSwxOS4yNzUtMTguOTM1bDIwLjU5Ni0wLjAwOVY0NS4wNDVjLTMuNTYyLTAuNDc0LTE1Ljc4OC0xLjUzMy0zMC4wMTItMS41MzNjLTI5LjY5NSwwLTUwLjAyNSwxOC4xMjYtNTAuMDI1LDUxLjQxM3YyOC42ODRoLTMzLjU4NXYzOC44OTVoMzMuNTg1djk5LjgwM0gxODIuNDA5eiIvPjwvc3ZnPg%3D%3D)](https://www.facebook.com/sharer.php?u=https://virtocommerce.com)&nbsp;[![Tweet](https://img.shields.io/twitter/url/https/virtocommerce.com.svg?style=social)](https://twitter.com/intent/tweet?text=%23VirtoCommerce%20puts%20the%20best%20of%20MS%20Azure%20Cloud%2C%20open%20source%20.Net%20code%20and%20agile%20development%20in%20a%20single%20enterprise%20%23ecommerce%20platform.) [![Latest release](https://img.shields.io/github/release/VirtoCommerce/vc-demo-theme-b2b.svg)](https://github.com/VirtoCommerce/vc-demo-theme-b2b/releases/latest) [![Total downloads](https://img.shields.io/github/downloads/VirtoCommerce/vc-demo-theme-b2b/total.svg?colorB=007ec6)](https://github.com/VirtoCommerce/vc-demo-theme-b2b/releases) [![License](https://img.shields.io/badge/license-VC%20OSL-blue.svg)](https://virtocommerce.com/open-source-license)
 
@@ -103,7 +103,7 @@ npx gulp default
 ```
 manually when you need to bundle & minify theme files.
 
-The following gulp tasks available to you: 
+The following gulp tasks available to you:
 1. **default**: default task. Bundles and minifies theme files.
 2. **clean**: removes bundled & minified files.
 3. **lint**: runs **eslint** to check for warnings & errors in javascript files. Look at [eslint site](https://eslint.org/) for details.
@@ -119,8 +119,8 @@ The following gulp tasks available to you:
 
 Storefront theme localization is very similar to [VirtoCommerce Platform localization](https://virtocommerce.com/docs/vc2devguide/working-with-platform-manager/localization-implementation). Check it for details on working with translation files.
 
-1. Make a copy of &lt;*theme repository location*&gt;\locales\en.default.json file 
-2. Rename the copied file to begin with your needed language 2 letter code (e.g., "es.default.json"). 
+1. Make a copy of &lt;*theme repository location*&gt;\locales\en.default.json file
+2. Rename the copied file to begin with your needed language 2 letter code (e.g., "es.default.json").
 3. Translate the file content.
 
 ### Adding new language to store
