@@ -10,5 +10,5 @@ insert_final_newline = true
 
 # CSS code style settings:
 [*.{scss,sass,css}]
-indent_size = 2
+indent_size = 3
 quote_type = single
