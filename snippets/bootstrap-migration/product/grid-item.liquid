@@ -2,8 +2,6 @@
     {% assign current_collection = collection %}
 {% endunless %}
 
-<!-- TODO: Badges -->
-
 {% assign unavailable = false %}
 {% assign sold_out = false %}
 
@@ -15,22 +13,24 @@
     {% assign unavailable = true %}
 {% endif %}
 
-<div class="col-md-3 flexible product-card">
-    {% include 'shared/item-response-group' %}
-    {% include 'product/item/image' %}
-    {% include 'product/compare' %}
-    {% include 'product/item/title-and-codes' %}
+<div class="col card-container">
+    <div class="card border-gray-200 mb-3">
+        <div class="card-body">
+            {% include 'bootstrap-migration/shared/item-response-group' %}
+            {% include 'bootstrap-migration/product/item/image' %}
+            {% include 'bootstrap-migration/product/compare' %}
+            {% include 'bootstrap-migration/product/item/title-and-codes' %}
 
-    {% if product.product_type == "Configurable" %}
-        {% include 'product/type/configured/item-price' %}
-        {% include 'product/type/configured/item-configure-button' %}
-    {% else %}
-        <ng-controller ng-controller="commonProductCardController">
-            {% include 'product/price' %}
-            {% include 'product/quantity' %}
-        </ng-controller>
-    {% endif %}
-
+            {% if product.product_type == "Configurable" %}
+            {% include 'bootstrap-migration/product/type/configured/item-price' %}
+            {% include 'bootstrap-migration/product/type/configured/item-configure-button' %}
+            {% else %}
+            <ng-controller ng-controller="commonProductCardController">
+                {% include 'bootstrap-migration/product/price' %}
+                {% include 'bootstrap-migration/product/quantity' %}
+            </ng-controller>
+            {% endif %}
+        </div>
+    </div>
+    {% include 'bootstrap-migration/product/item/script' %}
 </div>
-
-{% include 'product/item/script' %}
