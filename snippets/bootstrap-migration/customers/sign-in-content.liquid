@@ -1,0 +1,17 @@
+<div class="col-sm-6 card-body d-flex flex-column justify-content-center p-4">
+    {% capture loginUrl %} {{ requestUrl }} {% endcapture %}
+    {% include 'bootstrap-migration/customers/login-form' %}
+</div>
+<div class="col-sm-6 login-card card-body d-flex flex-column justify-content-center p-4">
+    <h2 class="text-white login-card-title mb-3">{{ 'customer.sign_in.registration_title' | t: shop.name }}</h2>
+    <ul class="pl-4 dashed-list">
+        {% assign advantages_size = 'customer.sign_in.registration_advantages' | t | size | minus: 2 %}
+        {% assign registration_advantage = 'customer.sign_in.registration_advantages' | t | slice: 1, advantages_size %}
+        {% assign advantages = registration_advantage | split: ',' %}
+        {% for phrase in advantages %}
+            {% assign phrase_size = phrase | strip | size | minus: 2 %}
+            <li>{{ phrase | strip | slice: 1, phrase_size }}</li>
+        {% endfor %}
+    </ul>
+    {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-white w-50" href' }}
+</div>

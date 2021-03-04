@@ -1,7 +1,21 @@
-@import "custom/backgrounds";
-@import "custom/popover";
-@import "custom/navbar";
-@import "custom/sizing";
-@import "custom/buttons";
-@import "custom/type";
-@import "custom/modals";
+@import 'custom/backgrounds';
+@import 'custom/popover';
+@import 'custom/navbar';
+@import 'custom/sizing';
+@import 'custom/buttons';
+@import 'custom/type';
+@import 'custom/modals';
+@import 'custom/lists';
+
+.add-cart-item-total {
+  height: 40px;
+}
+
+.login-card {
+  background: center / cover no-repeat url('../../images/login-card-bg.png');
+  .login-card-title {
+    text-shadow: 1px 1px 0px $dark;
+    text-transform: none;
+    font-size: 1.75rem;
+  }
+}

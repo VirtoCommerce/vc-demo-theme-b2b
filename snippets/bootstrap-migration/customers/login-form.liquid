@@ -26,8 +26,11 @@
     <div class="row">
         <div class="col-6 col-md-5">
     {% else %}
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary w-25 w-md-50" value="{{ 'customer.sign_in.sign_in' | t }}">
+            <div class="form-group mb-5">
+                {% include 'bootstrap-migration/customers/forgot-links' %}
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary w-50" value="{{ 'customer.sign_in.continue' | t }}">
     {% endif %}
         {% if template != 'customers/login' %}
                 <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.sign_in.sign_in' | t }}">
@@ -39,11 +42,6 @@
             </div>
         {% endif %}
         </div>
-        {% if template == 'customers/login' %}
-        <div class="form-group">
-            {% include 'bootstrap-migration/customers/forgot-links' %}
-        </div>
-        {% endif %}
 </fieldset>
 {{ antiforgery }}
 </form>
