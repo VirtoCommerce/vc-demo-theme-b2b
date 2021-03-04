@@ -1,0 +1,8 @@
+.dashed-list {
+  list-style-type: none;
+  li:before {
+    content: '\2014';
+    position: absolute;
+    margin-left: -1.25rem;
+  }
+}

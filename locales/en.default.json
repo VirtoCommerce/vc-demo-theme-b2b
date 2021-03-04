@@ -475,6 +475,7 @@
             "forgot_password": "Forgot your password?",
             "reset_password_success": "We've sent you an email with a link to update your password.",
             "sign_in": "Sign In",
+            "continue": "Continue",
             "or": "or",
             "cancel": "Return to Store",
             "guest_title": "Continue as a guest",

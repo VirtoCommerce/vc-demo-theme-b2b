@@ -1,28 +1,14 @@
 {% layout 'bootstrap_migration' %}
 
-<main class="container pt-4 pb-5 flex-grow-1" role="main">
-    <div class="row">
-        <div class="col-md-4">
+<main class="container pt-4 pb-sm-5 flex-grow-1" role="main">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
             <h1>{{ 'customer.sign_in.title' | t }}</h1>
-            {% capture loginUrl %} {{ requestUrl }} {% endcapture %}
-            {% include 'bootstrap-migration/customers/login-form' %}
-        </div>
-        <div class="col-md-8">
-            <h1>{{ 'customer.sign_in.registration_title' | t: shop.name }}</h1>
-            <p>
-                {{ 'customer.sign_in.registration_advantages_title' | t: shop.name }}
-                <ul>
-                    {% assign advantages_size = 'customer.sign_in.registration_advantages' | t | size | minus: 2 %}
-                    {% assign registration_advantage = 'customer.sign_in.registration_advantages' | t | slice: 1, advantages_size %}
-                    {% assign advantages = registration_advantage | split: ',' %}
-                    {% for phrase in advantages %}
-                        {% assign phrase_size = phrase | strip | size | minus: 2 %}
-                        <li>{{ phrase | strip | slice: 1, phrase_size }}</li>
-                    {% endfor %}
-                </ul>
-            </p>
-            <div>
-                {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-primary w-25" href' }}
+            <div class="d-none d-sm-flex card flex-row flex-wrap">
+                {% include 'bootstrap-migration/customers/sign-in-content' %}
+            </div>
+            <div class="d-flex d-sm-none row">
+                {% include 'bootstrap-migration/customers/sign-in-content' %}
             </div>
         </div>
     </div>
