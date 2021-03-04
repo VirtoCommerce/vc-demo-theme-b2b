@@ -34,7 +34,7 @@
             <tbody ng-if="$ctrl.entries.length">
                 <tr ng-repeat="order in $ctrl.entries">
                     <td>
-                        <a ng-bind="order.number" ng-href="{{ 'account#/orders/' | absolute_url }}{% raw %}{{ order.number}}{% endraw %}?pageNumber={% raw %}{{$ctrl.pageSettings.currentPage}}{% endraw %}"></a>
+                        <a ng-bind="order.number" ui-sref="orders.detail({number: order.number, pageNumber: $ctrl.pageSettings.currentPage})"></a>
                     </td>
                     <td ng-bind="order.purchaseOrderNumber"></td>
                     <td>
