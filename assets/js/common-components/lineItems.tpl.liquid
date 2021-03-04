@@ -14,10 +14,10 @@
                 <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td class="col-xs-6">
-                <a ng-bind="group.product.name" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
+                <a ng-bind="group.product.name" class="text-bold" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
                 <p class="d-flex mt-1">
                     <img class="img-responsive mr-2" src="{{ 'customize.svg' | asset_url }}" />
-                    <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer"></a>
+                    <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer font-weight-400 font-size-13"></a>
                 </p>
             </td>
             <td class="text-center">
@@ -64,7 +64,7 @@
                                     <img class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
                                 </td>
                                 <td>
-                                    <a ng-href="{% raw %}{{ part.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.name"></a>
+                                    <a class="font-weight-400" ng-href="{% raw %}{{ part.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.name"></a>
                                 </td>
                                 <td ng-bind="part.quantity" class="text-center"></td>
                             {% if settings.show_prices_with_taxes %}
@@ -85,7 +85,7 @@
                 <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </td>
             <td>
-                <a ng-bind="lineItem.name" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
+                <a ng-bind="lineItem.name" class="text-bold" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
                 {% if shop.subscription_enabled %}
                 <p ng-if="lineItem.paymentPlan">
                     <span ng-bind="'Subscription with a period: ' + lineItem.paymentPlan.intervalCount + ' ' + lineItem.paymentPlan.interval"></span>
