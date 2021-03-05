@@ -26,24 +26,21 @@
                         {% assign tag = custom_tag %}
                         {% include 'tag-label' %}
                         {% if tag_checked  %}
-                            <li class="custom-control custom-checkbox advanced-filter active-filter"
+                            <li class="custom-control custom-checkbox"
                                 data-group="{{ aggregation.field }}"
                                 data-handle="{{ custom_tag.name | handleize }}">
                         {% else %}
-                            <li class="custom-control custom-checkbox advanced-filter"
+                            <li class="custom-control custom-checkbox"
                                 data-group="{{ aggregation.field }}">
                         {% endif %}
-                                <div>
-                                    <input class="d-none"
-                                           type="checkbox"
-                                           ng-checked="{{ tag_checked }}">
-                                    <a class="text-body"
-                                       vc-query-source="{ terms: { '{{ aggregation.field }}': ['{{ custom_tag.value }}'] } }"
-                                       switchable="true">
-                                        <span class="custom-control-input"></span>
-                                        <label class="custom-control-label">{{ tag_label }} <span class="count">({{ custom_tag.count }})</span></label>
-                                    </a>
-                                </div>
+                                <input type="checkbox"
+                                       class="custom-control-input"
+                                       ng-checked="{{ tag_checked }}">
+                                <a class="custom-control-label d-inline-block text-body"
+                                    vc-query-source="{ terms: { '{{ aggregation.field }}': ['{{ custom_tag.value }}'] } }"
+                                    switchable="true">
+                                    {{ tag_label }} <span class="count">({{ custom_tag.count }})</span>
+                                </a>
                             </li>
                     {% endfor %}
                 </ol>
@@ -59,7 +56,7 @@
              role="tab"
              aria-selected="{{isOpen}}"
              ng-keypress="toggleOpen($event)">
-            <h4 class="mb-0">
+            <h4 class="card-title mb-0">
                 <a class="accordion-toggle text-body text-condensed font-weight-bold"
                    role="button"
                    data-toggle="collapse"

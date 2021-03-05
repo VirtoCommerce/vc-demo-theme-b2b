@@ -1,0 +1,20 @@
+{% assign is_select_only_purchased_products = current_product_search_criteria.is_select_only_purchased_products %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h4 class="card-title mb-0">
+            {{ 'collections.sidebar.previously_purchased' | t }}
+        </h4>
+    </div>
+    <div class="card-body">
+        <div class="custom-control custom-checkbox mt-2">
+            <input type="checkbox"
+                   class="custom-control-input"
+                   ng-checked="{{is_select_only_purchased_products}}">
+            <a class="custom-control-label d-inline-block text-body"
+               vc-query-source="{ select_only_purchased_products: ['{{is_select_only_purchased_products != true}}'] }"
+               switchable="false">
+                {{ 'collections.sidebar.previously_purchased_label' | t }}
+            </a>
+        </div>
+    </div>
+</div>

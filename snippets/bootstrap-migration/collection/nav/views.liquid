@@ -1,5 +1,5 @@
 <div class="form-group">
-    <ul class="nav nav-pills"
+    <ul class="nav nav-pills views"
         vc-query-target="$collection.viewQuery">
         <li class="nav-item">
             <a class="nav-link font-weight-bold"
@@ -11,7 +11,7 @@
                 <span class="ml-2">{{ 'collections.general.list_view' | t }}</span>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-1">
             <a class="nav-link font-weight-bold"
                ng-class="{'active': $collection.viewQuery.view[0] === 'grid'}"
                title="{{ 'collections.general.grid_view' | t }}"
