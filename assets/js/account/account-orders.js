@@ -57,6 +57,25 @@ angular.module('storefront.account')
                 loadData();
             }
 
+            $ctrl.toogleStatus = (status) => {
+                if (_.contains( $ctrl.selectedStatuses, status)){
+                    $ctrl.selectedStatuses = _.without($ctrl.selectedStatuses, status);
+                } else {
+                    $ctrl.selectedStatuses.push(status);
+                }
+            }
+
+            $ctrl.isStatusChecked = (status) => _.contains( $ctrl.selectedStatuses, status);
+
+            $ctrl.checkAllStatuses = () => {
+                $ctrl.selectedStatuses = $ctrl.orderStatuses;
+            }
+
+            $ctrl.uncheckAllStatuses = () => {
+                $ctrl.selectedStatuses = [];
+                filtersChanged();
+            }
+
             function filtersChanged() {
                 $ctrl.pageSettings.currentPage = 1;
                 loadData();
