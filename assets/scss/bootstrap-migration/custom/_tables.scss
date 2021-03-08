@@ -36,21 +36,6 @@ th {
   }
 }
 
-[ng-transclude='toggleDropdown'] {
-  width: 100%;
-}
-
-[ng-dropdown-multiselect] > div > ul > li.divider {
-  margin: 0.563rem 0;
-  height: 1px;
-  overflow: hidden;
-  background-color: $gray-200;
-}
-
-[ng-dropdown-multiselect] > div > ul > li > a:focus {
-  background: none;
-}
-
 .table-head-hover {
   th:hover {
     cursor: pointer;
