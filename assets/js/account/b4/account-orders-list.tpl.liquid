@@ -14,16 +14,16 @@
                             <span id="statuses-filter-dropdown" uib-dropdown-toggle>
                               {{ 'customer.orders.status' | t }}
                             </span>
-                            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
-                              <li ng-class="">
-                                <a ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check"></span> Check All</a>
+                            <ul class="dropdown-menu dropdown-menu-form" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
+                              <li class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check text-primary"></span> Check All</a>
                               </li>
-                              <li>
-                                <a ng-click="$ctrl.uncheckAllStatuses()"><span class="fa fa-times"></span> Uncheck All</a>
+                              <li class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.uncheckAllStatuses()"><span class="fa fa-times"></span> Uncheck All</a>
                               </li>
-                              <li class="divider"></li>
-                              <li ng-repeat="status in $ctrl.orderStatuses">
-                                <a ng-click="$ctrl.toogleStatus(status)"><span ng-if="$ctrl.isStatusChecked(status)" class="fa fa-check"></span> <span ng-bind="status"></span></a>
+                              <li class="dropdown-divider"></li>
+                              <li ng-repeat="status in $ctrl.orderStatuses" class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.toogleStatus(status)"><span ng-if="$ctrl.isStatusChecked(status)" class="fa fa-check text-primary"></span> <span ng-bind="status"></span></a>
                               </li>
                             </ul>
                         </div>
