@@ -9,12 +9,12 @@
                     <th scope="col">{{ 'customer.orders.purchase_order' | t }}</th>
                     <th scope="col">{{ 'customer.orders.invoice' | t }}</th>
                     <th scope="col" ng-click="$ctrl.sortChanged('createdDate')" class="col-sortable" ng-class="{'desc': $ctrl.getSortDirection('createdDate') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('createdDate') == $ctrl.sortAscending }">{{ 'customer.orders.date' | t }}</th>
-                    <th scope="col" class="filter" ng-class="{'filtered': $ctrl.selectedStatuses.length > 0 }">
-                        <div uib-dropdown>
-                            <span id="statuses-filter-dropdown" uib-dropdown-toggle>
+                    <th scope="col" uib-dropdown uib-dropdown-toggle class="filter" ng-class="{'filtered': $ctrl.selectedStatuses.length > 0 }">
+                        <div>
+                            <span id="statuses-filter-dropdown">
                               {{ 'customer.orders.status' | t }}
                             </span>
-                            <ul class="dropdown-menu dropdown-menu-form" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
+                            <ul class="dropdown-menu statuses-filter-dropdown" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
                               <li class="dropdown-item">
                                 <a class="font-weight-normal text-dark" ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check text-primary"></span> Check All</a>
                               </li>
