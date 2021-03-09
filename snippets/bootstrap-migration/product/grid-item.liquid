@@ -14,7 +14,7 @@
 {% endif %}
 
 <div class="col card-container">
-    <div class="card border-gray-200 mb-3">
+    <div class="card border-gray-200">
         <div class="card-body">
             {% include 'bootstrap-migration/shared/item-response-group' %}
             {% include 'bootstrap-migration/product/item/image' %}
@@ -22,11 +22,11 @@
             {% include 'bootstrap-migration/product/item/title-and-codes' %}
 
             {% if product.product_type == "Configurable" %}
-            {% include 'bootstrap-migration/product/type/configured/item-price' %}
-            {% include 'bootstrap-migration/product/type/configured/item-configure-button' %}
+                {% include 'bootstrap-migration/product/type/configured/item-price' %}
+                {% include 'bootstrap-migration/product/type/configured/item-configure-button' %}
             {% else %}
             <ng-controller ng-controller="commonProductCardController">
-                {% include 'bootstrap-migration/product/price' %}
+                {% include 'bootstrap-migration/product/price' column: true %}
                 {% include 'bootstrap-migration/product/quantity' %}
             </ng-controller>
             {% endif %}

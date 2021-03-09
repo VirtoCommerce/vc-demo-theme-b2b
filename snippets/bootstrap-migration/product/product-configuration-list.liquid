@@ -29,7 +29,7 @@
 <script id="storefront.select-configuration-item-dialog.tpl" type="text/ng-template">
     <div class="modal-header align-items-center bg-gray-modal">
         <span class="modal-title h4" ng-bind="getModalTitel()"></span>
-        <button class="close modal-close-btn py-0 mt-n4" type="button" ng-click="close()" title="close" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
+        <button class="close py-0 mt-n4" type="button" ng-click="close()" title="close" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
     <div class="modal-body" ng-class="$odd && 'bg-gray-modal'" ng-repeat="item in dialogData.items">
         <div class="d-flex align-items-center">

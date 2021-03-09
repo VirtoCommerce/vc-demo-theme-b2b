@@ -29,4 +29,12 @@
       @include make-row($gutter: $collection-gutter);
     }
   }
+
+  .card {
+    margin-bottom: $collection-gutter;
+
+    .img-thumbnail {
+        @extend .border-0, .shadow-none;
+    }
+  }
 }

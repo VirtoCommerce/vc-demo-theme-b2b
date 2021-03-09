@@ -2,7 +2,7 @@
     <ul class="nav nav-pills views"
         vc-query-target="$collection.viewQuery">
         <li class="nav-item">
-            <a class="nav-link font-weight-bold"
+            <a class="nav-link text-condensed font-weight-bold"
                ng-class="{'active': $collection.viewQuery.view[0] === 'list'}"
                title="{{ 'collections.general.list_view' | t }}"
                vc-query-source="{ view: ['list'] }"
@@ -12,10 +12,10 @@
             </a>
         </li>
         <li class="nav-item ml-1">
-            <a class="nav-link font-weight-bold"
+            <a class="nav-link text-condensed font-weight-bold"
                ng-class="{'active': $collection.viewQuery.view[0] === 'grid'}"
                title="{{ 'collections.general.grid_view' | t }}"
-               c-query-source="{ view: ['grid'] }"
+               vc-query-source="{ view: ['grid'] }"
                switchable="false">
                 <i class="fa fa-th"></i>
                 <span class="ml-2">{{ 'collections.general.grid_view' | t }}</span>

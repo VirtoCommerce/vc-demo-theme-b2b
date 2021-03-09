@@ -16,8 +16,8 @@
             </h1>
             {% assign variants_count = 0 %}
             {% for product in collection.products %}
-            {% assign product_variant_count = product.variants | size %}
-            {% assign variants_count = variants_count | plus: product_variant_count %}
+                {% assign product_variant_count = product.variants | size %}
+                {% assign variants_count = variants_count | plus: product_variant_count %}
             {% endfor %}
             {% assign all_results_count = collection.all_products_count %}
             {% assign displayed_results_count = collection.products | size %}
@@ -36,7 +36,7 @@
             <div ng-controller="priceController">
                 {% assign position = 'top' %}
                 {% include 'bootstrap-migration/collection/nav' %}
-                {% include 'bootstrap-migration/product/grid' %}
+                {% include product_items %}
                 {% assign position = 'bottom' %}
                 <div class="row">
                     <div class="col">

@@ -1,5 +1,5 @@
 <div class="card mb-3">
-    <div class="card-header text-condensed font-weight-bold">
+    <div class="card-header border-bottom-0 text-condensed font-weight-bold">
         <h4 class="card-title mb-0">{{ 'collections.general.availability' | t }}</h4>
     </div>
     <div class="card-body">
@@ -14,18 +14,22 @@
 
 <script type="text/ng-template" id="selected-branch">
     <form  ng-init="$ctrl.filters =  { terms: { available_in: undefined } }" vc-query-target="$ctrl.filters">
-        <p>
+        <div class="mb-2">
             {% raw %}
                 <span ng-bind="$ctrl.fulfillmentCenter.name"></span> – <a ng-href="{{$ctrl.baseUrl + '/fulfillmentcenter/' + $ctrl.fulfillmentCenter.id}}" target="_blank"">Info</a> |
                 <a href="#" ng-click="$ctrl.selectFulfillmentCenter()">Change</a>
             {% endraw %}
-        </p>
-        <p>{{ 'collections.sidebar.search_within' | t }}</p>
-        <div class="checkbox" ng-click="$ctrl.checkCenter()">
-            <input type="checkbox" ng-checked="$ctrl.filters.terms.available_in">
-            <a vc-query-source="{ terms: { 'available_in': [$ctrl.fulfillmentCenter.id] } }" switchable="true">
-                <span class="switch"></span>
-                <span class="name">In stock now at your branch</span>
+        </div>
+        <div class="mb-2">{{ 'collections.sidebar.search_within' | t }}</div>
+        <div class="custom-control custom-checkbox"
+             ng-click="$ctrl.checkCenter()">
+            <input type="checkbox"
+                   class="custom-control-input"
+                   ng-checked="$ctrl.filters.terms.available_in">
+            <a class="custom-control-label d-inline-block text-body"
+               vc-query-source="{ terms: { 'available_in': [$ctrl.fulfillmentCenter.id] } }"
+               switchable="true">
+                In stock now at your branch
             </a>
         </div>
     </form>

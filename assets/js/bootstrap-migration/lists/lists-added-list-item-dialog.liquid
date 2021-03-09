@@ -2,7 +2,7 @@
     <div ng-if="!itemAdded">
         <div class="modal-header align-items-center bg-gray-modal">
             <h4 class="modal-title" ng-if="!selectedList.title">{{ 'wishlist.general.select_list' | t }}</h4>
-            <button type="button" class="close modal-close-btn py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="d-flex align-items-center modal-body" ng-class="!$last && 'border-bottom border-gray-200'" ng-repeat="list in lists">
             <div class="col-1">
@@ -34,7 +34,7 @@
     <div ng-if="itemAdded">
         <div class="modal-header align-items-center bg-gray-modal">
             <h4 class="modal-title"><span ng-bind="'{{ 'wishlist.general.added_to_list' | t }}' + ' ' + selectedList.name"></span></h4>
-            <button type="button" class="close modal-close-btn py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}"><span aria-hidden="true">&times;</span></button>
         </div>
         <table class="table mb-0">
             <tr class="d-flex align-items-center">
