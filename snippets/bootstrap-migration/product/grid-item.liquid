@@ -26,7 +26,7 @@
                 {% include 'bootstrap-migration/product/type/configured/item-configure-button' %}
             {% else %}
             <ng-controller ng-controller="commonProductCardController">
-                {% include 'bootstrap-migration/product/price' column: true %}
+                {% include 'bootstrap-migration/product/price' column: true, show_each: true %}
                 {% include 'bootstrap-migration/product/quantity' %}
             </ng-controller>
             {% endif %}
