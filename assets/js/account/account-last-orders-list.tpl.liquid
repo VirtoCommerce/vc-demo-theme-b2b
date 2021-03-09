@@ -5,7 +5,7 @@
                 <span class="h4">{{ 'customer.dashboard.last_orders' | t }}</span>
             </div>
             <div class="col-md-3">
-                <a ui-sref="orders.list" class="text-transform-none">
+                <a href="{{ 'account/b4#/orders/' | absolute_url }}" class="text-transform-none">
                     {{ 'customer.dashboard.all_orders_link_text' | t }} <span class="fa fa-arrow-right arrow-padding-left"></span>
                 </a>
             </div>
