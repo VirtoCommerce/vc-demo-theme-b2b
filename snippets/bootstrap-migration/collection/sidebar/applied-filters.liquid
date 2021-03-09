@@ -20,7 +20,7 @@
             <li ng-repeat="value in term">
                 <a vc-query-source="{ terms: { [term.$key]: [value] } }"
                    switchable="true">
-                    <i class="fa fa-times-circle"></i>
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </a>
                 <span class="ml-1">{% raw %}{{ value }}{% endraw %}</span>
             </li>
