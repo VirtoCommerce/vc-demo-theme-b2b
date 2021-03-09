@@ -63,12 +63,15 @@ angular.module('storefront.account')
                 } else {
                     $ctrl.selectedStatuses.push(status);
                 }
+
+                filtersChanged();
             }
 
             $ctrl.isStatusChecked = (status) => _.contains( $ctrl.selectedStatuses, status);
 
             $ctrl.checkAllStatuses = () => {
                 $ctrl.selectedStatuses = $ctrl.orderStatuses;
+                filtersChanged();
             }
 
             $ctrl.uncheckAllStatuses = () => {
