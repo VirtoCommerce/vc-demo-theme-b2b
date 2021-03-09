@@ -7,7 +7,9 @@
         {% elsif sold_out %}
             {{ 'products.product.sold_out' | t }}
         {% else %}
-            <img class="img-responsive configure-icon" src="{{ 'customize.svg' | asset_url }}" />
+            <img class="img-responsive configure-icon"
+                 src="{{ 'customize.svg' | asset_url }}"
+                 alt="" />
             <span>Configure</span>
         {% endif %}
     </button>

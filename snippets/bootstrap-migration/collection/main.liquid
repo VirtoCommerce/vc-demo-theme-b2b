@@ -3,14 +3,17 @@
 {% endif %}
 
 {{ paginator =  collection.products  | paginate page_size }}
-<main class="collection container pt-4 pb-6" role="main" ng-controller="collectionController as $collection">
+<main class="collection container pt-4 pb-6"
+      role="main"
+      ng-controller="collectionController as $collection">
     <div class="row mb-3">
         <div class="col">
             {% include 'bootstrap-migration/shared/breadcrumb' %}
         </div>
     </div>
     <div class="row">
-        <div class="col" ng-init="isAboutCollapsed = true">
+        <div class="col"
+             ng-init="isAboutCollapsed = true">
             <h1>
                 {{ collection.title }}
             </h1>

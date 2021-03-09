@@ -6,7 +6,7 @@
             ng-class="{'active': $collection.pageSizeQuery.page_size == pageSize}"
             ng-repeat="pageSize in $collection.pageSizes"
             vc-query-target="$collection.pageSizeQuery">
-            <a class="page-link text-condensed font-weight-bold"
+            <a class="page-link"
                vc-query-source="{ page_size: [pageSize] }"
                switchable="false"
                ng-bind="pageSize">

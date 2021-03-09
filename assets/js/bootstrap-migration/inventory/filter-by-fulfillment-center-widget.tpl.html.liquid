@@ -13,7 +13,8 @@
 </script>
 
 <script type="text/ng-template" id="selected-branch">
-    <form  ng-init="$ctrl.filters =  { terms: { available_in: undefined } }" vc-query-target="$ctrl.filters">
+    <form ng-init="$ctrl.filters = { terms: { available_in: undefined } }"
+          vc-query-target="$ctrl.filters">
         <div class="mb-2">
             {% raw %}
                 <span ng-bind="$ctrl.fulfillmentCenter.name"></span> – <a ng-href="{{$ctrl.baseUrl + '/fulfillmentcenter/' + $ctrl.fulfillmentCenter.id}}" target="_blank"">Info</a> |
