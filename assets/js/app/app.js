@@ -7,7 +7,6 @@ var storefrontAppDependencies = [
     'vcRecaptcha',
     'storefrontApp.consts',
     'mgo-angular-wizard',
-    'angularjs-dropdown-multiselect',
     'storefrontApp.customerInfo',
     'ui.router'
 ];

@@ -1,12 +1,16 @@
 angular.module('storefront.account')
     .component('vcAccountOrders', {
-        templateUrl: "themes/assets/js/account/account-orders.tpl.liquid",
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders.tpl");
+        }],
         controller: [function () {
             var $ctrl = this;
         }]
     })
     .component('vcAccountOrdersList', {
-        templateUrl: "account-orders-list.tpl",
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders-list.tpl");
+        }],
         controller: ['accountApi',
         'loadingIndicatorService',
         '$window',
@@ -53,6 +57,28 @@ angular.module('storefront.account')
                 loadData();
             }
 
+            $ctrl.toogleStatus = (status) => {
+                if (_.contains( $ctrl.selectedStatuses, status)){
+                    $ctrl.selectedStatuses = _.without($ctrl.selectedStatuses, status);
+                } else {
+                    $ctrl.selectedStatuses.push(status);
+                }
+
+                filtersChanged();
+            }
+
+            $ctrl.isStatusChecked = (status) => _.contains( $ctrl.selectedStatuses, status);
+
+            $ctrl.checkAllStatuses = () => {
+                $ctrl.selectedStatuses = $ctrl.orderStatuses;
+                filtersChanged();
+            }
+
+            $ctrl.uncheckAllStatuses = () => {
+                $ctrl.selectedStatuses = [];
+                filtersChanged();
+            }
+
             function filtersChanged() {
                 $ctrl.pageSettings.currentPage = 1;
                 loadData();
@@ -84,7 +110,7 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrderDetail', {
-        templateUrl: "account-order-detail.tpl",
+        templateUrl: "themes/assets/js/account/account-order-detail.tpl",
         require: {
             accountManager: '^vcAccountManager'
         },
