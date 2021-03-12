@@ -290,7 +290,6 @@ angular.module('storefront.account')
                             angular.extend(x.product, { quantity: minAvailableQuantity })
                         );
 
-
                         var configurationDialogData = toDialogDataModel(configuredProuctsForDialog, null, false, null);
 
                         if(!dialogData) {
@@ -304,7 +303,6 @@ angular.module('storefront.account')
                 var usalItemsForReorder =  _.reject(_.map($ctrl.order.usualItems, (x)=> {
                     return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
                 }), (x) => x.quantity < 1);
-
 
                 var prouctsForDialog =   _.reject(_.map($ctrl.order.usualItems, (x)=>
                     angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
