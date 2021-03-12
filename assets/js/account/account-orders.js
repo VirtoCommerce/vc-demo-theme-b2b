@@ -129,6 +129,7 @@ angular.module('storefront.account')
         'authService',
         'creditCardPaymentMethodCode',
         'purchasingAgentRole',
+        '$q',
         function ($rootScope,
           $window,
           loader,
@@ -143,7 +144,8 @@ angular.module('storefront.account')
           cartService,
           authService,
           creditCardPaymentMethodCode,
-          purchasingAgentRole) {
+          purchasingAgentRole,
+          $q) {
             var $ctrl = this;
             $ctrl.loader = loader;
             $ctrl.hasPhysicalProducts = true;
@@ -299,6 +301,30 @@ angular.module('storefront.account')
                 });
                 return;
             };
+
+
+            $scope.reorderAll = function() {
+                var addToCartRequests = [];
+
+                var usalItemsForReorder =  _.reject(_.map($ctrl.order.usualItems, (x)=> {
+                    return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
+                }), (x) => x.quantity < 1);
+
+
+                var prouctsForDialog =   _.reject(_.map($ctrl.order.usualItems, (x)=>
+                                                    angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
+                ), (x) => x.quantity < 1);
+
+                var dialogData = toDialogDataModel(prouctsForDialog, null, false, null);
+
+                addToCartRequests.push(cartService.addLineItems(usalItemsForReorder))
+
+                $q.all(addToCartRequests).then(data => {
+                    console.log(data);
+                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+                    $rootScope.$broadcast('cartItemsChanged');
+                });
+            }
 
             function addProductToCartById(productId, quantity) {
                 catalogService.getProduct([productId]).then(response => {
