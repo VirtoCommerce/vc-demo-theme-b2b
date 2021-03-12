@@ -277,7 +277,7 @@ angular.module('storefront.account')
                 var dialogData = undefined;
 
                 _.each( $ctrl.order.configuredGroups, (configuration) => {
-                    var minAvailableQuantity = _.min(_.map(configuration.items, (x)=>  _.min([x.quantity, x.product.availableQuantity])));
+                    var minAvailableQuantity = _.min(_.map(configuration.items, (x) => _.min([x.quantity, x.product.availableQuantity])));
 
                     if(minAvailableQuantity > 0) {
                        var itemsForAdding = configuration.items.map(item => {
@@ -286,7 +286,7 @@ angular.module('storefront.account')
 
                         addToCartRequests.push(cartService.addLineItems(itemsForAdding));
 
-                        var configuredProuctsForDialog =  _.map(configuration.items, (x)=>
+                        var configuredProuctsForDialog =  _.map(configuration.items, (x) =>
                             angular.extend(x.product, { quantity: minAvailableQuantity })
                         );
 
@@ -300,11 +300,11 @@ angular.module('storefront.account')
                     }
                 });
 
-                var usalItemsForReorder =  _.reject(_.map($ctrl.order.usualItems, (x)=> {
+                var usalItemsForReorder = _.reject(_.map($ctrl.order.usualItems, (x) => {
                     return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
                 }), (x) => x.quantity < 1);
 
-                var prouctsForDialog =   _.reject(_.map($ctrl.order.usualItems, (x)=>
+                var prouctsForDialog = _.reject(_.map($ctrl.order.usualItems, (x) =>
                     angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
                 ), (x) => x.quantity < 1);
 
@@ -318,7 +318,7 @@ angular.module('storefront.account')
 
                 addToCartRequests.push(cartService.addLineItems(usalItemsForReorder))
 
-                $q.all(addToCartRequests).then(data => {
+                $q.all(addToCartRequests).then(() => {
                     dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
                     $rootScope.$broadcast('cartItemsChanged');
                 });
