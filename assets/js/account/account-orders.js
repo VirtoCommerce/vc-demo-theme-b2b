@@ -302,9 +302,34 @@ angular.module('storefront.account')
                 return;
             };
 
-
             $scope.reorderAll = function() {
                 var addToCartRequests = [];
+                var dialogData = undefined;
+
+                _.each( $ctrl.order.configuredGroups, (configuration) => {
+                    var minAvailableQuantity = _.min(_.map(configuration.items, (x)=>  _.min([x.quantity, x.product.availableQuantity])));
+
+                    if(minAvailableQuantity > 0) {
+                       var itemsForAdding = configuration.items.map(item => {
+                            return { id: item.productId, quantity: minAvailableQuantity, configuredProductId: configuration.productId };
+                        });
+
+                        addToCartRequests.push(cartService.addLineItems(itemsForAdding));
+
+                        var configuredProuctsForDialog =  _.map(configuration.items, (x)=>
+                            angular.extend(x.product, { quantity: minAvailableQuantity })
+                        );
+
+
+                        var configurationDialogData = toDialogDataModel(configuredProuctsForDialog, null, false, null);
+
+                        if(!dialogData) {
+                            dialogData = configurationDialogData;
+                        } else {
+                            dialogData.items = _.union(dialogData.items, configurationDialogData.items);
+                        }
+                    }
+                });
 
                 var usalItemsForReorder =  _.reject(_.map($ctrl.order.usualItems, (x)=> {
                     return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
@@ -312,15 +337,20 @@ angular.module('storefront.account')
 
 
                 var prouctsForDialog =   _.reject(_.map($ctrl.order.usualItems, (x)=>
-                                                    angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
+                    angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
                 ), (x) => x.quantity < 1);
 
-                var dialogData = toDialogDataModel(prouctsForDialog, null, false, null);
+                var usialItemsDialogData = toDialogDataModel(prouctsForDialog, null, false, null);
+
+                if(!dialogData) {
+                    dialogData = usialItemsDialogData;
+                } else {
+                    dialogData.items = _.union(dialogData.items, usialItemsDialogData.items);
+                }
 
                 addToCartRequests.push(cartService.addLineItems(usalItemsForReorder))
 
                 $q.all(addToCartRequests).then(data => {
-                    console.log(data);
                     dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
                     $rootScope.$broadcast('cartItemsChanged');
                 });
