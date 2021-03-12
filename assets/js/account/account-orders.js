@@ -195,36 +195,6 @@ angular.module('storefront.account')
                 $window.open(url, '_blank');
             }
 
-            // $ctrl.reorder = function() {
-            //     var productIdsQuery = $ctrl.order.items.map(item => {
-            //         return 'productIds=' + item.productId;
-            //     }).join("&");
-
-            //     catalogService.getProducts(productIdsQuery).then(response => {
-            //         if (response.data && response.data.length) {
-            //             var configurationProducts = response.data.map(item => {
-            //                 return angular.extend(item, { quantity: _.findWhere($ctrl.order.items, {productId: item.id}).quantity });
-            //             });
-            //             var inventoryError = configurationProducts.some(product => {
-            //                 return product.availableQuantity < product.quantity;
-            //             });
-            //             var dialogData = toDialogDataModel(configurationProducts, null, inventoryError, null);
-            //             dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
-            //             if (!inventoryError) {
-            //                 var items = configurationProducts.map(product => {
-            //                     return { id: product.id, quantity: product.quantity };
-            //                 });
-            //                 cartService.addLineItems(items).then(res => {
-            //                     var result = res.data;
-            //                     if (result.isSuccess) {
-            //                         $rootScope.$broadcast('cartItemsChanged');
-            //                     }
-            //                 });
-            //             }
-            //         }
-            //     });
-            // }
-
             $ctrl.paymentMethodChanged = function () {
                 loader.wrapLoading(function() {
                     $ctrl.selectedPaymentMethod = _.find($ctrl.paymentMethods, function (pm) { return pm.code == $ctrl.selectedPaymentMethodCode; });
