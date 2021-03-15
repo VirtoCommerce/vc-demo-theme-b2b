@@ -292,7 +292,7 @@ angular.module('storefront.account')
 
                         const configurationDialogData = toDialogDataModel(configuredProuctsForDialog, null, false, null);
 
-                        if(!dialogData) {
+                        if (!dialogData) {
                             dialogData = configurationDialogData;
                         } else {
                             dialogData.items = _.union(dialogData.items, configurationDialogData.items);
