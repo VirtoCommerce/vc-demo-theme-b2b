@@ -273,24 +273,24 @@ angular.module('storefront.account')
             };
 
             $scope.reorderAll = function() {
-                var addToCartRequests = [];
-                var dialogData = undefined;
+                const addToCartRequests = [];
+                let dialogData = undefined;
 
                 _.each( $ctrl.order.configuredGroups, (configuration) => {
-                    var minAvailableQuantity = _.min(_.map(configuration.items, (x) => _.min([x.quantity, x.product.availableQuantity])));
+                    const minAvailableQuantity = _.min(_.map(configuration.items, (x) => _.min([x.quantity, x.product.availableQuantity])));
 
-                    if(minAvailableQuantity > 0) {
-                       var itemsForAdding = configuration.items.map(item => {
+                    if (minAvailableQuantity > 0) {
+                        const itemsForAdding = configuration.items.map(item => {
                             return { id: item.productId, quantity: minAvailableQuantity, configuredProductId: configuration.productId };
                         });
 
                         addToCartRequests.push(cartService.addLineItems(itemsForAdding));
 
-                        var configuredProuctsForDialog =  _.map(configuration.items, (x) =>
+                        let configuredProuctsForDialog =  _.map(configuration.items, (x) =>
                             angular.extend(x.product, { quantity: minAvailableQuantity })
                         );
 
-                        var configurationDialogData = toDialogDataModel(configuredProuctsForDialog, null, false, null);
+                        const configurationDialogData = toDialogDataModel(configuredProuctsForDialog, null, false, null);
 
                         if(!dialogData) {
                             dialogData = configurationDialogData;
@@ -300,17 +300,17 @@ angular.module('storefront.account')
                     }
                 });
 
-                var usalItemsForReorder = _.reject(_.map($ctrl.order.usualItems, (x) => {
+                const usalItemsForReorder = _.reject(_.map($ctrl.order.usualItems, (x) => {
                     return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
                 }), (x) => x.quantity < 1);
 
-                var prouctsForDialog = _.reject(_.map($ctrl.order.usualItems, (x) =>
+                let prouctsForDialog = _.reject(_.map($ctrl.order.usualItems, (x) =>
                     angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
                 ), (x) => x.quantity < 1);
 
-                var usialItemsDialogData = toDialogDataModel(prouctsForDialog, null, false, null);
+                const usialItemsDialogData = toDialogDataModel(prouctsForDialog, null, false, null);
 
-                if(!dialogData) {
+                if (!dialogData) {
                     dialogData = usialItemsDialogData;
                 } else {
                     dialogData.items = _.union(dialogData.items, usialItemsDialogData.items);
