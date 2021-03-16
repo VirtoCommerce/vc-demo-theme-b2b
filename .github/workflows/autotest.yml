@@ -74,7 +74,7 @@ jobs:
         with:
           version: '7.7.2'
           projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
-          args: '-noSplash -retry=0 -testSuiteCollectionPath="Test Suites/B2B/B2B-Collection" -browserType="Chrome (headless)" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090" -g_urlFront="http://localhost:8080/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
+          args: '-noSplash -retry=0 -testSuitePath="Test Suites/B2B/OpenCategoryPage" -browserType="Chrome (headless)" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090" -g_urlFront="http://localhost:8080/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
 
       - name: 'Katalon Reports'
         if: always()
