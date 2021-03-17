@@ -1,4 +1,4 @@
-<div class="card-body border-gray-200 text-condensed font-weight-bold py-1">
+<div class="card-body py-2 border-gray-200 text-condensed font-weight-bold">
     <div class="row align-items-center">
         <div class="col">{{ 'customer.order.product' | t }}</div>
         <div class="col-5">
@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div ng-repeat="group in $ctrl.order.configuredGroups" class="card-body border-gray-200 border-top border-1">
+<div ng-repeat="group in $ctrl.order.configuredGroups" class="card-body py-2 border-gray-200 border-top border-1">
     <div class="row align-items-center">
         <div ng-class="$ctrl.hideReorder ? 'col-1' : 'col-2'">
             <img class="img-fluid border-0 p-0 " alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div ng-repeat="part in group.items"
-                    class="card-body panel-body  border-gray-200 border-top border-1">
+                    class="card-body py-2 panel-body  border-gray-200 border-top border-1">
                     <div class="row align-items-center">
                         <div class="col-2 text-center">
                             <img class="img-fluid border-0 p-0" alt="{% raw %}{{ part.name }}{% endraw %}"
@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<div ng-repeat="lineItem in $ctrl.order.usualItems" class="card-body border-gray-200 border-top border-1">
+<div ng-repeat="lineItem in $ctrl.order.usualItems" class="card-body py-2 border-gray-200 border-top border-1">
     <div class="row align-items-center">
         <div ng-class="$ctrl.hideReorder ? 'col-1' : 'col-2'">
             <img class="img-fluid border-0 p-0" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
@@ -108,7 +108,6 @@
                 <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
                     <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
                 </div>
-
             </div>
         </div>
     </div>
