@@ -1,6 +1,10 @@
-<div class="custom-control custom-checkbox my-2">
-    <input type="checkbox" class="custom-control-input" id="compareCheckbox" title="Compare" ng-click="$ctrl.addProductToCompareList($event);" ng-checked="$ctrl.containProduct">
-    <label class="custom-control-label" for="compareCheckbox">
+<div class="custom-control custom-checkbox my-2"
+     ng-click="$ctrl.addProductToCompareList($event);">
+    <input type="checkbox"
+           class="custom-control-input"
+           title="Compare"
+           ng-checked="$ctrl.containProduct">
+    <label class="custom-control-label">
         Compare
     </label>
 </div>

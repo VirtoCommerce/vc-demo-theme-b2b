@@ -13,16 +13,16 @@
             {% endraw %}
             <i class="fa fa-angle-down font-weight-bold text-primary" aria-hidden="true"></i>
         </a>
-        <ul class="dropdown-menu"
-            uib-dropdown-menu
-            role="menu"
-            aria-labelledby="sort">
-            <li ng-repeat="(mode, title) in $collection.sortModes">
-                <a vc-query-source="{ sort_by: [mode] }"
-                   switchable="false"
-                   ng-bind="title | translate">
-                </a>
-            </li>
-        </ul>
+        <div class="dropdown-menu"
+             uib-dropdown-menu
+             role="menu"
+             aria-labelledby="sort">
+            <a class="dropdown-item"
+               ng-repeat="(mode, title) in $collection.sortModes"
+               vc-query-source="{ sort_by: [mode] }"
+               switchable="false"
+               ng-bind="title | translate">
+            </a>
+        </div>
     </div>
 </div>
