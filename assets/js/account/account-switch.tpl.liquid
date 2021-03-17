@@ -25,18 +25,11 @@
                     </div>
                 </a>
                 <div class="d-inline-block px-2">
-                    <a class="btn btn-sm btn-white mr-0 p-2"
-                       ng-if="$ctrl.currentAccount.id === account.id"
-                       href="{{ 'account/logout' | absolute_url }}">
+                    <button class="btn btn-sm btn-white mr-0 p-2"
+                            ng-click="$ctrl.logout(account.id, '{{ 'account/logout' | absolute_url }}')">
                         <i class="fa fa-sign-out"
                            aria-hidden="true"></i>
-                    </a>
-                    <a class="btn btn-sm btn-white mr-0 p-2"
-                       ng-if="$ctrl.currentAccount.id !== account.id"
-                       ng-click="$ctrl.logout(account.id)">
-                        <i class="fa fa-sign-out"
-                           aria-hidden="true"></i>
-                    </a>
+                    </button>
                 </div>
             </div>
         </li>
