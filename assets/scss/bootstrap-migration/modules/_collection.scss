@@ -1,0 +1,40 @@
+.collection {
+  $collection-gutter: 20px;
+
+  .navigation {
+    @include make-row($gutter: $collection-gutter);
+    @include make-grid-columns($gutter: $collection-gutter);
+
+    .sidebar {
+      @include media-breakpoint-up(md) {
+        @include make-col(2.76);
+      }
+
+      .card-title {
+        font-size: $font-size-base * 1.1428571429;
+      }
+    }
+
+    .views {
+      .nav-link:not(.active) {
+        color: $body-color;
+
+        &:hover {
+          background-color: $light;
+        }
+      }
+    }
+
+    .row {
+      @include make-row($gutter: $collection-gutter);
+    }
+  }
+
+  .card {
+    margin-bottom: $collection-gutter;
+
+    .img-thumbnail {
+        @extend .border-0, .shadow-none;
+    }
+  }
+}

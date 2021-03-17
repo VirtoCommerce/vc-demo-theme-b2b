@@ -1,5 +1,5 @@
-<div class="modal-compare position-fixed col" ng-show="$ctrl.itemsCount > 0 && $ctrl.showBar">
-    <div class="compare-head bg-gray-900 text-white row">
+<div class="modal-compare container border-light position-fixed" ng-show="$ctrl.itemsCount > 0 && $ctrl.showBar">
+    <div class="compare-head row bg-gray-900 text-white">
         <div class="col-md-8">
             You have <span class="visible-count" id="productCompareListCount" ng-bind="$ctrl.itemsCount"></span> out of 5 products to compare selected.
         </div>
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-white overflow-hidden p-2 row justify-content-between" ng-show="$ctrl.showedBody">
+    <div class="row bg-white justify-content-between p-2 overflow-hidden" ng-show="$ctrl.showedBody">
         <div class="col-md-9">
             <ul class="list p-0">
                 <li class="list-item d-inline-block pr-2 position-relative align-top" ng-repeat="product in $ctrl.products">
