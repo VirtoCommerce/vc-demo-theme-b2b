@@ -1,0 +1,49 @@
+<div class="dropdown account-switch"
+     uib-dropdown
+     aria-haspopup="true">
+    <a id="account-dropdown"
+       href="{{ 'account' | absolute_url }}"
+       uib-dropdown-toggle>
+    {{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right mt-0"
+         role="menu"
+         uib-dropdown-menu
+         aria-labelledby="account-dropdown">
+        <div ng-repeat="account in $ctrl.accounts"
+             class="dropdown-item d-flex align-items-center justify-content-between p-2">
+            <a role="menuitem"
+               class="text-body"
+               ng-click="$ctrl.switch(account)">
+                <i class="account-icon fa fa-user-circle fa-2x fa-fw"
+                   ng-class="{'active': $ctrl.currentAccount.id === account.id}">
+                </i>
+                <div class="d-inline-block small">
+                    <div class="font-weight-bold" ng-bind="account.name"></div>
+                    <div class="small text-muted" ng-bind="account.role.name"></div>
+                </div>
+            </a>
+            <div class="d-inline-block px-2">
+                <a class="btn btn-xs btn-white btn-square shadow-sm"
+                   ng-if="$ctrl.currentAccount.id === account.id"
+                   href="{{ 'account/logout' | absolute_url }}">
+                    <i class="fa fa-sign-out"></i>
+                </a>
+                <a class="btn btn-xs btn-white btn-square shadow-sm"
+                   ng-if="$ctrl.currentAccount.id !== account.id"
+                   ng-click="$ctrl.logout(account.id)">
+                    <i class="fa fa-sign-out"></i>
+                </a>
+            </div>
+        </div>
+        <div class="dropdown-divider my-1"></div>
+        <div class="dropdown-item p-2">
+            <a role="menuitem"
+               class="d-flex align-items-center"
+               href="{{ 'account/login' | absolute_url }}">
+                <i class="add-icon fa fa-plus-circle fa-2x fa-fw"></i>
+                <span>Add account</span>
+            </a>
+        </div>
+    </div>
+</div>

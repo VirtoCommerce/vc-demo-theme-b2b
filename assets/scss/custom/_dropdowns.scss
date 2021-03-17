@@ -82,3 +82,23 @@
     outline: 0;
   }
 }
+
+.account-switch {
+  .dropdown-menu {
+    min-width: 210px;
+  }
+
+  .dropdown-menu-item {
+    .account-icon.active {
+      color: $brand-primary;
+    }
+
+    &:active .account-icon {
+      color: $white;
+    }
+
+    .add-icon {
+      color: #72A365;
+    }
+  }
+}

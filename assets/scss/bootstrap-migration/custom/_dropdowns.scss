@@ -3,3 +3,23 @@
   border-radius: 0;
   border: none;
 }
+
+.account-switch {
+  .dropdown-menu {
+    min-width: 13.125rem;
+  }
+
+  .dropdown-item {
+    .account-icon.active {
+      color: $primary;
+    }
+
+    &:active .account-icon {
+      color: $white;
+    }
+
+    .add-icon {
+      color: #72A365;
+    }
+  }
+}
