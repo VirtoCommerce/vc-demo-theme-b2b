@@ -789,6 +789,7 @@
         },
         "customer": {
             "account": "Account",
+            "add_account": "Add account", 
             "view_account": "Go to my account",
             "logged_in_as_html": "Logged in as {0}",
             "logged_in_as_label": "Logged in as",
