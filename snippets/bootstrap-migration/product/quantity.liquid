@@ -1,5 +1,5 @@
 ﻿{% if show_label %}
-    <label>{{ 'products.product.quantity' | t }}</label>
+    <label class="{% if label_bold %}font-weight-bold{% endif %}">{{ 'products.product.quantity' | t }}</label>
 {% endif %}
 <div class="input-group">
         <input type="text" class="form-control"

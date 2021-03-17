@@ -1,6 +1,6 @@
 
-<dl class="d-flex justify-content-between mb-0">
-    <dt>
+<div class="d-flex justify-content-between {% if column %}flex-column mb-2{% endif %}">
+    <div class="font-weight-bold">
         <span class="text-helvetica {% if variation_price %}font-weight-normal text-uppercase text-muted{% endif %}">
             {% if customer %}
                 {{ 'products.price.private' | t }}
@@ -8,10 +8,10 @@
                 {{ 'products.price.public' | t }}
             {% endif %}
         </span>
-    </dt>
+    </div>
 
-    <dd>
-        <span class="{% if variation_price %}{% else %}text-dark-green{% endif %}">
+    <div>
+        <span class="{% if variation_price != true %}text-dark-green{% endif %}">
             {% if variant != null %}
                 {% assign productOrVariant = variant %}
             {% else %}
@@ -28,7 +28,9 @@
                 {% assign price_name = 'actualPrice' %}
                 {% include 'bootstrap-migration/product/price/dynamic' %}
             {% endif %}
-            <span class="{% if variation_price %}font-weight-normal{% else %}font-weight-bold{% endif %}">/ each</span>
         </span>
-    </dd>
-</dl>
+        {% if show_each %}
+            <span class="font-weight-normal">/ each</span>
+        {% endif %}
+    </div>
+</div>

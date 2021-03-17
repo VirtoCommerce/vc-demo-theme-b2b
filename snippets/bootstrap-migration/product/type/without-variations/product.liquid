@@ -26,7 +26,7 @@
             <div class="card-body px-0">
                 <div class="border-bottom px-3 pb-3 mb-3">
                   {% assign product = product %}
-                  {% include 'bootstrap-migration/product/price' %}
+                  {% include 'bootstrap-migration/product/price' show_each: true %}
                 </div>
 
                 {% include 'bootstrap-migration/product/type/common/product-delivery' %}

@@ -1,0 +1,8 @@
+{% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
+<div class="text-uppercase">{{ product.properties['Brand'].value }}
+</div>
+<div class="mb-3">
+    <a class="font-weight-bold text-truncate d-inline-block mw-100" href="{{ product_url | append: '?resp_group=' | append: response_group }}">{{ product.title }}</a><br>
+    <span class="font-weight-bold">{{ 'products.product.sku' | t }}</span>&nbsp;<a href="{{ product_url| append: '?resp_group=' | append: response_group }}">{{ product.sku }}</a><br>
+    <span class="font-weight-bold">{{ 'products.product.mmn' | t }}</span>&nbsp;{{ product.properties['MMN'].value }}
+</div>

@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between flex-column mb-2"
+     ng-controller="configurableProductCardController"
+     ng-init="initProductConfiguration('{{product.id}}')">
+    <div class="font-weight-bold">
+        <span class="text-helvetica">
+            {% if customer %}
+                {{ 'products.price.private' | t }}
+            {% else %}
+                {{ 'products.price.public' | t }}
+            {% endif %}
+        </span>
+    </div>
+
+    <div>
+        <span class="text-dark-green"
+              ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
+            <strong ng-bind="getDefaultPrice()"></strong>
+        </span>
+        <span class="font-weight-normal">/ each</span>
+    </div>
+</div>
