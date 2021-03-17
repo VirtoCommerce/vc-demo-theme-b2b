@@ -1,6 +1,8 @@
 var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('vcAddress', {
-    templateUrl: "themes/assets/address.tpl.html",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/common-components/address.tpl.html");
+    }],
     bindings: {
         address: '=',
         addresses: '<',
@@ -19,7 +21,7 @@ storefrontApp.component('vcAddress', {
     controller: ['$scope', function ($scope) {
         var ctrl = this;
         ctrl.types = [{ id: 'Billing', name: 'Billing' }, { id: 'Shipping', name: 'Shipping' }, { id: 'BillingAndShipping', name: 'Billing and Shipping' }];
-        
+
         this.$onInit = function () {
             if (ctrl.validationContainer)
                 ctrl.validationContainer.addComponent(this);
