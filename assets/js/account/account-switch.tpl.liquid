@@ -13,7 +13,7 @@
         <li ng-repeat="account in $ctrl.accounts">
             <div class="dropdown-menu-item d-flex align-items-center justify-content-between pl-2 pr-3 py-2">
                 <a role="menuitem"
-                   class="text-body p-0"
+                   class="text-body w-100 p-0"
                    ng-click="$ctrl.switch(account)">
                     <i class="account-icon fa fa-user-circle fa-2x fa-fw"
                        ng-class="{'active': $ctrl.currentAccount.id === account.id}"
