@@ -4,7 +4,7 @@
     <a id="account-dropdown"
        href="{{ 'account' | absolute_url }}"
        uib-dropdown-toggle>
-    {{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary"></i>
+    {{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary" aria-hidden="true"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-right mt-0"
          role="menu"
@@ -16,7 +16,8 @@
                class="text-body"
                ng-click="$ctrl.switch(account)">
                 <i class="account-icon fa fa-user-circle fa-2x fa-fw"
-                   ng-class="{'active': $ctrl.currentAccount.id === account.id}">
+                   ng-class="{'active': $ctrl.currentAccount.id === account.id}"
+                   aria-hidden="true">
                 </i>
                 <div class="d-inline-block small">
                     <div class="font-weight-bold" ng-bind="account.name"></div>
@@ -27,12 +28,14 @@
                 <a class="btn btn-xs btn-white btn-square shadow-sm"
                    ng-if="$ctrl.currentAccount.id === account.id"
                    href="{{ 'account/logout' | absolute_url }}">
-                    <i class="fa fa-sign-out"></i>
+                    <i class="fa fa-sign-out"
+                       aria-hidden="true"></i>
                 </a>
                 <a class="btn btn-xs btn-white btn-square shadow-sm"
                    ng-if="$ctrl.currentAccount.id !== account.id"
                    ng-click="$ctrl.logout(account.id)">
-                    <i class="fa fa-sign-out"></i>
+                    <i class="fa fa-sign-out"
+                       aria-hidden="true"></i>
                 </a>
             </div>
         </div>
@@ -41,7 +44,8 @@
             <a role="menuitem"
                class="d-flex align-items-center"
                href="{{ 'account/login' | absolute_url }}">
-                <i class="add-icon fa fa-plus-circle fa-2x fa-fw"></i>
+                <i class="add-icon fa fa-plus-circle fa-2x fa-fw"
+                   aria-hidden="true"></i>
                 <span>Add account</span>
             </a>
         </div>
