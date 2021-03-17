@@ -10,10 +10,8 @@
         </a>
     </div>
     <div class="card-body">
-        <h5 ng-repeat-start="term in filters.terms | toArray: true | orderBy: '$key'">
-            {% raw %}
-                {{ term.$key }}
-            {% endraw %}
+        <h5 ng-repeat-start="term in filters.terms | toArray: true | orderBy: '$key'"
+            ng-bind="adaptFilterName(term.$key)">
         </h5>
         <ul class="list-unstyled mb-0"
             ng-repeat-end>
@@ -22,7 +20,7 @@
                    switchable="true">
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </a>
-                <span class="ml-1">{% raw %}{{ value }}{% endraw %}</span>
+                <span class="ml-1" ng-bind="adaptFilterValue(term.$key, value)"></span>
             </li>
         </ul>
     </div>
