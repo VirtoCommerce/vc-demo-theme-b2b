@@ -24,7 +24,7 @@
     {% include 'main/dependencies-bootstrap-migration' %}
 </head>
 <body id="{{ page_title | handle }}"
-      class="h-100 d-flex flex-column {% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}"
+      class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}"
       ng-cloak
       ng-controller="mainController"
       ng-init="baseUrl='{{ '' | absolute_url }}'"

@@ -50,6 +50,10 @@ $link-color: $secondary;
 $link-hover-decoration: none;
 $link-font-weight: 500;
 
+$box-shadow-sm: .0625rem .0625rem .3125rem rgba($black, .15);
+$box-shadow: .0625rem .25rem .625rem rgba($black, .15);
+$box-shadow-lg: .0625rem .5rem .9375rem rgba($black, .15);
+
 $input-bg: $body-bg;
 $input-bg-checked: $secondary;
 $input-border-radius: 0;
@@ -64,7 +68,11 @@ $input-btn-border-width: 1px;
 $input-btn-font-size: 0.9375rem;
 $input-btn-line-height: 1.3392875;
 $input-btn-padding-x: 1rem;
+
 $input-btn-padding-x-lg: 1.5rem;
+
+$input-btn-font-size-sm: $font-size-sm !default;
+$input-btn-line-height-sm: $line-height-sm !default;
 
 $custom-control-cursor: pointer;
 $custom-control-indicator-size: 1.2rem;
@@ -79,13 +87,24 @@ $custom-control-margin-bottom: $spacer / 2;
 $custom-checkbox-indicator-border-radius: 0;
 
 $btn-border-width: 2px;
+$btn-height-border: $btn-border-width * 2;
 $btn-font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $btn-font-weight: $font-weight-bold;
 $btn-box-shadow: false;
 $btn-padding-y: $input-padding-y;
 $btn-padding-x: $input-padding-x;
+
+$btn-border-radius-sm: $border-radius-sm;
+$btn-font-size-sm: $input-btn-font-size-sm;
+$btn-line-height-sm: $input-btn-line-height-sm;
 $btn-padding-y-sm: 0.313rem;
 $btn-padding-x-sm: 0.625rem;
+
+$btn-font-size-xs: $btn-font-size-sm;
+$btn-line-height-xs: $btn-line-height-sm;
+$btn-border-radius-xs: $btn-border-radius-sm;
+$btn-padding-y-xs: $btn-padding-y-sm / 2;
+$btn-padding-x-xs: $btn-padding-x-sm / 2;
 
 $dropdown-padding-y: 0.3125rem;
 $dropdown-header-color: $gray-700;
