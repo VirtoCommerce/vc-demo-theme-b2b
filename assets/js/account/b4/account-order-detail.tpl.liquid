@@ -125,11 +125,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <hr class="hr--small" ng-if="$ctrl.order.subscriptionNumber" />
-                    <div class="vc-section-header" ng-if="$ctrl.order.subscriptionNumber">
-                        <div class="vc-t">{{ 'customer.order.subscription' | t }}</div>
-                        <div class="vc-descr">
+                <div class="row mt-4">
+                    <div class="col-12 px-0">
+                        <hr class="mb-2 mt-0 border-1 border-gray-200" />
+                    </div>
+                    <div class="col-12 px-0" >
+                        <div>{{ 'customer.order.subscription' | t }}</div>
+                        <div>
                             {{ 'customer.order.subscription_comment' | t }}
                             <a ng-bind="$ctrl.order.subscriptionNumber" ui-sref="subscriptions.detail({number: $ctrl.order.subscriptionNumber})"></a>
                         </div>
