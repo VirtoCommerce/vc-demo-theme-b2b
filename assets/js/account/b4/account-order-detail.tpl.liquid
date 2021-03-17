@@ -1,9 +1,9 @@
-
+<div class="mb-3">
      <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})" class="btn btn-outline-primary text-condensed">
          <span class="fa fa-arrow-left pr-2"></span> {{ 'customer.orders.return' | t }}
      </a>
-
-<div id="order-detail" class="row mt-2">
+</div>
+<div id="order-detail" class="row">
     <div class="col-md-9">
         <div class="row">
             <div class="col">
@@ -48,73 +48,86 @@
     </div>
     <div class="col-md-3">
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="d-flex justify-content-between order-action-block">
-                        <button class="btn btn-primary btn-lg p-0" ng-click="$ctrl.getInvoicePdf()">
+            <div class="col">
+                <div class="row mb-3">
+                    <div class="col d-flex justify-content-between p-0">
+                        <button class="btn btn-primary btn-lg" ng-click="$ctrl.getInvoicePdf()">
                             <span class="btn-text">{{ 'customer.order.get_invoice' | t }}</span>
                             <span class="btn-loading"></span>
                         </button>
-                        <button class="btn btn-primary btn-lg p-0">
+                        <button class="btn btn-primary btn-lg">
                             <span class="btn-text">{{ 'customer.order.reorder' | t }}</span>
                             <span class="btn-loading"></span>
                         </button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Order totals</div>
-                        <div class="panel-body">
-                            <vc-totals order="$ctrl.order"></vc-totals>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" ng-if="$ctrl.deliveryMethod.type =='shipping'">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">{{ 'customer.order.billing_address' | t }}</div>
-                        <div class="panel-body">
-                            <vc-address address="$ctrl.billingAddress"></vc-address>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" ng-if="$ctrl.deliveryMethod.type =='shipping'">
-                    <div class="panel panel-default" ng-if="$ctrl.order.shipments[0].deliveryAddress">
-                        <div class="panel-heading">{{ 'customer.order.shipping_address' | t }}</div>
-                        <div class="panel-body">
-                            <vc-address address="$ctrl.order.shipments[0].deliveryAddress"></vc-address>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" ng-if="$ctrl.deliveryMethod.type =='pickup'">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">PICKUP INFORMATION</div>
-                        <div class="panel-body">
-                            <vc-address address="$ctrl.deliveryMethod.fulfillmentCenter.address"></vc-address>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">PAYMENT DETAILS</div>
-                        <div class="panel-body">
-                            <div class="h5">
-                                <span>{{ 'customer.order.payment_type' | t }}</span>
-                            </div>
-                            <div class="form-group">
-                                <select name="paymentMethodSelect" id="paymentMethodSelect" ng-model="$ctrl.selectedPaymentMethodCode" ng-change="$ctrl.paymentMethodChanged()" class="form-control" ng-disabled="$ctrl.order.inPayments[0].status === 'Paid'">
-                                    <option ng-repeat="method in $ctrl.paymentMethods" ng-value="method.code" ng-bind="method.displayName"></option>
-                                </select>
-                            </div>
-                            <div ng-if="$ctrl.order.inPayments[0].status !== 'Paid'">
-                                <button class="btn btn-primary btn-lg" ng-click="$ctrl.payInvoice()">
-                                    <span class="btn-text">{{ 'customer.order.pay_invoice' | t }}</span>
-                                    <span class="btn-loading"></span>
-                                </button>
+                <div class="row mt-3">
+                    <div class="col p-0">
+                        <div class="card">
+                            <div class="card-header text-uppercase text-condensed font-weight-bold">Order totals</div>
+                            <div class="card-body">
+                                <vc-totals order="$ctrl.order"></vc-totals>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3" ng-if="$ctrl.deliveryMethod.type =='shipping'">
+                    <div class="col p-0">
+                        <div class="card">
+                            <div class="card-header text-uppercase text-condensed font-weight-bold">{{ 'customer.order.billing_address' | t }}</div>
+                            <div class="card-body">
+                                <vc-address address="$ctrl.billingAddress"></vc-address>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3" ng-if="$ctrl.deliveryMethod.type =='shipping'">
+                    <div class="col p-0">
+                        <div class="card" ng-if="$ctrl.order.shipments[0].deliveryAddress">
+                            <div class="card-header text-uppercase text-condensed font-weight-bold">{{ 'customer.order.shipping_address' | t }}</div>
+                            <div class="card-body">
+                                <vc-address address="$ctrl.order.shipments[0].deliveryAddress"></vc-address>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mt-3" ng-if="$ctrl.deliveryMethod.type =='pickup'">
+                    <div class="col p-0">
+                        <div class="card">
+                            <div class="card-header text-uppercase text-condensed font-weight-bold">PICKUP INFORMATION</div>
+                            <div class="card-body">
+                                <vc-address address="$ctrl.deliveryMethod.fulfillmentCenter.address"></vc-address>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col p-0">
+
+                        <div class="card">
+                            <div class="card-header text-uppercase text-condensed font-weight-bold">PAYMENT DETAILS</div>
+                            <div class="card-body">
+                                <div class="h5">
+                                    <span>{{ 'customer.order.payment_type' | t }}</span>
+                                </div>
+                                <div class="form-group">
+                                    <select name="paymentMethodSelect" id="paymentMethodSelect" ng-model="$ctrl.selectedPaymentMethodCode" ng-change="$ctrl.paymentMethodChanged()" class="form-control" ng-disabled="$ctrl.order.inPayments[0].status === 'Paid'">
+                                        <option ng-repeat="method in $ctrl.paymentMethods" ng-value="method.code" ng-bind="method.displayName"></option>
+                                    </select>
+                                </div>
+                                <div ng-if="$ctrl.order.inPayments[0].status !== 'Paid'">
+                                    <button class="btn btn-primary btn-lg" ng-click="$ctrl.payInvoice()">
+                                        <span class="btn-text">{{ 'customer.order.pay_invoice' | t }}</span>
+                                        <span class="btn-loading"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
                     <hr class="hr--small" ng-if="$ctrl.order.subscriptionNumber" />
                     <div class="vc-section-header" ng-if="$ctrl.order.subscriptionNumber">
                         <div class="vc-t">{{ 'customer.order.subscription' | t }}</div>

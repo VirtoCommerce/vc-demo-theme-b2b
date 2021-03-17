@@ -1,39 +1,45 @@
-<div class="card-body panel-body border-gray-200 text-condensed font-weight-bold">
+<div class="card-body border-gray-200 text-condensed font-weight-bold py-1">
     <div class="row align-items-center">
-        <div ng-class="$ctrl.hideReorder ? 'col-8' : 'col-7'">{{ 'customer.order.product' | t }}</div>
-        <div class="col text-center">{{ 'customer.order.quantity' | t }}</div>
-        <div class="col text-right">{{ 'customer.order.total' | t }}</div>
-        <div class="col" ng-if="!$ctrl.hideReorder"></div>
+        <div class="col">{{ 'customer.order.product' | t }}</div>
+        <div class="col-5">
+            <div class="row align-items-center">
+                <div class="col text-center">{{ 'customer.order.quantity' | t }}</div>
+                <div class="col text-right">{{ 'customer.order.total' | t }}</div>
+                <div class="col-5" ng-if="!$ctrl.hideReorder"><span></span></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div ng-repeat="group in $ctrl.order.configuredGroups" class="card-body panel-body  border-gray-200 border-top border-1">
+<div ng-repeat="group in $ctrl.order.configuredGroups" class="card-body border-gray-200 border-top border-1">
     <div class="row align-items-center">
         <div ng-class="$ctrl.hideReorder ? 'col-1' : 'col-2'">
             <img class="img-fluid border-0 p-0 " alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
         </div>
-        <div class="col-6">
+        <div class="col">
             <a ng-bind="group.product.name" class="text-bold" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
             <p class="d-flex mt-1">
                 <img class="img-fluid border-0 p-0 mr-2" src="{{ 'customize.svg' | asset_url }}" />
                 <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer font-weight-400 font-size-13"></a>
             </p>
         </div>
-        <div class="col text-center">
-            <span ng-bind="group.quantity"></span>
-        </div>
-        <div class="col text-right">
-            {% if settings.show_prices_with_taxes %}
-                <p ng-bind="group.placedPriceWithTax.formattedAmount"></p>
-                <s ng-if="group.listPriceWithTax.amount > group.placedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
-            {% else %}
-                <strong class="text-green" ng-bind="group.placedPrice.formattedAmount"></strong>
-                <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
-            {% endif %}
-        </div>
-        <div class="col" ng-if="!$ctrl.hideReorder">
-            <div class="btn-toolbar">
-                <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
+        <div class="col-5">
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <span ng-bind="group.quantity"></span>
+                </div>
+                <div class="col text-right">
+                    {% if settings.show_prices_with_taxes %}
+                        <p ng-bind="group.placedPriceWithTax.formattedAmount"></p>
+                        <s ng-if="group.listPriceWithTax.amount > group.placedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
+                    {% else %}
+                        <strong class="text-dark-green" ng-bind="group.placedPrice.formattedAmount"></strong>
+                        <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
+                    {% endif %}
+                </div>
+                <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
+                    <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
+                </div>
             </div>
         </div>
     </div>
@@ -48,7 +54,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div ng-repeat="part in group.items"
                     class="card-body panel-body  border-gray-200 border-top border-1">
                     <div class="row align-items-center">
@@ -73,12 +78,12 @@
     </div>
 </div>
 
-<div ng-repeat="lineItem in $ctrl.order.usualItems" class="card-body panel-body border-gray-200 border-top border-1">
+<div ng-repeat="lineItem in $ctrl.order.usualItems" class="card-body border-gray-200 border-top border-1">
     <div class="row align-items-center">
         <div ng-class="$ctrl.hideReorder ? 'col-1' : 'col-2'">
             <img class="img-fluid border-0 p-0" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
         </div>
-        <div class="col-6">
+        <div class="col">
             <a ng-bind="lineItem.name" class="text-bold" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
             {% if shop.subscription_enabled %}
             <p ng-if="lineItem.paymentPlan">
@@ -86,130 +91,25 @@
             </p>
             {% endif %}
         </div>
-        <div class="col text-center">
-            <span ng-bind="lineItem.quantity"></span>
-        </div>
-        <div class="col text-right">
-            {% if settings.show_prices_with_taxes %}
-            <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
-            <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
-            {% else %}
-            <strong class="text-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
-            <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
-            {% endif %}
-        </div>
-        <div class="col" ng-if="!$ctrl.hideReorder">
-            <div class="btn-toolbar">
-                <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
+        <div class="col-5">
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <span ng-bind="lineItem.quantity"></span>
+                </div>
+                <div class="col text-right">
+                    {% if settings.show_prices_with_taxes %}
+                    <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
+                    <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
+                    {% else %}
+                    <strong class="text-dark-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
+                    <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
+                    {% endif %}
+                </div>
+                <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
+                    <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
-
-<!--
-<table class="table no-vertical-borders small-table-head table-row-padding m-0">
-
-    <tbody ng-repeat="group in $ctrl.order.configuredGroups" class="order-line-item">
-        <tr>
-            <td ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
-                <img class="img-responsive" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
-            </td>
-            <td class="col-xs-6">
-                <a ng-bind="group.product.name" class="text-bold" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
-                <p class="d-flex mt-1">
-                    <img class="img-responsive mr-2" src="{{ 'customize.svg' | asset_url }}" />
-                    <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer font-weight-400 font-size-13"></a>
-                </p>
-            </td>
-            <td class="text-center">
-                <span ng-bind="group.quantity"></span>
-            </td>
-            <td class="text-right">
-                {% if settings.show_prices_with_taxes %}
-                    <p ng-bind="group.placedPriceWithTax.formattedAmount"></p>
-                    <s ng-if="group.listPriceWithTax.amount > group.placedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
-                {% else %}
-                    <strong class="text-green" ng-bind="group.placedPrice.formattedAmount"></strong>
-                    <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
-                {% endif %}
-            </td>
-            <td ng-if="!$ctrl.hideReorder">
-                <div class="btn-toolbar">
-                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
-                </div>
-            </td>
-        </tr>
-        <tr ng-show="group.showConfiguration">
-            <td></td>
-            <td colspan="4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <span class="h4">Configuration parts</span>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table no-vertical-borders small-table-head table-row-padding m-0">
-                        <thead class="d-none">
-                            <tr>
-                                <th></th>
-                                <th>Product</th>
-                                <th class="text-center">Quantity</th>
-                                <th class="text-right">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="part in group.items" class="border-bottom-light">
-                                <td class="text-center" ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
-                                    <img class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
-                                </td>
-                                <td>
-                                    <a class="font-weight-400" ng-href="{% raw %}{{ part.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.name"></a>
-                                </td>
-                                <td ng-bind="part.quantity" class="text-center"></td>
-                            {% if settings.show_prices_with_taxes %}
-                                <td ng-bind="part.extendedPriceWithTax.formattedAmount" class="text-bold text-right"></td>
-                            {% else %}
-                                <td ng-bind="part.extendedPrice.formattedAmount" class="text-bold text-right"></td>
-                            {% endif %}
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-        </tr>
-    </tbody>
- <tbody>
-        <tr ng-repeat="lineItem in $ctrl.order.usualItems" class="order-line-item">
-            <td ng-class="$ctrl.hideReorder ? 'col-xs-1' : 'col-xs-2'">
-                <img class="img-responsive" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
-            </td>
-            <td>
-                <a ng-bind="lineItem.name" class="text-bold" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
-                {% if shop.subscription_enabled %}
-                <p ng-if="lineItem.paymentPlan">
-                    <span ng-bind="'Subscription with a period: ' + lineItem.paymentPlan.intervalCount + ' ' + lineItem.paymentPlan.interval"></span>
-                </p>
-                {% endif %}
-            </td>
-            <td class="text-center">
-                <span ng-bind="lineItem.quantity"></span>
-            </td>
-            <td class="text-right">
-                {% if settings.show_prices_with_taxes %}
-                <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
-                <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
-                {% else %}
-                <strong class="text-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
-                <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
-                {% endif %}
-            </td>
-            <td ng-if="!$ctrl.hideReorder">
-                <div class="btn-toolbar">
-                    <button type="button" class="btn btn-primary btn-alt btn-xs" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table> -->
