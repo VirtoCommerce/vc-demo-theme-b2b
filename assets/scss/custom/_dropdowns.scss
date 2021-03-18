@@ -90,16 +90,28 @@
   }
 
   .dropdown-menu-item {
-    .account-icon.active {
-      color: $brand-primary;
+    .account-icon {
+      color: #D5DEE4;
+
+      &.active {
+        color: $brand-primary;
+      }
     }
 
-    &:active .account-icon {
-      color: $white;
+    &:active {
+      background-color: $brand-primary;
+
+      .account-icon {
+        color: $white;
+      }
     }
 
     .add-icon {
       color: #72A365;
+    }
+
+    .btn-logout {
+      color: #B3BEC7;
     }
   }
 }

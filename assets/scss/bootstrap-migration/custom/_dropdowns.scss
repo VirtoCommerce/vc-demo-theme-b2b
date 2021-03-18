@@ -10,8 +10,12 @@
   }
 
   .dropdown-item {
-    .account-icon.active {
-      color: $primary;
+    .account-icon {
+      color: #D5DEE4;
+
+      &.active {
+        color: $primary;
+      }
     }
 
     &:active .account-icon {
@@ -20,6 +24,10 @@
 
     .add-icon {
       color: #72A365;
+    }
+
+    .btn-logout {
+      color: #B3BEC7;
     }
   }
 }
