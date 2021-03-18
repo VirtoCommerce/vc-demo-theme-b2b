@@ -2,12 +2,12 @@
     <div class="col-12" >
         <dl class="row mb-1">
             <dt ng-if-start="$ctrl.options.show.subtotal" class="col" ng-init="title = '{{ 'totals.subtotal' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end class="col"><span class="pull-right" ng-bind="$ctrl.order[$ctrl.fieldNames.subTotal].formattedAmount"></span></dd>
+            <dd ng-if-end class="col"><span class="float-right" ng-bind="$ctrl.order[$ctrl.fieldNames.subTotal].formattedAmount"></span></dd>
             <div class="col-12">
                 <hr class="mb-2 mt-0 border-1 border-gray-200" >
             </div>
             <dt ng-if-start="$ctrl.options.show.discount" class="col" ng-init="title = '{{ 'totals.discount' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end class="col"><span class="pull-right" ng-bind="$ctrl.order[$ctrl.fieldNames.discount].formattedAmount"></span></dd>
+            <dd ng-if-end class="col"><span class="float-right" ng-bind="$ctrl.order[$ctrl.fieldNames.discount].formattedAmount"></span></dd>
             <div class="col-12">
                 <hr class="mb-2 mt-0 border-1 border-gray-200" >
             </div>
@@ -25,15 +25,15 @@
 
             {% unless settings.show_prices_with_taxes %}
             <dt ng-if-start="$ctrl.options.show.taxes" class="col-6" ng-init="title = '{{ 'totals.taxes' | t }}'" ng-include="'totals-title-template.tpl'"></dt>
-            <dd ng-if-end class="col-6" ><span class="pull-right" ng-bind="$ctrl.order.taxTotal.formattedAmount"></span></dd>
+            <dd ng-if-end class="col-6" ><span class="float-right" ng-bind="$ctrl.order.taxTotal.formattedAmount"></span></dd>
             {% endunless %}
             <div class="col-12">
                 <hr class="mb-2 mt-0 border-1 border-gray-200" >
             </div>
         </dl>
         <dl class="row mb-1">
-            <dt class="col"><span class="pull-left">{{ 'totals.total' | t }}</span></dt>
-            <dd class="col"><span class="pull-right font-weight-bold text-dark-green" ng-bind="$ctrl.order.total.formattedAmount"></span></dd>
+            <dt class="col"><span class="float-left">{{ 'totals.total' | t }}</span></dt>
+            <dd class="col"><span class="float-right font-weight-bold text-dark-green" ng-bind="$ctrl.order.total.formattedAmount"></span></dd>
         </dl>
         <div ng-if="$ctrl.options.show.outOfStockMessage && $ctrl.order.outOfStockError" class="alert alert-danger d-flex">
             <span class="fa fa-times-circle fa-lg text-danger mr-2 mt-1"></span>
@@ -46,10 +46,10 @@
 </div>
 
 <script id="totals-title-template.tpl" type="text/ng-template">
-    <span class="pull-left" ng-if="!$ctrl.options.complete"> {% raw %} {{ title }} {% endraw %} </span> {% if settings.show_prices_with_taxes %} {{ 'totals.withTax' | t }} {% endif %}
+    <span class="float-left" ng-if="!$ctrl.options.complete"> {% raw %} {{ title }} {% endraw %} </span> {% if settings.show_prices_with_taxes %} {{ 'totals.withTax' | t }} {% endif %}
 </script>
 
 <script id="totals-field-with-free-template.tpl" type="text/ng-template">
-    <span ng-if="$ctrl.field.amount > 0" class="pull-right" ng-bind="$ctrl.field.formattedAmount"></span>
-    <span ng-if="$ctrl.field.amount <= 0" class="pull-right">{{ 'totals.free' | t }}</span>
+    <span ng-if="$ctrl.field.amount > 0" class="float-right" ng-bind="$ctrl.field.formattedAmount"></span>
+    <span ng-if="$ctrl.field.amount <= 0" class="float-right">{{ 'totals.free' | t }}</span>
 </script>
