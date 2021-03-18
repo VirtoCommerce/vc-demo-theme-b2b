@@ -3,3 +3,31 @@
   border-radius: 0;
   border: none;
 }
+
+.account-switch {
+  .dropdown-menu {
+    min-width: 13.125rem;
+  }
+
+  .dropdown-item {
+    .account-icon {
+      color: #D5DEE4;
+
+      &.active {
+        color: $primary;
+      }
+    }
+
+    &:active .account-icon {
+      color: $white;
+    }
+
+    .add-icon {
+      color: #72A365;
+    }
+
+    .btn-logout {
+      color: #B3BEC7;
+    }
+  }
+}
