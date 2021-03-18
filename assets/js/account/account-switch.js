@@ -1,8 +1,9 @@
 vcAccountSwitchController.$inject = ['multiAccountService'];
 function vcAccountSwitchController (multiAccountService) {
     var $ctrl = this;
-    $ctrl.currentAccount = multiAccountService.getCurrentAccount();
 
+    $ctrl.accountLimit = multiAccountService.accountLimit;
+    $ctrl.currentAccount = multiAccountService.getCurrentAccount();
     $ctrl.accounts = multiAccountService.getAccounts();
 
     $ctrl.switch = (account) => {
@@ -28,6 +29,7 @@ storefrontApp.component('vcAccountSwitchMigration', {
 
 storefrontApp.service('multiAccountService', ['$window', '$localStorage', '$cookies', 'storefrontApp.mainContext', function ($window, $localStorage, $cookies, mainContext) {
     const multiAccountService = {
+        accountLimit: 5,
         getAccounts: () => Object.values($localStorage.accounts || {}),
         getCurrentAccount: () => {
             const customer = mainContext.customer;
@@ -43,7 +45,7 @@ storefrontApp.service('multiAccountService', ['$window', '$localStorage', '$cook
             return $localStorage.lastUsedUserName;
         },
         updateCurrentAccount: () => {
-            if (mainContext.customer.isRegisteredUser) {
+            if (mainContext.customer.isRegisteredUser && multiAccountService.getAccounts().length < multiAccountService.accountLimit) {
                 if (!$localStorage.accounts) {
                     $localStorage.accounts = {};
                 }
@@ -69,6 +71,7 @@ storefrontApp.service('multiAccountService', ['$window', '$localStorage', '$cook
             delete $localStorage.accounts[id];
             if (mainContext.customer.id === id) {
                 delete $localStorage.lastUsedUserName;
+                delete $localStorage.accounts;
                 $window.location = redirectUrl;
             }
         }

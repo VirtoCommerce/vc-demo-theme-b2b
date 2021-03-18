@@ -32,8 +32,10 @@
                 </button>
             </div>
         </div>
-        <div class="dropdown-divider my-1"></div>
-        <div class="dropdown-item p-2">
+        <div ng-if-start="$ctrl.accounts.length < $ctrl.accountLimit"
+             class="dropdown-divider my-1"></div>
+        <div ng-if-end
+             class="dropdown-item p-2">
             <a role="menuitem"
                class="d-flex align-items-center"
                href="{{ 'account/login' | absolute_url }}">

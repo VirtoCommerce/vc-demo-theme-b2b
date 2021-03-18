@@ -33,8 +33,9 @@
                 </div>
             </div>
         </li>
-        <li class="divider"></li>
-        <li>
+        <li ng-if-start="$ctrl.accounts.length < $ctrl.accountLimit"
+            class="divider"></li>
+        <li ng-if-end>
             <div class="dropdown-menu-item pl-2 pr-3 py-2">
                 <a role="menuitem"
                    class="d-flex align-items-center"
