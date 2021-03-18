@@ -19,7 +19,7 @@
                                         <span class="font-weight-normal" ng-bind="$ctrl.order.status"></span>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="pull-right">
+                                        <div class="float-right">
                                             {% capture created_date %}<span ng-bind="$ctrl.order.createdDate | date: 'medium'" class="font-weight-normal"></span>{% endcapture %}
                                             <span>{{ 'customer.order.placed_on_date_html' | t: created_date }}</span>
                                         </div>

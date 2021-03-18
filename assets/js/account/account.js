@@ -180,7 +180,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
             if(path && path.indexOf('/b4') > -1) {
                 result = result.replace('/account/', '/account/b4/');
-                result = result.replace('/common-components/', '/common-components/b4/');
+                result = result.replace('/common-components/', '/bootstrap-migration/common-components/');
             }
 
             return result;
