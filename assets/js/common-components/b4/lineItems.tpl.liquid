@@ -19,7 +19,7 @@
         <div class="col">
             <a ng-bind="group.product.name" class="text-bold" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>
             <p class="d-flex mt-1">
-                <img class="img-fluid border-0 p-0 mr-2" src="{{ 'customize.svg' | asset_url }}" />
+                <img class="img-fluid border-0 p-0 mr-2" src="{{ 'customize.svg' | asset_url }}" alt="$ctrl.getToggleTitle(group)" />
                 <a ng-bind="$ctrl.getToggleTitle(group)" ng-click="$ctrl.toggleConfiguration(group)" class="cursor-pointer font-weight-400 font-size-13"></a>
             </p>
         </div>

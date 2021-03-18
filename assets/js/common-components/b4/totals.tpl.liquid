@@ -36,7 +36,7 @@
             <dd class="col"><span class="pull-right font-weight-bold text-dark-green" ng-bind="$ctrl.order.total.formattedAmount"></span></dd>
         </dl>
         <div ng-if="$ctrl.options.show.outOfStockMessage && $ctrl.order.outOfStockError" class="bg-danger p-3 mb-3 rounded d-flex">
-            <i class="fa fa-times-circle fa-lg text-danger mr-2 mt-1"></i>
+            <span class="fa fa-times-circle fa-lg text-danger mr-2 mt-1"></span>
             <small>{{ 'checkout.out_of_stock_error_message' | t }}</small>
         </div>
         <p class="mb-0" ng-if="!$ctrl.options.complete">
