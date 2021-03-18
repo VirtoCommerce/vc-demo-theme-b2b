@@ -55,13 +55,11 @@ storefrontApp.service('multiAccountService', ['$window', '$localStorage', '$cook
             }
         },
         switch: (account) => {
-            const thirtyMinutesInMilliseconds = 30 * 60 * 1000;
-            const expirationDate = new Date(new Date().getTime() + thirtyMinutesInMilliseconds);
             $cookies.set('.AspNetCore.Identity.Application',
                 account.cookie,
                 {
                     path: '/',
-                    expires: expirationDate,
+                    expires: 30, // specified in days
                     samesite: 'lax'
                 });
             $localStorage.lastUsedUserName = account.userName;
