@@ -1,0 +1,85 @@
+<div ng-if="!$ctrl.readOnly" class="d-flex align-items-center">
+    <div class="col-2 col-md-1 align-self-start">
+        <img class="img-fluid" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+    </div>
+    <div class="col-4 col-md-4">
+        <p><a ng-href="{% raw %}{{ $ctrl.lineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.lineItem.name" class="font-weight-bold"></a></p>
+        <p><span class="font-weight-bold">{{ 'checkout.item' | t }}</span> <span ng-bind="$ctrl.lineItem.sku"></span></p>
+        <p>
+            <span class="font-weight-bold">{{ 'checkout.price' | t }}</span>
+            {% if settings.show_prices_with_taxes %}
+            <strong ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount" class="text-dark-green"></strong>
+            {% else %}
+            <strong ng-bind="$ctrl.lineItem.placedPrice.formattedAmount" class="text-dark-green"></strong>
+            {% endif %}
+            <span>/ each</span>
+        </p>
+    </div>
+    <div class="d-none d-md-block col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
+        <vc-item-availability availability="$ctrl.lineItem.availability"></vc-item-availability>
+    </div>
+    <div class="col-3 col-md-2">
+        <div class="row" ng-class="{'align-items-baseline': outOfStockError}">
+            <div class="col-md-6 form-group pl-0 m-0">
+                <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.lineItem.quantity" vc-integer />
+                <input ng-if="outOfStockError" class="form-control text-center" type="text" ng-value="0" disabled />
+                <small ng-if="outOfStockError" class="text-danger">{{ 'checkout.out_of_stock' | t }}</small>
+            </div>
+            <div class="col-md-6">
+                <a ng-if="!outOfStockError" href="" ng-click="$ctrl.changeQty()">{{ 'checkout.update' | t }}</a>
+                <a href="" ng-click="$ctrl.remove()">{{ 'checkout.remove' | t }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 col-md-2">
+        <p ng-class="{'m-0': !outOfStockError}">
+            <span class="font-weight-bold text-condensed">{{ 'cart.general.total' | t }}</span><br>
+            {% if settings.show_prices_with_taxes %}
+            <strong ng-if="!outOfStockError" ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount" class="text-dark-green"></strong>
+            {% else %}
+            <strong ng-if="!outOfStockError" ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount" class="text-dark-green"></strong>
+            {% endif %}
+            <strong ng-if="outOfStockError" class="text-dark-green" ng-bind="$ctrl.setOutOfStockPrice()"></strong>
+        </p>
+    </div>
+</div>
+<div ng-if="$ctrl.readOnly" class="d-flex align-items-center">
+    <div class="col-2 col-md-1 align-self-start">
+        <img class="img-fluid" alt="{% raw %}{{ $ctrl.lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+    </div>
+    <div class="col-4 col-md-4">
+        <p><a href="{% raw %}{{ $ctrl.lineItem.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="$ctrl.lineItem.name" class="font-weight-bold"></a></p>
+        <p class="font-weight-bold">{{ 'checkout.item' | t }} <strong ng-bind="$ctrl.lineItem.sku"></strong></p>
+        <p>
+            <span class="font-weight-bold">{{ 'checkout.price' | t }}</span>
+            {% if settings.show_prices_with_taxes %}
+            <strong ng-bind="$ctrl.lineItem.placedPriceWithTax.formattedAmount" class="text-dark-green"></strong>
+            {% else %}
+            <strong ng-bind="$ctrl.lineItem.placedPrice.formattedAmount" class="text-dark-green"></strong>
+            {% endif %}
+            <span>/ each</span>
+        </p>
+    </div>
+    <div class="d-none d-md-block col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.lineItem.productId)'>
+        <vc-item-availability availability="$ctrl.lineItem.availability"></vc-item-availability>
+    </div>
+    <div class="col-2 col-md-2">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <span ng-bind="$ctrl.lineItem.quantity" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 col-md-2">
+        <p>
+            <span class="font-weight-bold text-condensed">{{ 'cart.general.total' | t }}</span><br>
+            {% if settings.show_prices_with_taxes %}
+            <strong ng-bind="$ctrl.lineItem.extendedPriceWithTax.formattedAmount" class="text-dark-green"></strong>
+            {% else %}
+            <strong ng-bind="$ctrl.lineItem.extendedPrice.formattedAmount" class="text-dark-green"></strong>
+            {% endif %}
+        </p>
+    </div>
+</div>

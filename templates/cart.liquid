@@ -1,165 +1,154 @@
-<nav ng-show="checkout.cart.itemsCount > 0" class="navbar navbar-default navbar-fixed-top visible-xs-block visible-sm-block" role="navigation">
+{% layout 'bootstrap-migration' %}
+<!-- <nav ng-show="checkout.cart.itemsCount > 0" class="navbar navbar-default navbar-fixed-top visible-xs-block visible-sm-block" role="navigation">
     <p class="navbar-text navbar-left">
         <small>{{ 'checkout.total' | t }}:</small>
         <strong ng-bind="checkout.cart.total.formattedAmount"></strong>
     </p>
-</nav>
-<main class="container" role="main" ng-controller="checkoutController">
-    <div ng-if="checkout.loading" class="loader">
-        <div class="indicator"></div>
-    </div>
+</nav> -->
+<main class="container flex-grow-1 pt-4 pb-6" role="main" ng-controller="checkoutController">
+    <vc-loader is-loading="checkout.loading"></vc-loader>
     <div class="row">
-        <div class="col-xs-12" ng-show="checkout.cart.itemsCount == 0" ng-cloak>
+        <div class="col" ng-show="checkout.cart.itemsCount == 0" ng-cloak>
             <h2>{{ 'cart.general.empty' | t }}</h2>
             <a href="{{ '' | absolute_url }}" class="btn btn-lg btn-primary">{{ 'cart.general.continue_shopping' | t }}</a>
         </div>
     </div>
     <div class="row" ng-show="checkout.cart.itemsCount > 0">
-        <div class="hidden-xs hidden-sm col-md-12 hidden-print">
+        <div class="d-none d-md-block col-md-12 mb-4">
             <div class="page-header clearfix d-flex align-items-center">
-                <ol class="nav nav-outline">
-                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" ng-class="{'active': step.isActive, 'disabled': !step.isActive}">
-                        <a href="" class="py-3 mr-4">
-                            <span class="h2 text-middle" ng-bind="$index + 1"></span>
-                            <span class="h2 text-middle" ng-class="{'text-default-color': !step.isActive}" ng-bind="step.title"></span>
+                <nav class="nav nav-pills nav-outline">
+                    <li role="presentation" ng-repeat="step in checkout.wizard.steps" class="nav-item" ng-class="!$last && 'mr-3'">
+                        <a href="" class="nav-link" ng-class="{'active': step.isActive, 'disabled': !step.isActive}">
+                            <span class="h2" ng-bind="$index + 1"></span>
+                            <span class="h2" ng-class="{'text-dark': !step.isActive}" ng-bind="step.title"></span>
                         </a>
                     </li>
-                </ol>
+                </nav>
                 <ul class="list-inline mb-0 ml-auto">
-                    <li>
-                        <a href="" class="btn btn-link bullhorn" ng-click=""><i class="fa fa-bullhorn"></i>&ensp;Feedback</a>
+                    <li class="list-inline-item">
+                        <a href="" class="btn btn-link font-weight-bold" ng-click=""><i class="fa fa-bullhorn text-gray-300"></i>&ensp;Feedback</a>
                     </li>
-                    <li>
-                        <a href="" class="btn btn-link envelope" ng-click="sendToEmail()"><i class="fa fa-envelope"></i>&ensp;Email</a>
+                    <li class="list-inline-item">
+                        <a href="" class="btn btn-link font-weight-bold" ng-click="sendToEmail()"><i class="fa fa-envelope text-gray-300"></i>&ensp;Email</a>
                     </li>
-                    <li>
-                        <a href="" class="btn btn-link print" ng-click="print()"><i class="fa fa-print"></i>&ensp;Print</a>
+                    <li class="list-inline-item">
+                        <a href="" class="btn btn-link font-weight-bold" ng-click="print()"><i class="fa fa-print text-gray-300"></i>&ensp;Print</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col">
             <vc-checkout-wizard wizard-model="checkout.wizard" on-initialized="initialize()" loading="checkout.loading">
                 <vc-checkout-wizard-step name="cart" title="My Cart">
                     <div class="row">
-                        <div class="col-xs-12 col-md-9">
-                            <div class="container-drain container-bordered-horizontal">
-                                <div class="row hidden-xs hidden-sm">
-                                    <div class="col-xs-12">
-                                        <vc-checkout-delivery-method delivery-method="checkout.deliveryMethod" on-eval-availability="evalAvailability(deliveryMethod)"></vc-checkout-delivery-method>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <div class="h2">
-                                            My products
-                                            <ul class="list-horizontal link-reset pull-right">
-                                                <li>
-                                                    <a href="">Show Reference Information</a>
-                                                </li>
-                                                <li>
-                                                    <a href="" ng-click="clearCart()">Clear Cart</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                        <div class="col col-md-9">
+                            <div class="row d-none d-md-block">
+                                <div class="col">
+                                    <vc-checkout-delivery-method delivery-method="checkout.deliveryMethod" on-eval-availability="evalAvailability(deliveryMethod)"></vc-checkout-delivery-method>
                                 </div>
-                                <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredGroups">
-                                    <vc-checkout-configurable-line-item item="item" on-change-qty="changeItemQty(item)" on-remove="removeItem(item)"></vc-checkout-configurable-line-item>
-                                </div>
-                                <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in checkout.cart.usualItems">
-                                    <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
-                                </div>
-                                <div ng-show="relatedProducts.item.count" class="row">
-                                    <div class="col-xs-12">
-                                        <p class="text-center"><strong>If you changed multiple quantities, </strong><a href="" ng-click="changeItemAllQty()">Update All</a></p>
-                                        <h2>{{ 'products.general.related_products' | t }}</h2>
-                                        <vc-related-products product-ids="checkout.productIds"
-                                                             responsive="{ 0: { items: 2 }, 768: { items: 3 }, 992: { items: 5 } }"
-                                                             image-size="md"
-                                                             on-update="relatedProducts = $event"></vc-related-products>
+                                <div class="col my-4">
+                                    <div class="d-flex align-items-center">
+                                        <span class="h2 mb-0">My products</span>
+                                        <ul class="list-inline list-divider m-0 ml-auto">
+                                            <li class="list-inline-item">
+                                                <a href="">Show Reference Information</a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="" ng-click="clearCart()">Clear Cart</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                            <div class="border-bottom border-gray-200 py-3" ng-class="$first && 'border-top'" ng-repeat="item in checkout.cart.configuredGroups">
+                                <vc-checkout-configurable-line-item item="item" on-change-qty="changeItemQty(item)" on-remove="removeItem(item)"></vc-checkout-configurable-line-item>
+                            </div>
+                            <div class="border-bottom border-gray-200 py-3" ng-repeat="lineItem in checkout.cart.usualItems">
+                                <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
+                            </div>
+                            <div ng-show="relatedProducts.item.count" class="mt-3">
+                                <p class="text-center"><strong>If you changed multiple quantities, </strong><a href="" ng-click="changeItemAllQty()">Update All</a></p>
+                                <h2>{{ 'products.general.related_products' | t }}</h2>
+                                <vc-related-products-migration product-ids="checkout.productIds"
+                                                     responsive="{ 0: { items: 2 }, 768: { items: 3 }, 992: { items: 5 } }"
+                                                     image-size="md"
+                                                     on-update="relatedProducts = $event"></vc-related-products-migration>
+                            </div>
                         </div>
-                        <div class="hidden-xs hidden-sm col-md-3">
-                            <p ng-if="customer && customer.isRegisteredUser" ng-cloak >
+                        <div class="d-none d-md-block col-md-3">
+                            <p ng-if="customer && customer.isRegisteredUser" ng-cloak>
                                 <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || checkout.cart.outOfStockError" ng-click="checkout.wizard.nextStep()">
                                     {{ 'cart.general.checkout' | t }}
                                 </button>
-                            <p ng-if="customer && !customer.isRegisteredUser" ng-cloak >
-                                {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" ng-class="{disabledLink: checkout.cart.outOfStockError}" ng-disabled="checkout.cart.outOfStockError" href' }}
+                            <p ng-if="customer && !customer.isRegisteredUser" ng-cloak>
+                                {{ 'cart.general.checkout' | t | customer_login_link | replace: 'href', 'class="btn btn-lg btn-block btn-primary" ng-class="{disabled: checkout.cart.outOfStockError}" ng-disabled="checkout.cart.outOfStockError" href' }}
                             </p>
-                            <div class="panel-group">
-                                <div class="panel panel-default panel-static">
-                                    <div class="panel-heading">
-                                        Order summary
-                                    </div>
-                                    <div class="panel-body">
-                                        <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true, outOfStockMessage: true } }"></vc-totals>
-                                    </div>
+                            <div class="card mb-3">
+                                <h5 class="card-header text-uppercase">
+                                    Order summary
+                                </h5>
+                                <div class="card-body">
+                                    <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true, outOfStockMessage: true } }"></vc-totals>
                                 </div>
-                                <div class="panel panel-default panel-static">
-                                    <div class="panel-heading">
-                                        {{ 'checkout.purchase_order_number.title' | t }}
-                                    </div>
-                                    <div class="panel-body">
-                                        <form class="form-inline" accept-charset="UTF-8" name="purchaseOrderNumberForm" novalidate="novalidate">
-                                            <div class="form-group">
-                                                <input id="purchaseOrderNumber"
-                                                       class="form-control"
-                                                       ng-model="checkout.cart.purchaseOrderNumber"
-                                                       name="purchaseOrderNumber"
-                                                       placeholder="{{ 'checkout.purchase_order_number.placeholder' | t }}"
-                                                       type="text">
-                                            </div>
-                                            <button ng-if="!purchaseOrderNumberExist() || purchaseOrderNumberChanged()"
-                                                    id="purchaseOrderNumberSubmit"
-                                                    class="btn pull-right d-flex align-items-center justify-content-center"
-                                                    ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
-                                                    ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
-                                                    ng-click="setPurchaseOrderNumber(purchaseOrderNumberForm)">
-                                                <i class="fa fa-check"></i>
-                                            </button>
-                                            <button ng-if="purchaseOrderNumberExist() && !purchaseOrderNumberChanged()"
-                                                    id="removePurchaseOrderNumber"
-                                                    class="btn pull-right btn-alt btn-danger d-flex align-items-center justify-content-center"
-                                                    ng-click="removePurchaseOrderNumber()">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                            </div>
+                            <div class="card mb-3">
+                                <h5 class="card-header text-uppercase">
+                                    {{ 'checkout.purchase_order_number.title' | t }}
+                                </h5>
+                                <div class="card-body">
+                                    <form class="d-flex" accept-charset="UTF-8" name="purchaseOrderNumberForm" novalidate="novalidate">
+                                        <input id="purchaseOrderNumber"
+                                               class="form-control mr-2"
+                                               ng-model="checkout.cart.purchaseOrderNumber"
+                                               name="purchaseOrderNumber"
+                                               placeholder="{{ 'checkout.purchase_order_number.placeholder' | t }}"
+                                               type="text">
+                                        <button ng-if="!purchaseOrderNumberExist() || purchaseOrderNumberChanged()"
+                                                id="purchaseOrderNumberSubmit"
+                                                class="btn d-flex align-items-center justify-content-center"
+                                                ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-outline-success'"
+                                                ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
+                                                ng-click="setPurchaseOrderNumber(purchaseOrderNumberForm)">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button ng-if="purchaseOrderNumberExist() && !purchaseOrderNumberChanged()"
+                                                id="removePurchaseOrderNumber"
+                                                class="btn btn-outline-danger d-flex align-items-center justify-content-center"
+                                                ng-click="removePurchaseOrderNumber()">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="panel panel-default panel-static">
-                                    <div class="panel-heading">
-                                        Promotion code
-                                    </div>
-                                    <div class="panel-body">
-                                        <form class="form-inline" accept-charset="UTF-8" name="applyCouponForm" novalidate="novalidate">
-                                            <div class="form-group">
-                                                <input id="applyCoupon"
-                                                       class="form-control"
-                                                       ng-model="checkout.coupon.code"
-                                                       name="applyCoupon"
-                                                       placeholder="{{ 'checkout.coupon_code' | t }}"
-                                                       ng-disabled="couponApplied"
-                                                       type="text">
-                                            </div>
-                                            <button ng-if="!couponApplied"
-                                                    id="applyCouponSubmit"
-                                                    class="btn pull-right d-flex align-items-center justify-content-center"
-                                                    ng-class="applyCouponForm.$dirty ? 'btn-primary' : 'btn-alt btn-success'"
-                                                    ng-disabled="!checkout.coupon.code"
-                                                    ng-click="applyCoupon(checkout.coupon)">
-                                                <i class="fa fa-check"></i>
-                                            </button>
-                                            <button ng-if="couponApplied"
-                                                    id="removeCouponSubmit"
-                                                    class="btn pull-right btn-alt btn-danger d-flex align-items-center justify-content-center"
-                                                    ng-click="removeCoupon(checkout.coupon)">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                        </form>
-                                        <span class="text-danger" ng-if="!checkout.coupon.appliedSuccessfully">{{ 'checkout.invalid_coupon_code' | t }}</span>
-                                    </div>
+                            </div>
+                            <div class="card">
+                                <h5 class="card-header text-uppercase">
+                                    Promotion code
+                                </h5>
+                                <div class="card-body">
+                                    <form class="d-flex" accept-charset="UTF-8" name="applyCouponForm" novalidate="novalidate">
+                                        <input id="applyCoupon"
+                                               class="form-control mr-2"
+                                               ng-model="checkout.coupon.code"
+                                               name="applyCoupon"
+                                               placeholder="{{ 'checkout.coupon_code' | t }}"
+                                               ng-disabled="couponApplied"
+                                               type="text">
+                                        <button ng-if="!couponApplied"
+                                                id="applyCouponSubmit"
+                                                class="btn d-flex align-items-center justify-content-center"
+                                                ng-class="applyCouponForm.$dirty ? 'btn-primary' : 'btn-outline-success'"
+                                                ng-disabled="!checkout.coupon.code"
+                                                ng-click="applyCoupon(checkout.coupon)">
+                                            <i class="fa fa-check"></i>
+                                        </button>
+                                        <button ng-if="couponApplied"
+                                                id="removeCouponSubmit"
+                                                class="btn btn-outline-danger d-flex align-items-center justify-content-center"
+                                                ng-click="removeCoupon(checkout.coupon)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </form>
+                                    <span class="text-danger" ng-if="!checkout.coupon.appliedSuccessfully">{{ 'checkout.invalid_coupon_code' | t }}</span>
                                 </div>
                             </div>
                         </div>
@@ -450,7 +439,6 @@
         <button type="button" class="btn btn-primary" ng-click="close(true)">Save</button>
     </div>
 </script>
-
 
 <script id="storefront.select-shipment-method-dialog.tpl" type="text/ng-template">
     <div class="modal-header bg-gray-striped rounded-top">

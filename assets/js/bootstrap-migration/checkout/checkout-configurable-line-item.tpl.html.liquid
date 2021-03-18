@@ -1,0 +1,110 @@
+<div class="d-flex flex-column">
+    <div class="d-flex align-items-center">
+        <div class="col-2 col-md-1 align-self-start">
+            <img class="img-fluid" alt="{% raw %}{{ $ctrl.item.product.name }}{% endraw %}" ng-src="{% raw %}{{ $ctrl.item.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+        </div>
+        <div class="col-4 col-md-4">
+            <p><span ng-bind="$ctrl.item.product.name" class="font-weight-bold"></span></p>
+            <p><span class="font-weight-bold">{{ 'checkout.item' | t }}</span> <span ng-bind="$ctrl.item.product.sku"></span></p>
+            <p>
+                <span class="font-weight-bold">{{ 'checkout.price' | t }}</span>
+                {% if settings.show_prices_with_taxes %}
+                    <span ng-bind="$ctrl.item.placedPriceWithTax.formattedAmount" class="font-weight-bold text-dark-green"></span>
+                {% else %}
+                    <span ng-bind="$ctrl.item.placedPrice.formattedAmount" class="font-weight-bold text-dark-green"></span>
+                {% endif %}
+                <span>/ each</span>
+            </p>
+            <p class="d-flex">
+                <img class="img-fluid mr-2" src="{{ 'customize.svg' | asset_url }}" />
+                <a ng-bind="$ctrl.getToggleTitle()" ng-click="$ctrl.toggleConfiguration()"></a>
+            </p>
+        </div>
+        <!-- Check migration of this component -->
+        <div class="d-none d-md-block col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.item.productId)'>
+            <vc-item-availability availability="$ctrl.item.availability"></vc-item-availability>
+        </div>
+        <!-- Check migration of this component -->
+        <div class="col-3 col-md-2">
+            <div class="row" ng-class="{'align-items-baseline': outOfStockError}">
+                <div class="col-md-6 form-group pl-0 m-0">
+                    <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" vc-integer />
+                    <input ng-if="outOfStockError" class="form-control text-center" type="text" ng-value="0" disabled />
+                    <small ng-if="outOfStockError" class="text-danger">{{ 'checkout.out_of_stock' | t }}</small>
+                </div>
+                <div class="col-md-6">
+                    <a ng-if="!outOfStockError" href="" ng-click="$ctrl.changeQty()">{{ 'checkout.update' | t }}</a>
+                    <a href="" ng-click="$ctrl.remove()">{{ 'checkout.remove' | t }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 col-md-2 font-weight-bold">
+            <p ng-class="{'m-0': !outOfStockError}">
+                <span class="text-condensed">{{ 'cart.general.total' | t }}</span><br>
+                {% if settings.show_prices_with_taxes %}
+                    <span ng-if="!outOfStockError" ng-bind="$ctrl.item.extendedPriceWithTax.formattedAmount" class="text-dark-green"></span>
+                {% else %}
+                    <span ng-if="!outOfStockError" ng-bind="$ctrl.item.extendedPrice.formattedAmount" class="text-dark-green"></span>
+                {% endif %}
+                    <span ng-if="outOfStockError" class="text-dark-green" ng-bind="$ctrl.setOutOfStockPrice()"></span>
+            </p>
+        </div>
+    </div>
+    <div ng-if="showConfiguration" class="offset-md-1">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">
+                        <span class="h4">{{ 'checkout.configuration_parts' | t }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead>
+                            <tr class="d-flex text-condensed">
+                                <th class="col-1 pl-3 pr-1 border-0"></th>
+                                <th class="col-7 border-0">{{ 'checkout.product' | t }}</th>
+                                <th class="col-2 text-center border-0">{{ 'cart.general.quantity' | t }}</th>
+                                <th class="col-2 text-right border-0">{{ 'cart.general.total' | t }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="part in $ctrl.item.items" class="d-flex align-items-center border-top border-gray-200">
+                                <td class="col-1 pl-3 pr-1 border-0">
+                                    <img class="img-fluid" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                                </td>
+                                <td class="col-7 border-0">
+                                    <a ng-href="{% raw %}{{ part.product.url.replace(regex, baseUrl) }}{% endraw %}" ng-bind="part.name" class="font-weight-bold"></a>
+                                    <p class="m-0">
+                                        <span class="font-weight-bold">{{ 'checkout.price' | t }}</span>
+                                        {% if settings.show_prices_with_taxes %}
+                                            <span ng-bind="part.placedPriceWithTax.formattedAmount" class="font-weight-bold text-dark-green"></span>
+                                        {% else %}
+                                            <span ng-bind="part.placedPrice.formattedAmount" class="font-weight-bold text-dark-green"></span>
+                                        {% endif %}
+                                        <span>/ each</span>
+                                    </p>
+                                </td>
+                                <td ng-if="!part.quantityError" ng-bind="part.quantity" class="col-2 border-0 text-center"></td>
+                                <td ng-if="part.quantityError && part.quantityError.availableQuantity === 0" class="col-2 border-0 text-center text-danger">
+                                    <span ng-bind="part.quantityError.availableQuantity"></span>
+                                    <small class="d-block">{{ 'checkout.out_of_stock' | t }}</small>
+                                </td>
+                                <td ng-if="!part.quantityError" class="col-2 border-0 font-weight-bold text-dark-green text-right">
+                                    {% if settings.show_prices_with_taxes %}
+                                        <span ng-bind="part.extendedPriceWithTax.formattedAmount"></span>
+                                    {% else %}
+                                        <span ng-bind="part.extendedPrice.formattedAmount"></span>
+                                    {% endif %}
+                                </td>
+                                <td ng-if="part.quantityError && part.quantityError.availableQuantity === 0" ng-bind="$ctrl.setOutOfStockPrice()" class="col-2 border-0 font-weight-bold text-dark-green text-right"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

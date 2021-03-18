@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.component('vcCheckoutDeliveryMethod', {
-    templateUrl: "themes/assets/js/checkout/checkout-delivery-method.tpl.html",
+    templateUrl: "themes/assets/js/bootstrap-migration/checkout/checkout-delivery-method.tpl.html",
     require: {
         checkoutStep: '^vcCheckoutWizardStep'
     },

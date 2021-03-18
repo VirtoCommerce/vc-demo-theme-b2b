@@ -1,0 +1,61 @@
+<div class="card card-body checkout-shadow-card bg-light p-4">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <h4>Delivery method</h4>
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="deliveryMethods" class="custom-control-input" id="shipping" ng-model="$ctrl.deliveryMethod.type" value="shipping">
+                    <label class="custom-control-label" for="shipping">Shipping</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="custom-control custom-radio">
+                    <input type="radio" name="deliveryMethods" class="custom-control-input" id="pickup" ng-model="$ctrl.deliveryMethod.type" value="pickup">
+                    <label class="custom-control-label" for="pickup">Pickup</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" ng-if="$ctrl.deliveryMethod.type == 'shipping'">
+            <h4>Check availability</h4>
+            <div class="form-inline">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="$ctrl.deliveryMethod.postalCode" placeholder="ZIP code" />
+                    <span class="input-group-append">
+                        <button class="btn btn-dark rounded-0" ng-click="$ctrl.evalAvailability()">Go</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9" ng-if="$ctrl.deliveryMethod.type == 'pickup'">
+            <div class="row">
+                <div class="col">
+                    <h4>Find a branch</h4>
+                    <p>Enter an address, city & state, ZIP code, branch # or country.</p>
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="$ctrl.deliveryMethod.postalCode" placeholder="ZIP code" />
+                        <span class="input-group-append">
+                            <button class="btn btn-dark rounded-0" ng-click="$ctrl.selectFulfillmentCenter()">Go</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- Check vc-address migration -->
+            <div class="row mt-3" ng-if="$ctrl.deliveryMethod.fulfillmentCenter">
+                <div class="col-12">
+                    <div class="border-top border-gray-200 mb-2"></div>
+                </div>
+                <div class="col pt-3">
+                    <h4>My selected branch</h4>
+                    <vc-address address="$ctrl.deliveryMethod.fulfillmentCenter.address">
+                        <address-header>
+                            <p><a href="#" ng-bind="$ctrl.deliveryMethod.fulfillmentCenter.name"></a></p>
+                        </address-header>
+                        <address-footer>
+                            <strong>Hours:</strong> <span>M–F 7:00 AM - 5:00 PM EASTERN</span>
+                        </address-footer>
+                    </vc-address>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
