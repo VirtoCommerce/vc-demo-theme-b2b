@@ -66,6 +66,10 @@ storefrontApp.factory('roundHelper', function () {
     }
 });
 
+storefrontApp.factory( "$cookies", function() {
+    return Cookies.noConflict();
+})
+
 storefrontApp.config(['$httpProvider', 'locale', 'localization', '$translateProvider', 'vcRecaptchaServiceProvider', 'reCaptchaKey', function ($httpProvider, locale, localization, $translateProvider, vcRecaptchaServiceProvider, reCaptchaKey) {
     //$locationProvider.html5Mode({ enabled: true, requireBase: false, rewriteLinks: false });
     $httpProvider.interceptors.push('httpErrorInterceptor');

@@ -33,3 +33,8 @@ $spacers: map-merge(
   )
 );
 
+$sizes: ();
+@for $i from 1 through 20 {
+    $size: $i * 5;
+    $sizes: map-merge($sizes, ($size: $size * 1%));
+}

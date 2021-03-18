@@ -38,11 +38,8 @@
                         <li class="list-inline-item">
                             {% raw %}{{ customer.firstName }} {{ customer.lastName }}{% endraw %}
                         </li>
-                        <li class="list-inline-item dropdown" uib-dropdown auto-close="mouseleave" aria-haspopup="true">
-                            <a id="account-dropdown" href="{{ 'account' | absolute_url }}" uib-dropdown-toggle vc-dropdown-trigger="mouseenter">{{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right mt-0" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
-                                    {{ 'layout.customer.log_out' | t | customer_logout_link | replace: 'href', 'role="menuitem" class="dropdown-item font-weight-normal stretched-link" tabindex="-1" href' }}
-                            </div>
+                        <li class="list-inline-item">
+                            <vc-account-switch-migration class="d-inline-block"></vc-account-switch-migration>
                         </li>
                     </ul>
                 </div>

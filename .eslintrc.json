@@ -1,4 +1,4 @@
-﻿{
+{
     "extends": [
         "google",
         "angular"
@@ -27,7 +27,11 @@
         "no-extend-native": "off",
         "no-tabs": "off",
         "angular/controller-as": "off",
-        "angular/di": [ "error", "array" ],
+        "angular/di": [
+            "error",
+            "array",
+            { "matchNames": false }
+        ],
         "angular/no-service-method": "off",
         "angular/module-getter": "off",
         // temporary dsiable style rules
