@@ -81,7 +81,10 @@ storefrontApp.factory('multiAccountInterceptor', ['multiAccountService', functio
     var multiAccountInterceptor = {};
 
     multiAccountInterceptor.response = function (response) {
-        multiAccountService.updateCurrentAccount();
+        if (!(response.config.method === 'POST' &&
+            response.config.url.endsWith('/storefrontapi/account/organization'))) {
+            multiAccountService.updateCurrentAccount();
+        }
         return response;
     };
 
