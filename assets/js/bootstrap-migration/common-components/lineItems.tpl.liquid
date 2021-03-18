@@ -63,9 +63,9 @@
                         </div>
                         <div ng-bind="part.quantity" class="col text-center"></div>
                         {% if settings.show_prices_with_taxes %}
-                        <div ng-bind="part.extendedPriceWithTax.formattedAmount" class="col-2 font-weight-bold text-right"></div>
+                            <div ng-bind="part.extendedPriceWithTax.formattedAmount" class="col-2 font-weight-bold text-right"></div>
                         {% else %}
-                        <div ng-bind="part.extendedPrice.formattedAmount" class="col-2 font-weight-bold text-right"></div>
+                            <div ng-bind="part.extendedPrice.formattedAmount" class="col-2 font-weight-bold text-right"></div>
                         {% endif %}
                         </div>
                     </div>
@@ -82,9 +82,9 @@
         <div class="col">
             <a ng-bind="lineItem.name" class="text-bold" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
             {% if shop.subscription_enabled %}
-            <p ng-if="lineItem.paymentPlan">
-                <span ng-bind="'Subscription with a period: ' + lineItem.paymentPlan.intervalCount + ' ' + lineItem.paymentPlan.interval"></span>
-            </p>
+                <p ng-if="lineItem.paymentPlan">
+                    <span ng-bind="'Subscription with a period: ' + lineItem.paymentPlan.intervalCount + ' ' + lineItem.paymentPlan.interval"></span>
+                </p>
             {% endif %}
         </div>
         <div class="col-5">
@@ -94,11 +94,11 @@
                 </div>
                 <div class="col text-right">
                     {% if settings.show_prices_with_taxes %}
-                    <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
-                    <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
+                        <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
+                        <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
                     {% else %}
-                    <strong class="text-dark-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
-                    <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
+                        <strong class="text-dark-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
+                        <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
                     {% endif %}
                 </div>
                 <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
