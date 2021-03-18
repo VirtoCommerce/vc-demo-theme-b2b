@@ -10,19 +10,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      # - uses: actions/checkout@v2
+      #   with:
+      #     fetch-depth: 0
 
-      - name: Get Image Version
-        uses: VirtoCommerce/vc-github-actions/get-image-version@master
-        id: image
+      # - name: Get Image Version
+      #   uses: VirtoCommerce/vc-github-actions/get-image-version@master
+      #   id: image
 
-      - name: Build
-        id: build
-        uses: VirtoCommerce/vc-github-actions/build-theme@master
-        with:
-          versionSuffix:  ${{ env.VERSION_SUFFIX }}
+      # - name: Build
+      #   id: build
+      #   uses: VirtoCommerce/vc-github-actions/build-theme@master
+      #   with:
+      #     versionSuffix:  ${{ env.VERSION_SUFFIX }}
 
       # - name: Docker Login
       #   uses: azure/docker-login@v1
