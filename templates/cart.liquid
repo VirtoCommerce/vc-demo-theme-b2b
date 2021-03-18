@@ -41,7 +41,7 @@
             <vc-checkout-wizard wizard-model="checkout.wizard" on-initialized="initialize()" loading="checkout.loading">
                 <vc-checkout-wizard-step name="cart" title="My Cart">
                     <div class="row">
-                        <div class="col col-md-9">
+                        <div class="col-md-9">
                             <div class="row d-none d-md-block">
                                 <div class="col">
                                     <vc-checkout-delivery-method delivery-method="checkout.deliveryMethod" on-eval-availability="evalAvailability(deliveryMethod)"></vc-checkout-delivery-method>
@@ -156,157 +156,133 @@
                 </vc-checkout-wizard-step>
                 <vc-checkout-wizard-step name="review" title="Review">
                         <div class="row">
-                            <div class="col-xs-12 col-md-9">
-                                <div class="container-drain checkout-settings">
-                                    <div class="hidden-xs hidden-sm">
-                                               <h2>DELIVERY METHOD</h2>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="form-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="deliveryMethods" id="shipping" ng-model="checkout.deliveryMethod.type" value="shipping">
-                                                        <span class="switch"></span>
-                                                        <span class="name">Shipping</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="radio">
-                                                    <label>
-                                                        <input type="radio" name="deliveryMethods" id="pickup" ng-model="checkout.deliveryMethod.type" value="pickup">
-                                                        <span class="switch"></span>
-                                                        <span class="name">Pickup</span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hidden-xs hidden-sm" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                            <h2>SHIPPING ADDRESS</h2>
-                                    </div>
-                                    <div class="row" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div class="col-xs-12">
-                                            &emsp;
-                                            <a class="btn btn-white link-button" href="" ng-click="changeShippingAddress()">
-                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
-                                            </a>
-                                            <div class="pull-left" ng-if="checkout.shipment.deliveryAddress.city">
-                                                <span class="label label-default d-inline-block mb-3" ng-if="isEqualAddress(checkout.shipment.deliveryAddress, customer.defaultShippingAddress)">Default</span>
-                                                <vc-address address="checkout.shipment.deliveryAddress" edit-mode="false"></vc-address>
-                                            </div>
-                                            <div class="pull-left" ng-if="!checkout.shipment.deliveryAddress.city">
-                                                <h4><small>Please enter shipping address</small></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                                <h2>SHIPPING METHOD</h2>
-                                    </div>
-                                    <div class="row"  ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div class="col-xs-12">
-                                            &emsp;
-                                            <a class="btn btn-white link-button" href="" ng-click="changeShippingMethod()">
-                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
-                                            </a>
-                                            <div class="pull-left" ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode">
-                                                <address>
-                                                    <div class="col-xs-2 col-md-3">
-                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
-                                                    </div>
-                                                    <div class="h5 col-md-9">
-                                                        <span class="name" ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
-                                                        <span>
-                                                            <strong ng-bind="'(' + checkout.shipment.price.formattedAmount + ')'"></strong>
-                                                        </span>
-                                                    </div>
-                                                </address>
-                                            </div>
-                                            <div class="pull-left" ng-if="!checkout.shipment.shipmentMethod.shipmentMethodCode">
-                                                <h4><small>Please select shipping method</small></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                                <h2>PICKUP ADDRESS</h2>
-                                    </div>
-                                    <div class="row" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                        <div class="col-xs-12">
-                                            &emsp;
-                                            <a class="btn btn-white link-button" href="" ng-click="changePickupAddress()">
-                                                   <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
-                                            </a>
-                                            <div class="pull-left" ng-if="checkout.deliveryMethod.fulfillmentCenter.address.city">
-                                                <vc-address address="checkout.deliveryMethod.fulfillmentCenter.address" edit-mode="false"></vc-address>
-                                            </div>
-                                            <div class="pull-left" ng-if="!checkout.deliveryMethod.fulfillmentCenter.address.city">
-                                                <h4><small>Please select branch</small></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="hidden-xs hidden-sm">
-                                            <h2>PAYMENT METHOD</h2>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            &emsp;
-                                            <a class="btn btn-white link-button" href="" ng-click="changePaymentMethod()">
-                                                <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
-                                            </a>
-                                            <div class="pull-left" ng-if="checkout.payment.name">
-                                                <address>
-                                                    <div class="col-xs-2 col-md-3">
-                                                        <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
-                                                    </div>
-                                                    <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                                        <span ng-bind="checkout.payment.name"></span>
-                                                        <span><small ng-bind="checkout.payment.description"></small></span>
-                                                    </div>
-                                                    <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                                        <span ng-bind="checkout.payment.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : checkout.payment.name"></span>
-                                                        <span><small ng-bind="checkout.payment.description"></small></span>
-                                                    </div>
-                                                </address>
-                                            </div>
-                                            <div class="pull-left" ng-if="!checkout.payment.name">
-                                                <h4><small>Please select payment method</small></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="hidden-xs hidden-sm">
-                                               <h2> MY PRODUCTS</h2>
-                                    </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="item in checkout.cart.configuredGroups">
-                                        <vc-checkout-configurable-line-item item="item" ></vc-checkout-configurable-line-item>
-                                    </div>
-                                    <div class="row flexible mr-0 border-bottom-light" ng-repeat="lineItem in checkout.cart.usualItems">
-                                        <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
+                            <div class="col-md-9">
+                                <div class="d-none d-md-block">
+                                    <h2>DELIVERY METHOD</h2>
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" name="deliveryMethods" class="custom-control-input" id="shipping" ng-model="checkout.deliveryMethod.type" value="shipping">
+                                        <label class="custom-control-label" for="shipping">Shipping</label>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" name="deliveryMethods" class="custom-control-input" id="pickup" ng-model="checkout.deliveryMethod.type" value="pickup">
+                                        <label class="custom-control-label" for="pickup">Pickup</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-none d-md-block" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                    <h2>SHIPPING ADDRESS</h2>
+                                </div>
+                                <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                    <div ng-if="checkout.shipment.deliveryAddress.city">
+                                        <span class="badge badge-dark mb-2" ng-if="isEqualAddress(checkout.shipment.deliveryAddress, customer.defaultShippingAddress)">Default</span>
+                                        <vc-address address="checkout.shipment.deliveryAddress" edit-mode="false"></vc-address>
+                                    </div>
+                                    <div class="mr-2" ng-if="!checkout.shipment.deliveryAddress.city">
+                                        <h4 class="m-0"><small>Please enter shipping address</small></h4>
+                                    </div>
+                                    <a class="btn btn-white align-self-start" href="" ng-click="changeShippingAddress()">
+                                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                                    </a>
+                                </div>
+
+                                <div ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                    <h2>SHIPPING METHOD</h2>
+                                </div>
+                                <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                    <div ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode">
+                                        <address>
+                                            <div class="col-2 col-md-3">
+                                                <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
+                                            </div>
+                                            <div class="h5 col-md-9">
+                                                <span class="name" ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
+                                                <span>
+                                                    <strong ng-bind="'(' + checkout.shipment.price.formattedAmount + ')'"></strong>
+                                                </span>
+                                            </div>
+                                        </address>
+                                    </div>
+                                    <div class="mr-2" ng-if="!checkout.shipment.shipmentMethod.shipmentMethodCode">
+                                        <h4 class="m-0"><small>Please select shipping method</small></h4>
+                                    </div>
+                                    <a class="btn btn-white align-self-start" href="" ng-click="changeShippingMethod()">
+                                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                                    </a>
+                                </div>
+
+                                <div ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                    <h2>PICKUP ADDRESS</h2>
+                                </div>
+                                <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                    <div ng-if="checkout.deliveryMethod.fulfillmentCenter.address.city">
+                                        <vc-address address="checkout.deliveryMethod.fulfillmentCenter.address" edit-mode="false"></vc-address>
+                                    </div>
+                                    <div class="mr-2" ng-if="!checkout.deliveryMethod.fulfillmentCenter.address.city">
+                                        <h4 class="m-0"><small>Please select branch</small></h4>
+                                    </div>
+                                    <a class="btn btn-white align-self-start" href="" ng-click="changePickupAddress()">
+                                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                                    </a>
+                                </div>
+
+                                <div class="d-none d-md-block">
+                                    <h2>PAYMENT METHOD</h2>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div ng-if="checkout.payment.name">
+                                        <address>
+                                            <div class="col-xs-2 col-md-3">
+                                                <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
+                                            </div>
+                                            <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                                <span ng-bind="checkout.payment.name"></span>
+                                                <span><small ng-bind="checkout.payment.description"></small></span>
+                                            </div>
+                                            <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                                <span ng-bind="checkout.payment.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : checkout.payment.name"></span>
+                                                <span><small ng-bind="checkout.payment.description"></small></span>
+                                            </div>
+                                        </address>
+                                    </div>
+                                    <div class="mr-2" ng-if="!checkout.payment.name">
+                                        <h4 class="m-0"><small>Please select payment method</small></h4>
+                                    </div>
+                                    <a class="btn btn-white align-self-start" href="" ng-click="changePaymentMethod()">
+                                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
+                                    </a>
+                                </div>
+
+                                <div class="d-none d-md-block">
+                                    <h2> MY PRODUCTS</h2>
+                                </div>
+                                <div class="border-bottom border-gray-200 py-3" ng-class="$first && 'border-top'" ng-repeat="item in checkout.cart.configuredGroups">
+                                    <vc-checkout-configurable-line-item item="item" ></vc-checkout-configurable-line-item>
+                                </div>
+                                <div class="border-bottom border-gray-200 py-3" ng-repeat="lineItem in checkout.cart.usualItems">
+                                    <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
+                                </div>
                             </div>
-                            <div class="hidden-xs hidden-sm col-md-3">
-                                <div class="d-flex justify-content-between order-action-block">
-                                    <button class="btn btn-lg btn-alt btn-primary btn-return d-flex justify-content-center" type="button" ng-click="checkout.wizard.prevStep()">
-                                        <span class="fa fa-arrow-left"></span>
+                            <div class="d-none d-md-block col-md-3">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <button class="btn btn-lg btn-outline-primary w-50 d-flex align-items-center justify-content-center px-2" type="button" ng-click="checkout.wizard.prevStep()">
+                                        <span class="fa fa-arrow-left mr-2"></span>
                                         <span>Back to cart</span>
                                     </button>
-                                    <button class="btn btn-lg btn-primary d-flex justify-content-center" type="button" ng-disabled="checkout.loading || !checkout.isValid" ng-click="createOrder()">
+                                    <div class="px-2"></div>
+                                    <button class="btn btn-lg btn-primary w-50 px-2" type="button" ng-disabled="checkout.loading || !checkout.isValid" ng-click="createOrder()">
                                         <span>Submit order</span>
                                     </button>
                                 </div>
-                                <div class="panel-group">
-                                    <div class="panel panel-default panel-static">
-                                        <div class="panel-heading">
-                                            Order summary
-                                        </div>
-                                        <div class="panel-body">
-                                            <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true } }"></vc-totals>
-                                        </div>
+                                <div class="card">
+                                    <h5 class="card-header text-uppercase">
+                                        Order summary
+                                    </h5>
+                                    <div class="card-body">
+                                        <vc-totals order="checkout.cart" options="{ show: { payment: false, discount: true } }"></vc-totals>
                                     </div>
                                 </div>
                             </div>
