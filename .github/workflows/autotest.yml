@@ -70,9 +70,9 @@ jobs:
         run: git clone https://github.com/VirtoCommerce/vc-quality-gate-katalon.git --branch dev
 
       - name: Katalon Studio Github Action
-        uses: VirtoCommerce/vc-github-actions/katalon-studio-github-action@master
+        uses: katalon-studio/katalon-studio-github-action@v2
         with:
-          version: '7.7.2'
+          version: '7.5.5'
           projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
           args: '-noSplash -retry=0 -testSuitePath="Test Suites/B2B/OpenCategoryPage" -browserType="Chrome (headless)" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="https://webstore-platform.qa.govirto.com/" -g_urlFront="https://webstore-storefront.qa.govirto.com/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=false' 
 
