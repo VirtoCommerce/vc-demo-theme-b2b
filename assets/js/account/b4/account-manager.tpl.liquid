@@ -17,24 +17,24 @@
                             <a class="nav-link text-dark text-condensed" ui-sref="orders.list">{{ 'customer.account.menu_label.orders' | t }}</a>
                         </li>
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/profile/' | absolute_url }}">{{ 'customer.account.menu_label.profile' | t }}</a>
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/profile' | absolute_url }}">{{ 'customer.account.menu_label.profile' | t }}</a>
                         </li>
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/addresses/' | absolute_url }}">{{ 'customer.account.menu_label.addresses' | t }}</a>
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/addresses' | absolute_url }}">{{ 'customer.account.menu_label.addresses' | t }}</a>
                         </li>
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/changePassword/' | absolute_url }}">{{ 'customer.account.menu_label.change_password' | t }}</a>
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/changePassword' | absolute_url }}">{{ 'customer.account.menu_label.change_password' | t }}</a>
                         </li>
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
                             <a class="nav-link text-dark text-condensed" href="{{ 'account#/lists/' | absolute_url }}">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                         </li>
                         {% if shop.quotes_enabled %}
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/quotes/' | absolute_url }}">{{ 'customer.account.menu_label.quotes' | t }}</a>
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/quotes' | absolute_url }}">{{ 'customer.account.menu_label.quotes' | t }}</a>
                         </li>
                         {% endif %}
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/checkoutDefaults/' | absolute_url }}">Checkout Details</a>
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/checkoutDefaults' | absolute_url }}">Checkout Details</a>
                         </li>
                     </ul>
                 </div>
@@ -46,10 +46,10 @@
                         <div class="row">
                         <ul class="col vertical-menu nav flex-column">
                             <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                                <a class="nav-link text-dark text-condensed" ui-sref="companyInfo">{{ 'customer.account.menu_label.company_info' | t }}</a>
+                                <a class="nav-link text-dark text-condensed" href="{{ 'account#/companyInfo' | absolute_url }}">{{ 'customer.account.menu_label.company_info' | t }}</a>
                             </li>
                             <li class="nav-item" va-permission="storefront:user:view" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                                <a class="nav-link text-dark text-condensed" ui-sref="members.list">{{ 'customer.account.menu_label.company_members' | t }}</a>
+                                <a class="nav-link text-dark text-condensed" href="{{ 'account#/companyMembers/' | absolute_url }}">{{ 'customer.account.menu_label.company_members' | t }}</a>
                             </li>
                         </ul>
                     </div>
