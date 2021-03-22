@@ -41,11 +41,11 @@
             </button>
             <div class="px-2"></div>
             <button class="btn btn-primary btn-lg btn-block">
-                <span>{{ 'customer.order.reorder' | t }}</span>
+                <span>{{ 'customer.order.reorder_all' | t }}</span>
             </button>
         </div>
         <div class="card mb-3">
-            <h5 class="card-header text-uppercase">Order totals</h5>
+            <h5 class="card-header text-uppercase">{{ 'customer.order.order_totals' | t }}</h5>
             <div class="card-body">
                 <vc-totals order="$ctrl.order"></vc-totals>
             </div>
@@ -63,13 +63,13 @@
             </div>
         </div>
         <div class="card mb-3" ng-if="$ctrl.deliveryMethod.type =='pickup'">
-            <h5 class="card-header text-uppercase">PICKUP INFORMATION</h5>
+            <h5 class="card-header text-uppercase">{{'customer.order.pickup_information' | t }}</h5>
             <div class="card-body">
                 <vc-address address="$ctrl.deliveryMethod.fulfillmentCenter.address"></vc-address>
             </div>
         </div>
         <div class="card mb-3">
-            <h5 class="card-header text-uppercase">PAYMENT DETAILS</h5>
+            <h5 class="card-header text-uppercase">{{'customer.order.payment_details' | t }}</h5>
             <div class="card-body">
                 <div class="h5">
                     <span>{{ 'customer.order.payment_type' | t }}</span>

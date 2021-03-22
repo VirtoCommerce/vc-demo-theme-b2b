@@ -38,7 +38,7 @@
                         {% endif %}
                     </div>
                     <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
-                        <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addConfigurationToCart(group)">Reorder</button>
+                        <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addConfigurationToCart(group)">{{ 'customer.order.reorder' | t }}</button>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                         {% endif %}
                     </div>
                     <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
-                        <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">Reorder</button>
+                        <button type="button" class="btn btn-outline-primary text-condensed" ng-click="$ctrl.addProductToCart(lineItem.productId,lineItem.quantity)">{{ 'customer.order.reorder' | t }}</button>
                     </div>
                 </div>
             </div>
