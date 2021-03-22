@@ -7,7 +7,7 @@ on:
 
 jobs:
   autotests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       # - uses: actions/checkout@v2
@@ -72,7 +72,7 @@ jobs:
       - name: Katalon Studio Github Action
         uses: katalon-studio/katalon-studio-github-action@v2
         with:
-          version: '7.2.2'
+          version: '7.5.5'
           projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
           args: '-noSplash -retry=0 -testSuitePath="Test Suites/B2B/OpenCategoryPage" -browserType="Chrome" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="https://webstore-platform.qa.govirto.com/" -g_urlFront="https://webstore-storefront.qa.govirto.com/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
 
