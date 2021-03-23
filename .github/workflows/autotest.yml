@@ -10,60 +10,60 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      # - uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # - name: Get Image Version
       #   uses: VirtoCommerce/vc-github-actions/get-image-version@master
       #   id: image
 
-      # - name: Build
-      #   id: build
-      #   uses: VirtoCommerce/vc-github-actions/build-theme@master
-      #   with:
-      #     versionSuffix:  ${{ env.VERSION_SUFFIX }}
+      - name: Build
+        id: build
+        uses: VirtoCommerce/vc-github-actions/build-theme@master
+        with:
+          versionSuffix:  ${{ env.VERSION_SUFFIX }}
 
-      # - name: Docker Login
-      #   uses: azure/docker-login@v1
-      #   with:
-      #     login-server: docker.pkg.github.com
-      #     username: $GITHUB_ACTOR
-      #     password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Docker Login
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: $GITHUB_ACTOR
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Start Containers
-      #   uses: VirtoCommerce/vc-github-actions/docker-start-environment@master
-      #   with: 
-      #     platformImage: docker.pkg.github.com/virtocommerce/vc-platform/platform
-      #     platformDockerTag: 3.49.0-master-182936ca
-      #     storefrontImage: docker.pkg.github.com/virtocommerce/vc-demo-storefront/demo-storefront
-      #     storefrontDockerTag: 1.10.0-alpha.1012-upstream-dev-672f462a
+      - name: Start Containers
+        uses: VirtoCommerce/vc-github-actions/docker-start-environment@master
+        with: 
+          platformImage: docker.pkg.github.com/virtocommerce/vc-platform/platform
+          platformDockerTag: 3.49.0-master-182936ca
+          storefrontImage: docker.pkg.github.com/virtocommerce/vc-demo-storefront/demo-storefront
+          storefrontDockerTag: 1.10.0-alpha.1012-upstream-dev-672f462a
 
-      # - name: Restore Dump
-      #   uses: VirtoCommerce/vc-github-actions/docker-restore-dump@master
-      #   with:
-      #     dumpUrl: 'https://devdemovc3.blob.core.windows.net/demosd/qa3.sql'
+      - name: Restore Dump
+        uses: VirtoCommerce/vc-github-actions/docker-restore-dump@master
+        with:
+          dumpUrl: 'https://devdemovc3.blob.core.windows.net/demosd/qa3.sql'
 
-      # - name: Install Modules
-      #   uses: VirtoCommerce/vc-github-actions/docker-install-modules@master
-      #   with:
-      #     githubToken: ${{ secrets.REPO_TOKEN }}
-      #     manifestUrl: 'https://raw.githubusercontent.com/VirtoCommerce/vc-webstore-deploy/qa/webstore-app/resources/deployment-cm.yaml'
-      #     manifestFormat: 'yml'
-      #     containerName: 'virtocommerce_vc-platform-web_1'
-      #     containerDestination: '/opt/virtocommerce/platform/modules'
-      #     sleepAfterRestart: '90000'
+      - name: Install Modules
+        uses: VirtoCommerce/vc-github-actions/docker-install-modules@master
+        with:
+          githubToken: ${{ secrets.REPO_TOKEN }}
+          manifestUrl: 'https://raw.githubusercontent.com/VirtoCommerce/vc-webstore-deploy/qa/webstore-app/resources/deployment-cm.yaml'
+          manifestFormat: 'yml'
+          containerName: 'virtocommerce_vc-platform-web_1'
+          containerDestination: '/opt/virtocommerce/platform/modules'
+          sleepAfterRestart: '90000'
 
-      # - name: Check Installed Modules
-      #   uses: VirtoCommerce/vc-github-actions/docker-check-modules@master
+      - name: Check Installed Modules
+        uses: VirtoCommerce/vc-github-actions/docker-check-modules@master
 
-      # - name: Install Theme
-      #   uses: VirtoCommerce/vc-github-actions/docker-install-theme@master
-      #   with:
-      #     artifactPath: ${{ steps.build.outputs.artifactPath }}
-      #     containerName: 'virtocommerce_vc-storefront-web_1'
-      #     containerDestination: '/opt/virtocommerce/storefront/wwwroot/cms-content/Themes/B2B-store/default'
-      #     restartContainer: 'true'
+      - name: Install Theme
+        uses: VirtoCommerce/vc-github-actions/docker-install-theme@master
+        with:
+          artifactPath: ${{ steps.build.outputs.artifactPath }}
+          containerName: 'virtocommerce_vc-storefront-web_1'
+          containerDestination: '/opt/virtocommerce/storefront/wwwroot/cms-content/Themes/B2B-store/default'
+          restartContainer: 'true'
 
       - name: Getting tests
         shell: sh
@@ -74,7 +74,7 @@ jobs:
         with:
           version: '7.5.5'
           projectPath: '${{ github.workspace }}/vc-quality-gate-katalon/platform_storefront.prj'
-          args: '-noSplash -retry=0 -testSuitePath="Test Suites/B2B/OpenCategoryPage" -browserType="Chrome" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="https://webstore-platform.qa.govirto.com/" -g_urlFront="https://webstore-storefront.qa.govirto.com/B2B-store/#/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
+          args: '-noSplash -retry=0 -testSuiteCollectionPath="Test Suites/B2B/B2B-Collection" -browserType="Chrome" -apiKey= ${{ secrets.KATALON_API_KEY }} -g_urlBack="http://localhost:8090/" -g_urlFront="http://localhost:8080/B2B-store/" -executionProfile="B2B-v3-Argo-QA" --config -webui.autoUpdateDrivers=true' 
 
       - name: 'Katalon Reports'
         if: always()
