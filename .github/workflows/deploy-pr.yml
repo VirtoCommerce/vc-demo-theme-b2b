@@ -16,7 +16,7 @@ jobs:
     steps:
     - name: Gets artifact link
       id: artifactLink
-      uses: VirtoCommerce/vc-github-actions/get-artifact-link@master
+      uses: VirtoCommerce/vc-github-actions/get-artifact-link@VDS-414
 
     - name: Create deploy PR in QA
       if: github.event.action != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy-qa')
