@@ -1,0 +1,40 @@
+# v0.1
+
+name: Deploy Theme to QA
+
+on: 
+  pull_request:
+    types: [labeled, closed]
+
+jobs:
+  deploy-qa:
+    if: github.event.action != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy-qa')
+
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+    steps:
+    - name: Create deploy step
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: VirtoCommerce/vc-github-actions/create-deploy-pr@VDS-414
+      with:
+        deployRepo: "vc-webstore-deploy"
+        deployBranch: "qa"
+        artifactKey: "B2B_THEME_URL"
+
+  deploy-demo:
+    if: github.event.action == 'closed' && github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'deploy-demo')
+
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+    steps:
+    - name: Create deploy step
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: VirtoCommerce/vc-github-actions/create-deploy-pr@VDS-414
+      with:
+        deployRepo: "vc-webstore-deploy"
+        deployBranch: "demo"
+        artifactKey: "B2B_THEME_URL"
