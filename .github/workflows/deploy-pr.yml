@@ -1,9 +1,15 @@
-# v0.2
+# v1.0
 
 name: Deploy Theme to environments
 on: 
   pull_request:
-    branches: [test, dev]
+    paths-ignore:
+      - '.github/**'
+      - 'docs/**'
+      - 'build/**'
+      - 'README.md'
+      - 'LICENSE'
+    branches: [dev]
     types: [labeled, closed]
 
 jobs:
