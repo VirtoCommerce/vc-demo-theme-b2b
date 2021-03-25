@@ -3,7 +3,7 @@
 name: Deploy Theme to environments
 on: 
   pull_request:
-    branches: [master, dev]
+    branches: [test, dev]
     types: [labeled, closed]
 
 jobs:
