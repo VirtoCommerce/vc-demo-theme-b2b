@@ -18,7 +18,7 @@ jobs:
       uses: VirtoCommerce/vc-github-actions/get-artifact-link@VDS-414
 
     - name: Create deploy PR in QA
-      if: github.event.action != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy-qa')
+      if: github.event.action != 'closed' && contains(github.event.pull_request.labels.*.name, 'deploy-qa') && !contains(github.event.pull_request.labels.*.name, 'deploy-demo')
       uses: VirtoCommerce/vc-github-actions/create-deploy-pr@VDS-414
       with:
         deployRepo: "vc-webstore-deploy"
@@ -43,5 +43,5 @@ jobs:
       with:
         workflow: Theme deployment
         token: ${{ secrets.REPO_TOKEN }}
-        inputs: '{ "blobUrl": "${{ steps.artifactLink.outputs.artifactUrl }}", "artifactVersion": "PR-${{  github.event.number }}", "key": "B2B_THEME_URL"  }'
+        inputs: '{ "blobUrl": "${{ steps.artifactLink.outputs.artifactUrl }}", "artifactVersion": "PR-${{ github.event.pull_request.number }}", "key": "B2B_THEME_URL"  }'
 
