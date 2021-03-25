@@ -1,6 +1,6 @@
 var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('filterByFulfillmentCenterWidget', {
-    templateUrl: "themes/assets/js/inventory/filter-by-fulfillment-center-widget.tpl.html",
+storefrontApp.component('vcFilterByFulfillmentCenterWidget', {
+    templateUrl: "themes/assets/js/bootstrap-migration/inventory/filter-by-fulfillment-center-widget.tpl.html",
     bindings: {
     }, 
     controller: ['$scope', 'inventoryApi', 'dialogService', 'baseUrl', '$localStorage', function ($scope, inventoryApi, dialogService, baseUrl, $localStorage) {

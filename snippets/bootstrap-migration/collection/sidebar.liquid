@@ -1,0 +1,11 @@
+<uib-accordion ng-init="filters = { terms: undefined }"
+               close-others="false"
+               vc-query-target="filters">
+    {% include 'bootstrap-migration/collection/sidebar/applied-filters' %}
+    {% include 'bootstrap-migration/collection/sidebar/keyword' %}
+    {% if customer and customer.is_registered_user and customer.is_first_time_buyer != true %}
+        {% include 'bootstrap-migration/collection/sidebar/previously-purchased' %}
+    {% endif %}
+    <vc-filter-by-fulfillment-center-widget></vc-filter-by-fulfillment-center-widget>
+</uib-accordion>
+{% include 'bootstrap-migration/collection/sidebar/filters' %}

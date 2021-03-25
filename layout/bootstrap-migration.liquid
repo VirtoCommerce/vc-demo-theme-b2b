@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="h-100"
+      lang="{{ shop.default_language.two_letter_language_name }}">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    {% if template == "json-page" or template == "json-preview" %}
+        <base href="{{ "" | full_url }}">
+    {% endif %}
+
+    {% include 'meta/meta-info' %}
+
+    {% include 'third-party/google-tag-manager-head' %}
+    {% include 'meta/open-graph-tags' %}
+
+    <link rel="canonical" href="{{ canonical_url }}" />
+
+    <script>
+        var BASE_URL = '{{ "" | full_url }}';
+    </script>
+
+    {% include 'main/dependencies-bootstrap-migration' %}
+</head>
+<body id="{{ page_title | handle }}"
+      class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}"
+      ng-cloak
+      ng-controller="mainController"
+      ng-init="baseUrl='{{ '' | absolute_url }}'"
+      data-target="#toc"
+      data-spy="scroll">
+    {% include 'bootstrap-migration/dialogs/recently-added-cart-item' %}
+    {% include 'bootstrap-migration/dialogs/send-product-to-email' %}
+    {% include 'bootstrap-migration/dialogs/select-fulfillment-center' %}
+    {% include 'js/bootstrap-migration/lists/lists-added-list-item-dialog' %}
+    {% include 'bootstrap-migration/main/header' %}
+    {{ content_for_layout }}
+    {% include 'bootstrap-migration/main/footer' %}
+</body>
+
+</html>

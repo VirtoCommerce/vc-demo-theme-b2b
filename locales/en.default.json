@@ -71,7 +71,7 @@
         "invalid_bank_card_expiration_date_message": "Please enter valid expiration date of your bank card in MM / YY format",
         "bank_card_cvv_required_message": "Please enter verification code of your bank card",
         "invalid_bank_card_cvv_message": "Please enter correct verification code of your bank card",
-        "order_successfully": "Order <strong class=\"text-uppercase\" >{0}</strong> has successfully been submitted. You will be sent an email notification as soon as your order is ready.",
+        "order_successfully": "has been successfully submitted. You will be notified via email when your order is ready for shipping",
         "order_print": "Print order",
         "order_summary": "Order summary",
         "pickup_address": "Pickup address",
@@ -374,7 +374,9 @@
             "shop_by": "Shop By",
             "all": "All",
             "all_collection": "All {0}",
-            "no_tags": "Add tags to your products for this list to build itself."
+            "no_tags": "Add tags to your products for this list to build itself.",
+            "previously_purchased": "Previously Purchased",
+            "previously_purchased_label": "Previously Purchased Products"
         },
         "sorting": {
             "title": "Sort results by:",
@@ -473,6 +475,7 @@
             "forgot_password": "Forgot your password?",
             "reset_password_success": "We've sent you an email with a link to update your password.",
             "sign_in": "Sign In",
+            "continue": "Continue",
             "or": "or",
             "cancel": "Return to Store",
             "guest_title": "Continue as a guest",
@@ -786,6 +789,7 @@
         },
         "customer": {
             "account": "Account",
+            "add_account": "Add account", 
             "view_account": "Go to my account",
             "logged_in_as_html": "Logged in as {0}",
             "logged_in_as_label": "Logged in as",

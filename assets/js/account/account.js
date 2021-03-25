@@ -169,10 +169,21 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
 
     }])
 
-    .run(['$templateCache', 'locale', '$translate', function ($templateCache, locale, $translate) {
+    .run(['$rootScope', '$window', '$templateCache', 'locale', '$translate', function ($rootScope, $window, $templateCache, locale, $translate) {
         $translate.use(locale);
         // cache application level templates
         $templateCache.put('pagerTemplate.html', '<ul uib-pagination boundary-links="true" max-size="$ctrl.pageSettings.numPages" items-per-page="$ctrl.pageSettings.itemsPerPageCount" total-items="$ctrl.pageSettings.totalItems" ng-model="$ctrl.pageSettings.currentPage" ng-change="$ctrl.pageSettings.pageChanged()" class="pagination-sm" style="padding-bottom: 20px;" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul uib-pagination>');
+
+        $rootScope.adjustTemplateUrl = (templateUrl) => {
+            const path = $window.location.pathname;
+
+            if(!path || path.indexOf('/b4') === -1) {
+                return templateUrl;
+            }
+
+            var result = templateUrl.replace('/account/', '/account/b4/');
+            return result;
+        };
     }])
 
     .service('accountDialogService', ['$uibModal', function ($uibModal) {
@@ -190,30 +201,6 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
             }
         }
     }])
-
-    .component('vcAccountManager', {
-        templateUrl: "account-manager.tpl",
-        bindings: {
-            baseUrl: '<',
-            customer: '<'
-        },
-        controller: ['$scope', '$timeout', 'storefrontApp.mainContext', 'loadingIndicatorService', 'commonService', function ($scope, $timeout, mainContext, loader, commonService) {
-            var $ctrl = this;
-            $ctrl.loader = loader;
-            $ctrl.availCountries = [];
-            loader.wrapLoading(function () {
-                return commonService.getCountries().then(function (response) {
-                    $ctrl.availCountries = response.data;
-                });
-            });
-
-            $ctrl.getCountryRegions = function (country) {
-                return loader.wrapLoading(function () {
-                    return commonService.getCountryRegions(country.code3).then(function (response) { return response.data; });
-                });
-            };
-        }]
-    })
 
     .service('confirmService', ['$q', function ($q) {
         this.confirm = function (message) {

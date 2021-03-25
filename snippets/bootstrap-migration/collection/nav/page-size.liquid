@@ -1,0 +1,16 @@
+<div class="form-group ml-3">
+    <label class="mr-1">{{ 'collections.general.products_per_page' | t }}</label>
+    <ul class="pagination mb-0"
+        ng-init="$collection.generatePageSizes({{ settings.product_list_capacity }}, {{ settings.product_list_capacity_steps }})">
+        <li class="page-item"
+            ng-class="{'active': $collection.pageSizeQuery.page_size == pageSize}"
+            ng-repeat="pageSize in $collection.pageSizes"
+            vc-query-target="$collection.pageSizeQuery">
+            <a class="page-link"
+               vc-query-source="{ page_size: [pageSize] }"
+               switchable="false"
+               ng-bind="pageSize">
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,60 @@
+
+<h3 class="pb-2">{{ 'customer.orders.title' | t }}</h3>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-bordered table-head-hover" aria-label="Order history">
+            <thead>
+                <tr class="text-condensed">
+                    <th scope="col" ng-click="$ctrl.sortChanged('number')" class="col-sortable border-bottom-0" ng-class="{'desc': $ctrl.getSortDirection('number') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('number') == $ctrl.sortAscending }">{{ 'customer.orders.order_number' | t }}</th>
+                    <th scope="col" class="border-bottom-0">{{ 'customer.orders.purchase_order' | t }}</th>
+                    <th scope="col" class="border-bottom-0">{{ 'customer.orders.invoice' | t }}</th>
+                    <th scope="col" ng-click="$ctrl.sortChanged('createdDate')" class="col-sortable border-bottom-0" ng-class="{'desc': $ctrl.getSortDirection('createdDate') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('createdDate') == $ctrl.sortAscending }">{{ 'customer.orders.date' | t }}</th>
+                    <th scope="col" uib-dropdown uib-dropdown-toggle class="filter border-bottom-0" ng-class="{'filtered': $ctrl.selectedStatuses.length > 0 }">
+                        <div>
+                            <span id="statuses-filter-dropdown">
+                              {{ 'customer.orders.status' | t }}
+                            </span>
+                            <ul class="dropdown-menu statuses-filter-dropdown" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
+                              <li class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check text-primary"></span> Check All</a>
+                              </li>
+                              <li class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.uncheckAllStatuses()"><span class="fa fa-times"></span> Uncheck All</a>
+                              </li>
+                              <li class="dropdown-divider"></li>
+                              <li ng-repeat="status in $ctrl.orderStatuses" class="dropdown-item">
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.toogleStatus(status)"><span ng-if="$ctrl.isStatusChecked(status)" class="fa fa-check text-primary"></span> <span ng-bind="status"></span></a>
+                              </li>
+                            </ul>
+                        </div>
+                    </th>
+                    <th scope="col" ng-click="$ctrl.sortChanged('total')" class="col-sortable border-bottom-0" ng-class="{'desc': $ctrl.getSortDirection('total') == $ctrl.sortDescending, 'asc': $ctrl.getSortDirection('total') == $ctrl.sortAscending }">{{ 'customer.orders.total' | t }}</th>
+                </tr>
+            </thead>
+            <tbody ng-if="$ctrl.entries.length">
+                <tr ng-repeat="order in $ctrl.entries">
+                    <td>
+                        <a ng-bind="order.number" ng-href="{{ 'account#/orders/' | absolute_url }}{% raw %}{{ order.number}}{% endraw %}?pageNumber={% raw %}{{$ctrl.pageSettings.currentPage}}{% endraw %}"></a>
+                    </td>
+                    <td ng-bind="order.purchaseOrderNumber"></td>
+                    <td>
+                        <a ng-bind="order.number" ng-click="$ctrl.getInvoicePdf(order.number)" class="cursor-pointer"></a>
+                    </td>
+                    <td ng-bind="order.createdDate | date"></td>
+                    <td ng-bind="order | orderToSummarizedStatusLabel"></td>
+                    <td ng-bind="order.total.formattedAmount"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div ng-if='$ctrl.pageSettings.totalItems > $ctrl.pageSettings.itemsPerPageCount' ng-include="'pagerTemplate.html'"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p ng-if="!$ctrl.entries.length && !$ctrl.loader.isLoading" class="text-center">{{ 'customer.orders.none' | t }}</p>
+    </div>
+</div>

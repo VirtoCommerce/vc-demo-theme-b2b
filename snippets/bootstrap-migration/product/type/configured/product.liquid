@@ -1,0 +1,64 @@
+{% include 'bootstrap-migration/product/type/common/product-title-info' %}
+<div class="row" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
+    <div class="col-md-3 mb-3 mb-md-0">
+        {% include 'bootstrap-migration/product/image' %}
+        {% include 'bootstrap-migration/product/compare' %}
+        {% include 'bootstrap-migration/product/product-compare-list-bar' %}
+    </div>
+
+    <div class="col-md-6 mb-3 mb-md-0">
+        {% if product.properties.size > 0 %}
+            {% include 'bootstrap-migration/product/type/common/product-properties' %}
+            {% include 'bootstrap-migration/product/type/common/product-description' %}
+        {% endif %}
+        {% include 'bootstrap-migration/product/product-configuration-list' %}
+    </div>
+
+    <div class="col-md-3 mb-3 mb-md-0">
+
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="h4">Price & delivery</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body px-0">
+                <div class="border-bottom px-3 pb-3 mb-3">
+                    <dl class="d-flex justify-content-between mb-0">
+                        <dt class="font-weight-normal fs-13">
+                            <span>Default price</span>
+                        </dt>
+                        <dd class="mb-0">
+                            <span ng-bind="getDefaultPrice()"></span>
+                        </dd>
+                    </dl>
+                    <dl class="d-flex justify-content-between mb-3">
+                        <dt class="font-weight-normal fs-13">
+                            <span>Custom changes</span>
+                        </dt>
+                        <dd class="mb-0">
+                            <span ng-bind="getCustomChangesTotal()"></span>
+                        </dd>
+                    </dl>
+                    <dl class="d-flex justify-content-between mb-0">
+                        <dt class="fs-13">
+                            <span>Total</span>
+                        </dt>
+                        <dd class="mb-0">
+                            <span class="text-dark-green font-weight-bold" ng-bind="getCurrentTotal()"></span>
+                        </dd>
+                    </dl>
+                </div>
+
+                {% include 'bootstrap-migration/product/type/common/product-delivery' %}
+                {% include 'bootstrap-migration/product/type/common/product-action-buttons' %}
+
+            </div>
+        </div>
+    </div>
+
+    {% include 'bootstrap-migration/product/type/common/related-products' %}
+
+</div>

@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$scope', '$window', '$filter', 'catalogService', 'availabilityService', 'pricingService', 'dialogService', 'cartService', 'storeCurrency',
-    function ($rootScope, $scope, $window, $filter, catalogService, availabilityService, pricingService, dialogService, cartService, storeCurrency) {
+storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$scope', '$window', '$filter', 'catalogService', 'availabilityService', 'pricingService', 'dialogService', 'cartService', 'storeCurrency', 'storefrontApp.mainContext',
+    function ($rootScope, $scope, $window, $filter, catalogService, availabilityService, pricingService, dialogService, cartService, storeCurrency, mainContext) {
         //TODO: prevent add to cart not selected variation
         // display validator please select property
         // display price range
@@ -11,7 +11,8 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         $scope.allVariationPropsMapCount = null;
         $scope.filterableVariationPropsMap = { };
         $scope.selectedVariation = {};
-        
+        $scope.customer = mainContext.customer;
+
         $scope.totalPrice = getDefaultTotalPrice();
 
         function initialize(filters) {
@@ -38,7 +39,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
                 angular.copy(getFlatternDistinctPropertiesMap(allVariations), $scope.allVariationPropsMap);
                 angular.copy(_.pick($scope.allVariationPropsMap, function (value, key, object) { return value.length > 1; }), $scope.filterableVariationPropsMap);
                 $scope.allVariationPropsMapCount = _.keys($scope.allVariationPropsMap).length;
-               
+
                 $scope.selectedVariation = product;
 
                 return availabilityService.getProductsAvailability([product.id]).then(function(res) {
@@ -67,7 +68,7 @@ storefrontApp.controller('productWithVariationsController', [ '$rootScope', '$sc
         function getVariationPropertyMap(variation) {
             return _.groupBy(variation.variationProperties, function (x) { return x.displayName });
         }
-        
+
         function getVariationsWithQuantity() {
           return _.pairs($scope.allVariationsMap).map(x => x[1]).filter(x => !!(+x.quantity));
         }

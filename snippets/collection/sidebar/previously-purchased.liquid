@@ -1,0 +1,25 @@
+{% assign is_select_only_purchased_products = current_product_search_criteria.is_select_only_purchased_products %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="panel-title">
+            {{ 'collections.sidebar.previously_purchased' | t }}
+        </div>
+    </div>
+    <div class="panel-collapse collapse in" role="tabpanel">
+        <div class="panel-body">
+            <div class="checkbox">
+                <ol class="list-unstyled">
+                    <li class="checkbox advanced-filter {% if is_select_only_purchased_products %}active-filter{% endif %}">
+                        <label>
+                            <input type="checkbox" ng-checked="{{is_select_only_purchased_products}}">
+                            <a vc-query-source="{ select_only_purchased_products: ['{{is_select_only_purchased_products != true}}'] }" switchable="false">
+                                <span class="switch"></span>
+                                <span class="name">{{ 'collections.sidebar.previously_purchased_label' | t }}</span>
+                            </a>
+                        </label>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,6 @@
-var storefrontApp = angular.module('storefrontApp');
-
-storefrontApp.component('vcRelatedProducts', {
-    templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
-    bindings: {
-        productIds: '<',
-        responsive: '<',
-        imageSize: '@',
-        onUpdate: '&'
-    },
-    controller: ['baseUrl', '$timeout', '$element', 'loadingIndicatorService', 'recommendationService', function (baseUrl, $timeout, $element, loader, recommendationService) {
-        var $ctrl = this;
+vcRelatedProductsController.$inject = ['baseUrl', '$timeout', '$element', 'loadingIndicatorService', 'recommendationService'];
+function vcRelatedProductsController(baseUrl, $timeout, $element, loader, recommendationService) {
+    var $ctrl = this;
         $ctrl.ready = false;
         $ctrl.loader = loader;
         $ctrl.baseUrl = baseUrl;
@@ -66,5 +57,27 @@ storefrontApp.component('vcRelatedProducts', {
         $ctrl.getUrl = function(relative) {
             return new URL(relative.replace(/^\/+/, ''), baseUrl).href;
         }
-    }]
+}
+
+var storefrontApp = angular.module('storefrontApp');
+storefrontApp.component('vcRelatedProducts', {
+  templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
+  bindings: {
+    productIds: '<',
+    responsive: '<',
+    imageSize: '@',
+    onUpdate: '&'
+  },
+  controller: vcRelatedProductsController
 });
+
+storefrontApp.component('vcRelatedProductsMigration', {
+    templateUrl: "themes/assets/js/bootstrap-migration/common-components/relatedProducts.tpl.html",
+    bindings: {
+      productIds: '<',
+      responsive: '<',
+      imageSize: '@',
+      onUpdate: '&'
+    },
+    controller: vcRelatedProductsController
+  });
