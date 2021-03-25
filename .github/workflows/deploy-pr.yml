@@ -1,7 +1,6 @@
 # v0.2
 
-name: Deploy Theme to QA
-
+name: Deploy Theme to environments
 on: 
   pull_request:
     branches: [master, dev]
