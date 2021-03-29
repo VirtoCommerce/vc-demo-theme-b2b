@@ -81,5 +81,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: reports
-          path: vc-quality-gate-katalon/Reports
+          path: |
+            vc-quality-gate-katalon/Reports
+            /home/runner/.katalon/*/Katalon_Studio_Engine_Linux_*/configuration/*.log.
           retention-days: 5
