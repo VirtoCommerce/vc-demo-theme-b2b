@@ -1,6 +1,5 @@
 <form accept-charset="UTF8" name="addrForm" novalidate="novalidate" ng-if="$ctrl.editMode">
     <div class="form-group" ng-init="$ctrl.setForm(addrForm)">
-
         <p class="form-error" ng-if="$ctrl.form.$submitted && $ctrl.form.Type.$error.required">
             {{ 'checkout.address.required_type' | t }}
         </p>
@@ -16,7 +15,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
