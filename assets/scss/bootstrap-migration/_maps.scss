@@ -2,7 +2,12 @@ $theme-colors: map-merge(
   $theme-colors,
   (
     'gray-900': $gray-900,
+    'gray-700': $gray-700,
+    'gray-600': $gray-600,
+    'gray-300': $gray-300,
     'gray-200': $gray-200,
+    'gray-modal': $gray-modal-bg,
+    'white': $white
   )
 );
 
@@ -28,3 +33,8 @@ $spacers: map-merge(
   )
 );
 
+$sizes: ();
+@for $i from 1 through 20 {
+    $size: $i * 5;
+    $sizes: map-merge($sizes, ($size: $size * 1%));
+}

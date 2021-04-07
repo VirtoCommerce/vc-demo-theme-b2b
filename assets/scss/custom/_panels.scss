@@ -100,3 +100,7 @@ h4.panel-title a {
 .panel-striped:nth-of-type(odd) {
     background-color: $gray-striped-table;
 }
+
+.panel-success {
+  background-color: $brand-success !important;
+}

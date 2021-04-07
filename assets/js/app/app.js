@@ -7,7 +7,6 @@ var storefrontAppDependencies = [
     'vcRecaptcha',
     'storefrontApp.consts',
     'mgo-angular-wizard',
-    'angularjs-dropdown-multiselect',
     'storefrontApp.customerInfo',
     'ui.router'
 ];
@@ -66,6 +65,10 @@ storefrontApp.factory('roundHelper', function () {
         }
     }
 });
+
+storefrontApp.factory( "$cookies", function() {
+    return Cookies.noConflict();
+})
 
 storefrontApp.config(['$httpProvider', 'locale', 'localization', '$translateProvider', 'vcRecaptchaServiceProvider', 'reCaptchaKey', function ($httpProvider, locale, localization, $translateProvider, vcRecaptchaServiceProvider, reCaptchaKey) {
     //$locationProvider.html5Mode({ enabled: true, requireBase: false, rewriteLinks: false });

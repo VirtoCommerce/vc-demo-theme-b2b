@@ -19,6 +19,7 @@
     display: block;
     padding: 3px 20px;
     clear: both;
+    cursor: pointer;
     font-weight: normal;
     line-height: $line-height-base;
     color: $dropdown-link-color;
@@ -80,5 +81,37 @@
 .open {
   > .dropdown-menu-item {
     outline: 0;
+  }
+}
+
+.account-switch {
+  .dropdown-menu {
+    min-width: 210px;
+  }
+
+  .dropdown-menu-item {
+    .account-icon {
+      color: #D5DEE4;
+
+      &.active {
+        color: $brand-primary;
+      }
+    }
+
+    &:active {
+      background-color: $brand-primary;
+
+      .account-icon {
+        color: $white;
+      }
+    }
+
+    .add-icon {
+      color: #72A365;
+    }
+
+    .btn-logout {
+      color: #B3BEC7;
+    }
   }
 }
