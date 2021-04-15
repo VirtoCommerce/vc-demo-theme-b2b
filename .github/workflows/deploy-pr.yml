@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      ARTIFACT_KEY: "B2B_THEME_URL"
 
     steps:
     - name: Gets artifact link
@@ -29,7 +30,7 @@ jobs:
       with:
         deployRepo: "vc-webstore-deploy"
         deployBranch: "qa"
-        artifactKey: "B2B_THEME_URL"
+        artifactKey: ${{ env.ARTIFACT_KEY}}
         artifactUrl: "${{ steps.artifactLink.outputs.artifactUrl }}"
         taskNumber: "${{ steps.artifactLink.outputs.qaTaskNumber }}"
 
@@ -39,7 +40,7 @@ jobs:
       with:
         deployRepo: "vc-webstore-deploy"
         deployBranch: "master"
-        artifactKey: "B2B_THEME_URL"
+        artifactKey: ${{ env.ARTIFACT_KEY}}
         artifactUrl: "${{ steps.artifactLink.outputs.artifactUrl }}"
         taskNumber: "${{ steps.artifactLink.outputs.demoTaskNumber }}"
 
@@ -49,5 +50,5 @@ jobs:
       with:
         workflow: Theme deployment
         token: ${{ secrets.REPO_TOKEN }}
-        inputs: '{ "blobUrl": "${{ steps.artifactLink.outputs.artifactUrl }}", "artifactVersion": "PR-${{ github.event.pull_request.number }}", "key": "B2B_THEME_URL"  }'
+        inputs: '{ "blobUrl": "${{ steps.artifactLink.outputs.artifactUrl }}", "artifactVersion": "PR-${{ github.event.pull_request.number }}", "key": "${{ env.ARTIFACT_KEY}}" }'
 
