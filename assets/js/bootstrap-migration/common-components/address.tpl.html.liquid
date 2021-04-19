@@ -1,6 +1,6 @@
 <form accept-charset="UTF8" name="addrForm" novalidate="novalidate" ng-if="$ctrl.editMode">
     <div class="form-group" ng-init="$ctrl.setForm(addrForm)">
-        <p class="form-error" ng-if="$ctrl.form.$submitted && $ctrl.form.Type.$error.required">
+        <p class="text-danger" ng-if="$ctrl.form.$submitted && $ctrl.form.Type.$error.required">
             {{ 'checkout.address.required_type' | t }}
         </p>
         <div class="form-group">
@@ -29,7 +29,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-select">
+                    <div class="form-group">
                         <label for="#" class="form-label">{{ 'checkout.address.country' | t }}</label>
                         <select ng-model="$ctrl.address.countryCode" ng-options="x.code3 as x.name for x in $ctrl.countries" name="countryCode" required class="form-control" size="1">
                             <option value="">{{ 'checkout.address.country_select_placeholder' | t }}</option>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col-md-6" ng-if="$ctrl.address.country.regions.length">
-                    <div class="form-group form-select">
+                    <div class="form-group">
                         <label for="#" class="form-label" ng-bind="'{{ 'customer.register.work_region' | t }}' + $ctrl.address.country.regionType"></label>
                         <select ng-model="$ctrl.address.regionId" ng-options="x.code as x.name for x in $ctrl.address.country.regions" name="region" required class="form-control" size="1">
                             <option value="" ng-bind="'Select ' + $ctrl.address.country.regionType"></option>

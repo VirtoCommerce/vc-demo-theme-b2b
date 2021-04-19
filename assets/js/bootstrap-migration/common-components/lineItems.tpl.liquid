@@ -5,7 +5,7 @@
             <div class="row align-items-center">
                 <div class="col text-center">{{ 'customer.order.quantity' | t }}</div>
                 <div class="col text-right">{{ 'customer.order.total' | t }}</div>
-                <div class="col-5" ng-if="!$ctrl.hideReorder"><span></span></div>
+                <div class="col-5" ng-if="!$ctrl.hideReorder"></div>
             </div>
         </div>
     </div>
@@ -14,7 +14,7 @@
     <div ng-repeat="group in $ctrl.order.configuredGroups" class="list-group-item border-gray-200">
         <div class="row align-items-center">
             <div ng-class="$ctrl.hideReorder ? 'col-1' : 'col-2'">
-                <img class="img-fluid border-0 p-0 " alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
+                <img class="img-fluid border-0 p-0" alt="{% raw %}{{ group.product.name }}{% endraw %}" ng-src="{% raw %}{{ group.product.primaryImage.url }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
             <div class="col">
                 <a ng-bind="group.product.name" class="text-bold" href="{% raw %}{{ group.product.url.replace(regex, baseUrl) }}{% endraw %}"></a>

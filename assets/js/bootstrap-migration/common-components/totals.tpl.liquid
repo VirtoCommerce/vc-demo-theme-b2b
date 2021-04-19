@@ -51,7 +51,7 @@
                 ng-init="title = '{{ 'totals.paymentFees' | t }}'"
                 ng-include="'totals-title-template.tpl'"
             ></dt>
-            <dd ng-if-end class="col-6 fee-margin-bottom">
+            <dd ng-if-end class="col-6">
                 <vc-totals-field-with-free
                     field="$ctrl.order[$ctrl.fieldNames.payment]"
                 ></vc-totals-field-with-free>
