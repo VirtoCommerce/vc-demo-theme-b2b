@@ -1,2 +1,7 @@
 @include text-emphasis-variant('.text-dark-green', $dark-green);
+@include text-emphasis-variant('.text-muted-contrast', $text-muted-contrast);
 @include text-emphasis-variant('.text-danger-alert', $text-danger-alert);
+
+.border-dashed {
+  border-bottom-style: dashed !important;
+}
