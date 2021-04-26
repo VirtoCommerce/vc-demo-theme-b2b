@@ -80,7 +80,7 @@
                 <img class="img-fluid border-0 p-0" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
             <div class="col">
-                <a ng-bind="lineItem.name" class="font-weight-bold" href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
+                <a ng-bind="lineItem.name" class="font-weight-bold" ng-href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
                 {% if shop.subscription_enabled %}
                     <p ng-if="lineItem.paymentPlan">
                         <span ng-bind="'Subscription with a period: ' + lineItem.paymentPlan.intervalCount + ' ' + lineItem.paymentPlan.interval"></span>

@@ -30,7 +30,7 @@ storefrontApp.component('vcLineItems', {
         };
 
         $ctrl.getProductLink = function(productId) {
-            return `product/${productId}`.replace($scope.regex, $scope.baseUrl);
+            return `${$scope.baseUrl}product/${productId}`;
         };
 
         $ctrl.$onChanges = function (params) {
