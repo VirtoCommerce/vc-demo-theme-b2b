@@ -178,8 +178,12 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
             let result = templateUrl;
             const path = $window.location.pathname;
 
-            if(path && path.indexOf('/b4') > -1) {
+            if (path && path.indexOf('/b4') > -1) {
                 result = result.replace('/account/', '/account/b4/');
+                result = result.replace('/common-components/', '/bootstrap-migration/common-components/');
+            }
+
+            if (path && path.indexOf('/cart') > -1) {
                 result = result.replace('/common-components/', '/bootstrap-migration/common-components/');
             }
 
