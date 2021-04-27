@@ -159,7 +159,7 @@
                             <div class="col-md-9 mt-4">
                                 <div class="pt-4 mb-4 border-top">
                                     <h2>DELIVERY METHOD</h2>
-                                    <div class="py-3">
+                                    <div class="pt-3">
                                         <div class="form-group mb-2">
                                             <div class="custom-control custom-radio">
                                                 <input type="radio" name="deliveryMethods" class="custom-control-input" id="shipping" ng-model="checkout.deliveryMethod.type" value="shipping">
@@ -178,14 +178,14 @@
                                 <div class="pt-4 mb-4 border-top" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                     <h2>SHIPPING ADDRESS</h2>
                                     <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div ng-if="checkout.shipment.deliveryAddress.city">
+                                        <div ng-if="checkout.shipment.deliveryAddress.city" class="mr-2">
                                             <span class="badge badge-dark mb-2" ng-if="isEqualAddress(checkout.shipment.deliveryAddress, customer.defaultShippingAddress)">Default</span>
                                             <vc-address address="checkout.shipment.deliveryAddress" edit-mode="false"></vc-address>
                                         </div>
                                         <div class="mr-2" ng-if="!checkout.shipment.deliveryAddress.city">
                                             <h4 class="m-0"><small>Please enter shipping address</small></h4>
                                         </div>
-                                        <a class="btn btn-white align-self-start" href="" ng-click="changeShippingAddress()">
+                                        <a class="btn btn-white btn-xs align-self-start" href="" ng-click="changeShippingAddress()">
                                             <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                         </a>
                                     </div>
@@ -194,7 +194,7 @@
                                 <div class="pt-4 mb-4 border-top" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                     <h2>SHIPPING METHOD</h2>
                                     <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                        <div ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode" class="d-flex align-items-center mr-2">
+                                        <div ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode" class="d-flex align-items-center mr-4">
                                             <img class="img-fluid mr-3" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
                                             <div class="h5">
                                                 <span ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
@@ -206,7 +206,7 @@
                                         <div class="mr-2" ng-if="!checkout.shipment.shipmentMethod.shipmentMethodCode">
                                             <h4 class="m-0"><small>Please select shipping method</small></h4>
                                         </div>
-                                        <a class="btn btn-white align-self-start" href="" ng-click="changeShippingMethod()">
+                                        <a class="btn btn-white btn-xs" href="" ng-click="changeShippingMethod()">
                                             <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                         </a>
                                     </div>
@@ -215,13 +215,13 @@
                                 <div class="pt-4 mb-4 border-top" ng-if="checkout.deliveryMethod.type == 'pickup'">
                                     <h2>PICKUP ADDRESS</h2>
                                     <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                        <div ng-if="checkout.deliveryMethod.fulfillmentCenter.address.city">
+                                        <div ng-if="checkout.deliveryMethod.fulfillmentCenter.address.city" class="mr-2">
                                             <vc-address address="checkout.deliveryMethod.fulfillmentCenter.address" edit-mode="false"></vc-address>
                                         </div>
                                         <div class="mr-2" ng-if="!checkout.deliveryMethod.fulfillmentCenter.address.city">
                                             <h4 class="m-0"><small>Please select branch</small></h4>
                                         </div>
-                                        <a class="btn btn-white align-self-start" href="" ng-click="changePickupAddress()">
+                                        <a class="btn btn-white btn-xs align-self-start" href="" ng-click="changePickupAddress()">
                                             <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                         </a>
                                     </div>
@@ -230,25 +230,21 @@
                                 <div class="pt-4 mb-4 border-top">
                                     <h2>PAYMENT METHOD</h2>
                                     <div class="d-flex align-items-center">
-                                        <div ng-if="checkout.payment.name">
-                                            <address>
-                                                <div class="col-xs-2 col-md-3">
-                                                    <img class="checkout-settings img-responsive" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
-                                                </div>
-                                                <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                                    <span ng-bind="checkout.payment.name"></span>
-                                                    <span><small ng-bind="checkout.payment.description"></small></span>
-                                                </div>
-                                                <div class="h5 col-md-9" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                                    <span ng-bind="checkout.payment.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : checkout.payment.name"></span>
-                                                    <span><small ng-bind="checkout.payment.description"></small></span>
-                                                </div>
-                                            </address>
+                                        <div class="d-flex align-items-center mr-4" ng-if="checkout.payment.name">
+                                            <img class="img-fluid mr-3" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
+                                            <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                                <span ng-bind="checkout.payment.name"></span>
+                                                <span><small ng-bind="checkout.payment.description"></small></span>
+                                            </div>
+                                            <div class="h5" ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                                <span ng-bind="checkout.payment.code == 'DefaultManualPaymentMethod'? 'Pay Upon Pickup' : checkout.payment.name"></span>
+                                                <span><small ng-bind="checkout.payment.description"></small></span>
+                                            </div>
                                         </div>
                                         <div class="mr-2" ng-if="!checkout.payment.name">
                                             <h4 class="m-0"><small>Please select payment method</small></h4>
                                         </div>
-                                        <a class="btn btn-white align-self-start" href="" ng-click="changePaymentMethod()">
+                                        <a class="btn btn-white btn-xs" href="" ng-click="changePaymentMethod()">
                                             <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}"  height="14" width="14" />
                                         </a>
                                     </div>
