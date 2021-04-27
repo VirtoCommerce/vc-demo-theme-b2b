@@ -20,11 +20,9 @@
                 <a ng-bind="$ctrl.getToggleTitle()" ng-click="$ctrl.toggleConfiguration()"></a>
             </p>
         </div>
-        <!-- Check migration of this component -->
         <div class="d-none d-md-block col-md-3" ng-init='$ctrl.loadPaymentPlan({{ settings.available_paymentPlans | json }}, "product", $ctrl.item.productId)'>
             <vc-item-availability availability="$ctrl.item.availability"></vc-item-availability>
         </div>
-        <!-- Check migration of this component -->
         <div class="col-3 col-md-2">
             <div class="row" ng-class="{'align-items-baseline': outOfStockError}">
                 <div class="col-md-6 form-group pl-0 m-0">
