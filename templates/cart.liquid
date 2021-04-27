@@ -284,51 +284,51 @@
                         </div>
                 </vc-checkout-wizard-step>
                 <vc-checkout-wizard-step name="complete" title="Complete" final="true">
-                    <div class="col-md-12">
+                    <div class="col-12">
                         <div class="row">
-                            <div class="panel panel-default">
-                                <div class="panel-heading panel-success">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-md-9 text-contrast text-transform-none"><p class="h4 text-transform-none my-0">Order <span ng-bind="checkout.order.number"></span> {{ 'checkout.order_successfully' | t }}</p></div>
-                                        <div class="col-md-3">
-                                            <div class="btn-group pull-right" role="group">
-                                                <button type="button" class="btn btn-white-checkout border-0" ng-click="getInvoicePdf()">{{ 'checkout.order_print' | t }}</button>
-                                            </div>
+                            <div class="card mb-3">
+                                <div class="card-header text-white bg-success">
+                                    <div class="row align-items-center">
+                                        <div class="col-8 col-sm-9">
+                                            <p class="font-weight-bold text-condensed my-0 order-complete-title">Order <span ng-bind="checkout.order.number"></span> {{ 'checkout.order_successfully' | t }}</p>
+                                        </div>
+                                        <div class="col-4 col-sm-3 text-right">
+                                            <button type="button" class="btn btn-white border-0" ng-click="getInvoicePdf()">{{ 'checkout.order_print' | t }}</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="row flexible nogap">
-                                        <div class="col-md-4 mb-4 mb-sm-0">
-                                            <div class="panel panel-default mb-0">
-                                                <div class="panel-heading">{{ 'checkout.order_summary' | t }}</div>
-                                                <div class="panel-body">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3 mb-sm-0 pr-md-2">
+                                            <div class="card mb-0">
+                                                <h5 class="card-header text-uppercase">{{ 'checkout.order_summary' | t }}</h5>
+                                                <div class="card-body">
                                                     <vc-totals order="checkout.order"></vc-totals>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-md-4 mb-4 mb-sm-0" ng-if="checkout.deliveryMethod.type == 'shipping'">
-                                            <div class="panel panel-default h-100 mb-0">
-                                                <div class="panel-heading">Shipping address</div>
-                                                <div class="panel-body">
+                                        <div class="col-12 col-md-4 mb-3 mb-sm-0 pl-md-2 pr-md-2" ng-if="checkout.deliveryMethod.type == 'shipping'">
+                                            <div class="card h-100 mb-0">
+                                                <h5 class="card-header text-uppercase">Shipping address</h5>
+                                                <div class="card-body">
                                                     <vc-address address="checkout.order.shipments[0].deliveryAddress"></vc-address>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-md-4 mb-4 mb-sm-0" ng-if="checkout.deliveryMethod.type == 'pickup'">
-                                            <div class="panel panel-default h-100 mb-0">
-                                                <div class="panel-heading">{{ 'checkout.pickup_address' | t }}</div>
-                                                <div class="panel-body">
+                                        <div class="col-12 col-md-4 mb-3 mb-sm-0 pl-md-2" ng-if="checkout.deliveryMethod.type == 'pickup'">
+                                            <div class="card h-100 mb-0">
+                                                <h5 class="card-header text-uppercase">{{ 'checkout.pickup_address' | t }}</h5>
+                                                <div class="card-body">
                                                     <vc-address address="checkout.deliveryMethod.fulfillmentCenter.address"></vc-address>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-md-4">
-                                            <div class="panel panel-default h-100 mb-0">
-                                                <div class="panel-heading">{{ 'checkout.payment_method.title' | t }}</div>
-                                                <div class="panel-body">
-                                                    <div class="row flexible nogap align-items-center">
-                                                        <img class="col-xs-2 img-responsive" alt="Payment method" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
+                                        <div class="col-12 col-md-4">
+                                            <div class="card h-100 mb-0">
+                                                <h5 class="card-header text-uppercase">{{ 'checkout.payment_method.title' | t }}</h5>
+                                                <div class="card-body">
+                                                    <div class="row align-items-center">
+                                                        <img class="col-2 img-fluid" alt="Payment method" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                                         <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                             <span ng-bind="checkout.payment.name"></span>
                                                             <span><small ng-bind="checkout.payment.description"></small></span>
@@ -346,10 +346,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
+                            <div class="card w-100">
+                                <h5 class="card-header text-uppercase">
                                     {{ 'checkout.purchased_products' | t }}
-                                </div>
+                                </h5>
                                 <vc-line-items order="checkout.order" hide-reorder="true"></vc-line-items>
                             </div>
                         </div>
