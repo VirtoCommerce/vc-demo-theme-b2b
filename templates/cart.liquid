@@ -11,14 +11,14 @@
     <div class="row" ng-show="checkout.cart.itemsCount > 0">
         <div class="d-none d-md-block col-md-12 mb-4">
             <div class="page-header clearfix d-flex align-items-center">
-                <nav class="nav nav-pills nav-outline">
+                <ul class="nav nav-pills nav-outline">
                     <li role="presentation" ng-repeat="step in checkout.wizard.steps" class="nav-item" ng-class="!$last && 'mr-3'">
                         <a href="" class="nav-link" ng-class="{'active': step.isActive, 'disabled': !step.isActive}">
                             <span class="h2" ng-bind="$index + 1"></span>
                             <span class="h2" ng-class="{'text-dark': !step.isActive}" ng-bind="step.title"></span>
                         </a>
                     </li>
-                </nav>
+                </ul>
                 <ul class="list-inline mb-0 ml-auto">
                     <li class="list-inline-item">
                         <a href="" class="btn btn-link font-weight-bold" ng-click=""><i class="fa fa-bullhorn text-gray-300" aria-hidden="true"></i>&ensp;Feedback</a>
