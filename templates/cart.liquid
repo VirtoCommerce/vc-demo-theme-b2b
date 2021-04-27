@@ -190,7 +190,7 @@
                                     <h2>SHIPPING METHOD</h2>
                                     <div class="d-flex align-items-center" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                         <div ng-if="checkout.shipment.shipmentMethod.shipmentMethodCode" class="d-flex align-items-center mr-4">
-                                            <img class="img-fluid mr-3" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
+                                            <img class="img-fluid mr-3" alt="shipmentMethodLogo" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %}{{ checkout.shipment.shipmentMethod.logoUrl }}{% endraw %}" />
                                             <div class="h5">
                                                 <span ng-bind="checkout.shipment.shipmentMethod.name"></span><span ng-bind="checkout.shipment.shipmentMethod.optionName"></span>
                                                 <span>
@@ -226,7 +226,7 @@
                                     <h2>PAYMENT METHOD</h2>
                                     <div class="d-flex align-items-center">
                                         <div class="d-flex align-items-center mr-4" ng-if="checkout.payment.name">
-                                            <img class="img-fluid mr-3" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
+                                            <img class="img-fluid mr-3" alt="PaymentMethodIcon" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-src="{% raw %} {{ getPaymentIconUrl(checkout.payment) }} {% endraw %}" />
                                             <div class="h5" ng-if="checkout.deliveryMethod.type == 'shipping'">
                                                 <span ng-bind="checkout.payment.name"></span>
                                                 <span><small ng-bind="checkout.payment.description"></small></span>
