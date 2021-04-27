@@ -1,10 +1,5 @@
 {% layout 'bootstrap-migration' %}
-<!-- <nav ng-show="checkout.cart.itemsCount > 0" class="navbar navbar-default navbar-fixed-top visible-xs-block visible-sm-block" role="navigation">
-    <p class="navbar-text navbar-left">
-        <small>{{ 'checkout.total' | t }}:</small>
-        <strong ng-bind="checkout.cart.total.formattedAmount"></strong>
-    </p>
-</nav> -->
+
 <main class="container flex-grow-1 pt-4 pb-6" role="main" ng-controller="checkoutController">
     <vc-loader is-loading="checkout.loading"></vc-loader>
     <div class="row">
