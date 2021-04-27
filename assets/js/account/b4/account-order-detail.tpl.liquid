@@ -1,0 +1,96 @@
+<div class="mb-3">
+     <a ui-sref="orders.list({pageNumber: $ctrl.pageNumber})" class="btn btn-outline-primary text-condensed">
+         <span class="fa fa-arrow-left pr-2"></span> {{ 'customer.orders.return' | t }}
+     </a>
+</div>
+<div id="order-detail" class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header text-uppercase text-condensed font-weight-bold">
+                {% capture order_number %}{% raw %}{{$ctrl.orderNumber}}{% endraw %}{% endcapture %}
+                <h3 class="my-2">{{ 'customer.order.title' | t: order_number }}</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <span>{{ 'customer.orders.status' | t }}: </span>
+                        <span class="font-weight-normal" ng-bind="$ctrl.order.status"></span>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="float-right">
+                            {% capture created_date %}<span ng-bind="$ctrl.order.createdDate | date: 'medium'" class="font-weight-normal"></span>{% endcapture %}
+                            <span>{{ 'customer.order.placed_on_date_html' | t: created_date }}</span>
+                        </div>
+                        <div ng-if="$ctrl.order.isCancelled">
+                            {% capture cancelled_on %}<span ng-bind="$ctrl.order.modifiedDate | date: 'medium'" class="font-weight-normal"></span>{% endcapture %}
+                            <div>
+                                {{ 'customer.order.cancelled_on' | t: cancelled_on }}
+                            </div>
+                            <div>{{ 'customer.order.cancel_reason' | t }}: {% raw %}{{ $ctrl.order.cancelReason }}{% endraw %}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-0" ng-if="$ctrl.order">
+                <vc-line-items order="$ctrl.order"></vc-line-items>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 px-0">
+        <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-primary btn-lg btn-block" ng-click="$ctrl.getInvoicePdf()">
+                <span>{{ 'customer.order.get_invoice' | t }}</span>
+            </button>
+            <div class="px-2"></div>
+            <button class="btn btn-primary btn-lg btn-block">
+                <span>{{ 'customer.order.reorder_all' | t }}</span>
+            </button>
+        </div>
+        <div class="card mb-3">
+            <h5 class="card-header text-uppercase">{{ 'customer.order.order_totals' | t }}</h5>
+            <div class="card-body">
+                <vc-totals order="$ctrl.order"></vc-totals>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <h5 class="card-header text-uppercase">{{ 'customer.order.billing_address' | t }}</h5>
+            <div class="card-body">
+                <vc-address address="$ctrl.billingAddress"></vc-address>
+            </div>
+        </div>
+        <div class="card mb-3" ng-if="$ctrl.order.shipments[0].deliveryAddress">
+            <h5 class="card-header text-uppercase">{{ 'customer.order.shipping_address' | t }}</h5>
+            <div class="card-body">
+                <vc-address address="$ctrl.order.shipments[0].deliveryAddress"></vc-address>
+            </div>
+        </div>
+        <div class="card mb-3" ng-if="$ctrl.deliveryMethod.type =='pickup'">
+            <h5 class="card-header text-uppercase">{{'customer.order.pickup_information' | t }}</h5>
+            <div class="card-body">
+                <vc-address address="$ctrl.deliveryMethod.fulfillmentCenter.address"></vc-address>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <h5 class="card-header text-uppercase">{{'customer.order.payment_details' | t }}</h5>
+            <div class="card-body">
+                <div class="h5">
+                    <span>{{ 'customer.order.payment_type' | t }}</span>
+                </div>
+                <div class="form-group mb-0">
+                    <select name="paymentMethodSelect" id="paymentMethodSelect" ng-model="$ctrl.selectedPaymentMethodCode" ng-change="$ctrl.paymentMethodChanged()" class="form-control" ng-disabled="$ctrl.order.inPayments[0].status === 'Paid'">
+                        <option ng-repeat="method in $ctrl.paymentMethods" ng-value="method.code" ng-bind="method.displayName"></option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-lg mt-3" ng-click="$ctrl.payInvoice()" ng-if="$ctrl.order.inPayments[0].status !== 'Paid'">
+                    <span>{{ 'customer.order.pay_invoice' | t }}</span>
+                </button>
+            </div>
+        </div>
+        <div ng-if="$ctrl.order.subscriptionNumber">
+            <hr class="mb-2 mt-4 border-1 border-gray-200" />
+            <div>{{ 'customer.order.subscription' | t }}</div>
+            <div>
+                {{ 'customer.order.subscription_comment' | t }}
+                <a ng-bind="$ctrl.order.subscriptionNumber" ui-sref="subscriptions.detail({number: $ctrl.order.subscriptionNumber})"></a>
+            </div>
+        </div>
+    </div>
+</div>

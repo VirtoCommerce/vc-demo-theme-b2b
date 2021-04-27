@@ -16,10 +16,10 @@
                             </span>
                             <ul class="dropdown-menu statuses-filter-dropdown" uib-dropdown-menu aria-labelledby="statuses-filter-dropdown">
                               <li class="dropdown-item">
-                                <a class="font-weight-normal text-dark" ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check text-primary"></span> Check All</a>
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.checkAllStatuses()"><span class="fa fa-check text-primary"></span> {{ 'customer.orders.check_all' | t }}</a>
                               </li>
                               <li class="dropdown-item">
-                                <a class="font-weight-normal text-dark" ng-click="$ctrl.uncheckAllStatuses()"><span class="fa fa-times"></span> Uncheck All</a>
+                                <a class="font-weight-normal text-dark" ng-click="$ctrl.uncheckAllStatuses()"><span class="fa fa-times"></span> {{ 'customer.orders.uncheck_all' | t }}</a>
                               </li>
                               <li class="dropdown-divider"></li>
                               <li ng-repeat="status in $ctrl.orderStatuses" class="dropdown-item">
@@ -34,7 +34,7 @@
             <tbody ng-if="$ctrl.entries.length">
                 <tr ng-repeat="order in $ctrl.entries">
                     <td>
-                        <a ng-bind="order.number" ng-href="{{ 'account#/orders/' | absolute_url }}{% raw %}{{ order.number}}{% endraw %}?pageNumber={% raw %}{{$ctrl.pageSettings.currentPage}}{% endraw %}"></a>
+                        <a ng-bind="order.number" ui-sref="orders.detail({number: order.number, pageNumber: $ctrl.pageSettings.currentPage})"></a>
                     </td>
                     <td ng-bind="order.purchaseOrderNumber"></td>
                     <td>

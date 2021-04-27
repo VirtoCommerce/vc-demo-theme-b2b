@@ -110,7 +110,9 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrderDetail', {
-        templateUrl: "themes/assets/js/account/account-order-detail.tpl",
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-order-detail.tpl");
+        }],
         require: {
             accountManager: '^vcAccountManager'
         },

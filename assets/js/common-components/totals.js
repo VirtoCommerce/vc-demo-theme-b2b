@@ -12,7 +12,9 @@ storefrontApp.constant('vcTotalsDefaults', {
 });
 
 storefrontApp.component('vcTotals', {
-    templateUrl: "themes/assets/js/common-components/totals.tpl.liquid",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/common-components/totals.tpl.liquid");
+    }],
 	bindings: {
         order: '<',
         options: '<'

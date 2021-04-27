@@ -1,7 +1,9 @@
 ﻿var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.component('vcLineItems', {
-    templateUrl: "themes/assets/js/common-components/lineItems.tpl.liquid",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/common-components/lineItems.tpl.liquid");
+    }],
     bindings: {
         order: '<',
         hideReorder: '<'
@@ -28,7 +30,7 @@ storefrontApp.component('vcLineItems', {
         };
 
         $ctrl.getProductLink = function(productId) {
-            return `product/${productId}`.replace($scope.regex, $scope.baseUrl);
+            return `${$scope.baseUrl}product/${productId}`;
         };
 
         $ctrl.$onChanges = function (params) {

@@ -175,13 +175,14 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
         $templateCache.put('pagerTemplate.html', '<ul uib-pagination boundary-links="true" max-size="$ctrl.pageSettings.numPages" items-per-page="$ctrl.pageSettings.itemsPerPageCount" total-items="$ctrl.pageSettings.totalItems" ng-model="$ctrl.pageSettings.currentPage" ng-change="$ctrl.pageSettings.pageChanged()" class="pagination-sm" style="padding-bottom: 20px;" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul uib-pagination>');
 
         $rootScope.adjustTemplateUrl = (templateUrl) => {
+            let result = templateUrl;
             const path = $window.location.pathname;
 
-            if(!path || path.indexOf('/b4') === -1) {
-                return templateUrl;
+            if(path && path.indexOf('/b4') > -1) {
+                result = result.replace('/account/', '/account/b4/');
+                result = result.replace('/common-components/', '/bootstrap-migration/common-components/');
             }
 
-            var result = templateUrl.replace('/account/', '/account/b4/');
             return result;
         };
     }])
