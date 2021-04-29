@@ -20,11 +20,13 @@ $danger: #ec6a5e;
 
 $body-color: #111;
 $text-muted: #757575;
+$text-muted-contrast: #999;
 $text-danger-alert: #a94442;
 
 $dark-green: #3c763d;
 $gray-modal-bg: #f8f8f8;
 $gray-modal-border: #e5e5e5;
+$gray-checkout-card-border: #e3e3e3;
 
 $yiq-contrasted-threshold: 200;
 
@@ -75,6 +77,8 @@ $input-btn-padding-x-lg: 1.5rem;
 $input-btn-font-size-sm: $font-size-sm !default;
 $input-btn-line-height-sm: $line-height-sm !default;
 
+$paragraph-margin-bottom: 0.625rem;
+
 $custom-control-cursor: pointer;
 $custom-control-indicator-size: 1.2rem;
 $custom-control-indicator-bg-size: 45% 35%;
@@ -114,6 +118,8 @@ $dropdown-link-active-bg: $primary;
 
 $navbar-dark-color: $white;
 $navbar-light-color: $black;
+
+$nav-link-disabled-color: $gray-300;
 
 $breadcrumb-margin-bottom: 0;
 $breadcrumb-padding-x: 0.938rem;

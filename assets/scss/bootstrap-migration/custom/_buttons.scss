@@ -33,3 +33,10 @@
     width: add($btn-line-height-xs * 1em, add($btn-padding-y-xs * 2, $btn-height-border, false));
   }
 }
+
+.btn-white {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  &:hover {
+    box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.15);
+  }
+}

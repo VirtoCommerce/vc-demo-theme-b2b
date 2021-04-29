@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="card-header">
+        <span class="h4">Credit card</span>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-column">
+            <ul class="list-inline m-0">
+                <li class="list-inline-item"><img src="{{ 'visa.svg' | asset_url }}" alt="Visa"></li>
+                <li class="list-inline-item"><img src="{{ 'master.svg' | asset_url }}" alt="MasterCard"></li>
+                <li class="list-inline-item"><img src="{{ 'american-express.svg' | asset_url }}" alt="AmericanExpress"></li>
+                <li class="list-inline-item"><img src="{{ 'diners-club.svg' | asset_url }}" alt="DinersClub"></li>
+                <li class="list-inline-item"><img src="{{ 'paypal.svg' | asset_url }}" alt="Paypal"></li>
+                <li class="list-inline-item"><img src="{{ 'jcb.svg' | asset_url }}" alt="JCB"></li>
+            </ul>
+            <form class="d-flex flex-column credit-card-form mt-3" accept-charset="UTF8" name="creditCardForm" novalidate="novalidate">
+                <div class="d-flex flex-wrap justify-content-between">
+                    <div class="p-3 credit-card-side">
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="form-group">
+                                    <label for="cardNumber"
+                                        class="font-weight-bold">{{ 'checkout.payment_method.card_number' | t }}</label>
+                                    <input name="cardNumber" class="form-control pr-1" value="8800 5553 5355 5055"
+                                        disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <label for="cardholderName"
+                                        class="font-weight-bold">{{ 'checkout.payment_method.cardholder_name' | t }}</label>
+                                    <input name="cardholderName" class="form-control" value="Jonh Doe" disabled />
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="cardExpiration"
+                                        class="font-weight-bold">{{ 'checkout.payment_method.expiry_date_label' | t }}</label>
+                                    <input name="cardExpiration" class="form-control" value="01/24" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 credit-card-side">
+                        <div class="row bg-gray-200 rounded-0 p-4 mb-2"></div>
+                        <div class="row">
+                            <div class="offset-9 col-3">
+                                <div class="form-group">
+                                    <label for="cvv" class="font-weight-bold">{{ 'checkout.payment_method.cvv' | t }}</label>
+                                    <input name="cvv" class="form-control" value="100" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-toolbar justify-content-end mt-3">
+                    <button class="btn btn-outline-dark mr-2" ng-click="close()">Cancel</button>
+                    <button class="btn btn-primary" ng-click="close()">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
