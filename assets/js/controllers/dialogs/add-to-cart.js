@@ -1,5 +1,5 @@
 angular.module('storefrontApp')
-    .controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
+    .controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
       $scope.dialogData = dialogData || {};
       $scope.baseUrl = baseUrl;
       $scope.regex = new RegExp(/^\/+/);
