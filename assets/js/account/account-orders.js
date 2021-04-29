@@ -278,7 +278,7 @@ angular.module('storefront.account')
                 const addToCartRequests = [];
                 let dialogData = undefined;
 
-                _.each( $ctrl.order.configuredGroups, (configuration) => {
+                _.each($ctrl.order.configuredGroups, (configuration) => {
                     const minAvailableQuantity = _.min(_.map(configuration.items, (x) => _.min([x.quantity, x.product.availableQuantity])));
 
                     if (minAvailableQuantity > 0) {
@@ -302,28 +302,32 @@ angular.module('storefront.account')
                     }
                 });
 
-                const usalItemsForReorder = _.reject(_.map($ctrl.order.usualItems, (x) => {
+                const usualItemsForReorder = _.reject(_.map($ctrl.order.usualItems, (x) => {
                     return { id: x.product.id, quantity: _.min([x.quantity, x.product.availableQuantity])}
                 }), (x) => x.quantity < 1);
 
-                let prouctsForDialog = _.reject(_.map($ctrl.order.usualItems, (x) =>
-                    angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
-                ), (x) => x.quantity < 1);
+                if (usualItemsForReorder && usualItemsForReorder.length) {
+                    let prouctsForDialog = _.reject(_.map($ctrl.order.usualItems, (x) =>
+                        angular.extend(x.product, { quantity: _.min([x.quantity, x.product.availableQuantity])})
+                    ), (x) => x.quantity < 1);
 
-                const usialItemsDialogData = toDialogDataModel(prouctsForDialog, null, false, null);
+                    const usualItemsDialogData = toDialogDataModel(prouctsForDialog, null, false, null);
 
-                if (!dialogData) {
-                    dialogData = usialItemsDialogData;
-                } else {
-                    dialogData.items = _.union(dialogData.items, usialItemsDialogData.items);
+                    if (!dialogData) {
+                        dialogData = usualItemsDialogData;
+                    } else {
+                        dialogData.items = _.union(dialogData.items, usualItemsDialogData.items);
+                    }
+
+                    addToCartRequests.push(cartService.addLineItems(usualItemsForReorder))
                 }
 
-                addToCartRequests.push(cartService.addLineItems(usalItemsForReorder))
-
-                $q.all(addToCartRequests).then(() => {
-                    dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
-                    $rootScope.$broadcast('cartItemsChanged');
-                });
+                if (addToCartRequests && addToCartRequests.length) {
+                    $q.all(addToCartRequests).then(() => {
+                        dialogService.showDialog(dialogData, 'recentlyAddedCartItemDialogController', 'storefront.recently-added-cart-item-dialog.tpl', 'lg');
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
+                }
             }
 
             function addProductToCartById(productId, quantity) {
