@@ -25,7 +25,7 @@ storefrontApp.controller('commonProductCardController', ['$rootScope', '$scope',
         }
 
         $scope.sendToEmail = function (storeId, productId, productUrl, language) {
-          dialogService.showDialog({ storeId: storeId, productId: productId, productUrl: productUrl, language: language }, 'recentlyAddedCartItemDialogController', 'storefront.send-product-to-email.tpl');
+          dialogService.showDialog({ storeId: storeId, productId: productId, productUrl: productUrl, language: language }, 'sendProductToEmailController', 'storefront.send-product-to-email.tpl');
         };
 
         function toDialogDataModel(products, quantity, inventoryError, configuredProductId) {
