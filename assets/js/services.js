@@ -18,14 +18,6 @@ storefrontApp.service('dialogService', ['$uibModal', function ($uibModal) {
     }
 }]);
 
-storefrontApp.service('mailingService', ['$http', 'apiBaseUrl', function ($http, apiBaseUrl) {
-    return {
-        sendProduct: function(id, data) {
-            return $http.post(apiBaseUrl + 'api/b2b/send/product/' + id, data);
-        }
-    }
-}]);
-
 storefrontApp.service('feedbackService', ['$http', function ($http) {
     return {
         postFeedback: function (data) {

@@ -1,5 +1,5 @@
 angular.module('storefrontApp')
-    .controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'mailingService', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, mailingService, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
+    .controller('recentlyAddedCartItemDialogController', ['$rootScope', '$scope', '$window', '$uibModalInstance', 'dialogData', 'baseUrl', 'cartService', 'roundHelper', '$filter', 'storeCurrency', function ($rootScope, $scope, $window, $uibModalInstance, dialogData, baseUrl, cartService, roundHelper, $filter, storeCurrency) {
       $scope.dialogData = dialogData || {};
       $scope.baseUrl = baseUrl;
       $scope.regex = new RegExp(/^\/+/);
@@ -71,13 +71,6 @@ angular.module('storefrontApp')
           $window.location.href = url;
       }
 
-      $scope.send = function(email) {
-          mailingService.sendProduct(dialogData.productId, { email: email, storeId: dialogData.storeId, productUrl: dialogData.productUrl, language: dialogData.language });
-          $uibModalInstance.close();
-      }
-
-          
-
       function getMaxInventory() {
           var inventoryArray = $scope.dialogData.items.map(item => {
               return item.availableQuantity;
@@ -100,9 +93,9 @@ angular.module('storefrontApp')
         }
 
         if (dialogBehavior === dialogBehaviorType.configured) {
-            $scope.configurationQty = $scope.dialogData.inventoryError ? getMaxInventory() : $scope.dialogData.configurationQty;            
+            $scope.configurationQty = $scope.dialogData.inventoryError ? getMaxInventory() : $scope.dialogData.configurationQty;
         }
-         
+
       }
 
       initialize();
