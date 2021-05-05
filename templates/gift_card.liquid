@@ -4,7 +4,7 @@
 {% assign formatted_initial_value_stripped = formatted_initial_value | strip_html %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
@@ -104,7 +104,7 @@
 
               <div id="gift-card-actions">
                 <a href="{{ shop.url }}" class="btn center" target="_blank">{{ 'gift_cards.issued.shop_link' | t }}</a>
-                <a href="#" class="action-link left" onclick="window.print();"><i class="ico-16 print"></i>{{ 'gift_cards.issued.print' | t }}</a>
+                <a href="#" class="action-link left" onclick="window.print();"><i class="ico-16 print" aria-hidden="true"></i>{{ 'gift_cards.issued.print' | t }}</a>
               </div>
 
             </div>
@@ -112,7 +112,7 @@
       </main> <!-- / Main -->
 
       <footer role="contentinfo">
-        <img src="{{ 'gift-card/icon-bug.png' | asset_url }}" class="gift-card-icon">
+        <img src="{{ 'gift-card/icon-bug.png' | asset_url }}" class="gift-card-icon" alt="">
       </footer>
 
     </div>
