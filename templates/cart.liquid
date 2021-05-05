@@ -27,7 +27,7 @@
                         <a href="" class="btn btn-link font-weight-bold" ng-click="sendToEmail()"><i class="fa fa-envelope text-gray-300" aria-hidden="true"></i>&ensp;Email</a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="" class="btn btn-link font-weight-bold" ng-click="print()"><i class="fa fa-print text-gray-300"></i>&ensp;Print</a>
+                        <a href="" class="btn btn-link font-weight-bold" ng-click="print()"><i class="fa fa-print text-gray-300" aria-hidden="true" ></i>&ensp;Print</a>
                     </li>
                 </ul>
             </div>
@@ -104,13 +104,13 @@
                                                 ng-class="purchaseOrderNumberForm.$dirty ? 'btn-primary' : 'btn-outline-success'"
                                                 ng-disabled="!checkout.cart.purchaseOrderNumber && !purchaseOrderNumberForm.$dirty"
                                                 ng-click="setPurchaseOrderNumber(purchaseOrderNumberForm)">
-                                            <i class="fa fa-check"></i>
+                                            <i class="fa fa-check" aria-hidden="true" ></i>
                                         </button>
                                         <button ng-if="purchaseOrderNumberExist() && !purchaseOrderNumberChanged()"
                                                 id="removePurchaseOrderNumber"
                                                 class="btn btn-outline-danger d-flex align-items-center justify-content-center"
                                                 ng-click="removePurchaseOrderNumber()">
-                                            <i class="fa fa-times"></i>
+                                            <i class="fa fa-times" aria-hidden="true" ></i>
                                         </button>
                                     </form>
                                 </div>
@@ -134,13 +134,13 @@
                                                 ng-class="applyCouponForm.$dirty ? 'btn-primary' : 'btn-outline-success'"
                                                 ng-disabled="!checkout.coupon.code"
                                                 ng-click="applyCoupon(checkout.coupon)">
-                                            <i class="fa fa-check"></i>
+                                            <i class="fa fa-check" aria-hidden="true" ></i>
                                         </button>
                                         <button ng-if="couponApplied"
                                                 id="removeCouponSubmit"
                                                 class="btn btn-outline-danger d-flex align-items-center justify-content-center"
                                                 ng-click="removeCoupon(checkout.coupon)">
-                                            <i class="fa fa-times"></i>
+                                            <i class="fa fa-times" aria-hidden="true" ></i>
                                         </button>
                                     </form>
                                     <span class="text-danger" ng-if="!checkout.coupon.appliedSuccessfully">{{ 'checkout.invalid_coupon_code' | t }}</span>
