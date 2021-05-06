@@ -220,9 +220,9 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     if (cart.payments.length) {
                         $scope.checkout.payment = cart.payments[0];
                         $scope.checkout.paymentMethod.code = $scope.checkout.payment.paymentGatewayCode;
-                        $scope.getAvailPaymentMethods().then(function (response) {
+                        $scope.getAvailPaymentMethods().then(function (availablePaymentMethods) {
                             _.each(cart.payments, function (x) {
-                                var paymentMethod = _.find(response, function (pm) { return pm.code == x.paymentGatewayCode; });
+                                var paymentMethod = _.find(availablePaymentMethods, function (pm) { return pm.code == x.paymentGatewayCode; });
                                 if (paymentMethod) {
                                     angular.extend(x, paymentMethod);
                                     $scope.checkout.paymentMethod = paymentMethod;
@@ -233,8 +233,8 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     if (cart.shipments.length) {
                         $scope.checkout.shipment = cart.shipments[0];
                         //Load shipment method for cart shipment
-                        $scope.getAvailShippingMethods($scope.checkout.shipment).then(function (response) {
-                            var shipmentMethod = _.find(response, function (sm) { return sm.shipmentMethodCode == $scope.checkout.shipment.shipmentMethodCode && sm.optionName == $scope.checkout.shipment.shipmentMethodOption; });
+                        $scope.getAvailShippingMethods($scope.checkout.shipment).then(function (availableShippingMethods) {
+                            var shipmentMethod = _.find(availableShippingMethods, function (sm) { return sm.shipmentMethodCode == $scope.checkout.shipment.shipmentMethodCode && sm.optionName == $scope.checkout.shipment.shipmentMethodOption; });
                             if (shipmentMethod) {
                                 $scope.checkout.shipment.shipmentMethod = shipmentMethod;
                                 $scope.checkout.shipmentMethod = shipmentMethod;
@@ -268,9 +268,9 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             function getAvailCountries() {
                 //Load avail countries
                 return commonService.getCountries().then(function (response) {
-                    return response.data;
+                    return response.data
                 });
-            };
+            }
 
             $scope.checkout.getCountryRegions = $scope.getCountryRegions = function (country) {
                 return commonService.getCountryRegions(country.code3).then(function (response) {
@@ -312,7 +312,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     //WORKAROUND: For pickup address FirstName and LastName can't set and need use some to avoid required violation
                     deliveryAddress.firstName = deliveryAddress.firstName ? deliveryAddress.firstName : 'Fulfillment';
                     deliveryAddress.lastName = deliveryAddress.lastName ? deliveryAddress.lastName : 'center';
-                };
+                }
                 //Does not pass validation errors to API
                 shipment.validationErrors = undefined;
                 return wrapLoading(function () {
@@ -322,16 +322,17 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.createOrder = function () {
                 wrapLoading(function() {
-                    return cartService.createOrder($scope.checkout.paymentMethod.card).then(function(response) {
+                    return cartService.createOrder($scope.checkout.paymentMethod.card).then(function(cartServiceResponse) {
                         $rootScope.$broadcast('cartItemsChanged');
 
-                        var orderProcessingResult = response.data.orderProcessingResult;
-                        var paymentMethod = response.data.paymentMethod;
+                        var createdOrder = cartServiceResponse.data.order;
+                        var orderProcessingResult = cartServiceResponse.data.orderProcessingResult;
+                        var paymentMethod = cartServiceResponse.data.paymentMethod;
 
-                        return orderService.getOrder(response.data.order.number).then(function(response) {
-                            var order = response.data;
-                            $scope.checkout.order = order;
-                            handlePostPaymentResult(order, orderProcessingResult, paymentMethod);
+                        return orderService.getOrder(createdOrder.number).then(function(orderServiceResponse) {
+                            var processedOrder = orderServiceResponse.data;
+                            $scope.checkout.order = processedOrder;
+                            handlePostPaymentResult(processedOrder, orderProcessingResult, paymentMethod);
                         });
                     });
 
