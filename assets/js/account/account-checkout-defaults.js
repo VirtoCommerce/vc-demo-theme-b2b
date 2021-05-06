@@ -22,7 +22,7 @@ angular.module('storefront.account')
                         setActivePaymentMethod();
                     });
                 });
-            };
+            }
 
             function getAvailShippingMethods() {
                 loader.wrapLoading(function() {
@@ -37,7 +37,7 @@ angular.module('storefront.account')
                 getCustomerDefaults();
                 getAvailShippingMethods();
                 getAvailPaymentMethods();
-            };
+            }
 
             $ctrl.changeShippingMethod = function (method) {
                 $ctrl.defaults.shippingMethod = method;
