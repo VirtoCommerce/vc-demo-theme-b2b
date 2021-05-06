@@ -15,7 +15,7 @@ storefrontApp.component('vcCheckoutDeliveryMethod', {
 
         if (!ctrl.defaultMethodType) {
             ctrl.defaultMethodType = 'shipping';
-        };
+        }
 
         this.$onInit = function () {
             ctrl.checkoutStep.addComponent(this);
