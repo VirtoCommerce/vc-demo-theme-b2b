@@ -28,7 +28,7 @@ angular.module('storefront.account')
                 });
             };
 
-            refresh();
+            refresh()
 
         }]
     });
