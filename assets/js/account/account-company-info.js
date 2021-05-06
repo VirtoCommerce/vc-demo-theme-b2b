@@ -14,7 +14,7 @@
                     $ctrl.company = response.data;
                 });
             });
-        };
+        }
 
         $ctrl.updateCompanyInfo = function (company) {
             return loader.wrapLoading(function () {
