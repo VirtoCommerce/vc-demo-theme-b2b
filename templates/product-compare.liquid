@@ -22,21 +22,21 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-borderless border-top border-gray-200">
+                    <table class="table table-striped table-borderless border-top border-gray-200" aria-hidden="true">
                         <tr>
                             <td>
                             </td>
                             <td ng-repeat="product in products">
                                 <div>
                                     <a class="" ng-click="removeProduct(product)">
-                                        <i class="fa fa-remove"></i>
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
                                         Remove
                                     </a>
                                 </div>
                                 <a ng-href="{% raw %}{{ product.url.replace(regex, baseUrl) }}{% endraw %}">
-                                    <img style="max-width: 150px;" ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" ng-if="product.primaryImage.url" />
+                                    <img style="max-width: 150px;" ng-src="{% raw %}{{ product.primaryImage.url }}{% endraw %}" ng-if="product.primaryImage.url" alt="Product image"/>
                                     <div ng-if="!product.primaryImage.url">
-                                        <img src="{{ 'images/no-image.svg' | asset_url }}" />
+                                        <img src="{{ 'images/no-image.svg' | asset_url }}" alt="Image does not exist"/>
                                     </div>
                                     <div ng-bind="product.name"></div>
                                 </a>
