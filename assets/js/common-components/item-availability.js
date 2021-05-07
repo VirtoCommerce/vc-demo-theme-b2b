@@ -5,7 +5,5 @@ storefrontApp.component('vcItemAvailability', {
     bindings: {
         availability: "<"
     },
-    controller: [function() {
-        var $ctrl = this;       
-    }]
+    controller: [function() {}]
 });
