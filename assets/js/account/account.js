@@ -203,6 +203,7 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
                         }
                     }
                 });
+                return modalInstance;
             }
         }
     }])
