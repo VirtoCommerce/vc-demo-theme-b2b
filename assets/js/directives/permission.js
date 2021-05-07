@@ -17,7 +17,7 @@ angular.module('storefrontApp')
                         }
                     }
                     return result;
-                };
+                }
 
                 function toggleVisibilityBasedOnPermission(user) {
                     var hasPermission = checkPermission(user, permissionValue);
@@ -29,7 +29,7 @@ angular.module('storefrontApp')
 
                 toggleVisibilityBasedOnPermission(mainContext.customer);
 
-                
+
                 scope.$watch(function () { return mainContext.customer; }, function (value) {
                     if (value) {
                         toggleVisibilityBasedOnPermission(value);
