@@ -9,7 +9,7 @@ function vcRelatedProductsController(baseUrl, $timeout, $element, loader, recomm
 
         $ctrl.initCarousel = function () {
             var responsive = Object.assign($ctrl.responsive);
-            Object.keys(responsive).map((key) => responsive[key].loop = responsive[key].items < $ctrl.products.length);
+            Object.keys(responsive).forEach((key) => responsive[key].loop = responsive[key].items < $ctrl.products.length);
             $timeout(function () {
                 $ctrl.$carousel = $element.find(".owl-carousel");
                 $ctrl.$carousel.on('initialized.owl.carousel refreshed.owl.carousel', function (event) {
