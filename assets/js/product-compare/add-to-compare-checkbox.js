@@ -11,13 +11,10 @@ function addToCompareCheckboxController($rootScope, $scope, catalogService, comp
 
   $ctrl.addProductToCompareList = function (event) {
       event.preventDefault();
-      catalogService.getProduct($ctrl.productId).then(function (response) {
-          var product = response.data[0];
-          event.preventDefault();
-          var isInProductList = compareProductService.isInProductCompareList(
-              $ctrl.productId
-          );
-          if (!isInProductList) {
+        var isInProductList = compareProductService.isInProductCompareList(
+            $ctrl.productId
+        );
+        if (!isInProductList) {
               var count = compareProductService.getProductsCount();
               if (count < 5) {
                   $ctrl.containProduct = true;
@@ -29,7 +26,6 @@ function addToCompareCheckboxController($rootScope, $scope, catalogService, comp
               compareProductService.removeProduct($ctrl.productId);
               $rootScope.$broadcast("productCompareListChanged");
           }
-      });
   };
 
   $scope.$on("productRemovedFromCompareList", function (event, data) {
