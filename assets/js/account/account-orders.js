@@ -3,9 +3,7 @@ angular.module('storefront.account')
         templateUrl: [ '$rootScope', function($rootScope) {
             return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders.tpl");
         }],
-        controller: [function () {
-            var $ctrl = this;
-        }]
+        controller: [function () {}]
     })
     .component('vcAccountOrdersList', {
         templateUrl: [ '$rootScope', function($rootScope) {
@@ -262,7 +260,7 @@ angular.module('storefront.account')
 
             function outerRedirect(absUrl) {
                 $window.location.href = absUrl;
-            };
+            }
 
             function handleBadPaymentResult(orderProcessingResult) {
                 loader.isLoading = false;
@@ -272,7 +270,7 @@ angular.module('storefront.account')
                     message: orderProcessingResult.error,
                 });
                 return;
-            };
+            }
 
             $scope.reorderAll = function() {
                 const addToCartRequests = [];
