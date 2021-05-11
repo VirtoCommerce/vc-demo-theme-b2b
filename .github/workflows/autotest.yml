@@ -33,7 +33,7 @@ jobs:
         uses: VirtoCommerce/vc-github-actions/docker-start-environment@master
         with: 
           platformImage: docker.pkg.github.com/virtocommerce/vc-platform/platform
-          platformDockerTag: 3.49.0-master-182936ca
+          platformDockerTag: 3.53.0-master-f99e3cec
           storefrontImage: docker.pkg.github.com/virtocommerce/vc-demo-storefront/demo-storefront
           storefrontDockerTag: 1.10.0-alpha.1012-upstream-dev-672f462a
 
