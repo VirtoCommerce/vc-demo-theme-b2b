@@ -58,5 +58,5 @@ storefrontApp.directive('fallbackSrc', function () {
                 }
             }
         }
-    }
+    };
 });

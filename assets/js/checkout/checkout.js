@@ -268,7 +268,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
             function getAvailCountries() {
                 //Load avail countries
                 return commonService.getCountries().then(function (response) {
-                    return response.data
+                    return response.data;
                 });
             }
 
