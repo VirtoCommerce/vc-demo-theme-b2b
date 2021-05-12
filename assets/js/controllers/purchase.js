@@ -35,9 +35,8 @@ storefrontApp.controller('purchaseController', ['$scope', '$localStorage', 'stor
     }
 
     $scope.$watch(
-        function () { 
-            var mc = mainContext;
-            return mainContext.customer; 
+        function () {
+            return mainContext.customer;
         },
         function (customer) {
             if (customer) {

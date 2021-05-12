@@ -219,7 +219,7 @@ storefrontApp.service('compareProductService', ['$http', '$localStorage', functi
                 return;
             }
             var ids = [];
-            for (i = 0; i < $localStorage['b2bproductCompareListIds'].length; i++) {
+            for (let i = 0; i < $localStorage['b2bproductCompareListIds'].length; i++) {
                 ids.push('productIds=' + $localStorage['b2bproductCompareListIds'][i]);
             }
             return ids.join("&");

@@ -8,7 +8,5 @@ storefrontApp.component('vcCheckoutCoupon', {
 		onApplyCoupon: '&',
 		onRemoveCoupon: '&'
 	},
-	controller: [function (loader) {
-        var $ctrl = this;
-	}]
+	controller: [function () {}]
 });

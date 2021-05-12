@@ -26,7 +26,7 @@ angular.module('storefront.account')
                         $ctrl.entries = response.data.results;
                     });
                 });
-            };
+            }
 
             refresh();
 

@@ -27,7 +27,7 @@
     &::after {
       color: $text-contrast;
       content: "\f00c";
-      font-family: "FontAwesome";
+      font-family: "FontAwesome",  sans-serif;
       font-size: $font-size-small;
       font-weight: normal;
       left: 50%;
