@@ -30,11 +30,11 @@
                     </div>
                     <div class="col text-right">
                         {% if settings.show_prices_with_taxes %}
-                            <p ng-bind="group.placedPriceWithTax.formattedAmount"></p>
-                            <s ng-if="group.listPriceWithTax.amount > group.placedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
+                            <strong class="text-dark-green" ng-bind="group.extendedPriceWithTax.formattedAmount"></strong>
+                            <s ng-if="group.listPriceWithTax.amount > group.extendedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
                         {% else %}
-                            <strong class="text-dark-green" ng-bind="group.placedPrice.formattedAmount"></strong>
-                            <s ng-if="group.listPrice.amount > group.placedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
+                            <strong class="text-dark-green" ng-bind="group.extendedPrice.formattedAmount"></strong>
+                            <s ng-if="group.listPrice.amount > group.extendedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
                         {% endif %}
                     </div>
                     <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
@@ -94,11 +94,9 @@
                     </div>
                     <div class="col text-right">
                         {% if settings.show_prices_with_taxes %}
-                            <p ng-bind="lineItem.placedPriceWithTax.formattedAmount"></p>
-                            <s ng-if="lineItem.listPriceWithTax.amount > lineItem.placedPriceWithTax.amount" ng-bind="lineItem.listPriceWithTax.formattedAmount"></s>
+                            <strong class="text-dark-green" ng-bind="lineItem.extendedPriceWithTax.formattedAmount"></strong>
                         {% else %}
-                            <strong class="text-dark-green" ng-bind="lineItem.placedPrice.formattedAmount"></strong>
-                            <s ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></s>
+                            <strong class="text-dark-green" ng-bind="lineItem.extendedPrice.formattedAmount"></strong>
                         {% endif %}
                     </div>
                     <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
