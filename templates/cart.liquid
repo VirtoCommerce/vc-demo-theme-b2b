@@ -251,7 +251,7 @@
                                         <vc-checkout-configurable-line-item item="item" ></vc-checkout-configurable-line-item>
                                     </div>
                                     <div class="border-bottom border-gray-200 py-3" ng-repeat="lineItem in checkout.cart.usualItems">
-                                        <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
+                                        <vc-checkout-line-item line-item="lineItem" on-change-qty="changeItemQty(lineItem)" on-remove="removeItem(lineItem)"></vc-checkout-line-item>
                                     </div>
                                 </div>
 
