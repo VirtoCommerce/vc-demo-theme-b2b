@@ -131,7 +131,10 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.clearCart = function () {
                 return wrapLoading(function () {
-                    return cartService.clearCart().then($scope.reloadCart);
+                    return cartService.clearCart().then(() => {
+                        $scope.reloadCart();
+                        $rootScope.$broadcast('cartItemsChanged');
+                    });
                 });
             };
 
