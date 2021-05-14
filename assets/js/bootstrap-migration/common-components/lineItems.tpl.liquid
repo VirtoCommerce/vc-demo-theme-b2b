@@ -31,10 +31,8 @@
                     <div class="col text-right">
                         {% if settings.show_prices_with_taxes %}
                             <strong class="text-dark-green" ng-bind="group.extendedPriceWithTax.formattedAmount"></strong>
-                            <s ng-if="group.listPriceWithTax.amount > group.extendedPriceWithTax.amount" ng-bind="group.listPriceWithTax.formattedAmount"></s>
                         {% else %}
                             <strong class="text-dark-green" ng-bind="group.extendedPrice.formattedAmount"></strong>
-                            <s ng-if="group.listPrice.amount > group.extendedPrice.amount" ng-bind="group.listPrice.formattedAmount"></s>
                         {% endif %}
                     </div>
                     <div class="col-5 text-center" ng-if="!$ctrl.hideReorder">
