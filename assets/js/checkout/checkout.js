@@ -26,8 +26,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 newAddress: {}
             };
 
-
-
             $scope.isEqualAddress = function (firstAddress, secondAddress) {
                 return firstAddress.line1 == secondAddress.line1 &&
                     firstAddress.line2 == secondAddress.line2 &&
