@@ -22,8 +22,11 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 availCountries: [],
                 loading: false,
                 isValid: false,
+                isSubmitted: false,
                 newAddress: {}
             };
+
+
 
             $scope.isEqualAddress = function (firstAddress, secondAddress) {
                 return firstAddress.line1 == secondAddress.line1 &&
@@ -325,9 +328,9 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.createOrder = function () {
                 wrapLoading(function() {
+                    $scope.checkout.isSubmitted = true;
                     return cartService.createOrder($scope.checkout.paymentMethod.card).then(function(cartServiceResponse) {
                         $rootScope.$broadcast('cartItemsChanged');
-                        $scope.checkout.isValid = false;
                         var createdOrder = cartServiceResponse.data.order;
                         var orderProcessingResult = cartServiceResponse.data.orderProcessingResult;
                         var paymentMethod = cartServiceResponse.data.paymentMethod;
