@@ -22,6 +22,7 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 availCountries: [],
                 loading: false,
                 isValid: false,
+                isSubmitted: false,
                 newAddress: {}
             };
 
@@ -325,9 +326,9 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.createOrder = function () {
                 wrapLoading(function() {
+                    $scope.checkout.isSubmitted = true;
                     return cartService.createOrder($scope.checkout.paymentMethod.card).then(function(cartServiceResponse) {
                         $rootScope.$broadcast('cartItemsChanged');
-
                         var createdOrder = cartServiceResponse.data.order;
                         var orderProcessingResult = cartServiceResponse.data.orderProcessingResult;
                         var paymentMethod = cartServiceResponse.data.paymentMethod;

@@ -263,7 +263,7 @@
                                         <span>Back to cart</span>
                                     </button>
                                     <div class="px-2"></div>
-                                    <button class="btn btn-lg btn-primary w-50 px-2" type="button" ng-disabled="checkout.loading || !checkout.isValid" ng-click="createOrder()">
+                                    <button class="btn btn-lg btn-primary w-50 px-2" type="button" ng-disabled="checkout.loading || !checkout.isValid || checkout.isSubmitted" ng-click="createOrder()">
                                         <span>Submit order</span>
                                     </button>
                                 </div>
