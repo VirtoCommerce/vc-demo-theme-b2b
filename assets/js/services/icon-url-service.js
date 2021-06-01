@@ -7,7 +7,7 @@ storefrontApp.service('iconUrlService', ['urlService', 'creditCardPaymentMethodC
                 case creditCardPaymentMethodCode:
                     return urlService.toAbsoluteUrl('themes/assets/images/mock/credit-card-payment-method.svg');
                 default:
-                    return '';
+                    return urlService.toAbsoluteUrl('themes/assets/images/no-image.svg');
             }
         }
     }
