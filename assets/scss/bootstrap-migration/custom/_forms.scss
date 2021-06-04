@@ -1,0 +1,8 @@
+form label.required:after {
+  color: $primary;
+  content: '*';
+}
+
+label {
+  font-weight: 700;
+}
