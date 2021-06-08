@@ -57,6 +57,9 @@ $box-shadow-sm: .0625rem .0625rem .3125rem rgba($black, .15);
 $box-shadow: .0625rem .25rem .625rem rgba($black, .15);
 $box-shadow-lg: .0625rem .5rem .9375rem rgba($black, .15);
 
+$form-feedback-invalid-color: $text-danger-alert;
+$form-feedback-font-size: $font-size-base;
+
 $input-bg: $body-bg;
 $input-bg-checked: $secondary;
 $input-border-radius: 0;

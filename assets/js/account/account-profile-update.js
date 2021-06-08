@@ -1,6 +1,8 @@
 angular.module('storefront.account')
 .component('vcAccountProfileUpdate', {
-    templateUrl: "themes/assets/account-profile-update.tpl.liquid",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-profile-update.tpl");
+    }],
     require: {
         accountManager: '^vcAccountManager'
     },
