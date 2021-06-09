@@ -1,0 +1,48 @@
+<div class="col-md-8">
+    <div class="pb-2">
+        <h3>Checkout Defaults</h3>
+    </div>
+    <vc-errors message="errorMessage" errors="errors"></vc-errors>
+    <form name="detailForm">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Preferred Delivery Method</label>
+                <div class="form-group my-2">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="shipping" ng-model="$ctrl.defaults.deliveryMethod" value="shipping">
+                        <label class="custom-control-label" for="shipping">Shipping</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="pickup" ng-model="$ctrl.defaults.deliveryMethod" value="pickup">
+                        <label class="custom-control-label" for="pickup">Pickup</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="paymentMethod">Preferred Payment Method</label>
+                    <select ng-model="$ctrl.activePaymentMethod" ng-options="x as x.name for x in $ctrl.paymentMethods" id="paymentMethod" class="form-control" size="1">
+                        <option value="">Please select preferred Payment Method</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="shippingMethod">Preferred Shipping Method</label>
+                    <select ng-model="$ctrl.activeShippingMethod" ng-options="x as (x | toShippingMethodLabel) for x in $ctrl.shippingMethods" id="shippingMethod" class="form-control" size="1">
+                        <option value="">Please select preferred Shipping Method</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" ng-click="$ctrl.updateCustomerDefaults()">Update</button>
+    </form>
+</div>

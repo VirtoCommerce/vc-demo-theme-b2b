@@ -3,6 +3,6 @@ form label.required:after {
   content: '*';
 }
 
-label {
+label:not(.custom-control-label) {
   font-weight: 700;
 }
