@@ -6,7 +6,7 @@
     <form name="detailForm">
         <div class="row">
             <div class="col-md-6">
-                <label>Prefered Delivery Method</label>
+                <label>Preferred Delivery Method</label>
                 <div class="form-group my-2">
                     <div class="custom-control custom-radio">
                         <input type="radio" class="custom-control-input" id="shipping" ng-model="$ctrl.defaults.deliveryMethod" value="shipping">
@@ -24,9 +24,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="paymentMethod">Prefered Payment Method</label>
+                    <label for="paymentMethod">Preferred Payment Method</label>
                     <select ng-model="$ctrl.activePaymentMethod" ng-options="x as x.name for x in $ctrl.paymentMethods" id="paymentMethod" class="form-control" size="1">
-                        <option value="">Please select prefered Payment Method</option>
+                        <option value="">Please select preferred Payment Method</option>
                     </select>
                 </div>
             </div>
@@ -35,9 +35,9 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <label for="shippingMethod">Prefered Shipping Method</label>
+                    <label for="shippingMethod">Preferred Shipping Method</label>
                     <select ng-model="$ctrl.activeShippingMethod" ng-options="x as (x | toShippingMethodLabel) for x in $ctrl.shippingMethods" id="shippingMethod" class="form-control" size="1">
-                        <option value="">Please select prefered Shipping Method</option>
+                        <option value="">Please select preferred Shipping Method</option>
                     </select>
                 </div>
             </div>
