@@ -1,6 +1,8 @@
 angular.module('storefront.account')
 .component('vcAccountPasswordChange', {
-    templateUrl: "themes/assets/js/account/account-password-change.tpl.liquid",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-password-change.tpl");
+    }],
     require: {
         accountManager: '^vcAccountManager'
     },
