@@ -19,8 +19,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col" itemscope itemtype="http://schema.org/Product">
-           <meta itemprop="url" content="{{ product.url | absolute_url}}">
+        <div class="col" itemscope itemtype="http://schema.org/Product" name="{{ product.name }}" description="{{ product.description }}" sku="{{ product.sku }}" >
+            <meta itemprop="url" content="{{ product.url | absolute_url}}">
+            <meta itemprop="name" content="{{ product.name }}">
+            <meta itemprop="description" content="{{ product.description }}">
+            <meta itemprop="sku" content="{{ product.sku }}">
             <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}">
 
         {% if product.product_type == "Configurable" %}
