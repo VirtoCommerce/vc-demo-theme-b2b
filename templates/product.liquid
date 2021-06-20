@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col" itemscope itemtype="http://schema.org/Product" name="{{ product.name }}" description="{{ product.description }}" sku="{{ product.sku }}" >
+        <div class="col" itemscope itemtype="http://schema.org/Product">
             <meta itemprop="url" content="{{ product.url | absolute_url}}">
             <meta itemprop="name" content="{{ product.name }}">
             <meta itemprop="description" content="{{ product.description }}">
