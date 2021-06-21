@@ -40,22 +40,32 @@
 
 
 <script type='application/ld+json'>
-    {% capture images  %}
+    {% assign brand = product.properties['Brand'].value %}
+    {% assign url = product.url %}
+    {% assign sku = product.sku %}
+    {% assign name = product.name %}
+    {% assign category = current_category.name %}
+
+    {% capture imagesString  %}
         {% for image in product.images %}
-            "{{ image.url }}",
+            "{{ image.url }}"
         {% endfor %}
     {% endcapture %}
+    {% assign imagesArray = imagesString | strip | strip_newlines | split: ' ' %}
+
+    {% assign strippedDescription = product.description | strip_html | split: '\n' | join: ' ' %}
+
 
     {
         "@context": "https://www.schema.org",
         "@type": "product",
-        "brand": "{{ product.properties['Brand'].value }}",
-        "url": "{{ product.url }}",
-        "sku": "{{ product.sku }}",
-        "name": "{{ product.name }}",
-        "category": "{{ current_category.name }}",
-        "image": {{ images | split: ',' }},
-        "description": "{{ product.description | strip_html | split: '\n' | join: ' ' }}",
+        "brand": "{{ brand }}",
+        "url": "{{ url }}",
+        "sku": "{{ sku }}",
+        "name": "{{ name }}",
+        "category": "{{ category }}",
+        "image": {{ imagesArray }},
+        "description": "{{ strippedDescription }}",
         "aggregateRating": {
             "@type": "aggregateRating",
             "ratingValue": "5",
