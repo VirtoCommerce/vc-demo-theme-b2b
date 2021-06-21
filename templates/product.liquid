@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col" itemscope itemtype="http://schema.org/Product">
+        <div class="col">
             <!-- <meta itemprop="url" content="{{ product.url | absolute_url}}"> -->
             <!-- <meta itemprop="name" content="{{ product.name }}">
             <meta itemprop="description" content="{{ product.description }}">
@@ -48,12 +48,14 @@
     {
       "@context": "https://www.schema.org",
       "@type": "product",
-      "brand": "Acme",
-      "logo": "http://www.example.com/logo.png",
-      "name": "WidgetPress",
-      "category": "Widgets",
-      "image": "http://www.example.com/image.jpg",
-      "description": "This is an excellent widget with 21 features and 4 colors.",
+      "brand": "_",
+      "url": "{{ product.url }}",
+      "sku": "{{ product.sku }}"
+      "logo": "_",
+      "name": "{{ product.name }}",
+      "category": "_",
+      "image": "_",
+      "description": "{{ product.description }}",
       "aggregateRating": {
         "@type": "aggregateRating",
         "ratingValue": "5",
