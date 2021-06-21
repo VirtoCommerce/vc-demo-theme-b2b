@@ -20,12 +20,11 @@
     </div>
     <div class="row">
         <div class="col" itemscope itemtype="http://schema.org/Product">
-            <meta itemprop="url" content="{{ product.url | absolute_url}}">
-            <meta itemprop="name" content="{{ product.name }}">
+            <!-- <meta itemprop="url" content="{{ product.url | absolute_url}}"> -->
+            <!-- <meta itemprop="name" content="{{ product.name }}">
             <meta itemprop="description" content="{{ product.description }}">
             <meta itemprop="sku" content="{{ product.sku }}">
-            <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}">
-
+            <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}"> -->
         {% if product.product_type == "Configurable" %}
             <ng-controller ng-controller="configurableProductController">
                 {% include 'bootstrap-migration/product/type/configured/product' %}
@@ -43,6 +42,25 @@
     </div>
 </div>
 </main>
+
+
+<script type='application/ld+json'>
+    {
+      "@context": "https://www.schema.org",
+      "@type": "product",
+      "brand": "Acme",
+      "logo": "http://www.example.com/logo.png",
+      "name": "WidgetPress",
+      "category": "Widgets",
+      "image": "http://www.example.com/image.jpg",
+      "description": "This is an excellent widget with 21 features and 4 colors.",
+      "aggregateRating": {
+        "@type": "aggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "21"
+      }
+    }
+</script>
 
 <script>
     window.product = {
