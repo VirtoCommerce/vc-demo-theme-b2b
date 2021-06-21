@@ -20,11 +20,6 @@
     </div>
     <div class="row">
         <div class="col">
-            <!-- <meta itemprop="url" content="{{ product.url | absolute_url}}"> -->
-            <!-- <meta itemprop="name" content="{{ product.name }}">
-            <meta itemprop="description" content="{{ product.description }}">
-            <meta itemprop="sku" content="{{ product.sku }}">
-            <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}"> -->
         {% if product.product_type == "Configurable" %}
             <ng-controller ng-controller="configurableProductController">
                 {% include 'bootstrap-migration/product/type/configured/product' %}
@@ -45,26 +40,27 @@
 
 
 <script type='application/ld+json'>
+    {% capture images  %}
+        {% for image in product.images %}
+            "{{ image.url }}",
+        {% endfor %}
+    {% endcapture %}
+
     {
-      "@context": "https://www.schema.org",
-      "@type": "product",
-      "brand": "Epson",
-      "url": "{{ product.url }}",
-      "sku": "{{ product.sku }}",
-      "logo": "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png",
-      "name": "{{ product.name }}",
-      "category": "inkjet printers",
-      "image": [
-        "https://example.com/photos/1x1/photo.jpg",
-        "https://example.com/photos/4x3/photo.jpg",
-        "https://example.com/photos/16x9/photo.jpg"
-      ],
-      "description": "{{ product.description }}",
-      "aggregateRating": {
-        "@type": "aggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "21"
-      }
+        "@context": "https://www.schema.org",
+        "@type": "product",
+        "brand": "{{ product.properties['Brand'].value }}",
+        "url": "{{ product.url }}",
+        "sku": "{{ product.sku }}",
+        "name": "{{ product.name }}",
+        "category": "{{ current_category.name }}",
+        "image": {{ images | split: ',' }},
+        "description": "{{ product.description | strip_html | split: '\n' | join: ' ' }}",
+        "aggregateRating": {
+            "@type": "aggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "21"
+        }
     }
 </script>
 
