@@ -17,6 +17,10 @@ angular.module('storefront.account')
 
         $ctrl.addNewAddress = function () {
             if (components.length > 0 && components[0].validate()) {
+                if (!$ctrl.currentMember.addresses) {
+                    $ctrl.currentMember.addresses = [];
+                }
+
                 $ctrl.currentMember.addresses.push($ctrl.newAddress);
                 $ctrl.newAddress = null;
                 $ctrl.updateAddresses($ctrl.currentMember);
