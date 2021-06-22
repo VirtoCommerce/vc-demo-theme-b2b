@@ -40,6 +40,7 @@
 <script type='application/ld+json'>
     {% assign productBrand = product.properties["Brand"].value %}
     {% assign productUrl = product.url %}
+    {% assign productGtin = product.gtin %}
     {% assign productSku = product.sku %}
     {% assign productName = product.name %}
     {% assign productCategory = current_category.name %}
@@ -71,6 +72,7 @@
         "@type": "product",
         "brand": "{{ productBrand }}",
         "url": "{{ productUrl }}",
+        "gtin": "{{ productGtin }}",
         "sku": "{{ productSku }}",
         "name": "{{ productName }}",
         "category": "{{ productCategory }}",
