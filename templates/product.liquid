@@ -57,8 +57,6 @@
 
     {% assign productPrice = product.price.actual_price_with_tax.amount %}
 
-    {% assign productCondition = "NewCondition" %}
-
     {% capture availability %}
         {% if product.is_in_stock %}
             InStock
@@ -83,7 +81,6 @@
             "url": "{{ productUrl }}",
             "priceCurrency": "{{ productCurrency }}",
             "price": "{{ productPrice }}",
-            "itemCondition": "{{ productCondition }}",
             "availability": "{{ productAvailability }}"
         }
     }
