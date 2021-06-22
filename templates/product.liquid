@@ -33,42 +33,58 @@
                 {% include 'bootstrap-migration/product/type/without-variations/product' %}
             </ng-controller>
         {% endif %}
-
+        </div>
     </div>
-</div>
 </main>
 
-
 <script type='application/ld+json'>
-    {% assign brand = product.properties['Brand'].value %}
-    {% assign url = product.url %}
-    {% assign sku = product.sku %}
-    {% assign name = product.name %}
-    {% assign category = current_category.name %}
+    {% assign productBrand = product.properties["Brand"].value %}
+    {% assign productUrl = product.url %}
+    {% assign productSku = product.sku %}
+    {% assign productName = product.name %}
+    {% assign productCategory = current_category.name %}
 
     {% capture imagesString  %}
         {% for image in product.images %}
             "{{ image.url }}"
         {% endfor %}
     {% endcapture %}
-    {% assign imagesArray = imagesString | strip | strip_newlines | split: ' ' %}
+    {% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
 
-    {% assign strippedDescription = product.description | strip_html | split: '\n' | join: ' ' %}
+    {% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' %}
+
+    {% assign productCurrency = product.price.actual_price_with_tax.currency.code %}
+
+    {% assign productPrice = product.price.actual_price_with_tax.amount %}
+
+    {% assign productCondition = "NewCondition" %}
+
+    {% capture availability %}
+        {% if product.is_in_stock %}
+            InStock
+        {% else %}
+            OutOfStock
+        {% endif %}
+    {% endcapture %}
+    {% assign productAvailability = availability | strip | strip_newlines %}
 
     {
         "@context": "https://www.schema.org",
         "@type": "product",
-        "brand": "{{ brand }}",
-        "url": "{{ url }}",
-        "sku": "{{ sku }}",
-        "name": "{{ name }}",
-        "category": "{{ category }}",
-        "image": {{ imagesArray }},
-        "description": "{{ strippedDescription }}",
-        "aggregateRating": {
-            "@type": "aggregateRating",
-            "ratingValue": "5",
-            "reviewCount": "21"
+        "brand": "{{ productBrand }}",
+        "url": "{{ productUrl }}",
+        "sku": "{{ productSku }}",
+        "name": "{{ productName }}",
+        "category": "{{ productCategory }}",
+        "image": {{ productImages }},
+        "description": "{{ productDescription }}",
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ productUrl }}",
+            "priceCurrency": "{{ productCurrency }}",
+            "price": "{{ productPrice }}",
+            "itemCondition": "{{ productCondition }}",
+            "availability": "{{ productAvailability }}"
         }
     }
 </script>
