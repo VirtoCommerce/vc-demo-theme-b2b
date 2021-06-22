@@ -1,0 +1,81 @@
+<h3 class="pb-2">{{ 'customer.addresses.title' | t }}</h3>
+<div>
+    <table class="table table-striped table-bordered table-head-hover" aria-label="Account addresses">
+        <thead>
+            <tr class="text-condensed">
+                <th class="border-bottom-0">Recipient's name</th>
+                <th class="border-bottom-0">Address</th>
+                <th class="border-bottom-0">{{ 'customer.addresses.phone' | t }}</th>
+                <th class="border-bottom-0">{{ 'customer.addresses.email' | t }}</th>
+                <th class="border-bottom-0">Default address</th>
+                <th class="border-bottom-0" aria-label="Actions"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="address in $ctrl.currentMember.addresses">
+                <td ng-if-start="$ctrl.editIndex !== $index">
+                    <span ng-if="address.firstName" ng-bind="address.firstName"></span>
+                    <span ng-if="address.lastName" ng-bind="address.lastName"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.line1"></span><span ng-if="address.line2">
+                        , <span ng-bind="address.line2"></span>
+                    </span>
+                    <span ng-bind="address.city"></span>, <span ng-bind="address.regionName"></span>, <span ng-bind="address.countryCode"></span> <span ng-bind="address.postalCode"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.phone"></span>
+                </td>
+                <td>
+                    <span ng-bind="address.email"></span>
+                </td>
+                <td>
+                    <label ng-if="$ctrl.currentMember.defaultShippingAddress.key === address.key" class="m-0">
+                        <i class="fa fa-check text-primary" aria-hidden="true"></i>&nbsp;Default
+                    </label>
+                    <label ng-if="$ctrl.currentMember.defaultShippingAddress.key !== address.key" class="m-0">
+                        <a role="button" href="" ng-click="$ctrl.setAsDefault(address)">Set as default</a>
+                    </label>
+                </td>
+                <td ng-if-end="" class="text-center">
+                    <button type="button" class="btn btn-white btn-xs" ng-click="$ctrl.edit($index)">
+                        <img alt="{{ shop.name }}" src="{{ 'context-pencil.svg' | asset_url }}" />
+                    </button>
+                    <button type="button" class="btn btn-white btn-xs" ng-click="$ctrl.delete($index)">
+                       <img alt="{{ shop.name }}" src="{{ 'context-delete.svg' | asset_url }}" />
+                    </button>
+                </td>
+                <td ng-if="$ctrl.editIndex === $index" colspan="6">
+                    <h3 ng-if="$ctrl.editIndex === $index">{{ 'customer.addresses.edit_old' | t }}</h3>
+                    <vc-errors message="errorMessage" errors="errors"></vc-errors>
+                    <vc-address address="$ctrl.editIndex === $index ? $ctrl.editAddress : address" edit-mode="$ctrl.editIndex === $index" validation-container="$ctrl" countries="$ctrl.accountManager.availCountries" get-country-regions="$ctrl.accountManager.getCountryRegions(country)"></vc-address>
+                    <div ng-if="$ctrl.editIndex === $index">
+                        <button ng-click="$ctrl.cancel()" ng-disabled="$ctrl.loader.isLoading || detailForm.$pristine" class="btn btn-primary">
+                            {{ 'customer.addresses.cancel' | t }}
+                        </button>
+                        <button ng-click="$ctrl.submit()" ng-disabled="$ctrl.loader.isLoading || detailForm.$pristine" class="btn btn-primary">
+                            {{ 'customer.addresses.update' | t }}
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p ng-if="!$ctrl.currentMember.addresses || !$ctrl.currentMember.addresses.length">{{ 'customer.addresses.no_addresses_message' | t }}</p>
+    <button ng-click="$ctrl.newAddress={}" ng-if="!$ctrl.newAddress && !($ctrl.editIndex >= 0)" class="btn btn-primary" ng-disabled="$ctrl.loader.isLoading">
+        {{ 'customer.addresses.add_new' | t }}
+    </button>
+    <div ng-if="$ctrl.newAddress">
+        <h2 ng-if="$ctrl.newAddress">{{ 'customer.addresses.add_new' | t }}</h2>
+        <vc-errors message="errorMessage" errors="errors"></vc-errors>
+        <vc-address address="$ctrl.newAddress" edit-mode="true" validation-container="$ctrl" countries="$ctrl.accountManager.availCountries" get-country-regions="$ctrl.accountManager.getCountryRegions(country)" ng-if="$ctrl.newAddress"></vc-address>
+        <div>
+            <button ng-click="$ctrl.newAddress = null" class="btn btn-primary" ng-disabled="$ctrl.loader.isLoading">
+                {{ 'customer.addresses.cancel' | t }}
+            </button>
+            <button ng-click="$ctrl.addNewAddress()" class="btn btn-primary" ng-disabled="$ctrl.loader.isLoading || detailForm.$pristine">
+                {{ 'customer.addresses.add' | t }}
+            </button>
+        </div>
+    </div>
+</div>
