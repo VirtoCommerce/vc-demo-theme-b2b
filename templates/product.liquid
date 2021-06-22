@@ -37,36 +37,34 @@
     </div>
 </main>
 
+{% assign productBrand = product.properties["Brand"].value %}
+{% assign productUrl = product.url %}
+{% assign productGtin = product.gtin %}
+{% assign productSku = product.sku %}
+{% assign productName = product.name %}
+{% assign productCategory = current_category.name %}
+
+{% capture imagesString  %}
+    {% for image in product.images %}
+        "https:{{ image.url }}"
+    {% endfor %}
+{% endcapture %}
+{% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
+
+{% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' %}
+{% assign productCurrency = product.price.actual_price_with_tax.currency.code %}
+{% assign productPrice = product.price.actual_price_with_tax.amount %}
+
+{% capture availability %}
+    {% if product.is_in_stock %}
+        InStock
+    {% else %}
+        OutOfStock
+    {% endif %}
+{% endcapture %}
+{% assign productAvailability = availability | strip | strip_newlines %}
+
 <script type='application/ld+json'>
-    {% assign productBrand = product.properties["Brand"].value %}
-    {% assign productUrl = product.url %}
-    {% assign productGtin = product.gtin %}
-    {% assign productSku = product.sku %}
-    {% assign productName = product.name %}
-    {% assign productCategory = current_category.name %}
-
-    {% capture imagesString  %}
-        {% for image in product.images %}
-            "https:{{ image.url }}"
-        {% endfor %}
-    {% endcapture %}
-    {% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
-
-    {% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' %}
-
-    {% assign productCurrency = product.price.actual_price_with_tax.currency.code %}
-
-    {% assign productPrice = product.price.actual_price_with_tax.amount %}
-
-    {% capture availability %}
-        {% if product.is_in_stock %}
-            InStock
-        {% else %}
-            OutOfStock
-        {% endif %}
-    {% endcapture %}
-    {% assign productAvailability = availability | strip | strip_newlines %}
-
     {
         "@context": "https://www.schema.org",
         "@type": "product",
