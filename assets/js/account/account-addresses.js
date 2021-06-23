@@ -1,6 +1,8 @@
 angular.module('storefront.account')
 .component('vcAccountAddresses', {
-    templateUrl: "themes/assets/account-addresses.tpl.liquid",
+    templateUrl: [ '$rootScope', function($rootScope) {
+        return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-addresses.tpl");
+    }],
     require: {
         accountManager: '^vcAccountManager'
     },
@@ -17,6 +19,10 @@ angular.module('storefront.account')
 
         $ctrl.addNewAddress = function () {
             if (components.length > 0 && components[0].validate()) {
+                if (!$ctrl.currentMember.addresses) {
+                    $ctrl.currentMember.addresses = [];
+                }
+
                 $ctrl.currentMember.addresses.push($ctrl.newAddress);
                 $ctrl.newAddress = null;
                 $ctrl.updateAddresses($ctrl.currentMember);

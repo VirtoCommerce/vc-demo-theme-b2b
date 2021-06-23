@@ -6,11 +6,11 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input ng-model="$ctrl.address.firstName" class="form-control" name="firstName" type="text" required placeholder="{{ 'checkout.address.first_name' | t }}" />
+                    <input ng-model="$ctrl.address.firstName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.firstName.$error.required}" name="firstName" type="text" required placeholder="{{ 'checkout.address.first_name' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.firstName.$error.required">{{ 'common.required' | t }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input ng-model="$ctrl.address.lastName" class="form-control" name="lastName" type="text" required placeholder="{{ 'checkout.address.last_name' | t }}" />
+                    <input ng-model="$ctrl.address.lastName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.lastName.$error.required}" name="lastName" type="text" required placeholder="{{ 'checkout.address.last_name' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.lastName.$error.required">{{ 'common.required' | t }}</span>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input class="form-control" ng-model="$ctrl.address.line1" name="line1" type="text" required placeholder="{{ 'checkout.address.address1' | t }}" />
+                    <input class="form-control" ng-model="$ctrl.address.line1" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.line1.$error.required}" name="line1" type="text" required placeholder="{{ 'checkout.address.address1' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.line1.$error.required">{{ 'common.required' | t }}</span>
                 </div>
                 <div class="col-md-6">
@@ -51,12 +51,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input class="form-control" ng-model="$ctrl.address.postalCode" name="postalCode" required pattern="\d{4,32}" placeholder="{{ 'checkout.address.zip' | t }}" />
+                    <input class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && ($ctrl.form.postalCode.$error.required || $ctrl.form.postalCode.$error.pattern)}" ng-model="$ctrl.address.postalCode" name="postalCode" required pattern="\d{4,32}" placeholder="{{ 'checkout.address.zip' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.postalCode.$error.required">{{ 'common.required' | t }}</span>
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.postalCode.$error.pattern">{{ 'common.invalid' | t }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" ng-model="$ctrl.address.city" name="city" type="text" required placeholder="{{ 'customer.addresses.city' | t }}" />
+                    <input class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.city.$error.required}" ng-model="$ctrl.address.city" name="city" type="text" required placeholder="{{ 'customer.addresses.city' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.city.$error.required">{{ 'common.required' | t }}</span>
                 </div>
             </div>
@@ -64,12 +64,12 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input ng-model="$ctrl.address.email" class="form-control" name="email" type="email" required placeholder="{{ 'customer.register.email_work' | t }}" />
+                    <input ng-model="$ctrl.address.email" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && ($ctrl.form.email.$error.required || $ctrl.form.email.$error.email)}" name="email" type="email" required placeholder="{{ 'customer.register.email_work' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.email.$error.required">{{ 'common.required' | t }}</span>
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.email.$error.email">{{ 'common.invalid' | t }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input class="form-control" ng-model="$ctrl.address.phone" name="phone" type="tel" ng-pattern="/^\+?[0-9]{1,12}$/" placeholder="{{ 'customer.register.phone' | t }}" />
+                    <input class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && ($ctrl.form.phone.$error.required || $ctrl.form.phone.$error.pattern)}" ng-model="$ctrl.address.phone" name="phone" type="tel" ng-pattern="/^\+?[0-9]{1,12}$/" placeholder="{{ 'customer.register.phone' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.phone.$error.required">{{ 'common.required' | t }}</span>
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.phone.$error.pattern">{{ 'common.invalid' | t }}</span>
                 </div>

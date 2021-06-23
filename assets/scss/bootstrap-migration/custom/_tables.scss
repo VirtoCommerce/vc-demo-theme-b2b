@@ -42,3 +42,8 @@ th {
     background-color: $gray-modal-bg;
   }
 }
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
