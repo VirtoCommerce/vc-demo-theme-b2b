@@ -46,7 +46,7 @@
 
 {% capture imagesString  %}
     {% for image in product.images %}
-        "https:{{ image.url }}"
+        "{{ image.absolute_url }}"
     {% endfor %}
 {% endcapture %}
 {% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
