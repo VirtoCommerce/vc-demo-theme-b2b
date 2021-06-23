@@ -37,12 +37,12 @@
     </div>
 </main>
 
-{% assign productBrand = product.properties["Brand"].value %}
-{% assign productUrl = product.url %}
-{% assign productGtin = product.gtin %}
-{% assign productSku = product.sku %}
-{% assign productName = product.name %}
-{% assign productCategory = current_category.name %}
+{% assign productBrand = product.properties["Brand"].value | escape %}
+{% assign productUrl = product.url | full_url %}
+{% assign productGtin = product.gtin | escape %}
+{% assign productSku = product.sku | escape %}
+{% assign productName = product.name | escape %}
+{% assign productCategory = current_category.name | escape %}
 
 {% capture imagesString  %}
     {% for image in product.images %}
@@ -51,7 +51,7 @@
 {% endcapture %}
 {% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
 
-{% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' %}
+{% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' | escape %}
 {% assign productCurrency = product.price.actual_price_with_tax.currency.code %}
 {% assign productPrice = product.price.actual_price_with_tax.amount %}
 
