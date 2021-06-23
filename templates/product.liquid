@@ -64,6 +64,8 @@
 {% endcapture %}
 {% assign productAvailability = availability | strip | strip_newlines %}
 
+{% assign productListingExpired = product.end_date %}
+
 <script type='application/ld+json'>
     {
         "@context": "https://www.schema.org",
@@ -79,6 +81,7 @@
         "offers": {
             "@type": "Offer",
             "url": "{{ productUrl }}",
+            "priceValidUntil": "{{ productListingExpired }}"
             "priceCurrency": "{{ productCurrency }}",
             "price": "{{ productPrice }}",
             "availability": "{{ productAvailability }}"
