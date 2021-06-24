@@ -49,7 +49,7 @@
                                 <a class="nav-link text-dark text-condensed" ui-sref="companyInfo">{{ 'customer.account.menu_label.company_info' | t }}</a>
                             </li>
                             <li class="nav-item" va-permission="storefront:user:view" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                                <a class="nav-link text-dark text-condensed" href="{{ 'account#/companyMembers/' | absolute_url }}">{{ 'customer.account.menu_label.company_members' | t }}</a>
+                                <a class="nav-link text-dark text-condensed" ui-sref="members.list">{{ 'customer.account.menu_label.company_members' | t }}</a>
                             </li>
                         </ul>
                     </div>

@@ -1,8 +1,9 @@
 angular.module('storefront.account')
     .component('vcAccountCompanyMembers', {
-        templateUrl: "themes/assets/account-company-members.tpl.liquid",
-        controller: ['storefrontApp.mainContext', function (mainContext) {
-            var $ctrl = this;
+        templateUrl: [ '$rootScope', function($rootScope) {
+            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-company-members.tpl");
+        }],
+        controller: ['storefrontApp.mainContext', function () {
         }]
     })
 
