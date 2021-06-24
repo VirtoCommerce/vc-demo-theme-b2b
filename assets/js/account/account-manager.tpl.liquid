@@ -48,7 +48,7 @@
                     <div class="row">
                         <ul class="nav nav-pills nav-stacked left-nav">
                             <li ui-sref-active="active">
-                                <a ui-sref="companyInfo">{{ 'customer.account.menu_label.company_info' | t }}</a>
+                                <a href="{{ 'account/b4#/companyInfo' | absolute_url }}">{{ 'customer.account.menu_label.company_info' | t }}</a>
                             </li>
                             <li va-permission="storefront:user:view" ui-sref-active="active">
                                 <a ui-sref="members.list">{{ 'customer.account.menu_label.company_members' | t }}</a>
