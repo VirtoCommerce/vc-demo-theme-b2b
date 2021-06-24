@@ -19,10 +19,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col" itemscope itemtype="http://schema.org/Product">
-           <meta itemprop="url" content="{{ product.url | absolute_url}}">
-            <meta itemprop="image" content="{{ product.featured_image.src | img_url: "308x308" }}">
-
+        <div class="col">
         {% if product.product_type == "Configurable" %}
             <ng-controller ng-controller="configurableProductController">
                 {% include 'bootstrap-migration/product/type/configured/product' %}
@@ -36,10 +33,61 @@
                 {% include 'bootstrap-migration/product/type/without-variations/product' %}
             </ng-controller>
         {% endif %}
-
+        </div>
     </div>
-</div>
 </main>
+
+{% assign productBrand = product.properties["Brand"].value | escape %}
+{% assign productUrl = product.url | full_url %}
+{% assign productGtin = product.gtin | escape %}
+{% assign productSku = product.sku | escape %}
+{% assign productName = product.name | escape %}
+{% assign productCategory = current_category.name | escape %}
+
+{% capture imagesString  %}
+    {% for image in product.images %}
+        "{{ image.absolute_url }}"
+    {% endfor %}
+{% endcapture %}
+{% assign productImages = imagesString | strip | strip_newlines | split: ' ' %}
+
+{% assign productDescription = product.description | strip_html | split: '\n' | join: ' ' | escape %}
+{% assign productCurrency = product.price.actual_price_with_tax.currency.code %}
+{% assign productPrice = product.price.actual_price_with_tax.amount %}
+
+{% capture availability %}
+    {% if product.is_in_stock %}
+        InStock
+    {% else %}
+        OutOfStock
+    {% endif %}
+{% endcapture %}
+{% assign productAvailability = availability | strip | strip_newlines %}
+
+{% assign productListingExpired = product.end_date %}
+
+<script type='application/ld+json'>
+    {
+        "@context": "https://www.schema.org",
+        "@type": "product",
+        "brand": "{{ productBrand }}",
+        "url": "{{ productUrl }}",
+        "gtin": "{{ productGtin }}",
+        "sku": "{{ productSku }}",
+        "name": "{{ productName }}",
+        "category": "{{ productCategory }}",
+        "image": {{ productImages }},
+        "description": "{{ productDescription }}",
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ productUrl }}",
+            "priceValidUntil": "{{ productListingExpired }}",
+            "priceCurrency": "{{ productCurrency }}",
+            "price": "{{ productPrice }}",
+            "availability": "{{ productAvailability }}"
+        }
+    }
+</script>
 
 <script>
     window.product = {
