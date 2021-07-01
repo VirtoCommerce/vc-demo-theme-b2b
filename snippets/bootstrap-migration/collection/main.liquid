@@ -53,3 +53,26 @@
     </div>
     {% include 'bootstrap-migration/product/product-compare-list-bar' %}
 </main>
+
+{% capture breadcrumbs %}
+{% assign counter = 1 %}
+{"@type": "ListItem", "position": {{ counter }}, "name": "{{ '' | absolute_url | remove: '/' }}", "item": "{{ '' | full_url }}"};
+{% if current_category.parents %}
+    {%- for parent in current_category.parents -%}
+        {%- assign counter = counter | plus: 1 -%}
+        {"@type": "ListItem", "position": {{ counter }}, "name": "{{ parent.name }}", "item": "{{ parent.url | full_url }}"};
+    {%- endfor -%}
+{% endif %}
+{% assign counter = counter | plus: 1 %}
+{"@type": "ListItem", "position": {{ counter }}, "name": "{{ current_category.name }}", "item": "{{ current_category.url | full_url }}"}
+{% endcapture %}
+
+{% assign breadcrumbsArray = breadcrumbs | strip | strip_newlines | split: ';' %}
+
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": {{ breadcrumbsArray }}
+    }
+</script>
