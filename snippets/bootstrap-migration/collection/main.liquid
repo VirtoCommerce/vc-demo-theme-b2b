@@ -56,7 +56,7 @@
 
 {% capture breadcrumbs %}
 {% assign counter = 1 %}
-{"@type": "ListItem", "position": {{ counter }}, "name": "{{ '' | absolute_url | remove: '/' }}", "item": "{{ '' | full_url }}"};
+{"@type": "ListItem", "position": {{ counter }}, "name": "{{ current_store.name }}", "item": "{{ '' | full_url }}"};
 {% if current_category.parents %}
     {%- for parent in current_category.parents -%}
         {%- assign counter = counter | plus: 1 -%}
