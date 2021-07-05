@@ -40,14 +40,14 @@
                             <p>Continue browsing <a ng-href={% raw %}{{$ctrl.getCollectionsLink()}}{% endraw %}>here</a>.</p>
                         </span>
 
-                        <table class="table table-striped" ng-if="$ctrl.accountLists.selectedList.items.length > 0">
+                        <table class="table table-striped" ng-if="$ctrl.accountLists.selectedList.items.length > 0" aria-label="Account lists">
                             <thead>
                                 <tr class="text-condensed">
-                                    <th class="border-bottom-0"></th>
-                                    <th class="border-bottom-0"></th>
-                                    <th class="border-bottom-0">Name</th>
-                                    <th class="border-bottom-0">Price</th>
-                                    <th class="border-bottom-0"></th>
+                                    <th scope="col" class="border-bottom-0"></th>
+                                    <th scope="col" class="border-bottom-0"></th>
+                                    <th scope="col" class="border-bottom-0">Name</th>
+                                    <th scope="col" class="border-bottom-0">Price</th>
+                                    <th scope="col" class="border-bottom-0"></th>
                                 </tr>
                             </thead>
                             <tbody>
