@@ -26,13 +26,13 @@
         <div class="col-3 col-md-2">
             <div class="row" ng-class="{'align-items-baseline': outOfStockError}">
                 <div class="col-md-6 form-group pl-0 m-0">
-                    <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" vc-integer ng-disabled="$ctrl.noEditable" />
+                    <input ng-if="!outOfStockError" class="form-control text-center" type="text" ng-model="$ctrl.item.quantity" vc-integer />
                     <input ng-if="outOfStockError" class="form-control text-center" type="text" ng-value="0" disabled />
                     <small ng-if="outOfStockError" class="text-danger">{{ 'checkout.out_of_stock' | t }}</small>
                 </div>
-                <div class="col-md-6 mt-3 mt-md-0" ng-if="!$ctrl.noEditable">
+                <div class="col-md-6">
                     <a ng-if="!outOfStockError" href="" ng-click="$ctrl.changeQty()">{{ 'checkout.update' | t }}</a>
-                    <a href="" ng-click="$ctrl.remove()" class="d-inline-block mt-2 mt-md-0">{{ 'checkout.remove' | t }}</a>
+                    <a href="" ng-click="$ctrl.remove()">{{ 'checkout.remove' | t }}</a>
                 </div>
             </div>
         </div>
