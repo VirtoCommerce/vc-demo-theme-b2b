@@ -1,0 +1,32 @@
+<script id="storefront.lists-settings-dialog.tpl" type="text/ng-template">
+    <div class="modal-header align-items-center bg-gray-200">
+        <h4 class="modal-title">Lists settings</h4>
+        <button type="button" class="close py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="px-5">Your lists</th>
+                <th class="px-5">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="list in dialogData">
+                <th ng-bind="list.name" class="px-5"></th>
+                <th class="px-5">
+                    <input ng-model="list.delete" type="checkbox" />
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal-footer justify-content-end">
+        <button class="btn btn-dark" ng-click="close()">
+            {{ 'wishlist.general.cancel' | t }}
+        </button>
+        <button class="btn btn-primary" ng-disabled="!isAnySelected()" ng-click="submitSettings()">
+            {{ 'Submit' | t }}
+        </button>
+    </div>
+</script>

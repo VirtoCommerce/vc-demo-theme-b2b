@@ -1,0 +1,21 @@
+<script id="storefront.lists-create-new-list-dialog.tpl" type="text/ng-template">
+    <div class="modal-header align-items-center bg-gray-200">
+        <h4 class="modal-title">{{ 'wishlist.general.create' | t }}</h4>
+        <button type="button" class="close py-0 mt-n4" ng-click="close()" title="{{ 'cart.general.close_cart' | t }}" aria-label="{{ 'cart.general.close_cart' | t }}">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="input-group">
+            <input placeholder="Enter list name" class="form-control" ng-model="dialogData.listName" type="text"/>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button ng-disabled="inProgress || !dialogData.listName" class="btn btn-primary" ng-click="createList()">
+            {{ 'wishlist.general.create' |t }}
+        </button>
+        <button class="btn btn-dark" ng-click="close()">
+            {{ 'wishlist.general.cancel' | t }}
+        </button>
+    </div>
+</script>
