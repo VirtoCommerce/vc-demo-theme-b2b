@@ -70,7 +70,7 @@
                                                      on-update="relatedProducts = $event"></vc-related-products-migration>
                             </div>
                         </div>
-                        <div class="d-none d-md-block col-md-3">
+                        <div class="d-md-block col-md-3">
                             <p ng-if="customer && customer.isRegisteredUser" ng-cloak>
                                 <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || checkout.cart.outOfStockError" ng-click="checkout.wizard.nextStep()">
                                     {{ 'cart.general.checkout' | t }}
@@ -248,15 +248,15 @@
                                 <div class="pt-4 mb-4 border-top">
                                     <h2>MY PRODUCTS</h2>
                                     <div class="border-bottom border-gray-200 py-3" ng-repeat="item in checkout.cart.configuredGroups">
-                                        <vc-checkout-configurable-line-item item="item" ></vc-checkout-configurable-line-item>
+                                        <vc-checkout-configurable-line-item item="item" no-editable="true"></vc-checkout-configurable-line-item>
                                     </div>
                                     <div class="border-bottom border-gray-200 py-3" ng-repeat="lineItem in checkout.cart.usualItems">
-                                        <vc-checkout-line-item line-item="lineItem" ></vc-checkout-line-item>
+                                        <vc-checkout-line-item line-item="lineItem" no-editable="true"></vc-checkout-line-item>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="d-none d-md-block col-md-3 mt-1">
+                            <div class="d-md-block col-md-3 mt-1">
                                 <div class="d-flex justify-content-between mb-3">
                                     <button class="btn btn-lg btn-outline-primary w-50 d-flex align-items-center justify-content-center px-2" type="button" ng-click="checkout.wizard.prevStep()">
                                         <span class="fa fa-arrow-left mr-2"></span>

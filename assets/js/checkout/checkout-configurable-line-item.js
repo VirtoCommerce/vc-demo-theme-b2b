@@ -7,6 +7,7 @@ storefrontApp.component('vcCheckoutConfigurableLineItem', {
     },
     bindings: {
         item: '=',
+        noEditable: '@',
         onChangeQty: '&',
         onRemove: '&'
     },
