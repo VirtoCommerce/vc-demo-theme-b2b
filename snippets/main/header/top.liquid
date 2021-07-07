@@ -17,7 +17,7 @@
                             <a class="navbar-link" href="{{ 'account/b4#/orders/' | absolute_url }}">{{ 'customer.orders.title' | t }}</a>
                         </li>
                         <li>
-                            <a class="navbar-link" href="{{ 'account#/lists/' | absolute_url }}">{{ 'customer.lists.title' | t }}</a>
+                            <a class="navbar-link" href="{{ 'account/b4#/lists/' | absolute_url }}">{{ 'customer.lists.title' | t }}</a>
                         </li>
                     </ul>
                 </div>
@@ -37,7 +37,7 @@
                     <ul class="list-inline list-inline-divider">
                         <li>
                             {% raw %}{{ customer.firstName }} {{ customer.lastName }}{% endraw %}
-                        </li>                        
+                        </li>
                         <li class="position-relative">
                             <vc-account-switch></vc-account-switch>
                         </li>

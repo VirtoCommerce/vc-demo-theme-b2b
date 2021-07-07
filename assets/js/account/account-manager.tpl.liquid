@@ -28,7 +28,7 @@
                             <a href="{{ 'account/b4#/changePassword' | absolute_url }}">{{ 'customer.account.menu_label.change_password' | t }}</a>
                         </li>
                         <li ui-sref-active="active">
-                            <a ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a>
+                            <a href="{{ 'account/b4#/lists/' | absolute_url }}">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                         </li>
                         {% if shop.quotes_enabled %}
                         <li ui-sref-active="active">

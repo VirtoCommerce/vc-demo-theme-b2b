@@ -1,7 +1,7 @@
 ﻿angular.module('storefront.account')
     .component('vcAccountLists',
         {
-            templateUrl: "lists-manager.tpl",
+            templateUrl: "themes/assets/js/account/lists-manager.tpl",
             controller: [
                 'listsApi', '$rootScope', 'cartService', '$translate', 'loadingIndicatorService', '$timeout',
                 function (listsApi, $rootScope, cartService, $translate, loader, $timeout) {
@@ -43,23 +43,24 @@
                             });
                         });
                     }
-
-
                 }]
         })
     .component('vcAccountMyLists',
         {
-            templateUrl: 'themes/assets/js/account/account-lists.tpl.liquid',
+            templateUrl: [ '$rootScope', function($rootScope) {
+                return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-lists.tpl");
+            }],
             require: {
                 accountLists: '^^vcAccountLists'
             },
             controller: [
-                '$rootScope', 'listsApi', 'customerService', 'loadingIndicatorService', '$q', 'dialogService', function ($rootScope, listsApi, customerService, loader, $q, dialogService) {
+                '$rootScope', 'listsApi', 'customerService', 'loadingIndicatorService', '$q', 'dialogService', 'baseUrl', function ($rootScope, listsApi, customerService, loader, $q, dialogService, baseUrl) {
 
                     var $ctrl = this;
 
                     $ctrl.type = null;
                     $ctrl.predefinedLists = [];
+                    $ctrl.baseUrl = baseUrl;
 
                     $ctrl.pageSettings = { currentPage: 1, itemsPerPageCount: 5, numPages: 4 };
 
@@ -164,6 +165,14 @@
 
 
                     };
+
+                    $ctrl.getProductLink = function(productId) {
+                        return `${$ctrl.baseUrl}product/${productId}`;
+                    };
+
+                    $ctrl.getCollectionsLink = function() {
+                        return `${$ctrl.baseUrl}collections`;
+                    }
 
                     function createList(listName, type) {
                         return listsApi.createList(listName, type);
