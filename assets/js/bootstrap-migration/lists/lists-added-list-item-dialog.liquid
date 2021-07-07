@@ -21,8 +21,8 @@
                 </span>
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-dark">
+        <div class="modal-footer justify-content-between">
+            <button class="btn btn-outline-dark">
                 <span ng-click="close()">{{ 'wishlist.general.cancel' | t }}</span>
             </button>
             <button ng-disabled="selectedList.contains || inProgress || !selectedList.name" class="btn btn-primary" ng-click="addProductToList()">
