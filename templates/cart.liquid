@@ -70,7 +70,7 @@
                                                      on-update="relatedProducts = $event"></vc-related-products-migration>
                             </div>
                         </div>
-                        <div class="d-none d-md-block col-md-3">
+                        <div class="d-md-block col-md-3">
                             <p ng-if="customer && customer.isRegisteredUser" ng-cloak>
                                 <button class="btn btn-lg btn-block btn-primary" type="button" ng-disabled="checkout.loading || checkout.cart.outOfStockError" ng-click="checkout.wizard.nextStep()">
                                     {{ 'cart.general.checkout' | t }}
@@ -256,7 +256,7 @@
                                 </div>
 
                             </div>
-                            <div class="d-none d-md-block col-md-3 mt-1">
+                            <div class="d-md-block col-md-3 mt-1">
                                 <div class="d-flex justify-content-between mb-3">
                                     <button class="btn btn-lg btn-outline-primary w-50 d-flex align-items-center justify-content-center px-2" type="button" ng-click="checkout.wizard.prevStep()">
                                         <span class="fa fa-arrow-left mr-2"></span>
