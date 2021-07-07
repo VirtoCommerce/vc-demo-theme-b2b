@@ -31,8 +31,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex justify-content-end mb-3">
-                            <button ng-if="$ctrl.accountLists.lists.length != 0" class="btn btn-dark mr-2" ng-click="$ctrl.listSettings()"><i class="fa fa-cog" aria-hidden="true"></i> {{'wishlist.general.settings' | t}}</button>
-                            <button ng-if="$ctrl.accountLists.selectedTab === 'myLists'" class="btn btn-dark" ng-click="$ctrl.createList()"><i class="fa fa-plus" aria-hidden="true"></i> {{'wishlist.general.create' | t}}</button>
+                            <button ng-if="$ctrl.accountLists.lists.length != 0" class="btn btn-outline-primary mr-2" ng-click="$ctrl.listSettings()"><i class="fa fa-cog" aria-hidden="true"></i> {{'wishlist.general.settings' | t}}</button>
+                            <button ng-if="$ctrl.accountLists.selectedTab === 'myLists'" class="btn btn-outline-primary" ng-click="$ctrl.createList()"><i class="fa fa-plus" aria-hidden="true"></i> {{'wishlist.general.create' | t}}</button>
                         </div>
 
                         <span ng-if="$ctrl.accountLists.selectedList.items.length == 0">
@@ -52,7 +52,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="lineItem in $ctrl.accountLists.selectedList.items">
-                                    <td>
+                                    <td class="col-2 col-md-1">
                                         <img class="img-fluid" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-if="lineItem.imageUrl" />
                                     </td>
                                     <td>
@@ -84,7 +84,7 @@
                             </tbody>
                         </table>
                         <div ng-if="$ctrl.accountLists.selectedList.items.length">
-                            <button type="button" name="add" id="addToCart" class="btn btn-dark pull-right"
+                            <button type="button" name="add" id="addToCart" class="btn btn-primary pull-right"
                                     ng-disabled="!$ctrl.addToCartAllProductsEnabled()"
                                     ng-click="$ctrl.addToCartAllProducts($ctrl.accountLists.selectedList.name)">
                                 {{ 'wishlist.general.add_all_products' | t }}

@@ -10,12 +10,12 @@
             <input placeholder="Enter list name" class="form-control" ng-model="dialogData.listName" type="text"/>
         </div>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer justify-content-between">
+        <button class="btn btn-outline-dark" ng-click="close()">
+            {{ 'wishlist.general.cancel' | t }}
+        </button>
         <button ng-disabled="inProgress || !dialogData.listName" class="btn btn-primary" ng-click="createList()">
             {{ 'wishlist.general.create' |t }}
-        </button>
-        <button class="btn btn-dark" ng-click="close()">
-            {{ 'wishlist.general.cancel' | t }}
         </button>
     </div>
 </script>

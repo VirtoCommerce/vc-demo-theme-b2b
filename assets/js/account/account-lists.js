@@ -43,8 +43,6 @@
                             });
                         });
                     }
-
-
                 }]
         })
     .component('vcAccountMyLists',
