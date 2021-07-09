@@ -34,56 +34,63 @@
                             <button ng-if="$ctrl.accountLists.lists.length != 0" class="btn btn-outline-primary mr-2" ng-click="$ctrl.listSettings()"><i class="fa fa-cog" aria-hidden="true"></i> {{'wishlist.general.settings' | t}}</button>
                             <button ng-if="$ctrl.accountLists.selectedTab === 'myLists'" class="btn btn-outline-primary" ng-click="$ctrl.createList()"><i class="fa fa-plus" aria-hidden="true"></i> {{'wishlist.general.create' | t}}</button>
                         </div>
-
                         <span ng-if="$ctrl.accountLists.selectedList.items.length == 0">
                             <h2>{{ 'wishlist.general.empty' | t }}</h2>
                             <p>Continue browsing <a ng-href={% raw %}{{$ctrl.getCollectionsLink()}}{% endraw %}>here</a>.</p>
                         </span>
-
-                        <table class="table table-striped" ng-if="$ctrl.accountLists.selectedList.items.length > 0" aria-label="Account lists">
-                            <thead>
-                                <tr class="text-condensed">
-                                    <th scope="col" class="border-bottom-0"></th>
-                                    <th scope="col" class="border-bottom-0"></th>
-                                    <th scope="col" class="border-bottom-0">Name</th>
-                                    <th scope="col" class="border-bottom-0">Price</th>
-                                    <th scope="col" class="border-bottom-0"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="lineItem in $ctrl.accountLists.selectedList.items">
-                                    <td class="col-2 col-md-1">
-                                        <img class="img-fluid" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-if="lineItem.imageUrl" />
-                                    </td>
-                                    <td>
-                                        <a href="" ng-click="$ctrl.accountLists.removeLineItem(lineItem, $ctrl.accountLists.selectedList)">
-                                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <a ng-bind="lineItem.name" ng-href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
+                        <div  ng-if="$ctrl.accountLists.selectedList.items.length > 0" >
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item border-gray-200 text-condensed font-weight-bold">
+                                    <div class="row align-items-center">
+                                        <div class="col-2"></div>
+                                        <div class="col">Name</div>
+                                        <div class="col-5">
+                                            <div class="row align-items-center">
+                                                <div class="col text-right">Price</div>
+                                                <div class="col-6"></div>
+                                            </div>
                                         </div>
-                                        <div ng-if="!lineItem.modifiedBy" ng-bind="'Added '+ (lineItem.createdDate | date:'MMMM d, y')"></div>
-                                        <div ng-if="lineItem.modifiedBy" ng-bind="'Added by '+ (lineItem.modifiedBy) +' in '+ (lineItem.createdDate | date:'MMMM d, y')"></div>
-                                        <div class="bg-warning text-center" ng-if="lineItem.productAdded">{{ 'wishlist.general.added_to_cart' | t}}</div>
-                                    </td>
-                                    <td>
-                                        <div ng-bind="lineItem.placedPrice.formattedAmount"></div>
-                                        <div ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></div>
-                                    </td>
-                                    <td>
-                                        <button type="button" name="add" id="addToCart" class="btn btn-primary"
-                                                ng-click="$ctrl.accountLists.addToCart(lineItem)" ng-disabled="!$ctrl.canBeAddedToCart(lineItem)">
-                                            <span id="addToCartText" ng-if="!lineItem.product.isBuyable">{{ 'products.product.unavailable' | t }}</span>
-                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable && !lineItem.product.isInStock">{{ 'products.product.sold_out' | t }}</span>
-                                            <span id="addToCartText" ng-if="lineItem.product.isBuyable && lineItem.product.isInStock">{{ 'products.general.add_to_cart' | t }}</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div ng-if="$ctrl.accountLists.selectedList.items.length">
+                                    </div>
+                                </div>
+                                <div ng-repeat="lineItem in $ctrl.accountLists.selectedList.items" class="list-group-item border-gray-200">
+                                    <div class="row align-items-center">
+                                        <div class="col-2 d-flex flex-row align-items-center">
+                                            <img class="img-fluid" alt="{% raw %}{{ lineItem.name }}{% endraw %}" ng-src="{% raw %}{{ lineItem.imageUrl }}{% endraw %}" fallback-src="{{ 'no-image.svg' | asset_url }}" ng-if="lineItem.imageUrl" />
+                                            <div class="px-1">
+                                                <a href="" ng-click="$ctrl.accountLists.removeLineItem(lineItem, $ctrl.accountLists.selectedList)">
+                                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div>
+                                                <a ng-bind="lineItem.name" ng-href="{% raw %}{{$ctrl.getProductLink(lineItem.productId)}}{% endraw %}"></a>
+                                            </div>
+                                            <div ng-if="!lineItem.modifiedBy" ng-bind="'Added '+ (lineItem.createdDate | date:'MMMM d, y')"></div>
+                                            <div ng-if="lineItem.modifiedBy" ng-bind="'Added by '+ (lineItem.modifiedBy) +' in '+ (lineItem.createdDate | date:'MMMM d, y')"></div>
+                                            <div class="bg-warning text-center" ng-if="lineItem.productAdded">{{ 'wishlist.general.added_to_cart' | t}}</div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="row align-items-center">
+                                                <div class="col text-right">
+                                                    <div ng-bind="lineItem.placedPrice.formattedAmount" class="text-dark-green font-weight-bold"></div>
+                                                    <div ng-if="lineItem.listPrice.amount > lineItem.placedPrice.amount" ng-bind="lineItem.listPrice.formattedAmount"></div>
+                                                </div>
+                                                <div class="col-6 text-center">
+                                                    <button type="button" name="add" id="addToCart" class="btn btn-primary"
+                                                    ng-click="$ctrl.accountLists.addToCart(lineItem)" ng-disabled="!$ctrl.canBeAddedToCart(lineItem)">
+                                                        <span id="addToCartText" ng-if="!lineItem.product.isBuyable">{{ 'products.product.unavailable' | t }}</span>
+                                                        <span id="addToCartText" ng-if="lineItem.product.isBuyable && !lineItem.product.isInStock">{{ 'products.product.sold_out' | t }}</span>
+                                                        <span id="addToCartText" ng-if="lineItem.product.isBuyable && lineItem.product.isInStock">{{ 'products.general.add_to_cart' | t }}</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="$ctrl.accountLists.selectedList.items.length" class="mt-3">
                             <button type="button" name="add" id="addToCart" class="btn btn-primary pull-right"
                                     ng-disabled="!$ctrl.addToCartAllProductsEnabled()"
                                     ng-click="$ctrl.addToCartAllProducts($ctrl.accountLists.selectedList.name)">
