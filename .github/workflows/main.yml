@@ -61,7 +61,7 @@ jobs:
       uses: VirtoCommerce/vc-github-actions/changelog-generator@master
 
     - name: SonarCloud Scan
-      uses: VirtoCommerce/vc-github-actions/sonar-theme@master
+      uses: VirtoCommerce/vc-github-actions/sonar-theme@karma
       with:
         projectVersion: ${{ env.VERSION_SUFFIX }}
 
