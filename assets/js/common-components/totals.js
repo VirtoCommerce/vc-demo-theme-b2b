@@ -23,6 +23,7 @@ storefrontApp.component('vcTotals', {
         var $ctrl = this;
 
         $ctrl.options = angular.merge({ }, defaults, $ctrl.options);
+        $ctrl.isCollapsed = true;
 
         var fieldSuffix = $ctrl.showWithTaxes ? 'WithTax' : '';
         $ctrl.fieldNames = {
@@ -32,6 +33,10 @@ storefrontApp.component('vcTotals', {
             payment: 'paymentPrice' + fieldSuffix,
             discount: 'discountTotal' + fieldSuffix
         };
+
+        $ctrl.toggleDiscountDetails = function () {
+            $ctrl.isCollapsed = !$ctrl.isCollapsed;
+        }
     }]
 });
 
