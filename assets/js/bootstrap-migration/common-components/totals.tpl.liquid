@@ -20,14 +20,29 @@
                 ng-if-start="$ctrl.options.show.discount"
                 class="col"
                 ng-init="title = '{{ 'totals.discount' | t }}'"
-                ng-include="'totals-title-template.tpl'"
+                ng-include="'totals-discounts-title-template.tpl'"
+                ng-click="$ctrl.toggleDiscountDetails()"
             ></dt>
             <dd ng-if-end class="col">
-                <span
+                <span ng-if="!$ctrl.order.discounts.length"
                     class="float-right"
                     ng-bind="$ctrl.order[$ctrl.fieldNames.discount].formattedAmount"
                 ></span>
+                <span ng-if="$ctrl.order.discounts.length"
+                class="float-right font-weight-bold text-danger"
+                ng-bind="'- ' + $ctrl.order[$ctrl.fieldNames.discount].formattedAmount"
+            ></span>
             </dd>
+            <div class="col-12" uib-collapse="$ctrl.isCollapsed">
+                <ul class="pl-3 text-muted" ng-repeat="discount in $ctrl.order.discounts">
+                    <li>
+                        <div class="d-flex justify-content-between">
+                            <span ng-bind="discount.description" class="shrinked-text"></span>
+                            <span ng-bind="'- ' + discount.amount.formattedAmount" class="text-nowrap"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <div class="col-12">
                 <hr class="mb-2 mt-0 border-1 border-gray-200" />
             </div>
@@ -107,6 +122,12 @@
 
 <script id="totals-title-template.tpl" type="text/ng-template">
     <span class="float-left" ng-if="!$ctrl.options.complete"> {% raw %} {{ title }} {% endraw %} </span> {% if settings.show_prices_with_taxes %} {{ 'totals.withTax' | t }} {% endif %}
+</script>
+
+<script id="totals-discounts-title-template.tpl" type="text/ng-template">
+    <span class="float-left" ng-if="!$ctrl.options.complete" type="button"> {% raw %} {{ title }} {% endraw %} </span> {% if settings.show_prices_with_taxes %} {{ 'totals.withTax' | t }} {% endif %}
+    <img ng-if="$ctrl.order.discounts.length && !$ctrl.isCollapsed" class="ml-2" src="{{ 'arrow-active-up.svg' | asset_url }}" />
+    <img ng-if="$ctrl.order.discounts.length && $ctrl.isCollapsed" class="ml-2" src="{{ 'arrow-active-down.svg' | asset_url }}" />
 </script>
 
 <script id="totals-field-with-free-template.tpl" type="text/ng-template">
