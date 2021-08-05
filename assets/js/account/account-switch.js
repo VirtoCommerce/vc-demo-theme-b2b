@@ -16,14 +16,8 @@ function vcAccountSwitchController (multiAccountService) {
     }
 }
 
-var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('vcAccountSwitch', {
-    templateUrl: "themes/assets/js/account/account-switch.tpl.liquid",
-    controller: vcAccountSwitchController
-});
-
 storefrontApp.component('vcAccountSwitchMigration', {
-    templateUrl: "themes/assets/js/account/b4/account-switch.tpl.liquid",
+    templateUrl: "themes/assets/js/account/account-switch.tpl.liquid",
     controller: vcAccountSwitchController
 });
 

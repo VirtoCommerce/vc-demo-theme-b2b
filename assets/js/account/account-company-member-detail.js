@@ -1,6 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountCompanyMemberDetail', {
-        templateUrl: "themes/assets/js/account/b4/account-company-member-detail.tpl",
+        templateUrl: "themes/assets/js/account/account-company-member-detail.tpl",
         require: {
             accountManager: '^vcAccountManager'
         },

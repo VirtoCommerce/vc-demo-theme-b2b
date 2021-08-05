@@ -1,6 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountCompanyMembers', {
-        templateUrl: "themes/assets/js/account/b4/account-company-members.tpl",
+        templateUrl: "themes/assets/js/account/account-company-members.tpl",
         controller: ['storefrontApp.mainContext', function () {
         }]
     })

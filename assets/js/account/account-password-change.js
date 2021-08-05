@@ -1,6 +1,6 @@
 angular.module('storefront.account')
 .component('vcAccountPasswordChange', {
-    templateUrl: "themes/assets/js/account/b4/account-password-change.tpl",
+    templateUrl: "themes/assets/js/account/account-password-change.tpl",
     require: {
         accountManager: '^vcAccountManager'
     },

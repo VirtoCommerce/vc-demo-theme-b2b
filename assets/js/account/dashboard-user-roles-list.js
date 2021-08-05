@@ -1,6 +1,6 @@
 angular.module('storefront.account')
     .component('vcDashboardUserRolesList', {
-        templateUrl: "themes/assets/js/account/b4/dashboard-user-roles-list.tpl",
+        templateUrl: "themes/assets/js/account/dashboard-user-roles-list.tpl",
         controller: ['accountApi', 'loadingIndicatorService', function (accountApi, loader) {
             var $ctrl = this;
             $ctrl.loader = loader;
