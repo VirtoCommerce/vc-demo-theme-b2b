@@ -23,3 +23,22 @@
     font-size: 1.75rem;
   }
 }
+
+.no-permission {
+  background: url('../../images/dashboard-placeholder-bg.png') right no-repeat;
+  padding: 60px;
+  .message {
+      width: 179px;
+      margin-left: 35px;
+      color: $gray-800;
+  }
+}
+
+.user-roles-card-body {
+  .title {
+      line-height: $line-height-base;
+  }
+  .description {
+      color: $gray-roles-description;
+  }
+}

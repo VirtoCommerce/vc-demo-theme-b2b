@@ -47,9 +47,7 @@
         })
     .component('vcAccountMyLists',
         {
-            templateUrl: [ '$rootScope', function($rootScope) {
-                return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-lists.tpl");
-            }],
+            templateUrl: "themes/assets/js/account/b4/account-lists.tpl",
             require: {
                 accountLists: '^^vcAccountLists'
             },

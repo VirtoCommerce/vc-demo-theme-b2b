@@ -1,8 +1,6 @@
-{% layout settings.customer_layout %}
-<main class="main">
-    <aside class="container">
-        <vc-account-manager base-url="baseUrl" customer="customer"></vc-account-manager>
-    </aside>
+{% layout 'bootstrap-migration' %}
+<main class="container flex-grow-1 pt-4 pb-6">
+    <vc-account-manager base-url="baseUrl" customer="customer"></vc-account-manager>
 </main>
 
 

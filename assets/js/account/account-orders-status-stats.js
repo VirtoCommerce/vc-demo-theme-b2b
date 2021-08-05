@@ -1,6 +1,6 @@
 angular.module('storefront.account')
 .component('vcAccountOrdersStatusStats', {
-    templateUrl: "account-orders-status-stats.tpl",
+    templateUrl: "themes/assets/js/account/b4/account-orders-status-stats.tpl",
     controller: ['$scope', '$q', 'storefrontApp.mainContext', 'loadingIndicatorService', 'accountApi', function ($scope, $q,  mainContext, loader, accountApi) {
         var $ctrl = this;
         $ctrl.loader = loader;

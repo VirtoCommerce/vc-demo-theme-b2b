@@ -5,9 +5,9 @@
                 <vc-account-last-orders-list></vc-account-last-orders-list>
             </div>
         </div>
-        <div class="row nogap">
+        <div class="row mb-3">
             <div class="col-md-6">
-                {% include 'dashboard/monthly-spend-report' %}
+                {% include 'bootstrap-migration/dashboard/monthly-spend-report' %}
             </div>
             <div class="col-md-6">
                 <vc-account-orders-status-stats></vc-account-orders-status-stats>
@@ -20,11 +20,14 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="row">
-            {% include 'dashboard/bulk-order-content' %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <span class="h4">{{ 'bulk_order.general.title' | t }}</span>
+            </div>
+            <div class="card-body pt-2">
+                {% include 'bootstrap-migration/dashboard/bulk-order-content' %}
+            </div>
         </div>
-        <div class="row">
-            <vc-dashboard-user-roles-list></vc-dashboard-user-roles-list>
-        </div>
+        <vc-dashboard-user-roles-list></vc-dashboard-user-roles-list>
     </div>
 </div>

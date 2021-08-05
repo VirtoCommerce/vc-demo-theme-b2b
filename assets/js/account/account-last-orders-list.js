@@ -1,6 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountLastOrdersList', {
-        templateUrl: "account-last-orders-list.tpl",
+        templateUrl: "themes/assets/js/account/b4/account-last-orders-list.tpl",
         controller: ['accountApi', 'loadingIndicatorService', '$window', 'sortDescending', function (accountApi, loader, $window, sortDescending ) {
             var $ctrl = this;
             $ctrl.loader = loader;

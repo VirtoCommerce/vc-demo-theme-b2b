@@ -1,9 +1,7 @@
 ﻿var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.component('vcLineItems', {
-    templateUrl: [ '$rootScope', function($rootScope) {
-        return $rootScope.adjustTemplateUrl("themes/assets/js/common-components/lineItems.tpl.liquid");
-    }],
+    templateUrl: "themes/assets/js/bootstrap-migration/common-components/lineItems.tpl.liquid",
     bindings: {
         order: '<',
         hideReorder: '<'

@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.dashboard.current_user_roles' | t }}</span>
+    </div>
+    <div class="card-body">
+        <div ng-repeat="role in $ctrl.distinctRoles" class="d-flex align-items-start" ng-class="!$last && 'mb-2'">
+            <img src="{{ 'user-circle.svg' | asset_url }}" />
+            <div class="user-roles-card-body d-flex flex-column ml-3 text-helvetica">
+                <span ng-bind="role.name" class="title font-weight-bold m-0"></span>
+                <span ng-bind="role.description" class="description"></span>
+            </div>
+        </div>
+    </div>
+</div>

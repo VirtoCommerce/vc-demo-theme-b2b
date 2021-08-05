@@ -1,6 +1,6 @@
 angular.module('storefront.account')
     .component('vcDashboardUserList', {
-        templateUrl: "dashboard-user-list.tpl",
+        templateUrl: "themes/assets/js/account/b4/dashboard-user-list.tpl",
         controller: ['storefrontApp.mainContext', '$scope', 'accountApi', 'loadingIndicatorService', 'sortDescending', function (mainContext, $scope, accountApi, loader, sortDescending) {
             var $ctrl = this;
             $ctrl.loader = loader;
