@@ -1,8 +1,6 @@
 angular.module('storefront.account')
     .component('vcAccountCheckoutDefaults', {
-        templateUrl: [ '$rootScope', function($rootScope) {
-            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-checkout-defaults.tpl.tpl");
-        }],
+        templateUrl: "themes/assets/js/account/account-checkout-defaults.tpl.tpl",
         require: {
             accountManager: '^vcAccountManager'
         },

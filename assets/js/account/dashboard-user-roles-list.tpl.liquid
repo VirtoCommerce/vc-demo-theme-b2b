@@ -1,16 +1,12 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-12">
-                <span class="h4">{{ 'customer.dashboard.current_user_roles' | t }}</span>
-            </div>
-        </div>
+<div class="card pl-sm-0">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.dashboard.current_user_roles' | t }}</span>
     </div>
-    <div class="panel-body">
-        <div ng-repeat="role in $ctrl.distinctRoles" class="user-roles-card">
+    <div class="card-body">
+        <div ng-repeat="role in $ctrl.distinctRoles" class="d-flex align-items-start" ng-class="!$last && 'mb-2'">
             <img src="{{ 'user-circle.svg' | asset_url }}" />
-            <div class="user-roles-card-body">
-                <span ng-bind="role.name" class="title margin-0"></span>
+            <div class="user-roles-card-body d-flex flex-column ml-3 text-helvetica">
+                <span ng-bind="role.name" class="title font-weight-bold m-0"></span>
                 <span ng-bind="role.description" class="description"></span>
             </div>
         </div>

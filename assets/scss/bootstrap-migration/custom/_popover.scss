@@ -5,30 +5,6 @@
     }
   }
 
-  .bulk-order-popover {
-    li {
-      & > a {
-        color: $secondary;
-        &:hover,
-        &:focus {
-          color: $body-color;
-        }
-      }
-
-      &.active {
-        border-bottom: 3px solid $primary;
-        & > {
-          a,
-          a:hover,
-          a:focus {
-            color: $body-color;
-            background: none;
-          }
-        }
-      }
-    }
-  }
-
   .all-products-popover {
     li > a {
       color: $body-color;
@@ -41,6 +17,30 @@
 
   .popover-category:nth-child(odd):not(:last-child) {
     border-right: 1px solid $gray-300;
+  }
+}
+
+.bulk-order-popover {
+  li {
+    & > a {
+      color: $secondary;
+      &:hover,
+      &:focus {
+        color: $body-color;
+      }
+    }
+
+    &.active {
+      border-bottom: 3px solid $primary;
+      & > {
+        a,
+        a:hover,
+        a:focus {
+          color: $body-color;
+          background-color: white !important;
+        }
+      }
+    }
   }
 }
 

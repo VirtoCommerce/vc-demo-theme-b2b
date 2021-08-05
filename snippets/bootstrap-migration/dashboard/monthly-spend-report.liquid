@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.dashboard.monthly_spend_report' | t }}</span>
+    </div>
+    <div class="card-body">
+        <div class="d-flex justify-content-around align-items-center">
+            <img src="{{ 'spend-chart.svg' | asset_url }}" alt="Spend chart" />
+            <div class="d-flex flex-column">
+                <span class="h4 font-weight-normal text-capitalize">{{ 'customer.dashboard.budget' | t }}</span>
+                <span class="h2 m-0">$58,152</span>
+            </div>
+            <div class="d-flex flex-column">
+                <span class="h4 font-weight-normal text-transform-none">{{ 'customer.dashboard.total_spend' | t }}</span>
+                <span class="h2 m-0">$30,152</span>
+            </div>
+        </div>
+    </div>
+</div>

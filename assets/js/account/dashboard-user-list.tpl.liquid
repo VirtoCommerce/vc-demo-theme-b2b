@@ -1,20 +1,16 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-10">
-                <span class="h4">{{ 'customer.dashboard.users' | t }}</span>
-            </div>
-            <div class="col-md-2" va-permission="storefront:organization:edit">
-               <a ui-sref="members.list" class="text-transform-none">
-                    {{ 'customer.dashboard.all_users_link_text' | t }} <span class="fa fa-arrow-right arrow-padding-left"></span>
-                </a>
-            </div>
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="h4 mb-0">{{ 'customer.dashboard.users' | t }}</span>
+            <a ui-sref="members.list" va-permission="storefront:organization:edit">
+                {{ 'customer.dashboard.all_users_link_text' | t }} <span class="fa fa-arrow-right pl-2"></span>
+            </a>
         </div>
     </div>
     <div va-permission="storefront:organization:edit" id="user-list-table">
-        <table class="table table-striped margin-0" ng-if="$ctrl.entries.length">
+        <table class="table table-striped table-bordered table-head-hover mb-0" ng-if="$ctrl.entries.length" aria-label="Organization user list">
             <thead>
-                <tr>
+                <tr class="text-condensed">
                     <th>{{ 'customer.edit_company_members.full_name' | t }}</th>
                     <th>{{ 'customer.edit_company_members.email' | t }}</th>
                     <th>{{ 'customer.edit_company_members.role' | t }}</th>
@@ -26,7 +22,7 @@
                     <td ng-bind="member.fullName"></td>
                     <td ng-bind="member.email"></td>
                     <td ng-bind="member.role.name"></td>
-                    <td ng-bind="member.isLockedOut ? 'Inactive' : 'Active'" ng-class="{ 'text-green': !member.isLockedOut }"></td>
+                    <td ng-bind="member.isLockedOut ? 'Inactive' : 'Active'" ng-class="{ 'text-dark-green': !member.isLockedOut }"></td>
                 </tr>
             </tbody>
         </table>
@@ -36,9 +32,9 @@
             </div>
         </div>
     </div>
-    <div ng-if="$ctrl.userTableHided()" class="panel-body no-permission">
+    <div ng-if="$ctrl.userTableHided()" class="card-body d-flex align-items-center no-permission">
         <img src="{{ 'cabinet.svg' | asset_url }}" />
-        <p class="message">{{ 'customer.dashboard.no_permission_message' | t }}</p>
+        <p class="text-helvetica font-weight-bold message">{{ 'customer.dashboard.no_permission_message' | t }}</p>
     </div>
 </div>
 

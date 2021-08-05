@@ -1,63 +1,62 @@
-<div ng-if="$ctrl.loader.isLoading" class="loader">
-    <div class="indicator"></div>
-</div>
+<vc-loader is-loading="$ctrl.loader.isLoading"></vc-loader>
 <div class="row">
-    <div class="col-xs-12" ng-class="{'loading': $ctrl.loader.isLoading }">
+    <div class="col">
         <div class="row">
-            <div class="col-xs-4 col-sm-2">
-                <div class="row">
-                    <div class="page-header border-none">
+            <div class="col-4 col-sm-2">
+                <div class="row pb-2">
+                    <div class="col">
                         <h3>{{ 'customer.account.title' | t }}</h3>
                     </div>
                 </div>
-                <div class="row">
-                    <ul class="nav nav-pills nav-stacked left-nav">
-                        <li ui-sref-active="active">
-                            <a ui-sref="dashboard">{{ 'customer.account.menu_label.dashboard' | t }}</a>
+                <div class="row pb-2">
+                    <ul class="col vertical-menu nav flex-column pr-0">
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="dashboard">{{ 'customer.account.menu_label.dashboard' | t }}</a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/orders/' | absolute_url }}">{{ 'customer.account.menu_label.orders' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="orders.list">{{ 'customer.account.menu_label.orders' | t }}</a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/profile' | absolute_url }}">{{ 'customer.account.menu_label.profile' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="profile">{{ 'customer.account.menu_label.profile' | t }}</a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/addresses' | absolute_url }}">{{ 'customer.account.menu_label.addresses' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="addresses">{{ 'customer.account.menu_label.addresses' | t }}</a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/changePassword' | absolute_url }}">{{ 'customer.account.menu_label.change_password' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="passwordChange">{{ 'customer.account.menu_label.change_password' | t }}</a>
                         </li>
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/lists/' | absolute_url }}">{{ 'customer.account.menu_label.wishlist' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                         </li>
                         {% if shop.quotes_enabled %}
-                        <li ui-sref-active="active">
-                            <a ui-sref="quotes">{{ 'customer.account.menu_label.quotes' | t }}</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/quotes' | absolute_url }}">{{ 'customer.account.menu_label.quotes' | t }}</a>
                         </li>
                         {% endif %}
-                        <li ui-sref-active="active">
-                            <a href="{{ 'account/b4#/checkoutDefaults' | absolute_url }}">Checkout Defaults</a>
+                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                            <a class="nav-link text-dark text-condensed" ui-sref="checkoutDefaults">Checkout Defaults</a>
                         </li>
                     </ul>
                 </div>
-                <div va-permission="storefront:organization:edit">
-                    <div class="row">
-                        <hr>
+                <div va-permission="storefront:organization:edit" class="row pt-3 border-top border-gray-200">
+                    <div class="col-12 pb-2">
                         <h3>{{ 'customer.account.corporate' | t }}</h3>
                     </div>
-                    <div class="row">
-                        <ul class="nav nav-pills nav-stacked left-nav">
-                            <li ui-sref-active="active">
-                                <a href="{{ 'account/b4#/companyInfo' | absolute_url }}">{{ 'customer.account.menu_label.company_info' | t }}</a>
+                    <div class="col-12">
+                        <div class="row">
+                        <ul class="col vertical-menu nav flex-column">
+                            <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                                <a class="nav-link text-dark text-condensed" ui-sref="companyInfo">{{ 'customer.account.menu_label.company_info' | t }}</a>
                             </li>
-                            <li va-permission="storefront:user:view" ui-sref-active="active">
-                                <a href="{{ 'account/b4#/companyMembers/' | absolute_url }}">{{ 'customer.account.menu_label.company_members' | t }}</a>
+                            <li class="nav-item" va-permission="storefront:user:view" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
+                                <a class="nav-link text-dark text-condensed" ui-sref="members.list">{{ 'customer.account.menu_label.company_members' | t }}</a>
                             </li>
                         </ul>
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-8 col-sm-10">
+            <div class="col-8 col-sm-10">
                 <ui-view></ui-view>
             </div>
         </div>

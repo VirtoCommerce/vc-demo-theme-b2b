@@ -1,8 +1,6 @@
 angular.module('storefront.account')
 .component('vcAccountAddresses', {
-    templateUrl: [ '$rootScope', function($rootScope) {
-        return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-addresses.tpl");
-    }],
+    templateUrl: "themes/assets/js/account/account-addresses.tpl",
     require: {
         accountManager: '^vcAccountManager'
     },

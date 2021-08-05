@@ -1,24 +1,20 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-12">
-                <span class="h4">{{ 'customer.dashboard.orders_status' | t }}</span>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.dashboard.orders_status' | t }}</span>
     </div>
-    <div class="panel-body">
-        <div class="spend-report-body">
-            <div class="spend-report-card text-center">
-                <span class="h4 text-transform-none text-normal">Unpaid</span>
-                <span class="h2 text-transform-none margin-0 text-green" ng-bind="$ctrl.statusStats['Unpaid']"></span>
+    <div class="card-body">
+        <div class="d-flex justify-content-around align-items-center">
+            <div class="d-flex flex-column text-center">
+                <span class="h4 my-2 font-weight-normal text-capitalize">Unpaid</span>
+                <span class="h2 mb-2 text-dark-green" ng-bind="$ctrl.statusStats['Unpaid']"></span>
             </div>
-            <div class="spend-report-card text-center">
-                <span class="h4 text-transform-none text-normal">Paid</span>
-                <span class="h2 text-transform-none margin-0" ng-bind="$ctrl.statusStats['Paid']"></span>
+            <div class="d-flex flex-column text-center">
+                <span class="h4 my-2 font-weight-normal text-capitalize">Paid</span>
+                <span class="h2 mb-2" ng-bind="$ctrl.statusStats['Paid']"></span>
             </div>
-            <div class="spend-report-card text-center">
-                <span class="h4 text-transform-none text-normal">Completed</span>
-                <span class="h2 text-transform-none margin-0 text-primary" ng-bind="$ctrl.statusStats['Completed']"></span>
+            <div class="d-flex flex-column text-center">
+                <span class="h4 my-2 font-weight-normal text-capitalize">Completed</span>
+                <span class="h2 mb-2 text-primary" ng-bind="$ctrl.statusStats['Completed']"></span>
             </div>
         </div>
     </div>

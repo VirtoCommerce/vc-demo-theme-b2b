@@ -4,47 +4,45 @@
     <a id="account-dropdown"
        href="{{ 'account' | absolute_url }}"
        uib-dropdown-toggle>
-        {{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary" aria-hidden="true"></i>
+    {{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary" aria-hidden="true"></i>
     </a>
-    <ul class="dropdown-menu dropdown-menu-right mt-0"
-        role="menu"
-        uib-dropdown-menu
-        aria-labelledby="account-dropdown">
-        <li ng-repeat="account in $ctrl.accounts">
-            <div class="dropdown-menu-item d-flex align-items-center justify-content-between pl-2 pr-3 py-2">
-                <a role="menuitem"
-                   class="text-body w-100 p-0"
-                   ng-click="$ctrl.switch(account)">
-                    <i class="account-icon fa fa-user-circle fa-2x fa-fw"
-                       ng-class="{'active': $ctrl.currentAccount.id === account.id}"
-                       aria-hidden="true">
-                    </i>
-                    <div class="d-inline-block small">
-                        <strong ng-bind="account.name"></strong>
-                        <div class="small text-muted" ng-bind="account.role.name"></div>
-                    </div>
-                </a>
-                <div class="d-inline-block px-2">
-                    <button class="btn btn-sm btn-white btn-logout mr-0 p-2"
-                            ng-click="$ctrl.logout(account.id, '{{ 'account/logout' | absolute_url }}')">
-                        <i class="fa fa-sign-out"
-                           aria-hidden="true"></i>
-                    </button>
+    <div class="dropdown-menu dropdown-menu-right mt-0"
+         role="menu"
+         uib-dropdown-menu
+         aria-labelledby="account-dropdown">
+        <div ng-repeat="account in $ctrl.accounts"
+             class="dropdown-item d-flex align-items-center justify-content-between p-2">
+            <a role="menuitem"
+               class="text-body w-100"
+               ng-click="$ctrl.switch(account)">
+                <i class="account-icon fa fa-user-circle fa-2x fa-fw"
+                   ng-class="{'active': $ctrl.currentAccount.id === account.id}"
+                   aria-hidden="true">
+                </i>
+                <div class="d-inline-block small">
+                    <div class="font-weight-bold" ng-bind="account.name"></div>
+                    <div class="small text-muted" ng-bind="account.role.name"></div>
                 </div>
-            </div>
-        </li>
-        <li ng-if-start="$ctrl.accounts.length < $ctrl.accountLimit"
-            class="divider"></li>
-        <li ng-if-end>
-            <div class="dropdown-menu-item pl-2 pr-3 py-2">
-                <a role="menuitem"
-                   class="d-flex align-items-center"
-                   href="{{ 'account/login' | absolute_url }}">
-                    <i class="add-icon fa fa-plus-circle fa-2x fa-fw"
+            </a>
+            <div class="d-inline-block px-2">
+                <button class="btn btn-xs btn-white btn-square btn-logout shadow-sm"
+                        ng-click="$ctrl.logout(account.id, '{{ 'account/logout' | absolute_url }}')">
+                    <i class="fa fa-sign-out"
                        aria-hidden="true"></i>
-                    <span>{{ 'layout.customer.add_account' | t }}</span>
-                </a>
+                </button>
             </div>
-        </li>
-    </ul>
+        </div>
+        <div ng-if-start="$ctrl.accounts.length < $ctrl.accountLimit"
+             class="dropdown-divider my-1"></div>
+        <div ng-if-end
+             class="dropdown-item p-2">
+            <a role="menuitem"
+               class="d-flex align-items-center"
+               href="{{ 'account/login' | absolute_url }}">
+                <i class="add-icon fa fa-plus-circle fa-2x fa-fw"
+                   aria-hidden="true"></i>
+                <span>{{ 'layout.customer.add_account' | t }}</span>
+            </a>
+        </div>
+    </div>
 </div>

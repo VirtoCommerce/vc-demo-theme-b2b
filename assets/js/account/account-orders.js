@@ -1,14 +1,10 @@
 angular.module('storefront.account')
     .component('vcAccountOrders', {
-        templateUrl: [ '$rootScope', function($rootScope) {
-            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders.tpl");
-        }],
+        templateUrl: "themes/assets/js/account/account-orders.tpl",
         controller: [function () {}]
     })
     .component('vcAccountOrdersList', {
-        templateUrl: [ '$rootScope', function($rootScope) {
-            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-orders-list.tpl");
-        }],
+        templateUrl: "themes/assets/js/account/account-orders-list.tpl",
         controller: ['accountApi',
         'loadingIndicatorService',
         '$window',
@@ -108,9 +104,7 @@ angular.module('storefront.account')
         }]
     })
     .component('vcAccountOrderDetail', {
-        templateUrl: [ '$rootScope', function($rootScope) {
-            return $rootScope.adjustTemplateUrl("themes/assets/js/account/account-order-detail.tpl");
-        }],
+        templateUrl: "themes/assets/js/account/account-order-detail.tpl",
         require: {
             accountManager: '^vcAccountManager'
         },
