@@ -2,5 +2,6 @@ a {
   &:not(.btn),
   &.btn.btn-link {
     cursor: pointer;
+    font-weight: 500;
   }
 }
