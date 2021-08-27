@@ -375,8 +375,8 @@
             <tbody>
                 <tr ng-repeat="address in addresses" class="d-flex align-items-center">
                     <td class="col-2 border-0">
-                        <span ng-if="address.firstName" ng-bind="address.firstName"></span>
-                        <span ng-if="address.lastName" ng-bind="address.lastName"></span>
+                        <span ng-if="address.firstName" ng-bind="address.firstName" class="text-break text-wrap"></span>
+                        <span ng-if="address.lastName" ng-bind="address.lastName" class="text-break text-wrap"></span>
                     </td>
                     <td class="col-2 border-0">
                         <span ng-bind="address.line1"></span><span ng-if="address.line2">
