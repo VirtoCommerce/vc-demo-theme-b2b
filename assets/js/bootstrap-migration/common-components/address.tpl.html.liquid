@@ -6,11 +6,11 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-6">
-                    <input ng-model="$ctrl.address.firstName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.firstName.$error.required}" name="firstName" type="text" required placeholder="{{ 'checkout.address.first_name' | t }}" />
+                    <input ng-model="$ctrl.address.firstName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.firstName.$error.required}" name="firstName" type="text" maxlength="64" required placeholder="{{ 'checkout.address.first_name' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.firstName.$error.required">{{ 'common.required' | t }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input ng-model="$ctrl.address.lastName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.lastName.$error.required}" name="lastName" type="text" required placeholder="{{ 'checkout.address.last_name' | t }}" />
+                    <input ng-model="$ctrl.address.lastName" class="form-control" ng-class="{'is-invalid': $ctrl.form.$submitted && $ctrl.form.lastName.$error.required}" name="lastName" type="text" maxlength="64" required placeholder="{{ 'checkout.address.last_name' | t }}" />
                     <span class="text-danger" ng-show="$ctrl.form.$submitted && $ctrl.form.lastName.$error.required">{{ 'common.required' | t }}</span>
                 </div>
             </div>
