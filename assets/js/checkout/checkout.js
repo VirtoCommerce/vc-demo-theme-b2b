@@ -460,18 +460,16 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
 
             $scope.getCustomerDefaults = function () {
                 if ($scope.customer.id) {
-                    const customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id));
-                    if (customerDefaults) {
-                        if (customerDefaults.deliveryMethod && Object.keys($scope.checkout.deliveryMethod).length === 0) {
-                            $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
-                        }
-                        if (customerDefaults.paymentMethod && Object.keys($scope.checkout.paymentMethod).length === 0) {
-                            $scope.selectPaymentMethod(customerDefaults.paymentMethod);
-                        }
-                        if (customerDefaults.shippingMethod && Object.keys($scope.checkout.shipmentMethod).length === 0) {
-                            $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
-                            $scope.selectShippingMethod(customerDefaults.shippingMethod);
-                        }
+                    const customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id)) || {};
+                    if (customerDefaults.deliveryMethod && Object.keys($scope.checkout.deliveryMethod).length === 0) {
+                        $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
+                    }
+                    if (customerDefaults.paymentMethod && Object.keys($scope.checkout.paymentMethod).length === 0) {
+                        $scope.selectPaymentMethod(customerDefaults.paymentMethod);
+                    }
+                    if (customerDefaults.shippingMethod && Object.keys($scope.checkout.shipmentMethod).length === 0) {
+                        $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
+                        $scope.selectShippingMethod(customerDefaults.shippingMethod);
                     }
                 }
             };
