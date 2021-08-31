@@ -365,24 +365,6 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                 }
             };
 
-            $scope.getCustomerDefaults = function() {
-                if ($scope.customer.id) {
-                    var customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id));
-                    if (customerDefaults) {
-                        if (customerDefaults.deliveryMethod) {
-                            $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
-                        }
-                        if (customerDefaults.paymentMethod) {
-                            $scope.selectPaymentMethod(customerDefaults.paymentMethod);
-                        }
-                        if (customerDefaults.shippingMethod && !$scope.checkout.shipmentMethod) {
-                            $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
-                            $scope.selectShippingMethod(customerDefaults.shippingMethod);
-                        }
-                    }
-                }
-            };
-
             $scope.applyCoupon = function (coupon) {
                 wrapLoading(function() {
                     return validateCoupon(coupon).then(function (result) {
@@ -476,8 +458,23 @@ angular.module(moduleName, ['credit-cards', 'angular.filter'])
                     });
             }
 
-            $scope.initialize = function () {
+            $scope.getCustomerDefaults = function () {
+                if ($scope.customer.id) {
+                    const customerDefaults = JSON.parse(localStorage.getItem($scope.customer.id));
+                    if (customerDefaults.deliveryMethod && Object.keys($scope.checkout.deliveryMethod).length === 0) {
+                        $scope.checkout.deliveryMethod.type = customerDefaults.deliveryMethod;
+                    }
+                    if (customerDefaults.paymentMethod && Object.keys($scope.checkout.paymentMethod).length === 0) {
+                        $scope.selectPaymentMethod(customerDefaults.paymentMethod);
+                    }
+                    if (customerDefaults.shippingMethod && Object.keys($scope.checkout.shipmentMethod).length === 0) {
+                        $scope.checkout.shipmentMethod = customerDefaults.shippingMethod;
+                        $scope.selectShippingMethod(customerDefaults.shippingMethod);
+                    }
+                }
+            };
 
+            $scope.initialize = function () {
                 $scope.reloadCart()
                 .then(function() {
                     // Workaround: we need to update cart and then reload it again to run cart recalculations
