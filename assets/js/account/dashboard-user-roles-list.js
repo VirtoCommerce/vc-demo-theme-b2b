@@ -12,11 +12,13 @@ angular.module('storefront.account')
                         take: 100
                     }).then(function (response) {
                         $ctrl.userEntries = response.data.results;
-                        const roleRecords = $ctrl.userEntries.map(x => ({
-                            id: x.role.id,
-                            name: x.role.name,
-                            description: x.role.description
-                        }));
+                        const roleRecords = $ctrl.userEntries
+                            .filter(entry => entry.role)
+                            .map(entryWithRole => ({
+                                id: entryWithRole.role.id || "",
+                                description: entryWithRole.role.description || "",
+                                name: entryWithRole.role.name || "",
+                            }));
                         $ctrl.distinctRoles = unique(roleRecords, 'id');
                     });
                 });
