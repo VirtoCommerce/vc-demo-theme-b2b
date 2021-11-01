@@ -77,6 +77,6 @@
     "url": "https://github.com/VirtoCommerce/vc-b2b-theme/issues"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install"
+    "postinstall": "bower install"
   }
 }
