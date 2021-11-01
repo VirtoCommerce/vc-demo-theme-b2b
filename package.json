@@ -68,15 +68,15 @@
     "node": ">=10.0.0"
   },
   "license": "MIT",
-  "homepage": "https://github.com/VirtoCommerce/vc-b2b-theme/",
+  "homepage": "https://github.com/VirtoCommerce/vc-demo-theme-b2b",
   "repository": {
     "type": "git",
-    "url": "https://github.com/VirtoCommerce/vc-b2b-theme.git"
+    "url": "https://github.com/VirtoCommerce/vc-demo-theme-b2b.git"
   },
   "bugs": {
-    "url": "https://github.com/VirtoCommerce/vc-b2b-theme/issues"
+    "url": "https://github.com/VirtoCommerce/vc-demo-theme-b2b/issues"
   },
   "scripts": {
-    "postinstall": "node_modules/.bin/bower install"
+    "postinstall": "bower install"
   }
 }
