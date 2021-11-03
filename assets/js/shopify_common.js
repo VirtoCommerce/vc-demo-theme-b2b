@@ -1,4 +1,4 @@
-/* 
+/*
  * Shopify Common JS
  *
  */
@@ -33,11 +33,11 @@ Shopify.postLink = function(path, options) {
   options = options || {};
   var method = options['method'] || 'post';
   var params = options['parameters'] || {};
-  
+
   var form = document.createElement("form");
   form.setAttribute("method", method);
   form.setAttribute("action", path);
-  
+
   for(var key in params) {
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("type", "hidden");
@@ -47,7 +47,7 @@ Shopify.postLink = function(path, options) {
   }
   document.body.appendChild(form);
   form.submit();
-  document.body.removeChild(form);      
+  document.body.removeChild(form);
 };
 
 /* CountryProvinceSelector
@@ -62,7 +62,7 @@ Shopify.postLink = function(path, options) {
  *   <select id="province_selector" name="province" data-default="Ontario">
  *     <option value="Ontario">Ontario</option>
  *     ...
- *   </select> 
+ *   </select>
  */
 Shopify.CountryProvinceSelector = function(country_domid, province_domid, options) {
   this.countryEl         = document.getElementById(country_domid);
@@ -70,25 +70,25 @@ Shopify.CountryProvinceSelector = function(country_domid, province_domid, option
   this.provinceContainer = document.getElementById(options['hideElement'] || province_domid);
 
   Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler,this));
-  
+
   this.initCountry();
   this.initProvince();
 };
 
 Shopify.CountryProvinceSelector.prototype = {
   initCountry: function() {
-    var value = this.countryEl.getAttribute('data-default');    
-    Shopify.setSelectorByValue(this.countryEl, value);    
+    var value = this.countryEl.getAttribute('data-default');
+    Shopify.setSelectorByValue(this.countryEl, value);
     this.countryHandler();
   },
-  
+
   initProvince: function() {
     var value = this.provinceEl.getAttribute('data-default');
     if (value && this.provinceEl.options.length > 0) {
       Shopify.setSelectorByValue(this.provinceEl, value);
     }
   },
-  
+
   countryHandler: function(e) {
     var opt       = this.countryEl.options[this.countryEl.selectedIndex];
     var raw       = opt.getAttribute('data-provinces');
@@ -102,19 +102,19 @@ Shopify.CountryProvinceSelector.prototype = {
       this.provinceContainer.style.display = "";
     }
   },
-  
+
   clearOptions: function(selector) {
     while (selector.firstChild) {
       selector.removeChild(selector.firstChild);
     }
   },
-  
+
   setOptions: function(selector, values) {
-    for (var i = 0, count = values.length; i < values.length; i++) {
+    for (var i = 0; i < values.length; i++) {
       var opt = document.createElement('option');
       opt.value = values[i];
       opt.innerHTML = values[i];
-      selector.appendChild(opt);        
-    }    
+      selector.appendChild(opt);
+    }
   }
 };
