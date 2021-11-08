@@ -5,7 +5,7 @@
 
 {% assign search_results = product_search_result.products %}
 
-<main class="main flex-grow-1" ng role="main">
+<main class="main flex-grow-1" role="main">
     <article class="container">
         {% if search and search_results.empty? == false %}
             {% paginator = search_results | paginate settings.product_list_capacity %}
