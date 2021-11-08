@@ -30,6 +30,7 @@
       ng-init="baseUrl='{{ '' | absolute_url }}'"
       data-target="#toc"
       data-spy="scroll">
+    {% include 'third-party/google-tag-manager-body' %}
     {% include 'bootstrap-migration/dialogs/recently-added-cart-item' %}
     {% include 'bootstrap-migration/dialogs/send-product-to-email' %}
     {% include 'bootstrap-migration/dialogs/select-fulfillment-center' %}
