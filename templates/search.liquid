@@ -1,43 +1,37 @@
+{% layout 'bootstrap-migration' %}
+
 {% assign respond_js_secret_key = shop.url | md5 %}
 {% assign search = current_product_search_criteria %}
 
 {% assign search_results = product_search_result.products %}
 
-<main class="main" role="main">
+<main class="main flex-grow-1" ng role="main">
     <article class="container">
         {% if search and search_results.empty? == false %}
             {% paginator = search_results | paginate settings.product_list_capacity %}
             {% if search_results.size == 0 %}
-                <h2 class="text-center">{{ 'general.search.no_results_html' | t: search.keyword }}</h2>
+                <div class="pb-0 my-5">
+                    <h2 class="text-center">{{ 'general.search.no_results_html' | t: search.keyword }}</h2>
+                </div>
             {% else %}
-                <div class="page-header">
+                <div class="pb-0 my-5">
                     <h2 class="text-center">{{ 'general.search.results_for_html' | t: search.keyword }}</h2>
                 </div>
                 <div class="row">
                     {% for item in search_results %}
                         {% assign product = item %}
-                        {% assign col_size = "col-xs-12 col-sm-6 col-md-4 col-lg-3" %}
-                        {% assign hide_quantity = true %}
-                        {% assign product_list_capacity = settings.product_list_capacity %}
-                        {% include 'product/grid-item' %}
+                        {% include 'bootstrap-migration/product/grid-item' %}
                     {% endfor %}
                 </div>
             {% endif %}
             {% if paginator.pages > 1 %}
-                <div class="text-center">
-                    {% include 'shared/pagination' %}
+                <div class="d-flex justify-content-center">
+                    {% include 'bootstrap-migration/shared/pagination' %}
                 </div>
             {% endif %}
         {% else %}
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="text-center">{{ 'general.search.no_results_html' | t: search.keyword }}</h2>
-                    {% comment %}
-                        <h2 class="text-center">{{ 'general.search.title' | t }}</h2>
-                        {% assign form_class = "text-center" %}
-                        {% include 'shared/search-bar' %}
-                    {% endcomment %}
-                </div>
+            <div class="pb-0 my-5">
+                <h2 class="text-center">{{ 'general.search.no_results_html' | t: search.keyword }}</h2>
             </div>
         {% endif %}
     </article>
