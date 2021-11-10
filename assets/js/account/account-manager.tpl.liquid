@@ -28,11 +28,6 @@
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
                             <a class="nav-link text-dark text-condensed" ui-sref="lists.myLists">{{ 'customer.account.menu_label.wishlist' | t }}</a>
                         </li>
-                        {% if shop.quotes_enabled %}
-                        <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
-                            <a class="nav-link text-dark text-condensed" href="{{ 'account#/quotes' | absolute_url }}">{{ 'customer.account.menu_label.quotes' | t }}</a>
-                        </li>
-                        {% endif %}
                         <li class="nav-item" ui-sref-active="border-left border-primary border-3 bg-gray-200 item-active">
                             <a class="nav-link text-dark text-condensed" ui-sref="checkoutDefaults">Checkout Defaults</a>
                         </li>

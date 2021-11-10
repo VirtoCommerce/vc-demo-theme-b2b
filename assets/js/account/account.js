@@ -44,32 +44,6 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
             }
         }
 
-        var subscriptionsSate = {
-            abstract: true,
-            name: 'subscriptions',
-            url: '/subscriptions',
-            component: 'vcAccountSubscriptions'
-        }
-
-
-        var subscriptionsListSate = {
-            name: 'subscriptions.list',
-            url: '/?{pageNumber: int}',
-            component: 'vcAccountSubscriptionsList',
-            params: {
-                pageNumber: {value: null}
-            }
-        }
-
-        var subscriptionsDetailSate = {
-            name: 'subscriptions.detail',
-            url: '/{number}?pageNumber',
-            component: 'vcAccountSubscriptionsDetail',
-            params: {
-                pageNumber: {value: null}
-            }
-        }
-
         var companyInfoSate = {
             name: 'companyInfo',
             url: '/companyInfo',
@@ -152,9 +126,6 @@ angular.module(moduleName, ['ngResource', /*'credit-cards', */'pascalprecht.tran
         $stateProvider.state(ordersSate);
         $stateProvider.state(ordersListSate);
         $stateProvider.state(ordersDetailSate);
-        $stateProvider.state(subscriptionsSate);
-        $stateProvider.state(subscriptionsDetailSate);
-        $stateProvider.state(subscriptionsListSate);
         $stateProvider.state(companyInfoSate);
         $stateProvider.state(membersSate);
         $stateProvider.state(membersListSate);

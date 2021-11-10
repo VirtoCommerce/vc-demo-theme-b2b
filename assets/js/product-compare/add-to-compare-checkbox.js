@@ -35,18 +35,6 @@ function addToCompareCheckboxController($rootScope, $scope, compareProductServic
     });
 }
 
-var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('addToCompareCheckbox', {
-    templateUrl: "themes/assets/js/product-compare/add-to-compare-checkbox.tpl.html",
-    bindings: {
-        productId: '<',
-        buttonType: '<',
-        customClass: '<',
-        buttonWidth: '<'
-    },
-    controller: addToCompareCheckboxController
-});
-
 storefrontApp.component('addToCompareCheckboxMigration', {
     templateUrl: "themes/assets/js/bootstrap-migration/product-compare/add-to-compare-checkbox.tpl.html",
     bindings: {

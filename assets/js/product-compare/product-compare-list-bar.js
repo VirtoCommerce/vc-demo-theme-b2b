@@ -65,13 +65,6 @@ function productCompareListController(compareProductService, catalogService, $sc
   }
 }
 
-
-var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('productCompareListBar', {
-  templateUrl: "themes/assets/js/product-compare/product-compare-list-bar.tpl.html",
-  controller: productCompareListController
-});
-
 storefrontApp.component('productCompareListBarMigration', {
   templateUrl: "themes/assets/js/bootstrap-migration/product-compare/product-compare-list-bar.tpl.html",
   controller: productCompareListController
