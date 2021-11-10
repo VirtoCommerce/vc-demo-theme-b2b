@@ -1,12 +1,12 @@
 {% include 'product/type/common/product-title-info' %}
-<div class="row flexible" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
-    <div class="col-md-3">
+<div class="row" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
+    <div class="col-md-3 mb-3 mb-md-0">
         {% include 'product/image' %}
         {% include 'product/compare' %}
         {% include 'product/product-compare-list-bar' %}
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3 mb-md-0">
         {% if product.properties.size > 0 %}
             {% include 'product/type/common/product-properties' %}
             {% include 'product/type/common/product-description' %}
@@ -14,59 +14,42 @@
         {% include 'product/product-configuration-list' %}
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3 mb-md-0">
 
-        <div class="panel panel-default price-panel">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-md-12">
                         <span class="h4">Price & delivery</span>
                     </div>
                 </div>
             </div>
-            <div class="panel-body">
-                <div class="price-block">
-
-                    <dl class="dl-horizontal">
-                        <dt class="text-normal overflow-visible">
-                            <span class="product-pull-left">
-                                <span class="text-default-color">Default price</span>
-                            </span>
+            <div class="card-body px-0">
+                <div class="border-bottom px-3 pb-3 mb-3">
+                    <dl class="d-flex justify-content-between mb-0">
+                        <dt class="font-weight-normal fs-13">
+                            <span>Default price</span>
                         </dt>
-
-                        <dd>
-                            <span class="product-pull-right text-normal text-default-color">
-                                <span ng-bind="getDefaultPrice()"></span>
-                            </span>
-                        </dd>
-
-                        <dt class="text-normal overflow-visible">
-                            <span class="product-pull-left">
-                                <span class="text-default-color">Custom changes</span>
-                            </span>
-                        </dt>
-
-                        <dd>
-                            <span class="product-pull-right text-normal text-default-color">
-                                <span ng-bind="getCustomChangesTotal()"></span>
-                            </span>
-                        </dd>
-
-                        <br>
-
-                        <dt class="text-normal overflow-visible">
-                            <span class="product-pull-left">
-                                <span class="text-default-color text-bold">Total</span>
-                            </span>
-                        </dt>
-
-                        <dd>
-                            <span class="product-pull-right">
-                                <span ng-bind="getCurrentTotal()"></span>
-                            </span>
+                        <dd class="mb-0">
+                            <span ng-bind="getDefaultPrice()"></span>
                         </dd>
                     </dl>
-
+                    <dl class="d-flex justify-content-between mb-3">
+                        <dt class="font-weight-normal fs-13">
+                            <span>Custom changes</span>
+                        </dt>
+                        <dd class="mb-0">
+                            <span ng-bind="getCustomChangesTotal()"></span>
+                        </dd>
+                    </dl>
+                    <dl class="d-flex justify-content-between mb-0">
+                        <dt class="fs-13">
+                            <span>Total</span>
+                        </dt>
+                        <dd class="mb-0">
+                            <span class="text-dark-green font-weight-bold" ng-bind="getCurrentTotal()"></span>
+                        </dd>
+                    </dl>
                 </div>
 
                 {% include 'product/type/common/product-delivery' %}

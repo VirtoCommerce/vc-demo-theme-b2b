@@ -1,5 +1,5 @@
 ﻿{% if show_label %}
-    <label>{{ 'products.product.quantity' | t }}</label>
+    <label class="{% if label_bold %}font-weight-bold{% endif %}">{{ 'products.product.quantity' | t }}</label>
 {% endif %}
 <div class="input-group">
         <input type="text" class="form-control"
@@ -7,8 +7,8 @@
         ng-init="product['{{product.id}}'].quantity = 1; unavailable = {{unavailable}} || {{sold_out}} "
         ng-model="product['{{product.id}}'].quantity"
         >
-        <span class="input-group-btn">
-            <button class="btn btn-alt btn-primary"
+        <span class="input-group-append">
+            <button class="btn btn-outline-primary border-1 rounded-0"
 
                     title="{{ 'products.general.add_to_cart' | t }}"
                     ng-click="addProductToCartById('{{ product.id }}', product['{{product.id}}'].quantity, $event)"

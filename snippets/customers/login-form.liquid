@@ -1,51 +1,49 @@
-<form accept-charset="UTF-8" action="{{ loginUrl }}" method="post" id="customer_login" name="customer_login">
+<form accept-charset="UTF-8"
+      action="{{ loginUrl }}"
+      method="post"
+      id="customer_login"
+      name="customer_login"
+      ng-controller="loginFormController">
     {% include 'form-errors-custom' %}
     <fieldset>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group mt-0 mb-0">
-                        <input class="form-control" ng-model="username" name="customer[user_name]" required vc-flying-placeholder="{{ 'customer.sign_in.user_name' | t }}"/>
-                        <span class="text-danger" ng-show="!customer_login['customer[user_name]'].$pristine && customer_login['customer[user_name]'].$error.required">{{ 'common.required' | t }}</span>
-
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group mt-0">
+                    <input class="form-control" ng-model="username" name="customer[user_name]" required placeholder="{{ 'customer.sign_in.user_name' | t }}" />
+                    <span class="text-danger" ng-show="!customer_login['customer[user_name]'].$pristine && customer_login['customer[user_name]'].$error.required">{{ 'common.required' | t }}</span>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <input class="form-control" ng-model="password" type="password" name="customer[password]" required vc-flying-placeholder="{{ 'customer.sign_in.password' | t }}" />
-                        <span class="text-danger" ng-show="!customer_login['customer[password]'].$pristine && customer_login['customer[password]'].$error.required">{{ 'common.required' | t }}</span>
-                    </div>
+            </div>
+            <div class="col-md-12">
+                <div class="mb-2">
+                    <input class="form-control" ng-model="password" type="password" name="customer[password]" required placeholder="{{ 'customer.sign_in.password' | t }}" />
+                    <span class="text-danger" ng-show="!customer_login['customer[password]'].$pristine && customer_login['customer[password]'].$error.required">{{ 'common.required' | t }}</span>
                 </div>
             </div>
         </div>
 
         {% if template != 'customers/login' %}
-        <div class="form-group">
+        <div class="mb-2">
             {% include 'customers/forgot-links' %}
         </div>
         {% endif %}
 
         {% if template != 'customers/login' %}
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-6 col-md-5">
+                <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.sign_in.sign_in' | t }}">
+            </div>
+            <div class="col-6 col-md-5">
+                {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-outline-primary btn-block" href' }}
+            </div>
+        </div>
         {% else %}
-                <div class="form-group">
+        <div class="form-group mb-5">
+            {% include 'customers/forgot-links' %}
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary w-50" value="{{ 'customer.sign_in.continue' | t }}">
+        </div>
         {% endif %}
-                     <input type="submit" class="btn btn-primary btn-block" value="{{ 'customer.sign_in.sign_in' | t }}">
-            {% if template != 'customers/login' %}
-                </div>
-            {% endif %}
-            {% if template != 'customers/login' %}
-                <div class="col-md-5">
-                    {{ 'layout.customer.register' | t | customer_register_link | replace: 'a href', 'a class="btn btn-alt btn-primary" href' }}
-                </div>
-            {% endif %}
-            </div>
-            {% if template == 'customers/login' %}
-            <div class="form-group">
-                {% include 'customers/forgot-links' %}
-            </div>
-            {% endif %}
     </fieldset>
     <input name="RememberMe" type="hidden" value="true" />
     {{ antiforgery }}

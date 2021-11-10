@@ -1,13 +1,17 @@
-﻿<nav class="navbar navbar-inverse-light navbar-static-top" role="navigation">
+<nav class="navbar-dark bg-gray-900" role="navigation">
     <div class="container">
-        {% include 'main/header/nav/top-level-collections' %}
-        <ul class="nav navbar-nav navbar-right">
-            {% if template != 'bulk-order' %}
-                {% assign dropdown = true %}
-                {% include 'main/header/nav/bulk-order-form' %}
-            {% endif %}
-            {% include 'main/header/shared/cart' %}
-        </ul>
-        {% include 'shared/search-bar' %}
+        <div class="row no-gutters">
+            {% include 'main/header/nav/top-level-collections' %}
+            <div class="flex-grow-1">
+                {% include 'shared/search-bar' %}
+            </div>
+            <ul class="nav">
+                {% if template != 'bulk-order' %}
+                    {% assign dropdown = true %}
+                    {% include 'main/header/nav/bulk-order-form' %}
+                {% endif %}
+                {% include 'main/header/shared/cart' %}
+            </ul>
+        </div>
     </div>
 </nav>

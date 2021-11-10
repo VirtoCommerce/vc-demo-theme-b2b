@@ -1,24 +1,22 @@
-﻿<nav class="navbar navbar-inverse navbar-fixed-top visible-xs-block visible-sm-block" role="navigation">
+﻿<nav class="navbar navbar-dark bg-dark d-block d-md-none p-0" role="navigation" aria-label="Header">
     <div class="container-fluid">
-        <div class="navbar-header" itemscope itemtype="http://schema.org/Organization">
+        <div itemscope itemtype="http://schema.org/Organization">
             {% include 'main/header/links/brand' %}
         </div>
-        <ul class="nav navbar-nav navbar-right" ng-cloak>
-            <li ng-if="customer && !customer.isRegisteredUser">
-                {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase text-condensed" href' | replace: '">', '"><i class="fa fa-sign-in"></i>&ensp;' }}
+        <ul class="nav" ng-cloak>
+            <li ng-if="customer && !customer.isRegisteredUser" class="nav-item">
+                {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase nav-link p-3 text-condensed text-white" href' | replace: '">', '"><i class="fa fa-sign-in" aria-hidden="true"></i>&ensp;' }}
             </li>
-            <li>
-            </li>
-            <li class="dropdown" uib-dropdown ng-if="customer && customer.isRegisteredUser">
-                <a id="account-dropdown" class="text-uppercase text-condensed" href="" uib-dropdown-toggle><i class="fa fa-user"></i>&ensp;{{ 'layout.customer.account' | t }}&ensp;<i class="dropdown-ico fa fa-angle-down"></i></a>
-                <ul class="dropdown-menu dropdown-menu-left" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
-                    <li>
-                        <a href="{{ 'account' | absolute_url }}">
-                            <i class="fa fa-user"></i>&ensp;{{ 'customer.account.title' | t }}
+            <li class="dropdown nav-item" uib-dropdown ng-if="customer && customer.isRegisteredUser">
+                <a id="account-dropdown" class="text-uppercase nav-link p-3 text-condensed text-white" href="" uib-dropdown-toggle><i class="fa fa-user text-primary" aria-hidden="true"></i>&ensp;{{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
+                    <li class="dropdown-item">
+                        <a href="{{ 'account' | absolute_url }}" class="text-body">
+                            <i class="fa fa-user" aria-hidden="true"></i>&ensp;{{ 'customer.account.title' | t }}
                         </a>
                     </li>
-                    <li>
-                        {{ 'layout.customer.log_out' | t | customer_logout_link | replace: '">', '"><i class="fa fa-sign-out"></i>&ensp;' }}
+                    <li class="dropdown-item">
+                        {{ 'layout.customer.log_out' | t | customer_logout_link | replace: '">', '" class="text-body"><i class="fa fa-sign-out" aria-hidden="true"></i>&ensp;' }}
                     </li>
                 </ul>
             </li>
@@ -26,10 +24,8 @@
         </ul>
     </div>
 </nav>
-<nav class="navbar navbar-inverse-light navbar-fixed-top visible-xs-block visible-sm-block" role="navigation">
-    <div class="container-fluid">
-        <div class="row">
-            {% include 'shared/search-bar' %}
-        </div>
+<nav class="navbar d-block d-md-none p-0" role="navigation" aria-label="Search bar">
+    <div class="flex-grow-1">
+        {% include 'shared/search-bar' %}
     </div>
 </nav>

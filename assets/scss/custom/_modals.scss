@@ -1,6 +1,0 @@
-// Prevent pseudo-elements from impacting the flex calculation
-
-.modal-footer:after,
-.modal-footer:before {
-    display: none;
-}

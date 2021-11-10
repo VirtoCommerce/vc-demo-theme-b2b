@@ -1,17 +1,5 @@
 ﻿var storefrontApp = angular.module('storefrontApp');
 
-storefrontApp.directive('vcContentPlace', ['$compile', 'marketingService', function ($compile, marketingService) {
-    return {
-        restrict: 'E',
-        link: function (scope, element, attrs) {
-            marketingService.getDynamicContent(attrs.id).then(function (response) {
-                element.html($compile(response.data)(scope));
-            });
-        },
-        replace: true
-    }
-}]);
-
 storefrontApp.directive('vcEnterSource', ['$timeout', function ($timeout) {
     return {
         restrict: "A",

@@ -1,10 +1,9 @@
-{% layout 'bootstrap-migration' %}
 <main class="container pt-4 pb-5 flex-grow-1" role="main">
     <div class="row justify-content-md-center">
         <div class="col-md-8">
             <h1>{{ 'customer.invite.title' | t }}</h1>
             <form accept-charset="UTF-8" action="{{ '~/account/confirminvitation' | absolute_url }}" method="post" id="confirm_invitation" name="confirm_invitation">
-                {% include 'bootstrap-migration/form-errors-custom' %}
+                {% include 'form-errors-custom' %}
                 <input type="hidden" value="{{ form.email }}" name="customer[email]">
                 <input type="hidden" value="{{ form.organization_id }}" name="customer[organization_id]">
                 <input type="hidden" value="{{ form.token }}" name="customer[token]">

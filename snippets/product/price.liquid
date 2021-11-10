@@ -1,17 +1,17 @@
 
-<dl class="dl-horizontal">
-    <dt class="text-normal">
-        <span class="product-pull-left">
+<div class="d-flex justify-content-between {% if column %}flex-column mb-2{% endif %}">
+    <div class="font-weight-bold">
+        <span class="text-helvetica {% if variation_price %}font-weight-normal text-uppercase text-muted{% endif %}">
             {% if customer %}
                 {{ 'products.price.private' | t }}
             {% else %}
                 {{ 'products.price.public' | t }}
             {% endif %}
         </span>
-    </dt>
+    </div>
 
-    <dd>
-        <span class="product-pull-right">
+    <div>
+        <span class="{% if variation_price != true %}text-dark-green{% endif %}">
             {% if variant != null %}
                 {% assign productOrVariant = variant %}
             {% else %}
@@ -28,8 +28,9 @@
                 {% assign price_name = 'actualPrice' %}
                 {% include 'product/price/dynamic' %}
             {% endif %}
-            <!-- TODO: Replace with product unit -->
-            <span class="price-unit">/ each</span>
         </span>
-    </dd>
-</dl>
+        {% if show_each %}
+            <span class="font-weight-normal">/ each</span>
+        {% endif %}
+    </div>
+</div>

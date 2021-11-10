@@ -1,6 +1,0 @@
-{% if product.product_type == "Configurable" %}
-<div class="configurable">
-    <img class="img-responsive configure-icon" src="{{ 'customize.svg' | asset_url }}" />
-    <a class="text-truncate" href="{{ product_url | append: '?resp_group=' | append: response_group }}">Configure</a>
-</div>
-{% endif %}

@@ -1,54 +1,26 @@
-<aside class="panel panel-default" ng-if="customer && customer.isRegisteredUser">
-    <div class="panel-body">
-        <h4>{% raw %}{{ customer.firstName }} {{ customer.lastName }}{% endraw %}</h4>
-        {% include 'customers/badge' %}
+<aside class="card mb-3" ng-if="customer && !customer.isRegisteredUser" aria-label="Login form">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.sign_in.title' | t }}</span>
     </div>
-</aside>
-<aside class="panel panel-default login-form" ng-if="customer && !customer.isRegisteredUser">
-        <div class="panel-heading">
-            <span class="h4">{{ 'customer.sign_in.title' | t }}</span>
-        </div>
-
-    <div class="panel-body">
-
+    <div class="card-body">
         {% capture loginUrl %} {{ '~/account/login' | absolute_url }} {% endcapture %}
         {% include 'customers/login-form' %}
     </div>
 </aside>
-<aside class="panel">
-    <div class="panel-body credentials-block">
-        <img src="{{ 'book.svg' | asset_url }}" />
-        <p class="margin-0 credentials-block-text">Please <a class="credentials-block-link" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
+<aside class="card mb-3" aria-label="Login credentials link">
+    <div class="card-body d-flex justify-content-around">
+        <img src="{{ 'book.svg' | asset_url }}" alt=""/>
+        <p class="mb-0 ml-3">Please <a class="font-weight-bold" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
     </div>
 </aside>
-{% assign found = false %}
-{% for blog in blogs %}
-    {% for article in blog.articles %}
-        {% assign found = article.is_sticked %}
-        {% if found %}
-            <aside class="thumbnail">
-                <figure>
-                    <img src="{{ article.image_url }}" class="img-responsive">
-                    <figcaption class="caption">
-                        <h4 class="text-center">{{ article.title }}</h4>
-                        <a href="{{ article.url }}" class="btn btn-alt btn-lg btn-block">{{ 'blogs.featured.learn_more' | t }}</a>
-                    </figcaption>
-                </figure>
-            </aside>
-            {% break %}
-        {% endif %}
-    {% endfor %}
-    {% if found %}{% break %}{% endif %}
-{% endfor %}
 {% if settings.footer_newsletter_enable %}
-
-    <aside class="panel panel-default subscribe-form">
-         <div class="panel-heading">
+    <aside class="card mb-3 mb-md-0" aria-label="Subscribe form">
+         <div class="card-header">
             <span class="h4">Subscribe now!</span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             {% include 'shared/newsletter-form' %}
         </div>
     </aside>
 {% endif %}
-<!-- TODO: Products you have recently viewed -->
+

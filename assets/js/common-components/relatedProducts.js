@@ -59,20 +59,8 @@ function vcRelatedProductsController(baseUrl, $timeout, $element, loader, recomm
         }
 }
 
-var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('vcRelatedProducts', {
-  templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
-  bindings: {
-    productIds: '<',
-    responsive: '<',
-    imageSize: '@',
-    onUpdate: '&'
-  },
-  controller: vcRelatedProductsController
-});
-
 storefrontApp.component('vcRelatedProductsMigration', {
-    templateUrl: "themes/assets/js/bootstrap-migration/common-components/relatedProducts.tpl.html",
+    templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
     bindings: {
       productIds: '<',
       responsive: '<',

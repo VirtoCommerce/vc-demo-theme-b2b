@@ -33,7 +33,7 @@ function searchBarController($scope, $q, catalogService) {
 
 var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('vcSearchBarMigration', {
-    templateUrl: "themes/assets/js/bootstrap-migration/common-components/searchBar.tpl.html",
+    templateUrl: "themes/assets/js/common-components/searchBar.tpl.html",
     bindings: {
         formClass: '<',
         placeholder: '<',

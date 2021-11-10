@@ -1,25 +1,25 @@
 {% if product.product_type == "Configurable" %}
-    <div class="panel panel-default" ng-if="productParts && productParts.length">
-        <div class="panel-heading">
+    <div class="card mt-3" ng-if="productParts && productParts.length">
+        <div class="card-header">
             <div class="row">
                 <div class="col-md-12">
                     <span class="h4">Customize your configuration</span>
                 </div>
             </div>
         </div>
-        <div ng-repeat="part in productParts" class="flex border-bottom-light panel-body align-items-center">
+        <div ng-repeat="part in productParts" ng-class="!$last && 'border-bottom border-gray-200'" class="card-body d-flex panel-body align-items-center">
             <div class="col-md-2">
-                <img ng-if="part.image.url" class="img-responsive" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
+                <img ng-if="part.image.url" class="img-fluid" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{% raw %}{{ part.image.url }}{% endraw %}" />
                 <img ng-if="!part.image.url" alt="{% raw %}{{ part.name }}{% endraw %}" ng-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
 
-            <div class="col-md-8 configuration-group">
-                <span class="group-name" ng-bind="part.name"></span>
+            <div class="col-md-8 d-flex flex-column">
+                <span class="font-weight-bold" ng-bind="part.name"></span>
                 <span ng-bind="getSelectedItem(part)"></span>
             </div>
 
-            <div class="col-md-2 configuration-group-btn p-0">
-                <button class="btn btn-sm btn-alt btn-primary" ng-click="changeGroupItem(part)">Change</button>
+            <div class="col-md-2 d-flex justify-content-end p-0">
+                <button class="btn btn-sm btn-outline-primary" ng-click="changeGroupItem(part)">Change</button>
             </div>
         </div>
     </div>
@@ -27,32 +27,32 @@
 
 
 <script id="storefront.select-configuration-item-dialog.tpl" type="text/ng-template">
-    <div class="modal-header configuration">
+    <div class="modal-header align-items-center bg-gray-modal">
         <span class="modal-title h4" ng-bind="getModalTitel()"></span>
-        <button class="close" type="button" ng-click="close()" title="close" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
+        <button class="close py-0 mt-n4" type="button" ng-click="close()" title="close" aria-label="{{ 'inventory.select_branch.close' | t }}"><span aria-hidden="true">&times;</span></button>
     </div>
-        <div class="flex align-items-center panel-body panel-striped" ng-repeat="item in dialogData.items">
-            <div class="col-xs-1">
-                <div class="radio-inline">
-                    <label>
-                        <input type="radio" ng-change="handleRadioClick(item.id)" ng-model="selectedId" ng-value="item.id" name="partName">
-                        <span class="switch"></span>
-                    </label>
+    <div class="modal-body" ng-class="$odd && 'bg-gray-modal'" ng-repeat="item in dialogData.items">
+        <div class="d-flex align-items-center">
+            <div class="col-1">
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="{% raw %}{{ item.id }}{% endraw %}" class="custom-control-input" ng-model="selectedId" ng-value="item.id" ng-change="handleRadioClick(item.id)" name="partName">
+                    <label class="custom-control-label" for="{% raw %}{{ item.id }}{% endraw %}"></label>
                 </div>
             </div>
-            <div class="col-xs-2">
-                <img ng-if="item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive border-none" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" />
-                <img ng-if="!item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-responsive border-none" ng-src="{{ 'no-image.svg' | asset_url }}" />
+            <div class="col-2">
+                <img ng-if="item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-fluid border-0 p-0" ng-src="{% raw %}{{ item.primaryImage.url }}{% endraw %}" />
+                <img ng-if="!item.primaryImage.url" alt="{% raw %}{{ item.name }}{% endraw %}" class="img-fluid border-0 p-0" ng-src="{{ 'no-image.svg' | asset_url }}" />
             </div>
-            <div class="col-xs-9 configuration-group">
-                <span ng-class="{ 'group-name': dialogData.selectedItemId == item.id }" ng-bind="item.name"></span>
-                <div class="configuration-item-info">
-                    <span class="price-title">Your price:</span> <span ng-bind="item.price.actualPrice.formattedAmount" class="price-value"></span>
+            <div class="col-9">
+                <span ng-class="{ 'font-weight-bold': dialogData.selectedItemId === item.id }" ng-bind="item.name"></span>
+                <div>
+                    <span class="fs-13 text-muted">Your price:</span> <span ng-bind="item.price.actualPrice.formattedAmount" class="font-weight-bold"></span>
                 </div>
             </div>
         </div>
-    <div class="modal-flex-footer">
-        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+    </div>
+    <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-dark" ng-click="close()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="save(selectedId)">Save</button>
     </div>
 </script>

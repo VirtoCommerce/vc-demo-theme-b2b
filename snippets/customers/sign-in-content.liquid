@@ -1,6 +1,6 @@
 <div class="col-sm-6 card-body d-flex flex-column justify-content-center p-4">
     {% capture loginUrl %} {{ requestUrl }} {% endcapture %}
-    {% include 'bootstrap-migration/customers/login-form' %}
+    {% include 'customers/login-form' %}
 </div>
 <div class="col-sm-6 login-card card-body d-flex flex-column justify-content-center p-4">
     <h2 class="text-white login-card-title mb-3">{{ 'customer.sign_in.registration_title' | t: shop.name }}</h2>

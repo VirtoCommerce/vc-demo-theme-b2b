@@ -1,12 +1,12 @@
-<div class="action-buttons">
-    <ul class="list-inline">
-        <li>
-            <add-to-list-button selected-variation="selectedVariation"></add-to-list-button>
+<div class="border-top pt-3">
+    <ul class="list-inline d-flex px-3 mb-0" ng-class="{'justify-content-around': !customer.isRegisteredUser, 'justify-content-between': customer.isRegisteredUser}">
+        <li ng-hide="!customer.isRegisteredUser">
+            <add-to-list-button-migration selected-variation="selectedVariation"></add-to-list-button-migration>
         </li>
         <li ng-controller="commonProductCardController">
-            <a class="envelope" href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')">Email</a>
+            <a class="text-condensed font-weight-bold" href="" ng-click="sendToEmail('{{ shop.id }}', '{{ product.id }}', '{{ product.url | absolute_url }}', '{{ current_language.culture_name }}')"><i class="fa fa-envelope mr-1 text-gray-300" aria-hidden="true"></i>Email</a>
         </li>
-        <li class="print">
+        <li>
             {% include 'shared/print' %}
         </li>
     </ul>

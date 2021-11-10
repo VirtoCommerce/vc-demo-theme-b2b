@@ -1,24 +1,24 @@
 {% unless template == 'index' or template == 'cart' %}
-    <ol class="breadcrumb pull-left" role="navigation" aria-label="breadcrumbs">
-        <li>
+    <ol class="pull-left breadcrumb" role="navigation" aria-label="breadcrumb">
+        <li class="breadcrumb-item">
             <a href="{{ "" | absolute_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t }}">{{ 'general.breadcrumbs.home' | t }}</a>
         </li>
         {% if template contains 'vendor' %}
-            <li class="active">{{ vendor.url }}</li>
+            <li class="breadcrumb-item active">{{ vendor.url }}</li>
         {% elsif template contains 'product' %}
             {% if collection %}
                 {% for parent in collection.parents %}
-                    <li>
+                    <li class="breadcrumb-item">
                         {% capture url %}{{ parent.handle | absolute_url }}{% endcapture %}
                         {{ parent.title | link_to: url }}
                     </li>
                 {% endfor %}
             {% endif %}
-            <li class="active">{{ product.title }}</li>
+            <li class="breadcrumb-item active">{{ product.title }}</li>
         {% elsif template contains 'collection' and collection.handle %}
             {% if current_tags %}
                 {% capture url %}{{ collection.handle | absolute_url }}{% endcapture %}
-                <li>{{ collection.title | link_to: url }}</li>
+                <li class="breadcrumb-item">{{ collection.title | link_to: url }}</li>
                 {% comment %}
                     Loop through tags and our custom tag array to strip out prepended tag categories if they exist.
                     snippet/advanced-tag-loop.liquid is required for this to work.
@@ -32,7 +32,7 @@
                     {% comment %}
                         Track whether the tag gets printed
                     {% endcomment %}
-                    <li class="active">
+                    <li class="breadcrumb-item active">
                         {% for cat_item in collection.all_tags %}
                             {% unless cat_item == '' %}
                                 {% if tag == cat_item %}
@@ -54,11 +54,11 @@
                 {% if collection %}
                     {% for parent in collection.parents %}
                         {% if for.last == true %}
-                            <li class="active">
+                            <li class="breadcrumb-item active">
                                 {{ parent.title }}
                             </li>
                         {% else %}
-                            <li>
+                            <li class="breadcrumb-item">
                                 {% capture url %}{{ parent.handle | absolute_url }}{% endcapture %}
                                 {{ parent.title | link_to: url }}
                             </li>
@@ -69,21 +69,21 @@
         {% elsif template == 'blog' %}
             {% if current_tags %}
                 {% assign blog_url = blog.url | absolute_url %}
-                <li>{{ blog.title | link_to: blog_url }}</li>
-                <li class="active">{{ current_tags | join: "&nbsp;+&nbsp;" }}</li>
+                <li class="breadcrumb-item">{{ blog.title | link_to: blog_url }}</li>
+                <li class="breadcrumb-item active">{{ current_tags | join: "&nbsp;+&nbsp;" }}</li>
             {% else %}
-                <li class="active">{{ blog.title }}</li>
+                <li class="breadcrumb-item active">{{ blog.title }}</li>
             {% endif %}
         {% elsif template == 'article' %}
             {% assign blog_url = blog.url | absolute_url %}
-            <li>{{ blog.title | link_to: blog_url }}</li>
-            <li class="active">{{ article.title }}</li>
+            <li class="breadcrumb-item">{{ blog.title | link_to: blog_url }}</li>
+            <li class="breadcrumb-item active">{{ article.title }}</li>
         {% elsif template contains 'page' %}
-            <li class="active">{{ page.title }}</li>
+            <li class="breadcrumb-item active">{{ page.title }}</li>
         {% elsif template contains 'fulfillment' %}
-            <li class="active">{{ fulfillment_center.name }}</li>    
+            <li class="breadcrumb-item active">{{ fulfillment_center.name }}</li>
         {% else %}
-            <li class="active">{{ page_title }}</li>
+            <li class="breadcrumb-item active">{{ page_title }}</li>
         {% endif %}
     </ol>
 {% endunless %}

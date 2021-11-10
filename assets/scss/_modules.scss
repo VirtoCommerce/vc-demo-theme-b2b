@@ -1,12 +1,4 @@
-@import "mixins/modules/_vc-labeled-input.scss";
-@import "modules/_vc-labeled-input.scss";
-@import "mixins/modules/_vc-flying-placeholder.scss";
-@import "modules/_vc-flying-placeholder.scss";
-@import "modules/_vc-compare.scss";
-@import "modules/_vc-checkout-line-item.scss";
-@import "modules/_loader.scss";
-@import "modules/_wizard.scss";
-@import "modules/_vc-alert.scss";
-@import "modules/_index-page.scss";
-@import "modules/_variations.scss";
-@import "modules/_owl-carousel.scss";
+@import "modules/loader";
+@import "modules/vc-compare";
+@import "modules/owl-carousel";
+@import "modules/collection";

@@ -1,12 +1,12 @@
 {% include 'product/type/with-variations/product-title-info' %}
-<div class="row flexible" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
-    <div class="col-md-3">
+<div class="row" ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
+    <div class="col-md-3 mb-3 mb-md-0">
         {% include 'product/image' %}
         {% include 'product/compare' %}
         {% include 'product/product-compare-list-bar' %}
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3 mb-md-0">
         {% if product.properties.size > 0 %}
             {% include 'product/type/common/product-properties' %}
             {% include 'product/type/common/product-description' %}
@@ -14,31 +14,30 @@
         {% include 'product/variations-panel' %}
     </div>
 
-    <div class="col-md-3">
-        <div class="panel panel-default price-panel">
-            <div class="panel-heading">
+    <div class="col-md-3 mb-3 mb-md-0">
+        <div class="card">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-md-12">
                         <span class="h4">Price & delivery</span>
                     </div>
                 </div>
             </div>
-            <div class="panel-body">
-                <div class="price-block">
-                    <dl class="dl-horizontal">
-                        <dt class="text-bold">
-                            <span class="pull-left">
+            <div class="card-body px-0">
+                <div class="border-bottom px-3">
+                    <dl class="d-flex justify-content-between">
+                        <dt>
+                            <span class="text-helvetica">
                                     {{ 'products.variation.total_price' | t }}
                             </span>
                         </dt>
-                        <dd>
-                            <span class="pull-right text-bold text-green" ng-bind="totalPrice">
-                            </span>
+                        <dd class="font-weight-bold text-dark-green">
+                            <span ng-bind="totalPrice"></span>
                         </dd>
                     </dl>
                 </div>
 
-                <div class="delivery-cart">
+                <div class="delivery-cart m-3">
                         <button class="btn btn-lg btn-primary btn-block"
                         title="{{ 'products.general.add_to_cart' | t }}"
                         ng-click="addVariationsToCart()"

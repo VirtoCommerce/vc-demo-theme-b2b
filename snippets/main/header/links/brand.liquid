@@ -2,7 +2,7 @@
     {% if settings.logo_use_image %}
         <img alt="{{ shop.name }}" src="{{ 'b2b-promo-logo.png' | asset_url }}" itemprop="logo" height="35" />
     {% else %}
-        <strong class="h1 text-uppercase text-condensed hidden-xs hidden-sm">{{ shop.name }}</strong>
-        <strong class="text-uppercase text-condensed visible-xs-inline visible-sm-inline">{{ shop.name }}</strong>
+        <strong class="h1 text-uppercase text-condensed d-none d-md-inline">{{ shop.name }}</strong>
+        <strong class="text-uppercase text-condensed d-inline d-md-none">{{ shop.name }}</strong>
     {% endif %}
 </a>

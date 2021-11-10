@@ -1,8 +1,0 @@
-form label.required:after {
-  color: $primary;
-  content: '*';
-}
-
-label:not(.custom-control-label) {
-  font-weight: 700;
-}

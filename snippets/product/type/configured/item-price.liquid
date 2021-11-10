@@ -1,20 +1,21 @@
-
-<dl class="dl-horizontal" ng-controller="configurableProductCardController" ng-init="initProductConfiguration('{{product.id}}')">
-    <dt class="text-normal">
-        <span class="product-pull-left">
-                {% if customer %}
+<div class="d-flex justify-content-between flex-column mb-2"
+     ng-controller="configurableProductCardController"
+     ng-init="initProductConfiguration('{{product.id}}')">
+    <div class="font-weight-bold">
+        <span class="text-helvetica">
+            {% if customer %}
                 {{ 'products.price.private' | t }}
             {% else %}
                 {{ 'products.price.public' | t }}
             {% endif %}
         </span>
-    </dt>
+    </div>
 
-    <dd ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
-        <span class="product-pull-right">
-        <strong ng-bind="getDefaultPrice()"></strong>
-        <!-- TODO: Replace with product unit -->
-        <span class="price-unit">/ each</span>
+    <div>
+        <span class="text-dark-green"
+              ng-init="showPricesWithTaxes = {{settings.show_prices_with_taxes}}">
+            <strong ng-bind="getDefaultPrice()"></strong>
         </span>
-    </dd>
-</dl>
+        <span class="font-weight-normal">/ each</span>
+    </div>
+</div>

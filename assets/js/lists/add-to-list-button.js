@@ -49,17 +49,8 @@ function addToListButtonController(accountApi, dialogService, listsApi, customer
             }
 }
 
-var storefrontApp = angular.module('storefrontApp');
-storefrontApp.component('addToListButton', {
-  templateUrl: "themes/assets/js/lists/add-to-list-button.tpl.html",
-  bindings: {
-    selectedVariation: '<'
-  },
-  controller: addToListButtonController
-});
-
 storefrontApp.component('addToListButtonMigration', {
-  templateUrl: "themes/assets/js/bootstrap-migration/lists/add-to-list-button.tpl.html",
+  templateUrl: "themes/assets/js/lists/add-to-list-button.tpl.html",
   bindings: {
     selectedVariation: '<'
   },

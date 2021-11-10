@@ -1,7 +1,7 @@
 ﻿angular.module('storefrontApp')
 
 .component('vcLabeledTextArea', {
-    templateUrl: "themes/assets/js/bootstrap-migration/common-components/labeled-textarea.tpl.html",
+    templateUrl: "themes/assets/js/common-components/labeled-textarea.tpl.html",
     bindings: {
         value: '=',
         form: '=',

@@ -2,11 +2,11 @@
     {% if settings.mailing_list_form_action %}{{settings.mailing_list_form_action}}{% else %}javascript:void(0);{% endif %}
 {% endcapture %}
 <form id="mc-embedded-subscribe-form" action="{{ action_link }}" method="post" name="mc-embedded-subscribe-form" target="_blank">
-    <p class="text-left">{{ 'blogs.newsletter.message' | t: shop.name }}</p>
+    <p class="mb-2">{{ 'blogs.newsletter.message' | t: shop.name }}</p>
     <div class="input-group">
-        <input type="email" id="mail" class="form-control"  value="{% raw %}{{ customer ? customer.email : null }}{% endraw %}" placeholder="{{ 'blogs.newsletter.email_placeholder' | t }}" name="EMAIL" aria-label="{{ 'blogs.newsletter.email_placeholder' | t }}" autocorrect="off" autocapitalize="off">
-        <span class="input-group-btn">
-            <input type="submit" id="subscribe" class="btn btn-primary" value="{{ 'blogs.newsletter.sign_up' | t }}" name="subscribe">
-        </span>
+        <input type="email" id="mail" class="form-control" value="{% raw %}{{ customer ? customer.email : null }}{% endraw %}" placeholder="{{ 'blogs.newsletter.email_placeholder' | t }}" name="EMAIL" aria-label="{{ 'blogs.newsletter.email_placeholder' | t }}" autocorrect="off" autocapitalize="off">
+        <div class="input-group-append">
+            <input type="submit" id="subscribe" class="btn btn-primary rounded-0" value="{{ 'blogs.newsletter.sign_up' | t }}" name="subscribe">
+        </div>
     </div>
 </form>
