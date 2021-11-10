@@ -60,7 +60,7 @@ function vcRelatedProductsController(baseUrl, $timeout, $element, loader, recomm
 }
 
 storefrontApp.component('vcRelatedProductsMigration', {
-    templateUrl: "themes/assets/js/bootstrap-migration/common-components/relatedProducts.tpl.html",
+    templateUrl: "themes/assets/js/common-components/relatedProducts.tpl.html",
     bindings: {
       productIds: '<',
       responsive: '<',

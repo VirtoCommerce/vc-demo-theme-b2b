@@ -1,7 +1,7 @@
 var storefrontApp = angular.module('storefrontApp');
 
 storefrontApp.component('vcCheckoutConfigurableLineItem', {
-    templateUrl: "themes/assets/js/bootstrap-migration/checkout/checkout-configurable-line-item.tpl.html",
+    templateUrl: "themes/assets/js/checkout/checkout-configurable-line-item.tpl.html",
     require: {
         checkoutStep: '^vcCheckoutWizardStep'
     },

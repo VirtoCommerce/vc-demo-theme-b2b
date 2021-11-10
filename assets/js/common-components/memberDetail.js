@@ -1,6 +1,6 @@
 var storefrontApp = angular.module('storefrontApp');
 storefrontApp.component('vcMemberDetail', {
-    templateUrl: "themes/assets/js/bootstrap-migration/common-components/memberDetail.tpl.html",
+    templateUrl: "themes/assets/js/common-components/memberDetail.tpl.html",
     bindings: {
         member: '=',
         memberComponent: '=',

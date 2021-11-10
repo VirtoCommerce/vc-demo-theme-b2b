@@ -36,7 +36,7 @@ function addToCompareCheckboxController($rootScope, $scope, compareProductServic
 }
 
 storefrontApp.component('addToCompareCheckboxMigration', {
-    templateUrl: "themes/assets/js/bootstrap-migration/product-compare/add-to-compare-checkbox.tpl.html",
+    templateUrl: "themes/assets/js/product-compare/add-to-compare-checkbox.tpl.html",
     bindings: {
         productId: '<',
         buttonType: '<',
