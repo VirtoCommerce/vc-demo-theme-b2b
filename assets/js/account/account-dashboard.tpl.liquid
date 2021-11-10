@@ -7,7 +7,7 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-6 pr-sm-0">
-                {% include 'bootstrap-migration/dashboard/monthly-spend-report' %}
+                {% include 'dashboard/monthly-spend-report' %}
             </div>
             <div class="col-md-6">
                 <vc-account-orders-status-stats></vc-account-orders-status-stats>
@@ -25,7 +25,7 @@
                 <span class="h4">{{ 'bulk_order.general.title' | t }}</span>
             </div>
             <div class="card-body pt-2">
-                {% include 'bootstrap-migration/dashboard/bulk-order-content' %}
+                {% include 'dashboard/bulk-order-content' %}
             </div>
         </div>
         <vc-dashboard-user-roles-list></vc-dashboard-user-roles-list>

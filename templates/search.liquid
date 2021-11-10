@@ -18,13 +18,13 @@
                 <div class="row">
                     {% for item in search_results %}
                         {% assign product = item %}
-                        {% include 'bootstrap-migration/product/grid-item' %}
+                        {% include 'product/grid-item' %}
                     {% endfor %}
                 </div>
             {% endif %}
             {% if paginator.pages > 1 %}
                 <div class="d-flex justify-content-center py-5">
-                    {% include 'bootstrap-migration/shared/pagination' %}
+                    {% include 'shared/pagination' %}
                 </div>
             {% endif %}
         {% else %}

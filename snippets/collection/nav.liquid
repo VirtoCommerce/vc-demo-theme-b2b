@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-12">
+        <form class="form-inline mb-3">
+            {% include 'collection/nav/views' %}
+            {% include 'collection/nav/page-size' %}
+            {% if position == 'top' %}
+                {% include 'collection/nav/sorting' %}
+            {% endif %}
+        </form>
+    </div>
+</div>

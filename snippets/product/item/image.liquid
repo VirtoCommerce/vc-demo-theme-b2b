@@ -1,0 +1,5 @@
+{% assign response_group = default_product_search_resp_group | plus: item_resp_group_variations | plus: item_resp_group_item_properties | plus: item_resp_group_item_editorial_reviews %}
+{% assign product_url = product.url | within: current_collection %}
+<a class="unstyled" href="{{ product_url | append: '?resp_group=' | append: response_group }}">
+    {% include 'product/image' %}
+</a>

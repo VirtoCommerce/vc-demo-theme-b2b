@@ -1,0 +1,12 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+
+{{ 'bundle/styles.css' | static_asset_url | append_version | stylesheet_tag }}
+{{ 'bundle/bootstrap.scss.css' | static_asset_url | append_version | stylesheet_tag }}
+
+{{ content_for_header }}
+
+{{ 'bundle/dependencies.js' | static_asset_url | append_version | script_tag }}
+{{ 'consts.js' | asset_url | script_tag }}
+{{ 'bundle/scripts.js' | static_asset_url | append_version | script_tag }}
+
+

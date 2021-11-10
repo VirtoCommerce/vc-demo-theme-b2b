@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-12">
+                <span class="h4">Technical Specs</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-striped table-borderless mb-0" aria-label="Product properties">
+            {% for property in product.properties %}
+            {% unless property.hidden %}
+                {% assign column_count = 1 %}
+                {% include 'shared/grid/rows' %}
+                {% if should_start_row %}
+                    <tr>
+                {% endif %}
+                    <th scope="row" class="font-weight-normal"><span class="text-muted">{{ property.name }}</span></th>
+                    <td><strong>{{ property.value }}</strong></td>
+                {% if should_end_row %}
+                    </tr>
+                {% endif %}
+            {% endunless %}
+            {% endfor %}
+        </table>
+    </div>
+</div>

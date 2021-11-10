@@ -1,0 +1,26 @@
+<aside class="card mb-3" ng-if="customer && !customer.isRegisteredUser" aria-label="Login form">
+    <div class="card-header">
+        <span class="h4">{{ 'customer.sign_in.title' | t }}</span>
+    </div>
+    <div class="card-body">
+        {% capture loginUrl %} {{ '~/account/login' | absolute_url }} {% endcapture %}
+        {% include 'customers/login-form' %}
+    </div>
+</aside>
+<aside class="card mb-3" aria-label="Login credentials link">
+    <div class="card-body d-flex justify-content-around">
+        <img src="{{ 'book.svg' | asset_url }}" alt=""/>
+        <p class="mb-0 ml-3">Please <a class="font-weight-bold" target="_blank" rel="noopener noreferrer" href="https://www.virtocommerce.org/t/b2b-theme-demo-environments-details/259">follow the link to access the B2B</a> demo portal credentials</p>
+    </div>
+</aside>
+{% if settings.footer_newsletter_enable %}
+    <aside class="card mb-3 mb-md-0" aria-label="Subscribe form">
+         <div class="card-header">
+            <span class="h4">Subscribe now!</span>
+        </div>
+        <div class="card-body">
+            {% include 'shared/newsletter-form' %}
+        </div>
+    </aside>
+{% endif %}
+

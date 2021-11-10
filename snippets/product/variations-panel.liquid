@@ -1,0 +1,54 @@
+{% if variants_size != 1 %}
+    <div class="card mt-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="h4">{{ 'products.variation.customize_your_order' | t }}</span>
+                </div>
+            </div>
+        </div>
+        {% for variant in product.variants %}
+            <div class="card-body {% unless forloop.last %}border-bottom border-gray-200{% endunless %}">
+                <div class="row">
+                    <div class="col">
+                        {% if variant.primary_image %}
+                            <img class="img-fluid img-thumbnail" ng-src="{{ variant.primary_image.url | img_url: "64x64" }}" fallback-src="{{ variant.primary_image.url | img_url }}"  alt="{{ variant.primary_image.alt | escape }}" />
+                        {% else %}
+                            <img class="img-fluid img-thumbnail" src="{{ 'no-image.svg' | asset_url }}" alt="No image" />
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        <p class="text-uppercase mb-2"><strong>Item #{{ variant.sku }}</strong></p>
+                        <div ng-repeat="property in allVariationsMap['{{ variant.id }}'].variationProperties">
+                            <dl class="d-flex justify-content-between mb-0">
+                                <dt class="font-weight-normal">
+                                    <span class="text-muted">
+                                        <span ng-bind="property.name"></span>
+                                    </span>
+                                </dt>
+
+                                <dd class="w-25">
+                                    <span>
+                                        <strong ng-bind="property.value"></strong>
+                                    </span>
+                                </dd>
+                            </dl>
+                        </div>
+                        {% if settings.show_prices_with_taxes %}
+                            {% include 'product/price' show_each: true %}
+                        {% else %}
+                            {% include 'product/price' show_each: true %}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-3 align-self-center">
+                        <div class="quantity d-flex align-items-center">
+                            <label for="qty" class="fs-13 mb-0 mr-2 text-muted">Quantity</label>
+                            <input id="qty_{{ variant.id }}" class="form-control" vc-integer ng-model="allVariationsMap['{{ variant.id }}'].quantity" ng-blur="recalculateTotalPrice()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+

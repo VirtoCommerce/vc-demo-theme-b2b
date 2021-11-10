@@ -1,0 +1,35 @@
+<div class="bulk-order-popover my-n2 mx-n3" ng-init="state = 'manual'">
+    <div class="border-bottom border-1 border-gray-200">
+        <ul class="nav">
+            <li ng-class="{active: state == 'manual'}" class="py-2 ml-3">
+                <a href="" ng-click="state = 'manual'" class="text-condensed font-weight-bold">{{ 'bulk_order.general.subtitle' | t }}</a>
+            </li>
+            <li ng-class="{active: state == 'csv'}" class="py-2 ml-3">
+                <a href="" ng-click="state = 'csv'" class="text-condensed font-weight-bold">{{ 'bulk_order.general.csv_title' | t }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="p-3" ng-controller="productWithVariationsController">
+            <form action="{{ '/bulkorder/addfielditems' | absolute_url }}" method="POST" ng-show="state == 'manual'">
+                {% assign column_count = 1 %}
+                {% assign rows_count = 6 %}
+                {% assign sku_grid_column_count = 7 %}
+                {% assign quantity_grid_column_count = 5 %}
+                <div>
+                    {% include 'shared/bulk-order-fields' %}
+                    <p><a class="small text-secondary" href="{{ 'bulkorder' | absolute_url }}">Show More Entry Fields</a></p>
+                <button class="btn btn-primary" type="submit">{{ 'bulk_order.general.add_to_cart' | t }}</button>
+                </div>
+            </form>
+        <dl ng-show="state == 'csv'">
+            <dt>{{ 'bulk_order.general.csv_subtitle' | t }}</dt>
+            <dd>{{ 'bulk_order.general.csv_subdescription' | t }}</dd>
+        </dl>
+        <form action="{{ '/bulkorder/addcsvitems' | absolute_url }}" method="POST" ng-show="state == 'csv'">
+            <div class="form-group">
+                <textarea name="csv" placeholder="{{ 'bulk_order.general.csv_field_placeholder' | t }}" rows="10" class="form-control"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">{{ 'bulk_order.general.add_to_cart' | t }}</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+{% unless page_size %}
+    {% assign page_size = settings.product_list_capacity  %}
+{% endif %}
+
+{{ paginator =  collection.products  | paginate page_size }}
+<main class="collection container pt-4 pb-6"
+      role="main"
+      ng-controller="collectionController as $collection">
+    <div class="row mb-3">
+        <div class="col">
+            {% include 'shared/breadcrumb' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col"
+             ng-init="isAboutCollapsed = true">
+            <h1>
+                {{ collection.title }}
+            </h1>
+            {% assign variants_count = 0 %}
+            {% for product in collection.products %}
+            {% assign product_variant_count = product.variants | size %}
+            {% assign variants_count = variants_count | plus: product_variant_count %}
+            {% endfor %}
+            {% assign all_results_count = collection.all_products_count %}
+            {% assign displayed_results_count = collection.products | size %}
+            <p class="font-weight-bold">
+                {{ 'collections.general.products_count' | t: all_results_count, displayed_results_count, variants_count }}
+            </p>
+        </div>
+    </div>
+    <div class="row navigation">
+        <div class="col sidebar">
+            {% assign collection = collection %}
+            {% include 'collection/sidebar' %}
+        </div>
+        <div class="col">
+            <div ng-controller="priceController">
+                {% assign position = 'top' %}
+                {% include 'collection/nav' %}
+                {% include product_items %}
+                {% assign position = 'bottom' %}
+                <div class="row">
+                    <div class="col">
+                        {% include 'shared/pagination' %}
+                    </div>
+                    <div class="col">
+                        {% include 'collection/nav' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'product/product-compare-list-bar' %}
+</main>
+
+{% capture breadcrumbs %}
+{% assign counter = 1 %}
+{"@type": "ListItem", "position": {{ counter }}, "name": "{{ current_store.name }}", "item": "{{ '' | full_url }}"};
+{% if current_category.parents %}
+    {%- for parent in current_category.parents -%}
+        {%- assign counter = counter | plus: 1 -%}
+        {"@type": "ListItem", "position": {{ counter }}, "name": "{{ parent.name }}", "item": "{{ parent.url | full_url }}"};
+    {%- endfor -%}
+{% endif %}
+{% assign counter = counter | plus: 1 %}
+{"@type": "ListItem", "position": {{ counter }}, "name": "{{ current_category.name }}", "item": "{{ current_category.url | full_url }}"}
+{% endcapture %}
+
+{% assign breadcrumbsArray = breadcrumbs | strip | strip_newlines | split: ';' %}
+
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": {{ breadcrumbsArray }}
+    }
+</script>

@@ -1,0 +1,38 @@
+﻿<nav class="navbar-dark bg-dark py-2" role="navigation">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 d-flex align-items-center" itemscope itemtype="http://schema.org/Organization">
+                {% include 'main/header/links/brand' %}
+                {% if current_user.contact.organization.name %}
+                    <div class="text-uppercase font-weight-bold text-white pl-3 border-left border-primary border-2">{{current_user.contact.organization.name}}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 navbar-text text-right">
+                <ul class="list-inline m-0">
+                    {% assign index = 0 %}
+                    {% for link in linklists[settings.main_menu].links %}
+                        {% assign child_list_handle = link.title | handleize %}
+                        {% if linklists[child_list_handle].links != blank %}
+                            {% assign id = 'header-link-' | append: index %}
+                            <li class="list-inline-item" uib-dropdown auto-close="mouseleave">
+                                <a id="{{ id }}" href="{{ link.url }}" uib-dropdown-toggle vc-dropdown-trigger="mouseenter">{{ link.title }}&ensp;<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu rounded-0" role="menu" uib-dropdown-menu aria-labelledby="{{ link.name }}">
+                                    {% for childlink in linklists[child_list_handle].links %}
+                                        <li class="dropdown-item">
+                                            <a role="menuitem" tabindex="-1" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="list-inline-item">
+                                <a href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                        {% endif %}
+                        {% assign index = index | plus: 1 %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

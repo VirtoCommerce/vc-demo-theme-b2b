@@ -1,6 +1,6 @@
 [
     {
-        "outputFileName": "assets/static/bundle/dependencies-bootstrap-migration.js",
+        "outputFileName": "assets/static/bundle/dependencies.js",
         "inputFiles": [
             "bower_components/polyfills/polyfill.js",
             "bower_components/jquery/dist/jquery.js",
@@ -62,9 +62,9 @@
         ]
     },
     {
-        "outputFileName": "assets/static/bundle/bootstrap-migration.scss.css",
+        "outputFileName": "assets/static/bundle/bootstrap.scss.css",
         "inputFiles": [
-            "assets/scss/bootstrap-migration/main.scss"
+            "assets/scss/main.scss"
         ]
     }
 ]

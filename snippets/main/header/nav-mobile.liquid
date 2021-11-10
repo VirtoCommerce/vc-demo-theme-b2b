@@ -1,0 +1,31 @@
+﻿<nav class="navbar navbar-dark bg-dark d-block d-md-none p-0" role="navigation" aria-label="Header">
+    <div class="container-fluid">
+        <div itemscope itemtype="http://schema.org/Organization">
+            {% include 'main/header/links/brand' %}
+        </div>
+        <ul class="nav" ng-cloak>
+            <li ng-if="customer && !customer.isRegisteredUser" class="nav-item">
+                {{ 'layout.customer.sign_in' | t | customer_login_link | replace: 'href', 'class="text-uppercase nav-link p-3 text-condensed text-white" href' | replace: '">', '"><i class="fa fa-sign-in" aria-hidden="true"></i>&ensp;' }}
+            </li>
+            <li class="dropdown nav-item" uib-dropdown ng-if="customer && customer.isRegisteredUser">
+                <a id="account-dropdown" class="text-uppercase nav-link p-3 text-condensed text-white" href="" uib-dropdown-toggle><i class="fa fa-user text-primary" aria-hidden="true"></i>&ensp;{{ 'layout.customer.account' | t }}&ensp;<i class="fa fa-angle-down text-primary" aria-hidden="true"></i></a>
+                <ul class="dropdown-menu" role="menu" uib-dropdown-menu aria-labelledby="account-dropdown">
+                    <li class="dropdown-item">
+                        <a href="{{ 'account' | absolute_url }}" class="text-body">
+                            <i class="fa fa-user" aria-hidden="true"></i>&ensp;{{ 'customer.account.title' | t }}
+                        </a>
+                    </li>
+                    <li class="dropdown-item">
+                        {{ 'layout.customer.log_out' | t | customer_logout_link | replace: '">', '" class="text-body"><i class="fa fa-sign-out" aria-hidden="true"></i>&ensp;' }}
+                    </li>
+                </ul>
+            </li>
+            {% include 'main/header/shared/cart' %}
+        </ul>
+    </div>
+</nav>
+<nav class="navbar d-block d-md-none p-0" role="navigation" aria-label="Search bar">
+    <div class="flex-grow-1">
+        {% include 'shared/search-bar' %}
+    </div>
+</nav>
